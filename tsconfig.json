@@ -1,12 +1,18 @@
 {
   "compilerOptions": {
     "target": "es2016",
+    "jsx": "react",
     "module": "commonjs",
+    "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "moduleResolution": "node",
+    "lib": ["dom", "dom.iterable", "es2022"]
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["./node_modules", "./dist", "webpack.config.ts"]
