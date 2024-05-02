@@ -26,3 +26,4 @@ This project is built with:
 - **ESLint**: A tool for identifying and reporting on patterns found in ECMAScript/JavaScript code.
 - **Prettier**: An opinionated code formatter that enforces a consistent style by parsing your code and re-printing it.
 - **Husky**: A tool that makes Git hooks easy, used for enforcing checks before code is committed.
+- **Jest**: A delightful JavaScript Testing Framework with a focus on simplicity.
