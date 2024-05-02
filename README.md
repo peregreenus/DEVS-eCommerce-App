@@ -30,7 +30,7 @@ This project is built with:
 
 ## Available Scripts 🛠️
 
-In the project directory, you can run:
+#### After `npm install`, in the project directory, you can run:
 
 #### `npm start`
 
