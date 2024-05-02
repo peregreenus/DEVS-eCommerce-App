@@ -27,3 +27,33 @@ This project is built with:
 - **Prettier**: An opinionated code formatter that enforces a consistent style by parsing your code and re-printing it.
 - **Husky**: A tool that makes Git hooks easy, used for enforcing checks before code is committed.
 - **Jest**: A delightful JavaScript Testing Framework with a focus on simplicity.
+
+## Available Scripts 🛠️
+
+In the project directory, you can run:
+
+#### `npm start`
+
+Runs the app in the development mode. Open http://localhost:8080 to view it in the browser.
+
+#### `npm test`
+
+Launches the test runner in the interactive watch mode. We use **Jest** as our testing framework.
+
+#### `npm run build`
+
+Builds the app for production to the `dist` folder. It correctly bundles React in production mode and optimizes the build for the best performance.
+
+#### `npm run lint`
+
+Runs **ESLint** to identify and report on patterns found in TypeScript code.
+
+#### `npm run prettier`
+
+Runs **Prettier** to enforce a consistent style by parsing your code and re-printing it.
+
+#### `npm run prepare`
+
+Runs **Husky** to set up Git hooks and enforce checks before code is committed.
+
+_Remember to replace `npm` with `yarn` if you are using Yarn as your package manager._
