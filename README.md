@@ -22,7 +22,7 @@ This project is built with:
 - **TypeScript**: A strongly typed superset of JavaScript that adds static types.
 - **Webpack**: A static module bundler for modern JavaScript applications.
 - **HTML**: The standard markup language for documents designed to be displayed in a web browser.
-- **CSS**: A style sheet language used for describing the look and formatting of a document written in HTML.
+- **SCSS**: A preprocessor scripting language that is interpreted or compiled into Cascading Style Sheets (CSS).
 - **ESLint**: A tool for identifying and reporting on patterns found in ECMAScript/JavaScript code.
 - **Prettier**: An opinionated code formatter that enforces a consistent style by parsing your code and re-printing it.
 - **Husky**: A tool that makes Git hooks easy, used for enforcing checks before code is committed.
