@@ -2,6 +2,7 @@ import path from "path";
 import { Configuration } from "webpack";
 import CopyWebpackPlugin from "copy-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import EslingPlugin from "eslint-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import "webpack-dev-server";
 
@@ -48,6 +49,7 @@ const config: Configuration = {
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css",
     }),
+    new EslingPlugin({ extensions: ["ts", ".tsx"] }),
   ],
 };
 
