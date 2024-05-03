@@ -28,6 +28,29 @@ This project is built with:
 - **Husky**: A tool that makes Git hooks easy, used for enforcing checks before code is committed.
 - **Jest**: A delightful JavaScript Testing Framework with a focus on simplicity.
 
+## Instructions
+
+**1. Clone the repo**
+
+```sh
+  git clone https://github.com/peregreenus/DEVS-eCommerce-App.git
+```
+
+**2. Install Dependencies**
+
+```sh
+  cd devs-ecommerce-app
+  npm install
+```
+
+**3. Run Project**
+
+```sh
+  npm start
+```
+
+The project should now be running on `http://localhost:8080`.
+
 ## Available Scripts 🛠️
 
 #### After `npm install`, in the project directory, you can run:
