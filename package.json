@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --env development",
     "build": "webpack --env production",
+    "prettier": "prettier . --write",
     "lint": "eslint . --ext .tsx, .ts"
   },
   "keywords": [],
