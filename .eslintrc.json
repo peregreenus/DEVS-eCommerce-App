@@ -28,7 +28,7 @@
     }
   },
   "ignorePatterns": ["webpack.config.ts"],
-  "plugins": ["react", "react-hooks", "@typescript-eslint"],
+  "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
   "rules": {
     "@typescript-eslint/no-shadow": "error",
     "@typescript-eslint/no-explicit-any": "error",
