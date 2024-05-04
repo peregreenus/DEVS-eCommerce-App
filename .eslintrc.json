@@ -21,7 +21,6 @@
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "tsconfigRootDir": "__dirname",
     "project": true,
     "ecmaFeatures": {
       "jsx": true
