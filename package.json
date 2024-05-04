@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --env development",
-    "build": "webpack --env production"
+    "build": "webpack --env production",
+    "lint": "eslint . --ext .tsx, .ts"
   },
   "keywords": [],
   "author": "",
