@@ -4,6 +4,7 @@
   "description": "Final Project RSS2023Q4",
   "main": "./src/index.tsx",
   "scripts": {
+    "test": "jest",
     "start": "webpack serve --env development",
     "build": "webpack --env production",
     "prettier": "prettier . --write",
