@@ -1,7 +1,8 @@
 import React from 'react';
+import Header from '../layouts/header/header';
 
 function Main() {
-  return <div className="Main">Main</div>;
+  return <Header />;
 }
 
 export default Main;
