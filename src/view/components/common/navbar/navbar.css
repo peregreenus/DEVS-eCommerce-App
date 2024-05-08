@@ -1,0 +1,10 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar a {
+  margin-right: 25px;
+  text-decoration: none;
+  color: black;
+}

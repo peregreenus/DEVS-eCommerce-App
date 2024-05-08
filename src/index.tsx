@@ -1,11 +1,11 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
-import Singup from './view/pages/Singup/singup';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import './index.css';
 
-const rootElement: HTMLDivElement = document.createElement('div');
-rootElement.id = 'root';
-document.body.append(rootElement);
-
-const root = createRoot(rootElement!);
-
-root.render(<Singup />);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
