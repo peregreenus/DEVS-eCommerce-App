@@ -36,7 +36,8 @@ const config: Configuration = {
     open: true,
     hot: true,
     port: 8080,
-    static: path.join(__dirname, 'public')
+    static: path.join(__dirname, 'public'),
+    historyApiFallback: true
   },
   plugins: [
     new HtmlWebpackPlugin({
