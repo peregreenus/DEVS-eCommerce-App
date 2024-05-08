@@ -7,4 +7,9 @@
   margin-right: 25px;
   text-decoration: none;
   color: black;
+  transition: 0.4s all ease-in;
+}
+
+.navbar a:hover {
+  color: rgb(228, 241, 238);
 }
