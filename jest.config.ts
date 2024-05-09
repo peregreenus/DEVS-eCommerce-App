@@ -7,7 +7,8 @@ const config: Config = {
   coverageProvider: 'v8',
   testEnvironment: 'jsdom',
   roots: ['<rootDir>/src/view/tests/'],
-  testMatch: ['**/*.+(ts|tsx)']
+  testMatch: ['**/*.+(ts|tsx)'],
+  preset: 'ts-jest'
 };
 
 export default config;
