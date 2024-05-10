@@ -1,12 +1,16 @@
 /* eslint-disable no-console */
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
+import { RegistrationFieldsType } from '../../../data/types/registration-type';
+import InputField from '../common/input/input';
+import './signup-form.css';
+import ButtonElement from '../common/button/button';
 
 export default function FormSingup() {
   const initialState = {
     firstName: '',
     lastName: '',
     email: '',
-    dateOfBirth: '',
+    dateOfBirth: new Date(),
     country: '',
     city: '',
     postalCode: '',
@@ -15,115 +19,106 @@ export default function FormSingup() {
     password2: ''
   };
 
-  const [newCostumer] = useState<{
-    firstName: string;
-    lastName: string;
-    email: string;
-    dateOfBirth: string;
-    country: string;
-    city: string;
-    postalCode: string;
-    street: string;
-    password: string;
-    password2: string;
-  }>(initialState);
-
-  function handleChange(e: ChangeEvent) {
-    console.log(e.target);
-  }
+  // function handleChange(e: ChangeEvent) {
+  //   console.log(e.target);
+  // }
   function handleRegistrationSubmit(e: FormEvent) {
     e.preventDefault();
     console.log(e.target);
   }
+
+  const [newCostumer] = useState<RegistrationFieldsType>(initialState);
+
   return (
     <div className="singup-form-container">
-      <form onSubmit={handleRegistrationSubmit}>
-        <input
-          name="email"
+      <form className="signup-form" onSubmit={handleRegistrationSubmit}>
+        <InputField
+          label="Email"
           type="email"
-          required
-          placeholder="one@example.com"
-          onChange={handleChange}
+          name="email"
           value={newCostumer.email}
-        />
-        <input
-          name="firstName"
-          type="text"
+          placeholder="one@example.com"
           required
-          placeholder="First Name"
-          onChange={handleChange}
-          value={newCostumer.firstName}
         />
-        <input
+        <InputField
+          label="First Name"
+          type="text"
+          name="email"
+          value={newCostumer.firstName}
+          placeholder="enter your name"
+          required
+        />
+        <InputField
+          label="Last Name"
           name="lastName"
           type="text"
-          placeholder="Last Name"
-          onChange={handleChange}
+          placeholder="enter your last name"
           value={newCostumer.lastName}
+          required={false}
         />
-        <input
+        <InputField
+          label="Date of birth"
           name="dateOfBirth"
           type="date"
           required
           placeholder=""
-          onChange={handleChange}
-          value={newCostumer.dateOfBirth}
+          value=""
         />
-        <input
+        <InputField
+          label="Country"
           name="country"
           type="text"
-          placeholder="your country"
-          onChange={handleChange}
+          placeholder="enter your country"
           value={newCostumer.country}
+          required={false}
         />
-        <input
+        <InputField
+          label="City"
           name="city"
           type="text"
-          placeholder="your cty"
-          onChange={handleChange}
+          placeholder="enter your cty"
           value={newCostumer.city}
+          required={false}
         />
-        <label htmlFor="postalCode">
-          Postal Code
-          <input
-            name="postalCode"
-            type="text"
-            placeholder=""
-            onChange={handleChange}
-            value={newCostumer.postalCode}
-          />
-        </label>
-        <input
+        <InputField
+          label="Postal Code"
+          name="postalCode"
+          type="text"
+          placeholder=""
+          required={false}
+          value={newCostumer.postalCode}
+        />
+        <InputField
+          label="Street"
           name="street"
           type="text"
           placeholder="your street"
-          onChange={handleChange}
+          required={false}
           value={newCostumer.street}
         />
-        <label htmlFor="password">
-          Password
-          <input
-            name="password"
-            type="password"
-            minLength={8}
-            required
-            placeholder="min 8 characters"
-            onChange={handleChange}
-            value={newCostumer.password}
-          />
-        </label>
-        <label htmlFor="password2">
-          Confirm Password
-          <input
-            name="password2"
-            type="password"
-            required
-            placeholder=""
-            onChange={handleChange}
-            value={newCostumer.password2}
-          />
-        </label>
-        <button type="submit">add to menu</button>
+        <InputField
+          label="Password"
+          name="password"
+          type="password"
+          required
+          placeholder="min 8 characters"
+          value={newCostumer.password}
+        />
+        <InputField
+          label="Retype password"
+          name="password2"
+          type="password"
+          required
+          placeholder="min 8 characters"
+          value={newCostumer.password}
+        />
+        <ButtonElement
+          type="submit"
+          label="Signup"
+          name="signup-button"
+          disabled={false}
+          className="button"
+        />
       </form>
     </div>
   );
