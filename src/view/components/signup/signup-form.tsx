@@ -1,33 +1,15 @@
-/* eslint-disable no-console */
-import React, { FormEvent, useState } from 'react';
-import { RegistrationFieldsType } from '../../../data/types/registration-type';
+import React, { FormEvent } from 'react';
 import InputField from '../common/input/input';
 import './signup-form.css';
 import ButtonElement from '../common/button/button';
 
 export default function FormSingup() {
-  const initialState = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    dateOfBirth: new Date(),
-    country: '',
-    city: '',
-    postalCode: '',
-    street: '',
-    password: '',
-    password2: ''
-  };
-
   // function handleChange(e: ChangeEvent) {
   //   console.log(e.target);
   // }
   function handleRegistrationSubmit(e: FormEvent) {
     e.preventDefault();
-    console.log(e.target);
   }
-
-  const [newCostumer] = useState<RegistrationFieldsType>(initialState);
 
   return (
     <div className="singup-form-container">
@@ -36,15 +18,13 @@ export default function FormSingup() {
           label="Email"
           type="email"
           name="email"
-          value={newCostumer.email}
           placeholder="one@example.com"
           required
         />
         <InputField
           label="First Name"
           type="text"
-          name="email"
-          value={newCostumer.firstName}
+          name="firstName"
           placeholder="enter your name"
           required
         />
@@ -53,23 +33,14 @@ export default function FormSingup() {
           name="lastName"
           type="text"
           placeholder="enter your last name"
-          value={newCostumer.lastName}
           required={false}
         />
-        <InputField
-          label="Date of birth"
-          name="dateOfBirth"
-          type="date"
-          required
-          placeholder=""
-          value=""
-        />
+        <InputField label="Date of birth" name="dateOfBirth" type="date" required placeholder="" />
         <InputField
           label="Country"
           name="country"
           type="text"
           placeholder="enter your country"
-          value={newCostumer.country}
           required={false}
         />
         <InputField
@@ -77,7 +48,6 @@ export default function FormSingup() {
           name="city"
           type="text"
           placeholder="enter your cty"
-          value={newCostumer.city}
           required={false}
         />
         <InputField
@@ -86,7 +56,6 @@ export default function FormSingup() {
           type="text"
           placeholder=""
           required={false}
-          value={newCostumer.postalCode}
         />
         <InputField
           label="Street"
@@ -94,7 +63,6 @@ export default function FormSingup() {
           type="text"
           placeholder="your street"
           required={false}
-          value={newCostumer.street}
         />
         <InputField
           label="Password"
@@ -102,7 +70,6 @@ export default function FormSingup() {
           type="password"
           required
           placeholder="min 8 characters"
-          value={newCostumer.password}
         />
         <InputField
           label="Retype password"
@@ -110,7 +77,6 @@ export default function FormSingup() {
           type="password"
           required
           placeholder="min 8 characters"
-          value={newCostumer.password}
         />
         <ButtonElement
           type="submit"

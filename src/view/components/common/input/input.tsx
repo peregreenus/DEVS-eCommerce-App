@@ -9,19 +9,17 @@ interface IInputFieldProps {
 }
 
 const defaultProps = {
-  required: false,
-  value: ''
+  required: false
 };
 
 export default function InputField(props: IInputFieldProps & typeof defaultProps) {
-  const { type, label, name, placeholder, required, value } = props;
+  const { type, label, name, placeholder, required } = props;
 
   return (
     <label htmlFor={name}>
       {label}
       <input
         type={type}
-        value={value}
         name={name}
         className="form-control"
         placeholder={placeholder}
