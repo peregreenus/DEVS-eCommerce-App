@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Footer from '../../components/common/footer/footer';
 import Header from '../../components/common/header/header';
 import './not-found.css';
 
@@ -14,6 +15,7 @@ function Notfound() {
           To homepage
         </Link>
       </section>
+      <Footer />
     </div>
   );
 }

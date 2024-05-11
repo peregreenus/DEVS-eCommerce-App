@@ -4,6 +4,7 @@ import CallToAction from './call-to-action';
 import Greeting from './greeting';
 import Offer from './offer';
 import './main.css';
+import Footer from '../../components/common/footer/footer';
 
 function Main() {
   return (
@@ -14,6 +15,7 @@ function Main() {
         <Offer />
         <CallToAction />
       </main>
+      <Footer />
     </>
   );
 }
