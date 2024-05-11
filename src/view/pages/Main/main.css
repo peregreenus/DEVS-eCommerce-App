@@ -1,0 +1,43 @@
+.main {
+  /* padding: 2rem; */
+  color: var(--light-text-color);
+  background-color: var(--accent-color);
+}
+
+.main .main-section:not(:first-child) {
+}
+
+.main .main-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80rem;
+}
+
+.main .greeting {
+  background-image: url('../../../assets/img/Default_draw_a_picture_about_Welcome_to_Galactic_Exclusive_yo_1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.main .call-to-action {
+  background-image: url('../../../assets/img/Default_Draw_the_rings_of_Saturn_in_space_0.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.main .offer {
+  background-image: url('../../../assets/img/Default_draw_a_picture_about_exotic_islands_Place_the_island_o_0.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.main .main-section .text-content {
+  width: 70%;
+}
+.main .main-section .text-content .title {
+  font-size: 3rem;
+}
+.main .main-section .text-content .subtitle {
+  font-size: 2rem;
+}

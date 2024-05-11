@@ -9,6 +9,7 @@ function Header() {
       <Link className="logo" to="/main">
         {' '}
       </Link>
+      <div>{}</div>
       <Navbar />
     </header>
   );
