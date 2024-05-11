@@ -2,11 +2,11 @@ export type RegistrationFieldsType = {
   firstName: string;
   lastName: string;
   email: string;
-  dateOfBirth: Date;
+  dateOfBirth: string;
   country: string;
   city: string;
   postalCode: string;
   street: string;
   password: string;
-  password2: string;
+  confirmPassword: string;
 };

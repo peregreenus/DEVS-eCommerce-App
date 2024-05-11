@@ -1,26 +1,56 @@
+.input-field {
+  font-size: 1.8rem;
+  padding: 1rem 2rem;
+  height: 4rem;
+  border-radius: 0.5rem;
+  background-color: var(--default-bg-color);
+  color: var(--primary-text-color);
+  border-color: var(--border-color);
+}
+.error-span {
+  color: var(--accent-color);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 200;
+  display: block;
+}
+
 .singup-form-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: var(--grey-bg-color);
+  color: var(--body-text-color);
 }
 .signup-form {
   display: flex;
+  max-width: 60rem;
+  padding: 5rem;
+  background-color: var(--body-text-color);
+  border-radius: 0.5rem;
   flex-direction: column;
   align-items: flex-start;
   gap: 1rem;
-  background-color: var(--default-bg-color);
+
   label {
+    padding: 1rem 3rem;
+    font-size: 1.4rem;
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
+    color: var(--light-text-color);
   }
-  input {
-    height: 4rem;
+  .input-field {
+    width: 40rem;
   }
-  button {
-    height: 4rem;
+  .btn-signup {
+    align-self: center;
+    font-size: 1.8rem;
     padding: 0 2rem;
-    max-width: 20rem;
+    height: 4rem;
+    border-radius: 0.5rem;
+    background-color: var(--accent-color);
+    color: var(--primary-text-color);
+    border-color: var(--border-color);
   }
 }
