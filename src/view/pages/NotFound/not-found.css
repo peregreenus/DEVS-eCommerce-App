@@ -1,11 +1,11 @@
 .page-nofound {
-  height: 100vh;
+  height: 78vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: url('../../assets/img/Default_Not_found_1.jpg');
+  background: url('../../../assets/img/Default_Not_found_1.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   /* color: #fff; */

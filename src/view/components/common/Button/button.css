@@ -1,0 +1,22 @@
+.myBtn {
+  padding: 5px 15px;
+  color: teal;
+  font-size: 14px;
+  background: transparent;
+  border: 1px solid teal;
+  cursor: pointer;
+  border: none;
+  border-radius: 1rem;
+  width: 15rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  translate: 0.4sec all;
+}
+
+.btn-center {
+  margin-top: 5rem;
+}
+
+.myBtn:hover {
+  background-color: rgb(255, 255, 255);
+}
