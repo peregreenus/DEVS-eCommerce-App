@@ -1,6 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import MyButton from '../../components/common/Button/MyButton';
 
 function Greeting() {
+  const navigate = useNavigate();
+
+  const goToCatalog = () => {
+    navigate('/catalog');
+  };
+
   return (
     <section className="greeting main-section">
       <div className="text-content">
@@ -11,6 +19,9 @@ function Greeting() {
           clients. From luxurious islands to futuristic asteroids – you&apos;ll find everything for
           your exclusive life in space.
         </p>
+        <MyButton type="button" className="btn-center" onClick={goToCatalog}>
+          Go...
+        </MyButton>
       </div>
     </section>
   );

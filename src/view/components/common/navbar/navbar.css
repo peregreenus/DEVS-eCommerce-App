@@ -9,6 +9,10 @@
   color: black;
   transition: 0.4s all ease-in;
 }
+.navbar a:last-child {
+  margin-left: 5rem;
+  margin-right: 3rem;
+}
 .navbar .basket-img {
   position: absolute;
   width: 3rem;
