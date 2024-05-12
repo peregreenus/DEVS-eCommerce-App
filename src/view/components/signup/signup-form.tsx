@@ -223,7 +223,7 @@ function FormSingup(props: IFormProps) {
   };
   return (
     <div className="singup-form-container">
-      <h2>Registration</h2>
+      <h2>Register</h2>
       <form className="signup-form" onSubmit={onSubmit}>
         <label htmlFor="email">
           Email
@@ -240,34 +240,38 @@ function FormSingup(props: IFormProps) {
           />
           {emailWrong && emailError && <span className="error-span">{emailError}</span>}
         </label>
-        <label htmlFor="firstName">
-          First Name
-          <input
-            type="text"
-            name="firstName"
-            className="input-field"
-            placeholder="enter your name"
-            required
-            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
-            onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-            value={newCostumer.firstName}
-          />
-          {firstNameWrong && firstNameError && <span className="error-span">{firstNameError}</span>}
-        </label>
-        <label htmlFor="lastName">
-          Last Name
-          <input
-            type="text"
-            name="lastName"
-            className="input-field"
-            placeholder="enter your last name"
-            required
-            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
-            onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-            value={newCostumer.lastName}
-          />
-          {lastNameWrong && lastNameError && <span className="error-span">{lastNameError}</span>}
-        </label>
+        <div className="signup-block">
+          <label htmlFor="firstName">
+            First Name
+            <input
+              type="text"
+              name="firstName"
+              className="input-field"
+              placeholder="enter your name"
+              required
+              onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+              onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
+              value={newCostumer.firstName}
+            />
+            {firstNameWrong && firstNameError && (
+              <span className="error-span">{firstNameError}</span>
+            )}
+          </label>
+          <label htmlFor="lastName">
+            Last Name
+            <input
+              type="text"
+              name="lastName"
+              className="input-field"
+              placeholder="enter your last name"
+              required
+              onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+              onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
+              value={newCostumer.lastName}
+            />
+            {lastNameWrong && lastNameError && <span className="error-span">{lastNameError}</span>}
+          </label>
+        </div>
         <label htmlFor="dateOfBirth">
           Date of birth
           <input
@@ -281,93 +285,100 @@ function FormSingup(props: IFormProps) {
           />
           {birthdayWrong && birthdayError && <span className="error-span">{birthdayError}</span>}
         </label>
-        <label htmlFor="country">
-          Country:
-          <select
-            value={selectedCountry}
-            onChange={(e: ChangeEvent<HTMLSelectElement>) => handleDropdownChange(e)}
-            name="country"
-            className="input-field">
-            <option value="null country" disabled hidden>
-              select country
-            </option>
-            {Object.entries(Country).map(([key, value]) => (
-              <option aria-selected="true" value={value} key={key}>
-                {value}
+        <div className="signup-block">
+          <label htmlFor="country">
+            Country:
+            <select
+              value={selectedCountry}
+              onChange={(e: ChangeEvent<HTMLSelectElement>) => handleDropdownChange(e)}
+              name="country"
+              className="input-field">
+              <option value="null country" disabled hidden>
+                select country
               </option>
-            ))}
-          </select>
-          {countryError && <span className="error-span">{countryError}</span>}
-        </label>
-        <label htmlFor="city">
-          City
-          <input
-            type="text"
-            name="city"
-            className="input-field"
-            placeholder="enter your city"
-            required
-            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
-            onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-            value={newCostumer.city}
-          />
-          {cityWrong && cityError && <span className="error-span">{cityError}</span>}
-        </label>
-        <label htmlFor="postalCode">
-          Postal Code
-          <input
-            disabled={!postalCodeEnable}
-            type="text"
-            name="postalCode"
-            className="input-field"
-            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
-            onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-            value={newCostumer.postalCode}
-          />
-          {postalCodeWrong && postalCodeError && (
-            <span className="error-span">{postalCodeError}</span>
-          )}
-        </label>
-        <label htmlFor="street">
-          Street
-          <input
-            type="text"
-            name="street"
-            className="input-field"
-            placeholder="your street"
-            required
-            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
-            onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-            value={newCostumer.street}
-          />
-          {streetWrong && streetError && <span className="error-span">{streetError}</span>}
-        </label>
-        <label htmlFor="password">
-          Password
-          <input
-            type="password"
-            name="password"
-            className="input-field"
-            required
-            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
-            onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-            value={newCostumer.password}
-          />
-          {passwordWrong && passwordError && <span className="error-span">{passwordError}</span>}
-        </label>
-        <label htmlFor="password">
-          Confirm Password
-          <input
-            type="password"
-            name="confirmPassword"
-            className="input-field"
-            required
-            onChange={(e: ChangeEvent<HTMLInputElement>) => checkConfirm(e)}
-            onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-            value={newCostumer.confirmPassword}
-          />
-          {confirmWrong && confirmError && <span className="error-span">{confirmError}</span>}
-        </label>
+              {Object.entries(Country).map(([key, value]) => (
+                <option aria-selected="true" value={value} key={key}>
+                  {value}
+                </option>
+              ))}
+            </select>
+            {countryError && <span className="error-span">{countryError}</span>}
+          </label>
+          <label htmlFor="postalCode">
+            Postal Code
+            <input
+              disabled={!postalCodeEnable}
+              type="text"
+              name="postalCode"
+              className="input-field"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+              onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
+              value={newCostumer.postalCode}
+            />
+            {postalCodeWrong && postalCodeError && (
+              <span className="error-span">{postalCodeError}</span>
+            )}
+          </label>
+        </div>
+        <div className="signup-block">
+          <label htmlFor="city">
+            City
+            <input
+              type="text"
+              name="city"
+              className="input-field"
+              placeholder="enter your city"
+              required
+              onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+              onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
+              value={newCostumer.city}
+            />
+            {cityWrong && cityError && <span className="error-span">{cityError}</span>}
+          </label>
+
+          <label htmlFor="street">
+            Street
+            <input
+              type="text"
+              name="street"
+              className="input-field"
+              placeholder="your street"
+              required
+              onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+              onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
+              value={newCostumer.street}
+            />
+            {streetWrong && streetError && <span className="error-span">{streetError}</span>}
+          </label>
+        </div>
+        <div className="signup-block">
+          <label htmlFor="password">
+            Password
+            <input
+              type="password"
+              name="password"
+              className="input-field"
+              required
+              onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+              onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
+              value={newCostumer.password}
+            />
+            {passwordWrong && passwordError && <span className="error-span">{passwordError}</span>}
+          </label>
+          <label htmlFor="password">
+            Confirm Password
+            <input
+              type="password"
+              name="confirmPassword"
+              className="input-field"
+              required
+              onChange={(e: ChangeEvent<HTMLInputElement>) => checkConfirm(e)}
+              onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
+              value={newCostumer.confirmPassword}
+            />
+            {confirmWrong && confirmError && <span className="error-span">{confirmError}</span>}
+          </label>
+        </div>
         <button disabled={!formValid} type="submit" className="button btn-signup">
           Signup
         </button>

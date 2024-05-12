@@ -1,0 +1,26 @@
+.signup-page {
+  padding: 1rem 0;
+  background-image: url('../../../assets/img/Default_draw_a_picture_about_Welcome_to_Galactic_Exclusive_yo_1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--default-text-color);
+  a {
+    text-decoration: none;
+    color: var(--accent-color);
+    transition: 0.4s all ease-in;
+  }
+  a:hover {
+    text-decoration: underline;
+    transition: 0.4s all ease-in;
+  }
+}
+
+.link-to {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.7) 0 100%);
+  border-radius: 1.2rem;
+  margin-top: 1rem;
+  padding: 1rem 2rem;
+}
