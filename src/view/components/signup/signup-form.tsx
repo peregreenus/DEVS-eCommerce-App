@@ -160,7 +160,7 @@ function FormSingup(props: IFormProps) {
         setCityError('');
         break;
       case 'errorPostalCode':
-        setPostalCodeError('should be ');
+        setPostalCodeError('postal code not valid for this country ');
         break;
       case 'cleanErrorPostalCode':
         setPostalCodeError('');
