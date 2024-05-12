@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-console */
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import './signup-form.css';
 import { RegistrationFieldsType } from '../../../data/types/registration-type';
 import validationField from '../../../data/utils/validate-signup-form';
@@ -43,7 +43,37 @@ function FormSingup(props: IFormProps) {
   const [passwordWrong, setPasswordWrong] = useState(false);
   const [confirmError, setConfirmError] = useState('should not be a empty!');
   const [confirmWrong, setConfirmWrong] = useState(false);
+  const [formValid, setFormValid] = useState(false);
 
+  useEffect(() => {
+    if (
+      birthdayError ||
+      emailError ||
+      passwordError ||
+      countryError ||
+      firstNameError ||
+      lastNameError ||
+      confirmError ||
+      postalCodeError ||
+      cityError ||
+      streetError
+    ) {
+      setFormValid(false);
+    } else {
+      setFormValid(true);
+    }
+  }, [
+    birthdayError,
+    emailError,
+    passwordError,
+    countryError,
+    firstNameError,
+    lastNameError,
+    confirmError,
+    postalCodeError,
+    cityError,
+    streetError
+  ]);
   const { onSubmit } = props;
 
   const handleDropdownChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -319,7 +349,7 @@ function FormSingup(props: IFormProps) {
           />
           {confirmWrong && confirmError && <span className="error-span">{confirmError}</span>}
         </label>
-        <button type="submit" className="button btn-signup">
+        <button disabled={!formValid} type="submit" className="button btn-signup">
           Signup
         </button>
       </form>

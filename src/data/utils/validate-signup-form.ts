@@ -49,7 +49,7 @@ function validationField(fieldName: string, fieldValue: string): string {
     }
   }
   if (fieldName === 'city') {
-    const requirements = /^[A-Za-z0-9]{3,16}$/;
+    const requirements = /^[A-Za-z0-9-]{3,16}$/;
     if (!requirements.test(fieldValue)) {
       returnValue = 'errorCity';
     } else {
@@ -81,16 +81,15 @@ function validationField(fieldName: string, fieldValue: string): string {
       returnValue = 'cleanErrorPostalCode';
     }
   }
-
-  // if (fieldName === 'country') {
-  //   if (!fieldValue) {
-  //     returnValue = 'errorCountry';
-  //     console.log(fieldValue);
-  //   } else {
-  //     returnValue = 'cleanErrorCountry';
-  //     console.log(fieldValue);
-  //   }
-  // }
+  if (fieldName === 'country') {
+    if (!fieldValue) {
+      returnValue = 'errorCountry';
+      console.log(fieldValue);
+    } else {
+      returnValue = 'cleanErrorCountry';
+      console.log(fieldValue);
+    }
+  }
   return returnValue;
 }
 

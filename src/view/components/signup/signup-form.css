@@ -6,6 +6,7 @@
   background-color: var(--default-bg-color);
   color: var(--primary-text-color);
   border-color: var(--border-color);
+  cursor: text;
 }
 .error-span {
   color: var(--accent-color);
@@ -52,5 +53,11 @@
     background-color: var(--accent-color);
     color: var(--primary-text-color);
     border-color: var(--border-color);
+    cursor: pointer;
+  }
+  .btn-signup:disabled {
+    cursor: not-allowed;
+    background-color: grey;
+    color: gainsboro;
   }
 }
