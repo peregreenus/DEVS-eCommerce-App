@@ -1,13 +1,13 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable no-console */
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import './signup-form.css';
 import { RegistrationFieldsType } from '../../../data/types/registration-type';
-import validationField from '../../../data/utils/validate-signup-form';
+import { validationField, setCostumerCountry } from '../../../data/utils/validate-signup-form';
 
 interface IFormProps {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }
+
 const initialState = {
   firstName: '',
   lastName: '',
@@ -20,6 +20,15 @@ const initialState = {
   password: '',
   confirmPassword: ''
 };
+
+enum Country {
+  'Austria' = 'Austria',
+  'Belarus' = 'Belarus',
+  'Germany' = 'Germany',
+  'Russia' = 'Russia',
+  'Ukraine' = 'Ukraine',
+  'United States' = 'United States'
+}
 
 function FormSingup(props: IFormProps) {
   const [newCostumer, setNewCostumer] = useState<RegistrationFieldsType>(initialState);
@@ -44,6 +53,7 @@ function FormSingup(props: IFormProps) {
   const [confirmError, setConfirmError] = useState('should not be a empty!');
   const [confirmWrong, setConfirmWrong] = useState(false);
   const [formValid, setFormValid] = useState(false);
+  const [postalCodeEnable, setPostalCodeEnable] = useState(false);
 
   useEffect(() => {
     if (
@@ -74,11 +84,19 @@ function FormSingup(props: IFormProps) {
     cityError,
     streetError
   ]);
+  useEffect(() => {
+    if (countryError) {
+      setPostalCodeEnable(false);
+    } else {
+      setPostalCodeEnable(true);
+    }
+  }, [countryError]);
   const { onSubmit } = props;
 
   const handleDropdownChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const target = e.target as HTMLSelectElement;
     setSelectedCountry(target.value);
+    setCostumerCountry(target.value as string);
     switch (validationField(target.name, target.value)) {
       case 'errorCountry':
         setCountryError('should be select');
@@ -267,15 +285,17 @@ function FormSingup(props: IFormProps) {
           Country:
           <select
             value={selectedCountry}
-            onChange={handleDropdownChange}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) => handleDropdownChange(e)}
             name="country"
             className="input-field">
             <option value="null country" disabled hidden>
               select country
             </option>
-            <option value="Belarus">Belarus</option>
-            <option value="Russia">Russia</option>
-            <option value="Ukraine">Ukraine</option>
+            {Object.entries(Country).map(([key, value]) => (
+              <option aria-selected="true" value={value} key={key}>
+                {value}
+              </option>
+            ))}
           </select>
           {countryError && <span className="error-span">{countryError}</span>}
         </label>
@@ -296,11 +316,10 @@ function FormSingup(props: IFormProps) {
         <label htmlFor="postalCode">
           Postal Code
           <input
+            disabled={!postalCodeEnable}
             type="text"
             name="postalCode"
             className="input-field"
-            placeholder=""
-            required
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
             value={newCostumer.postalCode}

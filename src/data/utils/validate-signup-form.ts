@@ -1,5 +1,10 @@
 /* eslint-disable no-console */
 
+let costumerCountry: string = '';
+
+function setCostumerCountry(country: string) {
+  costumerCountry = country;
+}
 function validationField(fieldName: string, fieldValue: string): string {
   let returnValue = '';
   if (fieldName === 'email') {
@@ -74,7 +79,31 @@ function validationField(fieldName: string, fieldValue: string): string {
     }
   }
   if (fieldName === 'postalCode') {
-    const requirements = /^[A-Za-z0-9]{3,16}$/;
+    let requirements: RegExp;
+    console.log(costumerCountry);
+    switch (costumerCountry) {
+      case 'United States':
+        requirements = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
+        break;
+      case 'Canada':
+        requirements = /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i;
+        break;
+      case 'Belarus':
+      case 'Russia':
+        requirements = /^[0-9]{6}$/;
+        break;
+      case 'Ukraine':
+      case 'Germany':
+        requirements = /^[0-9]{5}$/;
+        break;
+      case 'Austria':
+        requirements = /^[0-9]{4}$/;
+        break;
+      default:
+        requirements = /^[A-Za-z0-9]{15,16}$/;
+        console.log('nothing');
+        break;
+    }
     if (!requirements.test(fieldValue)) {
       returnValue = 'errorPostalCode';
     } else {
@@ -93,4 +122,4 @@ function validationField(fieldName: string, fieldValue: string): string {
   return returnValue;
 }
 
-export default validationField;
+export { validationField, setCostumerCountry };

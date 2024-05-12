@@ -57,7 +57,11 @@
   }
   .btn-signup:disabled {
     cursor: not-allowed;
-    background-color: grey;
-    color: gainsboro;
+    background-color: var(--gray-bg-color);
+    color: rgba(220, 220, 220, 0.433);
+  }
+  .input-field[name='postalCode']:disabled {
+    background-color: var(--gray-bg-color);
+    cursor: not-allowed;
   }
 }
