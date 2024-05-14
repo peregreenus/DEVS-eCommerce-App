@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../../components/common/footer/footer';
 import Header from '../../components/common/header/header';
-import './not-found.css';
 import { MainProps } from '../../../data/types/main-props';
 
 function Notfound({ showMsg, setShowMsg }: MainProps) {
