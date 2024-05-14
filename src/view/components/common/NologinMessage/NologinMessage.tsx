@@ -19,7 +19,7 @@ function NologinMessage({ showMsg, setShowMsg }: MainProps) {
             <Link to="/login">Login</Link>
           </div>
           <button className="close" type="button" onClick={hideMessage}>
-            x
+            <img src="../../../../assets/icon/cross.svg" alt="close" />
           </button>
         </>
       )}
