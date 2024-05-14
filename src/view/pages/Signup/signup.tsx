@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import React, { FormEvent } from 'react';
-import { Link } from 'react-router-dom';
 import FormSingup from '../../components/signup/signup-form';
 import Header from '../../components/common/header/header';
 import './signup.css';
@@ -17,9 +16,6 @@ export default function Singup() {
       <Header />
       <div className="signup-page">
         <FormSingup onSubmit={handleRegistrationSubmit} />
-        <p className="link-to">
-          Already have an account?<Link to="/login"> Login</Link>
-        </p>
       </div>
       <Footer />
     </>

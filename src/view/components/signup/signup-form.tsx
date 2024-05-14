@@ -55,6 +55,7 @@ function FormSingup(props: IFormProps) {
   const [confirmWrong, setConfirmWrong] = useState(false);
   const [formValid, setFormValid] = useState(false);
   const [postalCodeEnable, setPostalCodeEnable] = useState(false);
+  const { onSubmit } = props;
 
   useEffect(() => {
     if (
@@ -92,10 +93,9 @@ function FormSingup(props: IFormProps) {
       setPostalCodeEnable(true);
     }
   }, [countryError]);
-  const { onSubmit } = props;
 
   const handleDropdownChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const target = e.target as HTMLSelectElement;
+    const target = e.currentTarget;
     setSelectedCountry(target.value);
     setCostumerCountry(target.value as string);
     switch (validationField(target.name, target.value)) {
