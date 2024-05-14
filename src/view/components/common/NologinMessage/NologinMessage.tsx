@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { MainProps } from '../../../../data/types/main-props';
 
-function NologinMessage() {
-  const [hidden, setHidden] = useState(false);
+function NologinMessage({ showMsg, setShowMsg }: MainProps) {
+  // const [hidden, setHidden] = useState(false);
+
   function hideMessage() {
-    setHidden(true);
+    setShowMsg(false);
   }
 
   return (
-    <div className={`no-login-message ${hidden ? 'hide' : ''}`}>
-      {!hidden && (
+    <div className={`no-login-message ${!showMsg ? 'message-hide' : ''}`}>
+      {showMsg && (
         <>
-          <div className="text">
+          <div className="wrapper">
             <span>You are unauthorized user</span>
             <Link to="/signup">Register</Link>
             <Link to="/login">Login</Link>

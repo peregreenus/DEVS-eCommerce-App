@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from '../navbar/navbar';
-import './header.css';
-import NologinMessage from './NologinMessage';
+import Navbar from '../navbar/Navbar';
+import NologinMessage from '../NologinMessage/NologinMessage';
+import { MainProps } from '../../../../data/types/main-props';
 
-function Header() {
+function Header({ showMsg, setShowMsg }: MainProps) {
   return (
     <>
       <header className="header">
@@ -14,7 +14,7 @@ function Header() {
         <div>{}</div>
         <Navbar />
       </header>
-      <NologinMessage />
+      <NologinMessage showMsg={showMsg} setShowMsg={setShowMsg} />
     </>
   );
 }

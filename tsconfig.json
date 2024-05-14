@@ -13,8 +13,13 @@
     "strictNullChecks": true,
     "isolatedModules": true,
     "moduleResolution": "node",
-    "lib": ["dom", "dom.iterable", "es2022"]
+    "lib": ["dom", "dom.iterable", "es2022"],
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ]
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "customTemplate.js"],
   "exclude": ["./node_modules", "./dist", "webpack.config.ts"]
 }

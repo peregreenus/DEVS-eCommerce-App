@@ -3,13 +3,13 @@ import Header from '../../components/common/header/header';
 import CallToAction from './call-to-action';
 import Greeting from './greeting';
 import Offer from './offer';
-import './main.css';
 import Footer from '../../components/common/footer/footer';
+import { MainProps } from '../../../data/types/main-props';
 
-function Main() {
+function Main({ showMsg, setShowMsg }: MainProps) {
   return (
     <>
-      <Header />
+      <Header showMsg={showMsg} setShowMsg={setShowMsg} />
       <main className="main">
         <Greeting />
         <Offer />
