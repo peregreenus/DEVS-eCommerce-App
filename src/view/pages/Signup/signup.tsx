@@ -2,7 +2,7 @@
 import React, { FormEvent } from 'react';
 import FormSingup from '../../components/signup/signup-form';
 import Header from '../../components/common/header/header';
-import './signup.css';
+import * as SignupStyles from './signup.module.css';
 import Footer from '../../components/common/footer/footer';
 
 export default function Singup() {
@@ -14,7 +14,7 @@ export default function Singup() {
   return (
     <>
       <Header />
-      <div className="signup-page">
+      <div className={SignupStyles.signup}>
         <FormSingup onSubmit={handleRegistrationSubmit} />
       </div>
       <Footer />

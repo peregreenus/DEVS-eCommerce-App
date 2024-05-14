@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import './signup-form.css';
 import { RegistrationFieldsType } from '../../../data/types/registration-type';
 import { validationField, setCostumerCountry } from '../../../data/utils/validate-signup-form';
-import InputField from './form-input';
+import InputField from './signup-form-input';
+import * as FormStyles from './signup-form.module.css';
 
 interface IFormProps {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -223,14 +223,14 @@ function FormSingup(props: IFormProps) {
     }
   };
   return (
-    <div className="singup-form-container">
+    <div className={FormStyles.container}>
       <h2>Register</h2>
-      <form className="signup-form" onSubmit={onSubmit}>
+      <form className={FormStyles.form} onSubmit={onSubmit}>
         <InputField
           label="Email"
           type="email"
           name="email"
-          classes="input-field"
+          classes={FormStyles.input}
           placeholder="one@example.com"
           onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
           onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
@@ -239,12 +239,12 @@ function FormSingup(props: IFormProps) {
           error={emailError}
           disabled={false}
         />
-        <div className="signup-block">
+        <div className={FormStyles.block}>
           <InputField
             label="First Name"
             type="text"
             name="firstName"
-            classes="input-field"
+            classes={FormStyles.input}
             placeholder="enter your name"
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
@@ -257,7 +257,7 @@ function FormSingup(props: IFormProps) {
             label="Last Name"
             type="text"
             name="lastName"
-            classes="input-field"
+            classes={FormStyles.input}
             placeholder="enter your last name"
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
@@ -271,7 +271,7 @@ function FormSingup(props: IFormProps) {
           label="Date of birth"
           type="date"
           name="dateOfBirth"
-          classes="input-field"
+          classes={FormStyles.input}
           placeholder=""
           onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
           onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
@@ -280,14 +280,14 @@ function FormSingup(props: IFormProps) {
           error={birthdayError}
           disabled={false}
         />
-        <div className="signup-block">
-          <label htmlFor="country">
+        <div className={FormStyles.block}>
+          <label htmlFor="country" className={FormStyles.label}>
             Country:
             <select
               value={selectedCountry}
               onChange={(e: ChangeEvent<HTMLSelectElement>) => handleDropdownChange(e)}
               name="country"
-              className="input-field">
+              className={FormStyles.input}>
               <option value="null country" disabled hidden>
                 select country
               </option>
@@ -297,13 +297,13 @@ function FormSingup(props: IFormProps) {
                 </option>
               ))}
             </select>
-            {countryError && <span className="error-span">{countryError}</span>}
+            {countryError && <span className={FormStyles.error}>{countryError}</span>}
           </label>
           <InputField
             label="Postal Code"
             type="text"
             name="postalCode"
-            classes="input-field"
+            classes={FormStyles.input}
             placeholder=""
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
@@ -313,12 +313,12 @@ function FormSingup(props: IFormProps) {
             disabled={!postalCodeEnable}
           />
         </div>
-        <div className="signup-block">
+        <div className={FormStyles.block}>
           <InputField
             label="City"
             type="text"
             name="city"
-            classes="input-field"
+            classes={FormStyles.input}
             placeholder="enter your city"
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
@@ -331,7 +331,7 @@ function FormSingup(props: IFormProps) {
             label="Street"
             type="text"
             name="street"
-            classes="input-field"
+            classes={FormStyles.input}
             placeholder="your street"
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
@@ -341,12 +341,12 @@ function FormSingup(props: IFormProps) {
             disabled={false}
           />
         </div>
-        <div className="signup-block">
+        <div className={FormStyles.block}>
           <InputField
             label="Password"
             type="password"
             name="password"
-            classes="input-field"
+            classes={FormStyles.input}
             placeholder=""
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
@@ -359,7 +359,7 @@ function FormSingup(props: IFormProps) {
             label="Confirm Password"
             type="password"
             name="confirmPassword"
-            classes="input-field"
+            classes={FormStyles.input}
             placeholder=""
             onChange={(e: ChangeEvent<HTMLInputElement>) => checkConfirm(e)}
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
@@ -369,7 +369,7 @@ function FormSingup(props: IFormProps) {
             disabled={false}
           />
         </div>
-        <button disabled={!formValid} type="submit" className="button btn-signup">
+        <button disabled={!formValid} type="submit" className={FormStyles.button}>
           Signup
         </button>
       </form>

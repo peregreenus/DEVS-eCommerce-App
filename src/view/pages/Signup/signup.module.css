@@ -1,4 +1,4 @@
-.signup-page {
+.signup {
   padding: 1rem 0;
   background-image: url('../../../assets/img/Default_draw_a_picture_about_Welcome_to_Galactic_Exclusive_yo_1.jpg');
   background-repeat: no-repeat;
@@ -18,7 +18,7 @@
   }
 }
 
-.link-to {
+.link {
   background: linear-gradient(to right, rgba(255, 255, 255, 0.7) 0 100%);
   border-radius: 1.2rem;
   margin-top: 1rem;

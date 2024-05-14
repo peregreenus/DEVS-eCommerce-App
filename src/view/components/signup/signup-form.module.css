@@ -1,0 +1,77 @@
+.block {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.error {
+  color: var(--accent-color);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 200;
+}
+.input {
+  font-size: 1.8rem;
+  padding: 1rem 1.6rem;
+  height: 4rem;
+  border-radius: 1.2rem;
+  background-color: var(--default-bg-color);
+  color: var(--primary-text-color);
+  border-color: var(--border-color);
+  cursor: text;
+  width: 30rem;
+}
+.input[name='postalCode']:disabled {
+  background-color: var(--gray-bg-color);
+  cursor: not-allowed;
+}
+.button {
+  align-self: center;
+  font-size: 1.8rem;
+  margin-top: 1rem;
+  padding: 1rem 4rem;
+  width: 20rem;
+  height: 4rem;
+  border-radius: 1.2rem;
+  background-color: var(--primary-text-color);
+  color: var(--light-text-color);
+  border-color: var(--border-color);
+  cursor: pointer;
+  align-self: center;
+}
+.button:disabled {
+  cursor: not-allowed;
+  background-color: var(--gray-bg-color);
+  color: rgba(220, 220, 220, 0.433);
+}
+.label {
+  padding: 0.5rem 0;
+  font-size: 1.8rem;
+  display: flex;
+  width: 30rem;
+  gap: 0.2rem;
+  color: var(--primary-text-color);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.form {
+  display: flex;
+  padding: 2rem 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--body-text-color);
+  width: fit-content;
+  padding: 10rem;
+  border-radius: 50%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.7) 0 100%);
+}
