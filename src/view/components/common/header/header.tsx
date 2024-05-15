@@ -9,10 +9,7 @@ function Header({ showMsg, setShowMsg }: MainProps) {
   return (
     <>
       <header className={classes.header}>
-        <Link className={classes.logo} to="/main">
-          {' '}
-        </Link>
-        <div>{}</div>
+        <Link className={classes.logo} to="/main" />
         <Navbar />
       </header>
       <NologinMessage showMsg={showMsg} setShowMsg={setShowMsg} />

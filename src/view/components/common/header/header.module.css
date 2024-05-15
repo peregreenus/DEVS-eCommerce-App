@@ -1,7 +1,7 @@
 .header {
   padding: 15px;
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
   font-size: 1.6rem;
 }
 
