@@ -144,11 +144,11 @@ body {
       1px 1px 0 #000;
   }
 
-  .greeting {
+  /* .greeting {
     background-image: url('./assets/img/Default_draw_a_picture_about_Welcome_to_Galactic_Exclusive_yo_1.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-  }
+  } */
 
   .offer {
     background-image: url('./assets/img/Default_Draw_the_rings_of_Saturn_in_space_0.jpg');
@@ -162,7 +162,7 @@ body {
     background-size: cover;
   }
 
-  .text-content {
+  /* .text-content {
     width: 70%;
     display: flex;
     flex-direction: column;
@@ -176,7 +176,7 @@ body {
       margin-top: 1rem;
       font-size: 2rem;
     }
-  }
+  } */
 }
 
 /* .footer {
@@ -187,7 +187,7 @@ body {
   flex-wrap: wrap;
 } */
 
-.page-nofound {
+/* .page-nofound {
   height: 78vh;
   width: 100%;
   display: flex;
@@ -223,4 +223,4 @@ body {
     cursor: pointer;
     background-color: rgb(177, 96, 58);
   }
-}
+} */
