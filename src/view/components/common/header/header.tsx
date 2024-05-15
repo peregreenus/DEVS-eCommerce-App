@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from '../navbar/Navbar';
+import Navbar from '../navbar/navbar';
 import NologinMessage from '../NologinMessage/NologinMessage';
 import { MainProps } from '../../../../data/types/main-props';
 import * as classes from './header.module.css';

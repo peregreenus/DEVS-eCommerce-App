@@ -3,32 +3,3 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
-
-.mainSection {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 80rem;
-  text-shadow:
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;
-}
-
-.textContent {
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .title {
-    margin-bottom: 3rem;
-    font-size: 4rem;
-  }
-  .subtitle {
-    margin-top: 1rem;
-    font-size: 2rem;
-  }
-}
