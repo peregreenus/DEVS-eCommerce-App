@@ -7,13 +7,9 @@ function NologinMessage({ showMsg, setShowMsg }: MainProps) {
   function hideMessage() {
     setShowMsg(false);
   }
-  let cl: string = classes.nologin;
-  if (!showMsg) {
-    cl = ` ${classes.hide}`;
-  }
 
   return (
-    <div className={cl}>
+    <div className={`${classes.nologin} ${!showMsg ? classes.hide : ''} `}>
       {showMsg && (
         <>
           <div className={classes.wrapper}>
