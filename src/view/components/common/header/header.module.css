@@ -1,0 +1,22 @@
+.header {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.6rem;
+}
+
+.logo {
+  position: absolute;
+  top: 1rem;
+  left: 2rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 2rem;
+  background-image: url('../../../../assets/img/Default_Draw_logo_for_company_Galactic_Exclusive_0.png');
+  background-size: cover;
+  transition: 0.4s all ease-in;
+}
+.logo:hover {
+  width: 5rem;
+  height: 5rem;
+}

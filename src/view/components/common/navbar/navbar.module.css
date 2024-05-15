@@ -1,0 +1,30 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+a {
+  margin-right: 25px;
+  text-decoration: none;
+  color: black;
+  transition: 0.4s all ease-in;
+}
+
+a:last-child {
+  margin-left: 5rem;
+  margin-right: 3rem;
+}
+
+.basketImg {
+  position: absolute;
+  width: 3rem;
+  transition: 0.4s all ease-in;
+}
+
+a img:hover {
+  width: 3.5rem;
+}
+
+a:hover {
+  color: rgb(228, 241, 238);
+}

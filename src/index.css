@@ -26,7 +26,7 @@ body {
   background-color: var(--default-bg-color);
 }
 
-.header {
+/* .header {
   padding: 15px;
   display: flex;
   justify-content: space-between;
@@ -75,9 +75,9 @@ body {
       color: rgb(228, 241, 238);
     }
   }
-}
+} */
 
-.no-login-message {
+/* .no-login-message {
   position: absolute;
   padding: 0.5rem;
   display: flex;
@@ -125,7 +125,7 @@ body {
 .message-hide {
   height: 0;
   padding: 0;
-}
+} */
 
 .main {
   color: var(--light-text-color);
@@ -179,13 +179,13 @@ body {
   }
 }
 
-.footer {
+/* .footer {
   padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-}
+} */
 
 .page-nofound {
   height: 78vh;

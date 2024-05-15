@@ -1,25 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MainProps } from '../../../../data/types/main-props';
+import * as classes from './NologinMessage.module.css';
 
 function NologinMessage({ showMsg, setShowMsg }: MainProps) {
-  // const [hidden, setHidden] = useState(false);
-
   function hideMessage() {
     setShowMsg(false);
   }
+  let cl: string = classes.nologin;
+  if (!showMsg) {
+    cl = ` ${classes.hide}`;
+  }
 
   return (
-    <div className={`no-login-message ${!showMsg ? 'message-hide' : ''}`}>
+    <div className={cl}>
       {showMsg && (
         <>
-          <div className="wrapper">
+          <div className={classes.wrapper}>
             <span>You are unauthorized user</span>
             <Link to="/signup">Register</Link>
             <Link to="/login">Login</Link>
           </div>
-          <button className="close" type="button" onClick={hideMessage}>
-            <img src="../../../../assets/icon/cross.svg" alt="close" />
+          <button className={classes.button} type="button" onClick={hideMessage}>
+            <img className={classes.imgCross} src="../../../../assets/icon/cross.svg" alt="close" />
           </button>
         </>
       )}
