@@ -3,25 +3,28 @@
   justify-content: space-between;
 }
 
-.navbar a {
+a {
   margin-right: 25px;
   text-decoration: none;
   color: black;
   transition: 0.4s all ease-in;
 }
-.navbar a:last-child {
+
+a:last-child {
   margin-left: 5rem;
   margin-right: 3rem;
 }
-.navbar .basket-img {
+
+.basketImg {
   position: absolute;
   width: 3rem;
   transition: 0.4s all ease-in;
 }
-.navbar a img:hover {
+
+a img:hover {
   width: 3.5rem;
 }
 
-.navbar a:hover {
+a:hover {
   color: rgb(228, 241, 238);
 }
