@@ -8,7 +8,7 @@ import Footer from '../../components/common/footer/footer';
 export default function Singup() {
   const handleRegistrationSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const userDetails = new FormData(e.target as HTMLFormElement);
+    const userDetails = new FormData(e.currentTarget);
     console.log(Object.fromEntries(userDetails.entries()));
   };
   return (

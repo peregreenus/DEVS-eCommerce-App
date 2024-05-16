@@ -11,7 +11,7 @@ interface InputProps {
   onBlur: (e: ChangeEvent<HTMLInputElement>) => void;
   classes: string;
   wrong: boolean;
-  error: string;
+  error: string | null;
   disabled: boolean;
 }
 

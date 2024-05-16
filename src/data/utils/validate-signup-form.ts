@@ -6,31 +6,33 @@ function setCostumerCountry(country: string) {
   costumerCountry = country;
 }
 function validationField(fieldName: string, fieldValue: string): string {
-  let returnValue = '';
+  let returnValue: string = '';
   if (fieldName === 'email') {
     const requirements =
       // eslint-disable-next-line no-useless-escape
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     if (!requirements.test(fieldValue.toLowerCase())) {
-      returnValue = 'errorEmail';
+      returnValue = 'should be a valid email address';
     } else {
-      returnValue = 'cleanErrorEmail';
+      returnValue = 'empty';
     }
   }
   if (fieldName === 'firstName') {
     const requirements = /^[A-Za-z]{3,16}$/;
     if (!requirements.test(fieldValue)) {
-      returnValue = 'errorFirstName';
+      returnValue =
+        'first name should be 3-16 characters and should not include any special character';
     } else {
-      returnValue = 'cleanErrorFirstName';
+      returnValue = 'empty';
     }
   }
   if (fieldName === 'lastName') {
     const requirements = /^[A-Za-z]{3,16}$/;
     if (!requirements.test(fieldValue)) {
-      returnValue = 'errorLastName';
+      returnValue =
+        'last name should be 3-16 characters and should not include any special character';
     } else {
-      returnValue = 'cleanErrorLastName';
+      returnValue = 'empty';
     }
   }
   if (fieldName === 'dateOfBirth') {
@@ -40,34 +42,35 @@ function validationField(fieldName: string, fieldValue: string): string {
     const diffInYears = diffInMilliSeconds / 1000 / 60 / 60 / 24 / 365.32;
     const age = Math.abs(diffInYears);
     if (age <= 13) {
-      returnValue = 'errorBirthday';
+      returnValue = 'you must be > 13 y.o';
     } else {
-      returnValue = 'cleanErrorBirthday';
+      returnValue = 'empty';
     }
   }
   if (fieldName === 'city') {
     const requirements = /^[A-Za-z-]{3,16}$/;
     if (!requirements.test(fieldValue)) {
-      returnValue = 'errorCity';
+      returnValue = 'should be 3-16 characters and should not include any special character';
     } else {
-      returnValue = 'cleanErrorCity';
+      returnValue = 'empty';
     }
   }
   if (fieldName === 'street') {
     const requirements = /^[A-Za-z0-9-]{3,16}$/;
     if (!requirements.test(fieldValue)) {
-      returnValue = 'errorStreet';
+      returnValue = 'should be 3-16 characters and should not include any special character';
     } else {
-      returnValue = 'cleanErrorStreet';
+      returnValue = 'empty';
     }
   }
   if (fieldName === 'password') {
     const requirements = /^(?=.*\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#$^+=])(.{8,15})$/;
     console.log(fieldValue);
     if (!requirements.test(fieldValue)) {
-      returnValue = 'errorPassword';
+      returnValue =
+        'minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, and 1 number. (allowed char: latin char and @#$^+=)';
     } else {
-      returnValue = 'cleanErrorPassword';
+      returnValue = 'empty';
     }
   }
   if (fieldName === 'postalCode') {
@@ -93,13 +96,12 @@ function validationField(fieldName: string, fieldValue: string): string {
         break;
       default:
         requirements = /^[A-Za-z0-9]{15,16}$/;
-        console.log('nothing');
         break;
     }
     if (!requirements.test(fieldValue)) {
-      returnValue = 'errorPostalCode';
+      returnValue = 'postal code not valid for this country';
     } else {
-      returnValue = 'cleanErrorPostalCode';
+      returnValue = 'empty';
     }
   }
   if (fieldName === 'country') {

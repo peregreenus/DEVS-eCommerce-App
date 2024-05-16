@@ -21,7 +21,23 @@ const initialState = {
   password: '',
   confirmPassword: ''
 };
+// interface IErrorField {
+//   field: {
+//     fieldName: string;
+//     error: string | null;
+//   };
+// }
 
+const ErrorField = {
+  firstName: 'should not be a empty!',
+  lastName: 'should not be a empty!',
+  email: 'should not be a empty!',
+  dateOfBirth: 'should not be a empty!',
+  city: 'should not be a empty!',
+  postalCode: 'should not be a empty!',
+  street: 'should not be a empty!',
+  password: 'should not be a empty!'
+};
 enum Country {
   'Austria' = 'Austria',
   'Belarus' = 'Belarus',
@@ -32,24 +48,18 @@ enum Country {
 }
 
 function FormSingup(props: IFormProps) {
+  const validationErrors: { [key: string]: string } = ErrorField;
   const [newCostumer, setNewCostumer] = useState<RegistrationFieldsType>(initialState);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [selectedCountry, setSelectedCountry] = useState('null country');
-  const [emailError, setEmailError] = useState('should not be a empty!');
   const [emailWrong, setEmailWrong] = useState(false);
-  const [firstNameError, setFirstNameError] = useState('should not be a empty!');
   const [firstNameWrong, setFirstNameWrong] = useState(false);
-  const [lastNameError, setLastNameError] = useState('should not be a empty!');
   const [lastNameWrong, setLastNameWrong] = useState(false);
-  const [birthdayError, setBirthdayError] = useState('should not be a empty!');
   const [birthdayWrong, setBirthdayWrong] = useState(false);
   const [countryError, setCountryError] = useState('should be select');
-  const [cityError, setCityError] = useState('should not be a empty!');
   const [cityWrong, setCityWrong] = useState(false);
-  const [postalCodeError, setPostalCodeError] = useState('should not be a empty!');
   const [postalCodeWrong, setPostalCodeWrong] = useState(false);
-  const [streetError, setStreetError] = useState('should not be a empty!');
   const [streetWrong, setStreetWrong] = useState(false);
-  const [passwordError, setPasswordError] = useState('should not be a empty!');
   const [passwordWrong, setPasswordWrong] = useState(false);
   const [confirmError, setConfirmError] = useState('should not be a empty!');
   const [confirmWrong, setConfirmWrong] = useState(false);
@@ -58,34 +68,13 @@ function FormSingup(props: IFormProps) {
   const { onSubmit } = props;
 
   useEffect(() => {
-    if (
-      birthdayError ||
-      emailError ||
-      passwordError ||
-      countryError ||
-      firstNameError ||
-      lastNameError ||
-      confirmError ||
-      postalCodeError ||
-      cityError ||
-      streetError
-    ) {
+    if (Object.keys(errors).length !== 0 || countryError || confirmError) {
       setFormValid(false);
     } else {
       setFormValid(true);
     }
-  }, [
-    birthdayError,
-    emailError,
-    passwordError,
-    countryError,
-    firstNameError,
-    lastNameError,
-    confirmError,
-    postalCodeError,
-    cityError,
-    streetError
-  ]);
+  }, [errors, countryError, confirmError]);
+
   useEffect(() => {
     if (countryError) {
       setPostalCodeEnable(false);
@@ -97,7 +86,7 @@ function FormSingup(props: IFormProps) {
   const handleDropdownChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const target = e.currentTarget;
     setSelectedCountry(target.value);
-    setCostumerCountry(target.value as string);
+    setCostumerCountry(target.value);
     switch (validationField(target.name, target.value)) {
       case 'errorCountry':
         setCountryError('should be select');
@@ -106,10 +95,10 @@ function FormSingup(props: IFormProps) {
         setCountryError('');
         break;
       default:
-        console.log('nothing');
         break;
     }
   };
+
   function checkConfirm(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
     if (!newCostumer.password || value !== newCostumer.password) {
@@ -125,65 +114,17 @@ function FormSingup(props: IFormProps) {
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
-    switch (validationField(name, value)) {
-      case 'errorEmail':
-        setEmailError('should be a valid email address');
-        break;
-      case 'cleanErrorEmail':
-        setEmailError('');
-        break;
-      case 'errorFirstName':
-        setFirstNameError(
-          'first name should be 3-16 characters and should not include any special character'
-        );
-        break;
-      case 'cleanErrorFirstName':
-        setFirstNameError('');
-        break;
-      case 'errorLastName':
-        setLastNameError(
-          'last name should be 3-16 characters and should not include any special character'
-        );
-        break;
-      case 'cleanErrorLastName':
-        setLastNameError('');
-        break;
-      case 'errorBirthday':
-        setBirthdayError('you must be > 13 y.o');
-        break;
-      case 'cleanErrorBirthday':
-        setBirthdayError('');
-        break;
-      case 'errorCity':
-        setCityError('should be 3-16 characters and should not include any special character');
-        break;
-      case 'cleanErrorCity':
-        setCityError('');
-        break;
-      case 'errorPostalCode':
-        setPostalCodeError('postal code not valid for this country ');
-        break;
-      case 'cleanErrorPostalCode':
-        setPostalCodeError('');
-        break;
-      case 'errorStreet':
-        setStreetError('should be 3-16 characters and should not include any special character');
-        break;
-      case 'cleanErrorStreet':
-        setStreetError('');
-        break;
-      case 'errorPassword':
-        setPasswordError(
-          'minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, and 1 number. (allowed char: latin char and @#$^+=)'
-        );
-        break;
-      case 'cleanErrorPassword':
-        setPasswordError('');
-        break;
-      default:
-        console.log('nothing');
-        break;
+    if (validationField(name, value)) {
+      if (validationField(name, value) === 'empty') {
+        console.log(validationField(name, value));
+        delete validationErrors[name];
+      } else {
+        validationErrors[name] = validationField(name, value);
+        console.log(validationErrors);
+      }
     }
+    setErrors(validationErrors);
+    console.log(validationErrors);
     setNewCostumer({
       ...newCostumer,
       [name]: value
@@ -236,7 +177,7 @@ function FormSingup(props: IFormProps) {
           onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
           value={newCostumer.email}
           wrong={emailWrong}
-          error={emailError}
+          error={errors.email}
           disabled={false}
         />
         <div className={FormStyles.block}>
@@ -250,7 +191,7 @@ function FormSingup(props: IFormProps) {
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
             value={newCostumer.firstName}
             wrong={firstNameWrong}
-            error={firstNameError}
+            error={errors.firstName}
             disabled={false}
           />
           <InputField
@@ -263,7 +204,7 @@ function FormSingup(props: IFormProps) {
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
             value={newCostumer.lastName}
             wrong={lastNameWrong}
-            error={lastNameError}
+            error={errors.lastName}
             disabled={false}
           />
         </div>
@@ -277,7 +218,7 @@ function FormSingup(props: IFormProps) {
           onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
           value={newCostumer.dateOfBirth}
           wrong={birthdayWrong}
-          error={birthdayError}
+          error={errors.dateOfBirth}
           disabled={false}
         />
         <div className={FormStyles.block}>
@@ -309,7 +250,7 @@ function FormSingup(props: IFormProps) {
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
             value={newCostumer.postalCode}
             wrong={postalCodeWrong}
-            error={postalCodeError}
+            error={errors.postalCode}
             disabled={!postalCodeEnable}
           />
         </div>
@@ -324,7 +265,7 @@ function FormSingup(props: IFormProps) {
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
             value={newCostumer.city}
             wrong={cityWrong}
-            error={cityError}
+            error={errors.city}
             disabled={false}
           />
           <InputField
@@ -337,7 +278,7 @@ function FormSingup(props: IFormProps) {
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
             value={newCostumer.street}
             wrong={streetWrong}
-            error={streetError}
+            error={errors.street}
             disabled={false}
           />
         </div>
@@ -352,7 +293,7 @@ function FormSingup(props: IFormProps) {
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
             value={newCostumer.password}
             wrong={passwordWrong}
-            error={passwordError}
+            error={errors.password}
             disabled={false}
           />
           <InputField
