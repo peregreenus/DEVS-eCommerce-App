@@ -2,18 +2,23 @@
 import React, { FormEvent } from 'react';
 import FormSingup from '../../components/signup/signup-form';
 import Header from '../../components/common/header/header';
+import * as SignupStyles from './signup.module.css';
+import Footer from '../../components/common/footer/footer';
 import { MainProps } from '../../../data/types/main-props';
 
 export default function Singup({ showMsg, setShowMsg }: MainProps) {
   const handleRegistrationSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const userDetails = new FormData(e.target as HTMLFormElement);
+    const userDetails = new FormData(e.currentTarget);
     console.log(Object.fromEntries(userDetails.entries()));
   };
   return (
-    <div>
+    <>
       <Header showMsg={showMsg} setShowMsg={setShowMsg} />
-      <FormSingup onSubmit={handleRegistrationSubmit} />
-    </div>
+      <div className={SignupStyles.signup}>
+        <FormSingup onSubmit={handleRegistrationSubmit} />
+      </div>
+      <Footer />
+    </>
   );
 }
