@@ -1,0 +1,21 @@
+.loginFormInput {
+  width: 100%;
+  padding: 0.3rem 1.3rem 0.3rem 0.3rem;
+  outline: transparent;
+  margin-top: 0.1rem;
+}
+
+.errorMsg {
+  display: inline-block;
+  width: 100%;
+  height: 12px;
+  color: #900;
+  font-size: 1.1rem;
+  text-align: center;
+  transition: opacity ease-in 0.3s;
+  opacity: 0;
+}
+
+.errorMsg:not(:empty) {
+  opacity: 1;
+}
