@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { RegistrationFieldsType } from '../../../data/types/registration-type';
 import { validationField, setCostumerCountry } from '../../../data/utils/validate-signup-form';
 import InputField from './signup-form-input';
@@ -156,6 +157,9 @@ function FormSingup(props: IFormProps) {
   return (
     <div className={FormStyles.container}>
       <h2>Register</h2>
+      <p className={FormStyles.link}>
+        OR if you already have an account<Link to="/login">Login</Link>
+      </p>
       <form className={FormStyles.form} onSubmit={onSubmit}>
         <InputField
           label="Email"

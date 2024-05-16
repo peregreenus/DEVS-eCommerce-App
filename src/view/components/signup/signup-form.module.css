@@ -75,3 +75,8 @@
   border-radius: 50%;
   background: linear-gradient(to right, rgba(255, 255, 255, 0.7) 0 100%);
 }
+
+.link a:last-child {
+  margin: 0 1rem;
+  font-size: 2rem;
+}

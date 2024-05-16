@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import React, { FormEvent } from 'react';
-import { Link } from 'react-router-dom';
 import FormSingup from '../../components/signup/signup-form';
 import Header from '../../components/common/header/header';
 import * as SignupStyles from './signup.module.css';
@@ -19,9 +18,6 @@ export default function Singup({ showMsg, setShowMsg }: MainProps) {
       <div className={SignupStyles.signup}>
         <FormSingup onSubmit={handleRegistrationSubmit} />
       </div>
-      <p className={SignupStyles.link}>
-        Already have an account?<Link to="/login">Login</Link>
-      </p>
       <Footer />
     </>
   );
