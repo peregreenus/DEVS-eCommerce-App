@@ -21,13 +21,6 @@ const initialState = {
   password: '',
   confirmPassword: ''
 };
-// interface IErrorField {
-//   field: {
-//     fieldName: string;
-//     error: string | null;
-//   };
-// }
-
 const ErrorField = {
   firstName: 'should not be a empty!',
   lastName: 'should not be a empty!',
@@ -116,15 +109,12 @@ function FormSingup(props: IFormProps) {
     const { name, value } = e.target;
     if (validationField(name, value)) {
       if (validationField(name, value) === 'empty') {
-        console.log(validationField(name, value));
         delete validationErrors[name];
       } else {
         validationErrors[name] = validationField(name, value);
-        console.log(validationErrors);
       }
     }
     setErrors(validationErrors);
-    console.log(validationErrors);
     setNewCostumer({
       ...newCostumer,
       [name]: value
