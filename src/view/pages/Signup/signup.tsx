@@ -6,7 +6,7 @@ import * as SignupStyles from './signup.module.css';
 import Footer from '../../components/common/footer/footer';
 import { MainProps } from '../../../data/types/main-props';
 
-export default function Singup({ showMsg, setShowMsg }: MainProps) {
+export default function Singup({ state, setState }: MainProps) {
   const handleRegistrationSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const userDetails = new FormData(e.currentTarget);
@@ -14,7 +14,7 @@ export default function Singup({ showMsg, setShowMsg }: MainProps) {
   };
   return (
     <>
-      <Header showMsg={showMsg} setShowMsg={setShowMsg} />
+      <Header state={state} setState={setState} />
       <div className={SignupStyles.signup}>
         <FormSingup onSubmit={handleRegistrationSubmit} />
       </div>
