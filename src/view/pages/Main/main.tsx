@@ -7,10 +7,10 @@ import Footer from '../../components/common/footer/footer';
 import { MainProps } from '../../../data/types/main-props';
 import * as classes from './main.module.css';
 
-function Main({ showMsg, setShowMsg }: MainProps) {
+function Main({ state, setState }: MainProps) {
   return (
     <>
-      <Header showMsg={showMsg} setShowMsg={setShowMsg} />
+      <Header state={state} setState={setState} />
       <main className={classes.main}>
         <Greeting />
         <Offer />

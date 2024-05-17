@@ -5,7 +5,7 @@ import * as classes from './navbar.module.css';
 function Navbar() {
   return (
     <nav className={classes.navbar}>
-      <Link to="/main">Main</Link>
+      <Link to="/">Main</Link>
       <Link to="/catalog">Catalog</Link>
       <Link to="/about">About</Link>
       <Link to="/signup">Register</Link>

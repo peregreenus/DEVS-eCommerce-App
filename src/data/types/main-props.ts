@@ -1,4 +1,10 @@
-export interface MainProps {
+export interface AppState {
   showMsg: boolean;
-  setShowMsg: React.Dispatch<React.SetStateAction<boolean>>;
+  userLoggedIn: boolean;
+  // here we can add new parameters
+}
+
+export interface MainProps {
+  state: AppState;
+  setState: React.Dispatch<React.SetStateAction<AppState>>;
 }

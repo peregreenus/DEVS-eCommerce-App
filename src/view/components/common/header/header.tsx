@@ -2,17 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../navbar/navbar';
 import NologinMessage from '../NologinMessage/NologinMessage';
-import { MainProps } from '../../../../data/types/main-props';
 import * as classes from './header.module.css';
+import { MainProps } from '../../../../data/types/main-props';
 
-function Header({ showMsg, setShowMsg }: MainProps) {
+function Header({ state, setState }: MainProps) {
   return (
     <>
       <header className={classes.header}>
-        <Link className={classes.logo} to="/main" />
+        <Link className={classes.logo} to="/" />
         <Navbar />
       </header>
-      <NologinMessage showMsg={showMsg} setShowMsg={setShowMsg} />
+      <NologinMessage state={state} setState={setState} />
     </>
   );
 }
