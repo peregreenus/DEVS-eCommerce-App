@@ -38,7 +38,6 @@ function validationField(fieldName: string, fieldValue: string): string {
   if (fieldName === 'dateOfBirth') {
     const today = new Date();
     const diffInMilliSeconds = today.getTime() - new Date(fieldValue).getTime();
-    console.log(diffInMilliSeconds);
     const diffInYears = diffInMilliSeconds / 1000 / 60 / 60 / 24 / 365.32;
     const age = Math.abs(diffInYears);
     if (age <= 13) {
@@ -65,7 +64,6 @@ function validationField(fieldName: string, fieldValue: string): string {
   }
   if (fieldName === 'password') {
     const requirements = /^(?=.*\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#$^+=])(.{8,15})$/;
-    console.log(fieldValue);
     if (!requirements.test(fieldValue)) {
       returnValue =
         'minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, and 1 number. (allowed char: latin char and @#$^+=)';
@@ -75,7 +73,6 @@ function validationField(fieldName: string, fieldValue: string): string {
   }
   if (fieldName === 'postalCode') {
     let requirements: RegExp;
-    console.log(costumerCountry);
     switch (costumerCountry) {
       case 'United States':
         requirements = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
@@ -107,10 +104,8 @@ function validationField(fieldName: string, fieldValue: string): string {
   if (fieldName === 'country') {
     if (!fieldValue) {
       returnValue = 'errorCountry';
-      console.log(fieldValue);
     } else {
       returnValue = 'cleanErrorCountry';
-      console.log(fieldValue);
     }
   }
   return returnValue;

@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { RegistrationFieldsType } from '../../../data/types/registration-type';
+import { Country, RegistrationFieldsType } from '../../../data/types/registration-type';
 import { validationField, setCostumerCountry } from '../../../data/utils/validate-signup-form';
 import InputField from './signup-form-input';
 import * as FormStyles from './signup-form.module.css';
@@ -32,14 +32,6 @@ const ErrorField = {
   street: 'should not be a empty!',
   password: 'should not be a empty!'
 };
-enum Country {
-  'Austria' = 'Austria',
-  'Belarus' = 'Belarus',
-  'Germany' = 'Germany',
-  'Russia' = 'Russia',
-  'Ukraine' = 'Ukraine',
-  'United States' = 'United States'
-}
 
 function FormSingup(props: IFormProps) {
   const validationErrors: { [key: string]: string } = ErrorField;
