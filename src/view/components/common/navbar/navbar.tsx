@@ -69,12 +69,14 @@ function Navbar() {
         <Link to="/login" onClick={toggleMenu}>
           Login
         </Link>
+        <Link to="/logout" onClick={toggleMenu}>
+          Logout
+        </Link>
+        <Link to="/profile" onClick={toggleMenu}>
+          Profile
+        </Link>
         <Link to="/basket" onClick={toggleMenu}>
-          <img
-            className={classes.basketImg}
-            src="../../../../assets/icon/free-icon-shopping-cart-481384.svg"
-            alt="basket"
-          />
+          Basket
         </Link>
       </div>
     </nav>

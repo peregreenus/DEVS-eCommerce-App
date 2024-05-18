@@ -16,11 +16,11 @@ a {
   color: black;
   transition: 0.4s all ease-in;
 }
-
+/* 
 a:last-child {
   margin-left: 5rem;
   margin-right: 3rem;
-}
+} */
 
 .basketImg {
   position: absolute;
@@ -56,30 +56,29 @@ a:hover {
 }
 
 @media (max-width: 768px) {
-  .header {
-    position: fixed;
-  }
-
   .menu {
-    display: none;
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    width: 50%;
-    min-width: 350px;
+    align-items: center;
+    font-size: 2rem;
+    width: 100%;
     background-color: white;
     position: absolute;
-    top: 10%;
-    right: -100%;
-    padding: 10px;
-    padding-bottom: 50px;
-    font-size: 3rem;
+    top: 8%;
+    left: 0;
+    padding: 10px 0 25px 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
     z-index: 100;
-    transition: 0.4s all ease-in;
+    transition:
+      max-height 0.4s ease-in-out,
+      opacity 0.4s ease-in-out;
   }
 
-  .show {
-    display: flex;
-    right: 0;
+  .menu.show {
+    max-height: 600px;
+    opacity: 1;
   }
 
   .burger {
