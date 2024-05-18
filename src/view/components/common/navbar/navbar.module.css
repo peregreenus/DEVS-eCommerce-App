@@ -1,6 +1,13 @@
 .navbar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 a {
@@ -27,4 +34,64 @@ a img:hover {
 
 a:hover {
   color: rgb(228, 241, 238);
+}
+
+.burger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.4s ease-in-out;
+}
+
+.burgerBar {
+  width: 25px;
+  height: 3px;
+  background-color: black;
+  margin: 4px 0;
+  transition: 0.4s;
+}
+
+.rotate {
+  transform: rotate(90deg);
+}
+
+@media (max-width: 768px) {
+  .header {
+    position: fixed;
+  }
+
+  .menu {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+    min-width: 350px;
+    background-color: white;
+    position: absolute;
+    top: 10%;
+    right: -100%;
+    padding: 10px;
+    padding-bottom: 50px;
+    font-size: 3rem;
+    z-index: 100;
+    transition: 0.4s all ease-in;
+  }
+
+  .show {
+    display: flex;
+    right: 0;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  a {
+    margin: 10px 0;
+  }
+
+  a:last-child {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
