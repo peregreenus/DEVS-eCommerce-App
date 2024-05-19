@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Country, RegistrationFieldsType } from '../../../data/types/registration-type';
@@ -77,7 +76,6 @@ function FormSignup(props: IFormProps) {
 
   const handleDropdownChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
-    console.log('handleDropdownChange');
     setSelectedCountry(value);
     setCountryError(' ');
     setCostumerCountry(value);
@@ -104,7 +102,6 @@ function FormSignup(props: IFormProps) {
   }
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    console.log('handlerChange');
     const { name, value } = e.target;
     if (validationField(name, value) === 'empty') {
       delete validationErrors[name];
@@ -127,7 +124,6 @@ function FormSignup(props: IFormProps) {
     });
   }
   const handlerBlur = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target, 'handlerBlur');
     switch (e.target.name) {
       case 'email':
         setEmailWrong(true);

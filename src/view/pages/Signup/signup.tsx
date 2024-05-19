@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { FormEvent, useState } from 'react';
 import FormSignup from '../../components/signup/signup-form';
 import Header from '../../components/common/header/header';

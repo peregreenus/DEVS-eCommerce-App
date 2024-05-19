@@ -47,7 +47,7 @@ function validationField(fieldName: string, fieldValue: string): string {
     }
   }
   if (fieldName === 'city') {
-    const requirements = /^[A-Za-z-]{3,16}$/;
+    const requirements = /^[A-Za-z0-9- ]{3,16}$/;
     if (!requirements.test(fieldValue)) {
       returnValue = 'should be 3-16 characters and should not include any special character';
     } else {
@@ -55,7 +55,7 @@ function validationField(fieldName: string, fieldValue: string): string {
     }
   }
   if (fieldName === 'street') {
-    const requirements = /^[A-Za-z0-9-]{3,16}$/;
+    const requirements = /^[A-Za-z0-9- ]{3,16}$/;
     if (!requirements.test(fieldValue)) {
       returnValue = 'should be 3-16 characters and should not include any special character';
     } else {
