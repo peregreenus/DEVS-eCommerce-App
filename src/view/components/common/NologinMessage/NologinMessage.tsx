@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { KeyboardEvent } from 'react';
 import { Link } from 'react-router-dom';
 import * as classes from './NologinMessage.module.css';
 import { MainProps } from '../../../../data/types/main-props';
@@ -6,6 +6,13 @@ import { MainProps } from '../../../../data/types/main-props';
 function NologinMessage({ state, setState }: MainProps) {
   function hideMessage() {
     setState((prevState) => ({ ...prevState, showMsg: false }));
+  }
+
+  function hideMessageFromKey(e: KeyboardEvent) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      hideMessage();
+    }
   }
 
   return (
@@ -17,9 +24,14 @@ function NologinMessage({ state, setState }: MainProps) {
             <Link to="/signup">Register</Link>
             <Link to="/login">Login</Link>
           </div>
-          <button className={classes.button} type="button" onClick={hideMessage}>
-            <img className={classes.imgCross} src="../../../../assets/icon/cross.svg" alt="close" />
-          </button>
+          <div
+            className={classes.button}
+            onClick={hideMessage}
+            onKeyDown={hideMessageFromKey}
+            role="button"
+            tabIndex={0}
+            aria-label="hide message"
+          />
         </>
       )}
     </div>
