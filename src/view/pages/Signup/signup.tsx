@@ -21,7 +21,7 @@ export default function Singup({ state, setState }: MainProps) {
     e.preventDefault();
     const userDetails = new FormData(e.currentTarget);
     const customer = JSON.stringify(Object.fromEntries(userDetails.entries()));
-    await CustomerSignup(customer).then(showSuccessSignupMessage);
+    await CustomerSignup(customer).then(() => showSuccessSignupMessage());
   };
 
   return (
