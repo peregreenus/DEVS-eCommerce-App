@@ -18,12 +18,11 @@ export default function Singup({ state, setState }: MainProps) {
     setShowSucceed((prevState) => ({ ...prevState, showSignupSuccess: true }));
   };
 
-  const handleRegistrationSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleRegistrationSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const userDetails = new FormData(e.currentTarget);
     const costumer = JSON.stringify(Object.fromEntries(userDetails.entries()));
-    CostumerSignup(costumer);
-    showSuccessSignupMessage();
+    await CostumerSignup(costumer).then(showSuccessSignupMessage);
   };
 
   return (
