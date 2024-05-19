@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import * as FormStyles from './signup-form.module.css';
+import * as styles from './signup-form.module.css';
 
 interface InputProps {
   type: 'text' | 'number' | 'email' | 'password' | 'date';
@@ -30,7 +30,7 @@ export default function InputField(props: InputProps) {
     disabled
   } = props;
   return (
-    <label htmlFor={name} className={FormStyles.label}>
+    <label htmlFor={name} className={styles.label}>
       {label}
       <input
         type={type}
@@ -40,10 +40,10 @@ export default function InputField(props: InputProps) {
         placeholder={placeholder}
         onChange={onChange}
         onBlur={onBlur}
-        className={`${classes} ${wrong && error ? FormStyles.errorBorder : ''}`}
+        className={`${classes} ${wrong && error ? styles.errorBorder : ''}`}
         disabled={disabled}
       />
-      {wrong && error && <span className={FormStyles.error}>{error}</span>}
+      {wrong && error && <span className={styles.error}>{error}</span>}
     </label>
   );
 }

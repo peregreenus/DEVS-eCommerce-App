@@ -1,10 +1,12 @@
 /* eslint-disable no-console */
-import { Country, CustomerRegistration, RegistrationFieldsType } from '../types/registration-type';
-import { baseURL, bearerToken, projectKey } from './api';
+import Country from '../types/country';
+import { CustomerRegistration } from '../types/interfaces/customer.interface';
+import { RegistrationFieldsType } from '../types/registration-type';
+import { bearerToken } from './getToken';
 
-export default async function CostumerSignup(formCustomer: string) {
+export default async function CustomerSignup(formCustomer: string) {
   const newCustomer: RegistrationFieldsType = JSON.parse(formCustomer);
-  const url = `${baseURL}${projectKey}/me/signup`;
+  const url = `${process.env.CTP_API_URL}${process.env.CTP_PROJECT_KEY}/me/signup`;
   const data: CustomerRegistration = {
     email: newCustomer.email,
     firstName: newCustomer.firstName,
@@ -31,7 +33,7 @@ export default async function CostumerSignup(formCustomer: string) {
       body: JSON.stringify(data)
     });
     const responseData = await response.json();
-    console.log('response from create costumer', responseData);
+    return responseData;
   } catch (error) {
     console.error('error response:', error);
   }

@@ -1,9 +1,10 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Country, RegistrationFieldsType } from '../../../data/types/registration-type';
+import { RegistrationFieldsType } from '../../../data/types/registration-type';
 import { setCostumerCountry, validationField } from '../../../data/utils/validate-signup-form';
 import InputField from './signup-form-input';
-import * as FormStyles from './signup-form.module.css';
+import * as styles from './signup-form.module.css';
+import Country from '../../../data/types/country';
 
 interface IFormProps {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -34,7 +35,7 @@ const errorInitialState = {
 
 function FormSignup(props: IFormProps) {
   const validationErrors: { [key: string]: string } = errorInitialState;
-  const [newCostumer, setNewCostumer] = useState<RegistrationFieldsType>(initialState);
+  const [newCustomer, setNewCustomer] = useState<RegistrationFieldsType>(initialState);
   const [errors, setErrors] = useState<{ [key: string]: string }>(validationErrors);
   const [selectedCountry, setSelectedCountry] = useState('null country');
   const [countryError, setCountryError] = useState('should be select');
@@ -79,24 +80,24 @@ function FormSignup(props: IFormProps) {
     setSelectedCountry(value);
     setCountryError(' ');
     setCostumerCountry(value);
-    newCostumer.postalCode = '';
+    newCustomer.postalCode = '';
     validationErrors.postalCode = 'should not be a empty!';
     setErrors({ ...validationErrors });
-    setNewCostumer({
-      ...newCostumer,
+    setNewCustomer({
+      ...newCustomer,
       [name]: value
     });
   };
 
   function checkConfirmPassword(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
-    if (!newCostumer.password || value !== newCostumer.password) {
+    if (!newCustomer.password || value !== newCustomer.password) {
       setConfirmError('Passwords do not match!');
     } else {
       setConfirmError(' ');
     }
-    setNewCostumer({
-      ...newCostumer,
+    setNewCustomer({
+      ...newCustomer,
       [name]: value
     });
   }
@@ -111,15 +112,15 @@ function FormSignup(props: IFormProps) {
     setErrors({ ...validationErrors });
 
     if (name === 'password') {
-      if (value !== newCostumer.confirmPassword) {
+      if (value !== newCustomer.confirmPassword) {
         setConfirmError('Passwords do not match!');
       } else {
         setConfirmError(' ');
       }
     }
 
-    setNewCostumer({
-      ...newCostumer,
+    setNewCustomer({
+      ...newCustomer,
       [name]: value
     });
   }
@@ -157,35 +158,35 @@ function FormSignup(props: IFormProps) {
     }
   };
   return (
-    <div className={FormStyles.container}>
+    <div className={styles.container}>
       <h2>Register</h2>
-      <p className={FormStyles.link}>
+      <p className={styles.link}>
         OR if you already have an account<Link to="/login">Login</Link>
       </p>
-      <form className={FormStyles.form} onSubmit={onSubmit}>
+      <form className={styles.form} onSubmit={onSubmit}>
         <InputField
           label="Email"
           type="email"
           name="email"
-          classes={FormStyles.input}
+          classes={styles.input}
           placeholder="one@example.com"
           onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
           onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-          value={newCostumer.email}
+          value={newCustomer.email}
           wrong={emailWrong}
           error={errors.email}
           disabled={false}
         />
-        <div className={FormStyles.block}>
+        <div className={styles.block}>
           <InputField
             label="First Name"
             type="text"
             name="firstName"
-            classes={FormStyles.input}
+            classes={styles.input}
             placeholder="enter your name"
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-            value={newCostumer.firstName}
+            value={newCustomer.firstName}
             wrong={firstNameWrong}
             error={errors.firstName}
             disabled={false}
@@ -194,11 +195,11 @@ function FormSignup(props: IFormProps) {
             label="Last Name"
             type="text"
             name="lastName"
-            classes={FormStyles.input}
+            classes={styles.input}
             placeholder="enter your last name"
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-            value={newCostumer.lastName}
+            value={newCustomer.lastName}
             wrong={lastNameWrong}
             error={errors.lastName}
             disabled={false}
@@ -208,23 +209,23 @@ function FormSignup(props: IFormProps) {
           label="Date of birth"
           type="date"
           name="dateOfBirth"
-          classes={FormStyles.input}
+          classes={styles.input}
           placeholder=""
           onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
           onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-          value={newCostumer.dateOfBirth}
+          value={newCustomer.dateOfBirth}
           wrong={birthdayWrong}
           error={errors.dateOfBirth}
           disabled={false}
         />
-        <div className={FormStyles.block}>
-          <label htmlFor="country" className={FormStyles.label}>
+        <div className={styles.block}>
+          <label htmlFor="country" className={styles.label}>
             Country:
             <select
               value={selectedCountry}
               onChange={(e: ChangeEvent<HTMLSelectElement>) => handleDropdownChange(e)}
               name="country"
-              className={FormStyles.input}>
+              className={styles.input}>
               <option value="null country" disabled hidden>
                 select country
               </option>
@@ -234,32 +235,32 @@ function FormSignup(props: IFormProps) {
                 </option>
               ))}
             </select>
-            {countryError && <span className={FormStyles.error}>{countryError}</span>}
+            {countryError && <span className={styles.error}>{countryError}</span>}
           </label>
           <InputField
             label="Postal Code"
             type="text"
             name="postalCode"
-            classes={FormStyles.input}
+            classes={styles.input}
             placeholder=""
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-            value={newCostumer.postalCode}
+            value={newCustomer.postalCode}
             wrong={postalCodeWrong}
             error={errors.postalCode}
             disabled={!postalCodeEnable}
           />
         </div>
-        <div className={FormStyles.block}>
+        <div className={styles.block}>
           <InputField
             label="City"
             type="text"
             name="city"
-            classes={FormStyles.input}
+            classes={styles.input}
             placeholder="enter your city"
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-            value={newCostumer.city}
+            value={newCustomer.city}
             wrong={cityWrong}
             error={errors.city}
             disabled={false}
@@ -268,26 +269,26 @@ function FormSignup(props: IFormProps) {
             label="Street"
             type="text"
             name="street"
-            classes={FormStyles.input}
+            classes={styles.input}
             placeholder="your street"
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-            value={newCostumer.street}
+            value={newCustomer.street}
             wrong={streetWrong}
             error={errors.street}
             disabled={false}
           />
         </div>
-        <div className={FormStyles.block}>
+        <div className={styles.block}>
           <InputField
             label="Password"
             type="password"
             name="password"
-            classes={FormStyles.input}
+            classes={styles.input}
             placeholder=""
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-            value={newCostumer.password}
+            value={newCustomer.password}
             wrong={passwordWrong}
             error={errors.password}
             disabled={false}
@@ -296,17 +297,17 @@ function FormSignup(props: IFormProps) {
             label="Confirm Password"
             type="password"
             name="confirmPassword"
-            classes={FormStyles.input}
+            classes={styles.input}
             placeholder=""
             onChange={(e: ChangeEvent<HTMLInputElement>) => checkConfirmPassword(e)}
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-            value={newCostumer.confirmPassword}
+            value={newCustomer.confirmPassword}
             wrong={confirmWrong}
             error={confirmError}
             disabled={false}
           />
         </div>
-        <button disabled={!formValid} type="submit" className={FormStyles.button}>
+        <button disabled={!formValid} type="submit" className={styles.button}>
           Signup
         </button>
       </form>

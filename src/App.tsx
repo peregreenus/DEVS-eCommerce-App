@@ -5,7 +5,7 @@ import Signup from './view/pages/Signup/signup';
 import Notfound from './view/pages/NotFound/not-found';
 import Login from './view/pages/Login/Login';
 import { AppState } from './data/types/main-props';
-import { getToken } from './data/api/api';
+import { getToken } from './data/api/getToken';
 
 function App() {
   getToken();
