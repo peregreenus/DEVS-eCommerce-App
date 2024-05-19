@@ -65,12 +65,13 @@ a:hover {
     width: 100%;
     background-color: white;
     position: absolute;
-    top: 4.5rem;
+    top: 5.5rem;
     left: 0;
     padding: 10px 0 25px 0;
     max-height: 0;
     overflow: hidden;
     opacity: 0;
+    border: none;
     z-index: 600;
     transition:
       max-height 0.4s ease-in-out,
@@ -84,6 +85,7 @@ a:hover {
 
   .burger {
     display: flex;
+    z-index: 700;
   }
 
   a {
@@ -99,7 +101,7 @@ a:hover {
     position: fixed;
     width: 100vw;
     height: 100vh;
-    top: 10%;
+    top: 10rem;
     left: 0;
     background: rgba(128, 128, 128, 0.3);
     z-index: 500;
