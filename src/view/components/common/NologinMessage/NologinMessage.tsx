@@ -17,9 +17,19 @@ function NologinMessage({ state, setState }: MainProps) {
             <Link to="/signup">Register</Link>
             <Link to="/login">Login</Link>
           </div>
-          <button className={classes.button} type="button" onClick={hideMessage}>
-            <img className={classes.imgCross} src="../../../../assets/icon/cross.svg" alt="close" />
-          </button>
+          <div
+            className={classes.button}
+            onClick={hideMessage}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                hideMessage();
+              }
+            }}
+            role="button"
+            tabIndex={0}
+            aria-label="hide message"
+          />
         </>
       )}
     </div>
