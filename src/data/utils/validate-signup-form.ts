@@ -38,7 +38,6 @@ function validationField(fieldName: string, fieldValue: string): string {
   if (fieldName === 'dateOfBirth') {
     const today = new Date();
     const diffInMilliSeconds = today.getTime() - new Date(fieldValue).getTime();
-    console.log(diffInMilliSeconds);
     const diffInYears = diffInMilliSeconds / 1000 / 60 / 60 / 24 / 365.32;
     const age = Math.abs(diffInYears);
     if (age <= 13) {
@@ -48,7 +47,7 @@ function validationField(fieldName: string, fieldValue: string): string {
     }
   }
   if (fieldName === 'city') {
-    const requirements = /^[A-Za-z-]{3,16}$/;
+    const requirements = /^[A-Za-z0-9- ]{3,16}$/;
     if (!requirements.test(fieldValue)) {
       returnValue = 'should be 3-16 characters and should not include any special character';
     } else {
@@ -56,7 +55,7 @@ function validationField(fieldName: string, fieldValue: string): string {
     }
   }
   if (fieldName === 'street') {
-    const requirements = /^[A-Za-z0-9-]{3,16}$/;
+    const requirements = /^[A-Za-z0-9- ]{3,16}$/;
     if (!requirements.test(fieldValue)) {
       returnValue = 'should be 3-16 characters and should not include any special character';
     } else {
@@ -64,18 +63,16 @@ function validationField(fieldName: string, fieldValue: string): string {
     }
   }
   if (fieldName === 'password') {
-    const requirements = /^(?=.*\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#$^+=])(.{8,15})$/;
-    console.log(fieldValue);
+    const requirements = /^(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*])(?!.*[^a-zA-Z0-9!@#$%^&*])(.{8,15})$/;
     if (!requirements.test(fieldValue)) {
       returnValue =
-        'minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, and 1 number. (allowed char: latin char and @#$^+=)';
+        'minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, and 1 number. (allowed char: latin char and !@#$%^&*)';
     } else {
       returnValue = 'empty';
     }
   }
   if (fieldName === 'postalCode') {
     let requirements: RegExp;
-    console.log(costumerCountry);
     switch (costumerCountry) {
       case 'United States':
         requirements = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
@@ -102,15 +99,6 @@ function validationField(fieldName: string, fieldValue: string): string {
       returnValue = 'postal code not valid for this country';
     } else {
       returnValue = 'empty';
-    }
-  }
-  if (fieldName === 'country') {
-    if (!fieldValue) {
-      returnValue = 'errorCountry';
-      console.log(fieldValue);
-    } else {
-      returnValue = 'cleanErrorCountry';
-      console.log(fieldValue);
     }
   }
   return returnValue;
