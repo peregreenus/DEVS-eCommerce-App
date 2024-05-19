@@ -75,8 +75,8 @@ function Navbar() {
         <Link to="/profile" onClick={toggleMenu}>
           Profile
         </Link>
-        <Link to="/basket" onClick={toggleMenu}>
-          Basket
+        <Link to="/cart" onClick={toggleMenu}>
+          Cart
         </Link>
       </div>
     </nav>
