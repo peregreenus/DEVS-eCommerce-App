@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, KeyboardEvent } from 'react';
 import { Link } from 'react-router-dom';
 import * as classes from './navbar.module.css';
 
@@ -9,6 +9,13 @@ function Navbar() {
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const toggleMenuFromKey = (e: KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleMenu();
+    }
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -40,12 +47,7 @@ function Navbar() {
         ref={burgerRef}
         className={`${classes.burger} ${isOpen ? classes.rotate : ''}`}
         onClick={toggleMenu}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            toggleMenu();
-          }
-        }}
+        onKeyDown={toggleMenuFromKey}
         role="button"
         tabIndex={0}
         aria-label="Toggle menu">

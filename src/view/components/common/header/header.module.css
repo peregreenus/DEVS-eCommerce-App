@@ -14,18 +14,10 @@
   border-radius: 2rem;
   background-image: url('../../../../assets/img/Default_Draw_logo_for_company_Galactic_Exclusive_0.png');
   background-size: cover;
+  z-index: 2000;
   transition: 0.4s all ease-in;
 }
 .logo:hover {
   width: 5rem;
   height: 5rem;
 }
-
-/* @media (max-width: 768px) {
-  .header {
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 50px;
-  }
-} */

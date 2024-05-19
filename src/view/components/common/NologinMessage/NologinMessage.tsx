@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { KeyboardEvent } from 'react';
 import { Link } from 'react-router-dom';
 import * as classes from './NologinMessage.module.css';
 import { MainProps } from '../../../../data/types/main-props';
@@ -6,6 +6,13 @@ import { MainProps } from '../../../../data/types/main-props';
 function NologinMessage({ state, setState }: MainProps) {
   function hideMessage() {
     setState((prevState) => ({ ...prevState, showMsg: false }));
+  }
+
+  function hideMessageFromKey(e: KeyboardEvent) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      hideMessage();
+    }
   }
 
   return (
@@ -20,12 +27,7 @@ function NologinMessage({ state, setState }: MainProps) {
           <div
             className={classes.button}
             onClick={hideMessage}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                hideMessage();
-              }
-            }}
+            onKeyDown={hideMessageFromKey}
             role="button"
             tabIndex={0}
             aria-label="hide message"
