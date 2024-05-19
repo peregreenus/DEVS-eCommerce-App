@@ -2,9 +2,9 @@
 export const baseURLAuth: string = 'https://auth.us-central1.gcp.commercetools.com/';
 export const baseURL: string = 'https://api.us-central1.gcp.commercetools.com/';
 export const projectKey: string = 'devs-ecommerce-app-key-12435687';
-export const clientId: string = 'WynbMF96PvFryYU0NYLM5R';
+export const clientId: string = 'O-WynbMF96PvFryYU0NYLM5R';
 export const clientSecret: string = '9a_NIy80rtVZy1sUvscG0Ku6rryPet7Y';
-export const eCommScopes: string = 'manage_project:devs-ecommerce-app-key-12435687 ';
+export const eCommScopes: string = 'manage_project:devs-ecommerce-app-key-12435687';
 export const bearerToken = { token: null };
 
 export async function getToken() {
