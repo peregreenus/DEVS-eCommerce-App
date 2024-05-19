@@ -4,7 +4,6 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import EslingPlugin from 'eslint-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-const DotenvWebpackPlugin = require('dotenv-webpack');
 import 'webpack-dev-server';
 
 const config: Configuration = {
@@ -41,7 +40,6 @@ const config: Configuration = {
     historyApiFallback: true
   },
   plugins: [
-    new DotenvWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/index.html'),
       filename: 'index.html'

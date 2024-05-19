@@ -40,7 +40,7 @@ export default function InputField(props: InputProps) {
         placeholder={placeholder}
         onChange={onChange}
         onBlur={onBlur}
-        className={classes}
+        className={`${classes} ${wrong && error ? FormStyles.errorBorder : ''}`}
         disabled={disabled}
       />
       {wrong && error && <span className={FormStyles.error}>{error}</span>}

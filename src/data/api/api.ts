@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
-export const baseURLAuth: string = process.env.CTP_AUTH_URL as string;
-export const baseURL: string = process.env.CTP_API_URL as string;
-export const projectKey: string = process.env.CTP_PROJECT_KEY as string;
-export const clientId: string = process.env.CTP_CLIENT_ID as string;
-export const clientSecret: string = process.env.CTP_CLIENT_SECRET as string;
+export const baseURLAuth: string = 'https://auth.us-central1.gcp.commercetools.com/';
+export const baseURL: string = 'https://api.us-central1.gcp.commercetools.com/';
+export const projectKey: string = 'devs-ecommerce-app-key-12435687';
+export const clientId: string = 'WynbMF96PvFryYU0NYLM5R';
+export const clientSecret: string = '9a_NIy80rtVZy1sUvscG0Ku6rryPet7Y';
+export const eCommScopes: string = 'manage_project:devs-ecommerce-app-key-12435687 ';
 export const bearerToken = { token: null };
 
 export async function getToken() {

@@ -63,10 +63,10 @@ function validationField(fieldName: string, fieldValue: string): string {
     }
   }
   if (fieldName === 'password') {
-    const requirements = /^(?=.*\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#$^+=])(.{8,15})$/;
+    const requirements = /^(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*])(?!.*[^a-zA-Z0-9!@#$%^&*])(.{8,15})$/;
     if (!requirements.test(fieldValue)) {
       returnValue =
-        'minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, and 1 number. (allowed char: latin char and @#$^+=)';
+        'minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, and 1 number. (allowed char: latin char and !@#$%^&*)';
     } else {
       returnValue = 'empty';
     }
@@ -99,13 +99,6 @@ function validationField(fieldName: string, fieldValue: string): string {
       returnValue = 'postal code not valid for this country';
     } else {
       returnValue = 'empty';
-    }
-  }
-  if (fieldName === 'country') {
-    if (!fieldValue) {
-      returnValue = 'errorCountry';
-    } else {
-      returnValue = 'cleanErrorCountry';
     }
   }
   return returnValue;

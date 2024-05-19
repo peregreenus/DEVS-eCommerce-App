@@ -2,7 +2,7 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Country, RegistrationFieldsType } from '../../../data/types/registration-type';
-import { validationField, setCostumerCountry } from '../../../data/utils/validate-signup-form';
+import { setCostumerCountry, validationField } from '../../../data/utils/validate-signup-form';
 import InputField from './signup-form-input';
 import * as FormStyles from './signup-form.module.css';
 
@@ -22,7 +22,7 @@ const initialState = {
   password: '',
   confirmPassword: ''
 };
-const ErrorField = {
+const errorInitialState = {
   firstName: 'should not be a empty!',
   lastName: 'should not be a empty!',
   email: 'should not be a empty!',
@@ -33,64 +33,69 @@ const ErrorField = {
   password: 'should not be a empty!'
 };
 
-function FormSingup(props: IFormProps) {
-  const validationErrors: { [key: string]: string } = ErrorField;
+function FormSignup(props: IFormProps) {
+  const validationErrors: { [key: string]: string } = errorInitialState;
   const [newCostumer, setNewCostumer] = useState<RegistrationFieldsType>(initialState);
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [errors, setErrors] = useState<{ [key: string]: string }>(validationErrors);
   const [selectedCountry, setSelectedCountry] = useState('null country');
+  const [countryError, setCountryError] = useState('should be select');
+  const [confirmError, setConfirmError] = useState('should not be a empty!');
+
   const [emailWrong, setEmailWrong] = useState(false);
   const [firstNameWrong, setFirstNameWrong] = useState(false);
   const [lastNameWrong, setLastNameWrong] = useState(false);
   const [birthdayWrong, setBirthdayWrong] = useState(false);
-  const [countryError, setCountryError] = useState('should be select');
   const [cityWrong, setCityWrong] = useState(false);
   const [postalCodeWrong, setPostalCodeWrong] = useState(false);
   const [streetWrong, setStreetWrong] = useState(false);
   const [passwordWrong, setPasswordWrong] = useState(false);
-  const [confirmError, setConfirmError] = useState('should not be a empty!');
   const [confirmWrong, setConfirmWrong] = useState(false);
+
   const [formValid, setFormValid] = useState(false);
   const [postalCodeEnable, setPostalCodeEnable] = useState(false);
   const { onSubmit } = props;
 
   useEffect(() => {
-    if (Object.keys(errors).length !== 0 || countryError || confirmError) {
-      setFormValid(false);
-    } else {
+    if (
+      Object.keys(errors).length === 0 &&
+      countryError !== 'should be select' &&
+      confirmError === ' '
+    ) {
       setFormValid(true);
+    } else {
+      setFormValid(false);
     }
   }, [errors, countryError, confirmError]);
 
   useEffect(() => {
-    if (countryError) {
-      setPostalCodeEnable(false);
-    } else {
+    if (countryError === ' ') {
       setPostalCodeEnable(true);
+    } else {
+      setPostalCodeEnable(false);
     }
   }, [countryError]);
 
   const handleDropdownChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const target = e.currentTarget;
-    setSelectedCountry(target.value);
-    setCostumerCountry(target.value);
-    switch (validationField(target.name, target.value)) {
-      case 'errorCountry':
-        setCountryError('should be select');
-        break;
-      case 'cleanErrorCountry':
-        setCountryError('');
-        break;
-      default:
-        break;
-    }
+    const { name, value } = e.target;
+    console.log('handleDropdownChange');
+    setSelectedCountry(value);
+    setCountryError(' ');
+    setCostumerCountry(value);
+    newCostumer.postalCode = '';
+    validationErrors.postalCode = 'should not be a empty!';
+    setErrors({ ...validationErrors });
+    setNewCostumer({
+      ...newCostumer,
+      [name]: value
+    });
   };
 
-  function checkConfirm(e: ChangeEvent<HTMLInputElement>) {
+  function checkConfirmPassword(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
     if (!newCostumer.password || value !== newCostumer.password) {
       setConfirmError('Passwords do not match!');
     } else {
-      setConfirmError('');
+      setConfirmError(' ');
     }
     setNewCostumer({
       ...newCostumer,
@@ -99,21 +104,30 @@ function FormSingup(props: IFormProps) {
   }
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    console.log('handlerChange');
     const { name, value } = e.target;
-    if (validationField(name, value)) {
-      if (validationField(name, value) === 'empty') {
-        delete validationErrors[name];
+    if (validationField(name, value) === 'empty') {
+      delete validationErrors[name];
+    } else {
+      validationErrors[name] = validationField(name, value);
+    }
+    setErrors({ ...validationErrors });
+
+    if (name === 'password') {
+      if (value !== newCostumer.confirmPassword) {
+        setConfirmError('Passwords do not match!');
       } else {
-        validationErrors[name] = validationField(name, value);
+        setConfirmError(' ');
       }
     }
-    setErrors(validationErrors);
+
     setNewCostumer({
       ...newCostumer,
       [name]: value
     });
   }
   const handlerBlur = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target, 'handlerBlur');
     switch (e.target.name) {
       case 'email':
         setEmailWrong(true);
@@ -288,7 +302,7 @@ function FormSingup(props: IFormProps) {
             name="confirmPassword"
             classes={FormStyles.input}
             placeholder=""
-            onChange={(e: ChangeEvent<HTMLInputElement>) => checkConfirm(e)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => checkConfirmPassword(e)}
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
             value={newCostumer.confirmPassword}
             wrong={confirmWrong}
@@ -304,4 +318,4 @@ function FormSingup(props: IFormProps) {
   );
 }
 
-export default FormSingup;
+export default FormSignup;
