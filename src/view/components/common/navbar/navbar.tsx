@@ -19,7 +19,6 @@ function Navbar() {
   return (
     <nav className={classes.navbar}>
       <div
-        // ref={burgerRef}
         className={`${classes.burger} ${isOpen ? classes.rotate : ''}`}
         onClick={toggleMenu}
         onKeyDown={toggleMenuFromKey}
