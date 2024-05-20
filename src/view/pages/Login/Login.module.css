@@ -4,8 +4,28 @@
   flex-direction: column;
   align-items: center;
   padding-top: calc(1vw + 100px);
+  background: url(../../../assets/img/Default_draw_a_picture_about_exotic_islands_Place_the_island_o_0.jpg)
+    no-repeat;
+  background-size: cover;
 }
 
 .loginPage h2 {
   margin-bottom: 2rem;
+  color: var(--light-text-color);
+}
+
+.linkContainer {
+  display: flex;
+  align-items: center;
+}
+
+.linkContainer p {
+  font-size: 1.2rem;
+  color: var(--light-text-color);
+}
+
+.link {
+  font-size: 1.6rem;
+  color: rgb(34, 61, 185);
+  align-self: center;
 }
