@@ -1,6 +1,13 @@
 .navbar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 a {
@@ -9,11 +16,11 @@ a {
   color: black;
   transition: 0.4s all ease-in;
 }
-
+/* 
 a:last-child {
   margin-left: 5rem;
   margin-right: 3rem;
-}
+} */
 
 .basketImg {
   position: absolute;
@@ -27,4 +34,76 @@ a img:hover {
 
 a:hover {
   color: rgb(228, 241, 238);
+}
+
+.burger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.4s ease-in-out;
+}
+
+.burgerBar {
+  width: 25px;
+  height: 3px;
+  background-color: black;
+  margin: 4px 0;
+  transition: 0.4s;
+}
+
+.rotate {
+  transform: rotate(90deg);
+  z-index: 600;
+}
+
+@media (max-width: 768px) {
+  .menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2rem;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    top: 5.5rem;
+    left: 0;
+    padding: 10px 0 25px 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    border: none;
+    z-index: 600;
+    transition:
+      max-height 0.4s ease-in-out,
+      opacity 0.4s ease-in-out;
+  }
+
+  .menu.show {
+    max-height: 600px;
+    opacity: 1;
+  }
+
+  .burger {
+    display: flex;
+    z-index: 700;
+  }
+
+  a {
+    margin: 10px 0;
+  }
+
+  a:last-child {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .shadow {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 10rem;
+    left: 0;
+    background: rgba(128, 128, 128, 0.3);
+    z-index: 500;
+  }
 }

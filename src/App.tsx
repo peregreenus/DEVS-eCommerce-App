@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from './view/pages/Main/main';
@@ -9,6 +10,7 @@ import { getToken } from './data/api/getToken';
 
 function App() {
   getToken();
+  console.log('1');
   const [state, setState] = useState<AppState>({
     showMsg: true,
     userLoggedIn: false

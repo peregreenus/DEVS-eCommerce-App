@@ -2,7 +2,7 @@
 export const bearerToken = { token: null };
 
 export async function getToken() {
-  const url = `${process.env.CTP_AUTH_URL}oauth/token`;
+  const url = `${process.env.CTP_AUTH_URL}oauth/${process.env.CTP_PROJECT_KEY}/anonymous/token`;
   console.log(url);
   const data = new URLSearchParams();
   data.append('grant_type', 'client_credentials');
