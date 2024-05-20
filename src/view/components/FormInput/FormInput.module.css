@@ -1,8 +1,17 @@
 .loginFormInput {
+  font-family: 'Poppins', sans-serif;
   width: 100%;
-  padding: 0.3rem 1.3rem 0.3rem 0.3rem;
-  outline: transparent;
+  padding: 0.8rem 1.3rem 0.8rem 0.8rem;
+  outline: 0;
+  border: 0;
+  background-color: #4886af59;
   margin-top: 0.1rem;
+  border-radius: 2px;
+  color: var(--light-text-color);
+}
+
+.loginFormInput::placeholder {
+  color: var(--light-text-color);
 }
 
 .errorMsg {
