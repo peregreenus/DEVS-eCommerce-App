@@ -1,18 +1,12 @@
 /* eslint-disable no-console */
 
 import Country from '../types/country';
-import {
-  Customer,
-  CustomerResponse,
-  ErrorCustomerResponse
-} from '../types/interfaces/customer.interface';
+import { Customer, CustomerResponse } from '../types/interfaces/customer.interface';
 import CTP from '../types/ctp';
 import { RegistrationFieldsType } from '../types/registration-type';
 import { bearerToken } from './getToken';
 
-export default async function CustomerSignup(
-  formCustomer: string
-): Promise<CustomerResponse | ErrorCustomerResponse> {
+export default async function CustomerSignup(formCustomer: string): Promise<CustomerResponse> {
   const newCustomer: RegistrationFieldsType = JSON.parse(formCustomer);
   const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/me/signup`;
   const data: Customer = {
