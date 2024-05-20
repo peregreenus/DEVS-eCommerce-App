@@ -1,30 +1,30 @@
 /* eslint-disable no-console */
 import React, { FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import FormSignup from '../../components/signup/signup-form';
 import Header from '../../components/common/header/header';
 import * as styles from './signup.module.css';
 import Footer from '../../components/common/footer/footer';
-import SuccessSignupMessage from '../../components/common/SignupMessage/SuccessSignupMessage';
 import { MainProps } from '../../../data/types/main-props';
 import { SignupState } from '../../../data/types/signup-props';
 import CustomerSignup from '../../../data/api/customerSignup';
 import ErrorSignupMessage, {
   setErrorMessage
 } from '../../components/common/SignupMessage/ErrorSignupMessage';
-import {
-  CustomerResponse,
-  ErrorCustomerResponse
-} from '../../../data/types/interfaces/customer.interface';
+import { CustomerResponse } from '../../../data/types/interfaces/customer.interface';
+import getTokenForLogin from '../../../data/api/getTokenForLogin';
+import logInCustomer from '../../../data/api/logInCustomer';
+
+const userPass = { pass: '' };
 
 export default function Singup({ state, setState }: MainProps) {
   const [showSignupState, setShowSignupState] = useState<SignupState>({
     showSignupSuccess: false,
     showSignupError: false
   });
-
-  const showSuccessSignupMessage = (res: CustomerResponse | ErrorCustomerResponse) => {
+  const navigate = useNavigate();
+  const showSuccessSignupMessage = (res: CustomerResponse) => {
     if (res.message && res.statusCode && res.statusCode >= 400) {
-      console.log(res);
       switch (res.statusCode) {
         case 400:
           setErrorMessage('Customer with this email is already exist', res.statusCode);
@@ -35,24 +35,31 @@ export default function Singup({ state, setState }: MainProps) {
       }
       setShowSignupState((prevState) => ({
         ...prevState,
-        showSignupError: true,
-        showSignupSuccess: false
+        showSignupError: true
       }));
-    } else {
-      console.log(res);
-      setShowSignupState((prevState) => ({
-        ...prevState,
-        showSignupSuccess: true,
-        showSignupError: false
-      }));
+    } else if (res.customer?.email) {
+      getTokenForLogin(res.customer?.email, userPass.pass)
+        .then((token) => {
+          if (res.customer?.email && userPass.pass) {
+            logInCustomer(res.customer?.email, userPass.pass, `${token}`, '').catch((err) => {
+              throw new Error(err);
+            });
+          }
+          return token;
+        })
+        .catch((err) => console.error(err));
+      userPass.pass = '';
     }
   };
 
   const handleRegistrationSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const userDetails = new FormData(e.currentTarget);
+    userPass.pass = String(userDetails.get('password'));
     const customer = JSON.stringify(Object.fromEntries(userDetails.entries()));
-    await CustomerSignup(customer).then((res) => showSuccessSignupMessage(res));
+    await CustomerSignup(customer)
+      .then((res) => showSuccessSignupMessage(res))
+      .then(() => navigate('/'));
   };
 
   return (
@@ -62,13 +69,6 @@ export default function Singup({ state, setState }: MainProps) {
         <div
           className={` ${showSignupState.showSignupSuccess || showSignupState.showSignupError ? styles.disableForm : styles.showForm} `}>
           <FormSignup onSubmit={handleRegistrationSubmit} />
-        </div>
-        <div
-          className={` ${showSignupState.showSignupSuccess ? styles.showMessage : styles.hideMessage} `}>
-          <SuccessSignupMessage
-            showSignupState={showSignupState}
-            setShowSignupState={setShowSignupState}
-          />
         </div>
         <div
           className={` ${showSignupState.showSignupError ? styles.showMessage : styles.hideMessage} `}>

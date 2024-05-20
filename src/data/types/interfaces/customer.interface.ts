@@ -38,12 +38,6 @@ export interface Customer {
 export interface CustomerResponse {
   customer?: Customer;
   errors?: [];
-  message?: 'Request body does not contain valid JSON.';
+  message?: string;
   statusCode?: number;
-}
-
-export interface ErrorCustomerResponse {
-  errors: [];
-  message: string;
-  statusCode: number;
 }
