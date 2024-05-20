@@ -5,6 +5,7 @@
   min-width: 30rem;
   padding: 20px;
   border: 2px solid #000;
+  overflow: hidden;
 }
 
 .loginForm label {
@@ -34,6 +35,34 @@
 }
 
 .loginForm button {
-  padding: 0.2rem;
+  padding: 0.4rem 0.6rem;
   text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 3px;
+  border: 0;
+  background-color: #000;
+  color: #fff;
+}
+
+.loginForm button:disabled {
+  color: #0000009a;
+  border: 1px solid #0000009a;
+  background-color: transparent;
+  cursor: default;
+}
+
+.failMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  gap: 1rem;
+}
+
+.failMessageTitle {
+  color: #900;
+  font-size: 2rem;
 }
