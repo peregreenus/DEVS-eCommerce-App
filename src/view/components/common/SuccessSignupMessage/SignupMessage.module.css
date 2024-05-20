@@ -4,10 +4,15 @@
   padding: 10rem 10rem;
   font-size: 2rem;
 }
-.successLink a:last-child {
-  margin: 0 1rem;
-  font-size: 2.6rem;
+.successLink a {
+  margin: 0;
+  font-size: 1.8;
 }
+.successLink a:last-child {
+  margin: 0;
+  font-size: 1.8;
+}
+
 .button {
   align-self: center;
   font-size: 1.8rem;
@@ -25,6 +30,7 @@
 
 .buttonContainer {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
+  flex-wrap: wrap;
 }

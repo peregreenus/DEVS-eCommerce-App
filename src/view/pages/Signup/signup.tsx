@@ -23,9 +23,16 @@ export default function Singup({ state, setState }: MainProps) {
   });
 
   const showSuccessSignupMessage = (res: CustomerResponse | ErrorCustomerResponse) => {
-    if (res.statusCode === 400) {
+    if (res.message && res.statusCode && res.statusCode >= 400) {
       console.log(res);
-      setErrorMessage(res.message as string);
+      switch (res.statusCode) {
+        case 400:
+          setErrorMessage('Customer with this email is already exist', res.statusCode);
+          break;
+        default:
+          setErrorMessage('Internal server error', res.statusCode);
+          break;
+      }
       setShowSignupState((prevState) => ({
         ...prevState,
         showSignupError: true,
