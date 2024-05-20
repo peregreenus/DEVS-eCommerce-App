@@ -29,7 +29,7 @@ async function logInCustomer(
 
     const customer = await response.json();
     console.log('Customer:', customer);
-    console.log(url);
+    localStorage.setItem('cart', JSON.stringify(customer.cart));
 
     return customer;
   } catch (err) {
