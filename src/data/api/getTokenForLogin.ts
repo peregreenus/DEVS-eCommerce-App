@@ -29,6 +29,7 @@ async function getTokenForLogin(
     if (!response.ok) return tokenData;
 
     const { access_token: bearerToken, refresh_token: refreshToken } = tokenData;
+    localStorage.setItem('bearerToken', bearerToken);
     console.log('bearerToken:', bearerToken);
     console.log('refreshToken:', refreshToken);
 
