@@ -1,12 +1,13 @@
 /* eslint-disable no-console */
 import Country from '../types/country';
+import CTP from '../types/ctp';
 import { CustomerRegistration } from '../types/interfaces/customer.interface';
 import { RegistrationFieldsType } from '../types/registration-type';
 import { bearerToken } from './getToken';
 
 export default async function CustomerSignup(formCustomer: string) {
   const newCustomer: RegistrationFieldsType = JSON.parse(formCustomer);
-  const url = `${process.env.CTP_API_URL}${process.env.CTP_PROJECT_KEY}/me/signup`;
+  const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/me/signup`;
   const data: CustomerRegistration = {
     email: newCustomer.email,
     firstName: newCustomer.firstName,
