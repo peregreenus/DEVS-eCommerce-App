@@ -8,3 +8,23 @@
   margin: 0 1rem;
   font-size: 2.6rem;
 }
+.button {
+  align-self: center;
+  font-size: 1.8rem;
+  margin-top: 1rem;
+  padding: 1rem 4rem;
+  width: 20rem;
+  height: 4rem;
+  border-radius: 1.2rem;
+  background-color: var(--primary-text-color);
+  color: var(--light-text-color);
+  border-color: var(--border-color);
+  cursor: pointer;
+  align-self: center;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
