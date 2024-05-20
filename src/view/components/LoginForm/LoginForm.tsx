@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState, useId } from 'react';
+/* eslint-disable no-console */
+import React, { useEffect, useRef, useState, FormEvent } from 'react';
 import FormInput from '../FormInput/FormInput';
 import handleSubmit from './handleSubmit';
 import inputPropsArr from '../FormInput/inputPropsData';
@@ -9,14 +10,22 @@ function LoginForm() {
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
-
+  const [failAuthMessage, setFailAuthMessage] = useState<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
-  const key = useId();
 
   const resetErrorMessages = (): void => {
     setEmailErrorMessage('');
     setPasswordErrorMessage('');
   };
+
+  const skipFailMessage = (e: FormEvent) => {
+    e.preventDefault();
+    setFailAuthMessage('');
+  };
+
+  useEffect(() => {
+    if (inputRef.current) inputRef.current.focus();
+  }, [failAuthMessage]);
 
   useEffect(() => {
     if (emailErrorMessage === ' ' && passwordErrorMessage === ' ') {
@@ -36,7 +45,7 @@ function LoginForm() {
           : setPasswordErrorMessage(handleChange(e))
       }
       errorMessage={input.name === 'email' ? emailErrorMessage : passwordErrorMessage}
-      key={key + input.name}
+      key={input.name}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...input}
     />
@@ -46,15 +55,32 @@ function LoginForm() {
     <form
       className={classes.loginForm}
       onSubmit={(e) => {
-        handleSubmit(e);
-        resetErrorMessages();
+        handleSubmit(e).then((res) => {
+          if (res instanceof Object) {
+            const { message } = res;
+            setFailAuthMessage(`${message}`);
+          }
+          resetErrorMessages();
+        });
 
         if (inputRef.current) inputRef.current.focus();
       }}>
-      {inputs}
-      <button type="submit" disabled={isDisabled}>
-        Login
-      </button>
+      {failAuthMessage ? (
+        <div className={classes.failMessage}>
+          <h4 className={classes.failMessageTitle}>Wrong Email or Password!</h4>
+          {failAuthMessage}
+          <button onClick={skipFailMessage} type="button">
+            Skip
+          </button>
+        </div>
+      ) : (
+        <>
+          {inputs}
+          <button type="submit" disabled={isDisabled}>
+            Login
+          </button>
+        </>
+      )}
     </form>
   );
 }
