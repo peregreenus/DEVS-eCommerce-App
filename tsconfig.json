@@ -20,6 +20,6 @@
       }
     ]
   },
-  "include": ["**/*.ts", "**/*.tsx", "customTemplate.js", "../trash/SuccessSignupMessage.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "customTemplate.js"],
   "exclude": ["./node_modules", "./dist", "webpack.config.ts"]
 }
