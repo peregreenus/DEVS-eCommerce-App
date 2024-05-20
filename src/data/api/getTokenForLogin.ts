@@ -1,11 +1,12 @@
 /* eslint-disable no-console */
 
 import CTP from '../types/ctp';
+import { ErrorProps } from '../types/errorProps';
 
 async function getTokenForLogin(
   email: FormDataEntryValue,
   password: FormDataEntryValue
-): Promise<string> {
+): Promise<ErrorProps | string> {
   const url = `${CTP.AUTH_URL}oauth/${CTP.PROJECT_KEY}/customers/token`;
   const data = new URLSearchParams();
 
@@ -24,10 +25,13 @@ async function getTokenForLogin(
     });
 
     const tokenData = await response.json();
+    // eslint-disable-next-line no-alert
+    if (!response.ok) return tokenData;
+
     const { access_token: bearerToken, refresh_token: refreshToken } = tokenData;
     console.log('bearerToken:', bearerToken);
     console.log('refreshToken:', refreshToken);
-    console.log(url);
+
     return bearerToken;
   } catch (err) {
     throw new Error(`${err}`);
