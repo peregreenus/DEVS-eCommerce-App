@@ -7,9 +7,18 @@ import * as classesMain from './main.module.css';
 function Greeting() {
   const navigate = useNavigate();
 
-  const goToCatalog = () => {
-    navigate('/catalog');
+  const goToPage = (path: string) => {
+    navigate(path);
   };
+
+  const buttons = [
+    { path: '/catalog', label: 'Catalog' },
+    { path: '/about', label: 'About' },
+    { path: '/signup', label: 'Signup' },
+    { path: '/login', label: 'Login' },
+    { path: '/logout', label: 'LogOut' },
+    { path: '/cart', label: 'Cart' }
+  ];
 
   return (
     <section className={`${classes.greeting} ${classesMain.mainSection}`}>
@@ -21,9 +30,17 @@ function Greeting() {
           clients. From luxurious islands to futuristic asteroids – you&apos;ll find everything for
           your exclusive life in space.
         </p>
-        <MyButton type="button" className="btn-center" onClick={goToCatalog}>
-          Go...
-        </MyButton>
+        <div className={classes.wrapper}>
+          {buttons.map((button) => (
+            <MyButton
+              key={button.path}
+              type="button"
+              className="btn-center"
+              onClick={() => goToPage(button.path)}>
+              {button.label}
+            </MyButton>
+          ))}
+        </div>
       </div>
     </section>
   );

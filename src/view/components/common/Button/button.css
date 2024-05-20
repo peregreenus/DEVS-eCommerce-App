@@ -10,7 +10,7 @@
   width: 15rem;
   padding: 1rem;
   background-color: rgba(255, 255, 255, 0.5);
-  translate: 0.4sec all;
+  transition: 0.4s all ease-in;
 }
 
 .btn-center {
