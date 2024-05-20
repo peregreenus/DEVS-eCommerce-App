@@ -5,6 +5,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import EslingPlugin from 'eslint-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import DotenvWebpackPlugin from 'dotenv-webpack';
+import FaviconsWebpackPlugin from 'favicons-webpack-plugin';
 import 'webpack-dev-server';
 
 const config: Configuration = {
@@ -52,7 +53,8 @@ const config: Configuration = {
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css'
     }),
-    new EslingPlugin({ extensions: ['ts', '.tsx'] })
+    new EslingPlugin({ extensions: ['ts', '.tsx'] }),
+    new FaviconsWebpackPlugin('./src/assets/img/logo_.ico')
   ]
 };
 
