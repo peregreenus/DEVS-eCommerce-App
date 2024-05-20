@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import React, { useEffect, useRef, useState, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import FormInput from '../FormInput/FormInput';
 import handleSubmit from './handleSubmit';
 import inputPropsArr from '../FormInput/inputPropsData';
@@ -12,6 +13,8 @@ function LoginForm() {
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const [failAuthMessage, setFailAuthMessage] = useState<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const navigate = useNavigate();
 
   const resetErrorMessages = (): void => {
     setEmailErrorMessage('');
@@ -61,6 +64,10 @@ function LoginForm() {
             setFailAuthMessage(`${message}`);
           }
           resetErrorMessages();
+
+          if (localStorage.getItem('bearerToken')) {
+            navigate('/');
+          }
         });
 
         if (inputRef.current) inputRef.current.focus();
