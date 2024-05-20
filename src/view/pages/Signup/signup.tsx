@@ -47,6 +47,7 @@ export default function Singup({ state, setState }: MainProps) {
           }
           return token;
         })
+        .then(() => navigate('/'))
         .catch((err) => console.error(err));
       userPass.pass = '';
     }
@@ -57,9 +58,7 @@ export default function Singup({ state, setState }: MainProps) {
     const userDetails = new FormData(e.currentTarget);
     userPass.pass = String(userDetails.get('password'));
     const customer = JSON.stringify(Object.fromEntries(userDetails.entries()));
-    await CustomerSignup(customer)
-      .then((res) => signupProcess(res))
-      .then(() => navigate('/'));
+    await CustomerSignup(customer).then((res) => signupProcess(res));
   };
 
   return (
