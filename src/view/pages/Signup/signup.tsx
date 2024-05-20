@@ -23,7 +23,7 @@ export default function Singup({ state, setState }: MainProps) {
     showSignupError: false
   });
   const navigate = useNavigate();
-  const showSuccessSignupMessage = (res: CustomerResponse) => {
+  const signupProcess = (res: CustomerResponse) => {
     if (res.message && res.statusCode && res.statusCode >= 400) {
       switch (res.statusCode) {
         case 400:
@@ -58,7 +58,7 @@ export default function Singup({ state, setState }: MainProps) {
     userPass.pass = String(userDetails.get('password'));
     const customer = JSON.stringify(Object.fromEntries(userDetails.entries()));
     await CustomerSignup(customer)
-      .then((res) => showSuccessSignupMessage(res))
+      .then((res) => signupProcess(res))
       .then(() => navigate('/'));
   };
 
