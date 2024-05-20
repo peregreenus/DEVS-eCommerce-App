@@ -11,6 +11,15 @@ function Greeting() {
     navigate(path);
   };
 
+  const buttons = [
+    { path: '/catalog', label: 'Catalog' },
+    { path: '/about', label: 'About' },
+    { path: '/signup', label: 'Signup' },
+    { path: '/login', label: 'Login' },
+    { path: '/logout', label: 'LogOut' },
+    { path: '/cart', label: 'Cart' }
+  ];
+
   return (
     <section className={`${classes.greeting} ${classesMain.mainSection}`}>
       <div className={classesMain.textContent}>
@@ -22,24 +31,15 @@ function Greeting() {
           your exclusive life in space.
         </p>
         <div className={classes.wrapper}>
-          <MyButton type="button" className="btn-center" onClick={() => goToPage('/catalog')}>
-            Catalog
-          </MyButton>
-          <MyButton type="button" className="btn-center" onClick={() => goToPage('/about')}>
-            About
-          </MyButton>
-          <MyButton type="button" className="btn-center" onClick={() => goToPage('/signup')}>
-            Signup
-          </MyButton>
-          <MyButton type="button" className="btn-center" onClick={() => goToPage('/login')}>
-            Login
-          </MyButton>
-          <MyButton type="button" className="btn-center" onClick={() => goToPage('/logout')}>
-            LogOut
-          </MyButton>
-          <MyButton type="button" className="btn-center" onClick={() => goToPage('/cart')}>
-            Cart
-          </MyButton>
+          {buttons.map((button) => (
+            <MyButton
+              key={button.path}
+              type="button"
+              className="btn-center"
+              onClick={() => goToPage(button.path)}>
+              {button.label}
+            </MyButton>
+          ))}
         </div>
       </div>
     </section>
