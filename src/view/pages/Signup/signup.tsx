@@ -4,13 +4,13 @@ import FormSignup from '../../components/signup/signup-form';
 import Header from '../../components/common/header/header';
 import * as styles from './signup.module.css';
 import Footer from '../../components/common/footer/footer';
-import SuccessSignupMessage from '../../components/common/SuccessSignupMessage/SuccessSignupMessage';
+import SuccessSignupMessage from '../../components/common/SignupMessage/SuccessSignupMessage';
 import { MainProps } from '../../../data/types/main-props';
 import { SignupState } from '../../../data/types/signup-props';
 import CustomerSignup from '../../../data/api/customerSignup';
 import ErrorSignupMessage, {
   setErrorMessage
-} from '../../components/common/SuccessSignupMessage/ErrorSignupMessage';
+} from '../../components/common/SignupMessage/ErrorSignupMessage';
 import {
   CustomerResponse,
   ErrorCustomerResponse

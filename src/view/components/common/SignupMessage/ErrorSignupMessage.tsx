@@ -18,11 +18,17 @@ export default function ErrorSignupMessage({ showSignupState, setShowSignupState
       <p>Signup Failed</p>
       <p>{signupErrorMessage.message}</p>
       <div className={styles.buttonContainer}>
-        <button type="button" className={styles.button} onClick={OkClick}>
+        <button
+          type="button"
+          className={`${styles.button} ${signupErrorMessage.statusCode === 400 ? '' : styles.hideButton}`}
+          onClick={OkClick}>
           Change Form
         </button>
         <Link to="/">
-          <button type="button" className={styles.button} onClick={OkClick}>
+          <button
+            type="button"
+            className={`${styles.button} ${signupErrorMessage.statusCode === 400 ? styles.hideButton : ''}`}
+            onClick={OkClick}>
             Try Later
           </button>
         </Link>
