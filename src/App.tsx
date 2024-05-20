@@ -6,6 +6,7 @@ import Notfound from './view/pages/NotFound/not-found';
 import Login from './view/pages/Login/Login';
 import { AppState } from './data/types/main-props';
 import { getAnonToken } from './data/api/getToken';
+import Logout from './view/pages/Logout/logout';
 
 function App() {
   getAnonToken();
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<Main state={state} setState={setState} />} />
         <Route path="/signup" element={<Signup state={state} setState={setState} />} />
         <Route path="/login" element={<Login state={state} setState={setState} />} />
+        <Route path="/logout" element={<Logout />} />
         <Route path="/*" element={<Notfound state={state} setState={setState} />} />
       </Routes>
     </BrowserRouter>
