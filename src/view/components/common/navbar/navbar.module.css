@@ -16,11 +16,6 @@ a {
   color: black;
   transition: 0.4s all ease-in;
 }
-/* 
-a:last-child {
-  margin-left: 5rem;
-  margin-right: 3rem;
-} */
 
 .basketImg {
   position: absolute;
@@ -33,7 +28,7 @@ a img:hover {
 }
 
 a:hover {
-  color: rgb(228, 241, 238);
+  color: rgb(83, 139, 126);
 }
 
 .burger {
