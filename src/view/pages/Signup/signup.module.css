@@ -26,11 +26,6 @@
   pointer-events: none;
 }
 .hideMessage {
-  position: absolute;
-  align-self: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   opacity: 0;
   transition: 0.4s all ease-in;
   visibility: hidden;
@@ -44,4 +39,8 @@
   opacity: 1;
   transition: 0.4s all ease-in;
   visibility: visible;
+}
+
+.hideButton {
+  display: none;
 }

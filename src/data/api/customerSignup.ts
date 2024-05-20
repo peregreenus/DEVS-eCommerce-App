@@ -1,14 +1,21 @@
 /* eslint-disable no-console */
+
 import Country from '../types/country';
+import {
+  Customer,
+  CustomerResponse,
+  ErrorCustomerResponse
+} from '../types/interfaces/customer.interface';
 import CTP from '../types/ctp';
-import { CustomerRegistration } from '../types/interfaces/customer.interface';
 import { RegistrationFieldsType } from '../types/registration-type';
 import { bearerToken } from './getToken';
 
-export default async function CustomerSignup(formCustomer: string) {
+export default async function CustomerSignup(
+  formCustomer: string
+): Promise<CustomerResponse | ErrorCustomerResponse> {
   const newCustomer: RegistrationFieldsType = JSON.parse(formCustomer);
   const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/me/signup`;
-  const data: CustomerRegistration = {
+  const data: Customer = {
     email: newCustomer.email,
     firstName: newCustomer.firstName,
     lastName: newCustomer.lastName,
@@ -24,18 +31,16 @@ export default async function CustomerSignup(formCustomer: string) {
       }
     ]
   };
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${bearerToken.token}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    });
-    const responseData = await response.json();
-    return responseData;
-  } catch (error) {
-    console.error('error response:', error);
-  }
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${bearerToken.token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.error(err));
 }

@@ -1,9 +1,9 @@
-export interface SignupSuccessState {
+export interface SignupState {
   showSignupSuccess: boolean;
-  // here we can add new parameters
+  showSignupError: boolean;
 }
 
-export interface SignupSuccessProps {
-  showSucceed: SignupSuccessState;
-  setShowSucceed: React.Dispatch<React.SetStateAction<SignupSuccessState>>;
+export interface SignupProps {
+  showSignupState: SignupState;
+  setShowSignupState: React.Dispatch<React.SetStateAction<SignupState>>;
 }
