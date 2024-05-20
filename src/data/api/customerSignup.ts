@@ -6,6 +6,7 @@ import {
   CustomerResponse,
   ErrorCustomerResponse
 } from '../types/interfaces/customer.interface';
+import CTP from '../types/ctp';
 import { RegistrationFieldsType } from '../types/registration-type';
 import { bearerToken } from './getToken';
 
@@ -13,7 +14,7 @@ export default async function CustomerSignup(
   formCustomer: string
 ): Promise<CustomerResponse | ErrorCustomerResponse> {
   const newCustomer: RegistrationFieldsType = JSON.parse(formCustomer);
-  const url = `${process.env.CTP_API_URL}${process.env.CTP_PROJECT_KEY}/customers`;
+  const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/me/signup`;
   const data: Customer = {
     email: newCustomer.email,
     firstName: newCustomer.firstName,
