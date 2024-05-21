@@ -6,8 +6,9 @@ import handleSubmit from './handleSubmit';
 import inputPropsArr from '../FormInput/inputPropsData';
 import handleChange from '../FormInput/handleChange';
 import * as classes from './LoginForm.module.css';
+import { MainProps } from '../../../data/types/main-props';
 
-function LoginForm() {
+function LoginForm({ state, setState }: MainProps) {
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
@@ -58,7 +59,7 @@ function LoginForm() {
     <form
       className={classes.loginForm}
       onSubmit={(e) => {
-        handleSubmit(e).then((res) => {
+        handleSubmit(e, { state, setState }).then((res) => {
           if (res instanceof Object) {
             const { message } = res;
             setFailAuthMessage(`${message}`);

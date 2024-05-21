@@ -1,8 +1,9 @@
 import React, { useState, KeyboardEvent } from 'react';
 import { Link } from 'react-router-dom';
+import { MainProps } from '../../../../data/types/main-props';
 import * as classes from './navbar.module.css';
 
-function Navbar() {
+function Navbar({ state }: MainProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -39,18 +40,26 @@ function Navbar() {
         <Link to="/about" onClick={toggleMenu}>
           About
         </Link>
-        <Link to="/signup" onClick={toggleMenu}>
-          Register
-        </Link>
-        <Link to="/login" onClick={toggleMenu}>
-          Login
-        </Link>
-        <Link to="/logout" onClick={toggleMenu}>
-          Logout
-        </Link>
-        <Link to="/profile" onClick={toggleMenu}>
-          Profile
-        </Link>
+        {!state.userLoggedIn && (
+          <>
+            <Link to="/signup" onClick={toggleMenu}>
+              Register
+            </Link>
+            <Link to="/login" onClick={toggleMenu}>
+              Login
+            </Link>
+          </>
+        )}
+        {state.userLoggedIn && (
+          <>
+            <Link to="/logout" onClick={toggleMenu}>
+              Logout
+            </Link>
+            <Link to="/profile" onClick={toggleMenu}>
+              Profile
+            </Link>
+          </>
+        )}
         <Link to="/cart" onClick={toggleMenu}>
           Cart
         </Link>
