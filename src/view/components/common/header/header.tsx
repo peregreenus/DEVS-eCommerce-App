@@ -10,7 +10,7 @@ function Header({ state, setState }: MainProps) {
     <>
       <header className={classes.header}>
         <Link className={classes.logo} to="/" />
-        <Navbar />
+        <Navbar state={state} setState={setState} />
       </header>
       <NologinMessage state={state} setState={setState} />
     </>

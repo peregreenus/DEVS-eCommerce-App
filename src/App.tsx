@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from './view/pages/Main/main';
 import Signup from './view/pages/Signup/signup';
@@ -16,13 +16,20 @@ function App() {
     // here we can add new parameters
   });
 
+  useEffect(() => {
+    const bearerToken = localStorage.getItem('bearerToken');
+    if (bearerToken && !state.userLoggedIn) {
+      setState((prevState) => ({ ...prevState, userLoggedIn: true, showMsg: false }));
+    }
+  }, [state.userLoggedIn]);
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main state={state} setState={setState} />} />
         <Route path="/signup" element={<Signup state={state} setState={setState} />} />
         <Route path="/login" element={<Login state={state} setState={setState} />} />
-        <Route path="/logout" element={<Logout />} />
+        <Route path="/logout" element={<Logout state={state} setState={setState} />} />
         <Route path="/*" element={<Notfound state={state} setState={setState} />} />
       </Routes>
     </BrowserRouter>

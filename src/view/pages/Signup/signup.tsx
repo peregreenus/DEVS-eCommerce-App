@@ -39,10 +39,13 @@ export default function Singup({ state, setState }: MainProps) {
         showSignupError: true
       }));
     } else if (res.customer?.email) {
-      getTokenForLogin(res.customer?.email, userPass.pass)
+      getTokenForLogin(res.customer?.email, userPass.pass, { state, setState })
         .then((token) => {
           if (res.customer?.email && userPass.pass) {
-            logInCustomer(res.customer?.email, userPass.pass, `${token}`, '').catch((err) => {
+            logInCustomer(res.customer?.email, userPass.pass, `${token}`, '', {
+              state,
+              setState
+            }).catch((err) => {
               throw new Error(err);
             });
           }

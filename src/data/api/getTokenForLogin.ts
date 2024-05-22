@@ -2,10 +2,12 @@
 
 import CTP from '../types/ctp';
 import { ErrorProps } from '../types/errorProps';
+import { MainProps } from '../types/main-props';
 
 async function getTokenForLogin(
   email: FormDataEntryValue,
-  password: FormDataEntryValue
+  password: FormDataEntryValue,
+  { setState }: MainProps
 ): Promise<ErrorProps | string> {
   const url = `${CTP.AUTH_URL}oauth/${CTP.PROJECT_KEY}/customers/token`;
   const data = new URLSearchParams();
@@ -32,6 +34,7 @@ async function getTokenForLogin(
     localStorage.setItem('bearerToken', bearerToken);
     console.log('bearerToken:', bearerToken);
     console.log('refreshToken:', refreshToken);
+    setState((prevState) => ({ ...prevState, userLoggedIn: true, showMsg: false }));
 
     return bearerToken;
   } catch (err) {

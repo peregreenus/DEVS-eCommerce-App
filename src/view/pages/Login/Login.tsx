@@ -1,12 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import Header from '../../components/common/header/header';
 import LoginForm from '../../components/LoginForm/LoginForm';
-import * as classes from './Login.module.css';
 import { MainProps } from '../../../data/types/main-props';
+import * as classes from './Login.module.css';
 
 function Login({ state, setState }: MainProps) {
-  return (
+  const token = localStorage.getItem('bearerToken');
+
+  return token ? (
+    <Navigate to="/" />
+  ) : (
     <>
       <Header state={state} setState={setState} />
       <div className={classes.loginPage}>
@@ -17,7 +21,7 @@ function Login({ state, setState }: MainProps) {
             &nbsp;Signup!
           </Link>
         </div>
-        <LoginForm />
+        <LoginForm state={state} setState={setState} />
       </div>
     </>
   );

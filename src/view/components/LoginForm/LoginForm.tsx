@@ -1,17 +1,21 @@
 /* eslint-disable no-console */
 import React, { useEffect, useRef, useState, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import FormInput from '../FormInput/FormInput';
 import handleSubmit from './handleSubmit';
 import inputPropsArr from '../FormInput/inputPropsData';
 import handleChange from '../FormInput/handleChange';
 import * as classes from './LoginForm.module.css';
+import { MainProps } from '../../../data/types/main-props';
 
-function LoginForm() {
+function LoginForm({ state, setState }: MainProps) {
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const [failAuthMessage, setFailAuthMessage] = useState<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const navigate = useNavigate();
 
   const resetErrorMessages = (): void => {
     setEmailErrorMessage('');
@@ -55,12 +59,16 @@ function LoginForm() {
     <form
       className={classes.loginForm}
       onSubmit={(e) => {
-        handleSubmit(e).then((res) => {
+        handleSubmit(e, { state, setState }).then((res) => {
           if (res instanceof Object) {
             const { message } = res;
             setFailAuthMessage(`${message}`);
           }
           resetErrorMessages();
+
+          if (localStorage.getItem('bearerToken')) {
+            navigate('/');
+          }
         });
 
         if (inputRef.current) inputRef.current.focus();
