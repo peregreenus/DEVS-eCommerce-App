@@ -18,7 +18,7 @@ function handleSubmit(
 
   const [email, password] = [data.get('email'), data.get('password')];
 
-  return getTokenForLogin(email!, password!)
+  return getTokenForLogin(email!, password!, { state, setState })
     .then((token) => {
       if (email && password) {
         logInCustomer(email, password, `${token}`, '', { state, setState }).catch((err) => {
