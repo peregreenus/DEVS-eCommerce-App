@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "webpack serve --env development",
-    "build": "webpack --env production",
+    "build": "webpack --env production && node copy-redirects.ts",
     "prettier": "prettier . --write",
     "lint": "eslint . --ext .tsx",
     "prepare": "husky"
