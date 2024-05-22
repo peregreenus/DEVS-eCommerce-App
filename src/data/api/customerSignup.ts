@@ -17,13 +17,28 @@ export default async function CustomerSignup(formCustomer: string): Promise<Cust
     dateOfBirth: newCustomer.dateOfBirth,
     addresses: [
       {
+        key: 'addr1',
         country:
-          Object.keys(Country)[Object.values(Country).indexOf(newCustomer.country as Country)],
-        streetName: newCustomer.street,
-        postalCode: newCustomer.postalCode,
-        city: newCustomer.city
+          Object.keys(Country)[
+            Object.values(Country).indexOf(newCustomer.countryBilling as Country)
+          ],
+        streetName: newCustomer.streetBilling,
+        postalCode: newCustomer.postalCodeBilling,
+        city: newCustomer.cityBilling
+      },
+      {
+        key: 'addr2',
+        country:
+          Object.keys(Country)[
+            Object.values(Country).indexOf(newCustomer.countryShipping as Country)
+          ],
+        streetName: newCustomer.streetShipping,
+        postalCode: newCustomer.postalCodeShipping,
+        city: newCustomer.cityShipping
       }
-    ]
+    ],
+    defaultBillingAddress: 0,
+    defaultShippingAddress: 1
   };
   return fetch(url, {
     method: 'POST',

@@ -27,7 +27,7 @@ export default function Singup({ state, setState }: MainProps) {
     if (res.message && res.statusCode && res.statusCode >= 400) {
       switch (res.statusCode) {
         case 400:
-          setErrorMessage('Customer with this email is already exist', res.statusCode);
+          setErrorMessage(res.message, res.statusCode);
           break;
         default:
           setErrorMessage('Internal server error', res.statusCode);

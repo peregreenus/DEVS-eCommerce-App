@@ -1,93 +1,62 @@
+/* eslint-disable no-console */
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { RegistrationFieldsType } from '../../../data/types/registration-type';
-import { setCostumerCountry, validationField } from '../../../data/utils/validate-signup-form';
 import InputField from './signup-form-input';
 import * as styles from './signup-form.module.css';
-import Country from '../../../data/types/country';
+import AddressForm from './addressForm';
+import { validationField } from '../../../data/utils/validate-signup-form';
+import {
+  errorInitialState,
+  initialErrorCountry,
+  initialState,
+  initialStateCountry
+} from './initialState';
 
 interface IFormProps {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }
 
-const initialState = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  dateOfBirth: '',
-  country: '',
-  city: '',
-  postalCode: '',
-  street: '',
-  password: '',
-  confirmPassword: ''
-};
-const errorInitialState = {
-  firstName: 'should not be a empty!',
-  lastName: 'should not be a empty!',
-  email: 'should not be a empty!',
-  dateOfBirth: 'should not be a empty!',
-  city: 'should not be a empty!',
-  postalCode: 'should not be a empty!',
-  street: 'should not be a empty!',
-  password: 'should not be a empty!'
-};
-
 function FormSignup(props: IFormProps) {
   const validationErrors: { [key: string]: string } = errorInitialState;
+  const currentSelectCountry: { [key: string]: string } = initialStateCountry;
+  const currentErrorCountry: { [key: string]: string } = initialErrorCountry;
+
   const [newCustomer, setNewCustomer] = useState<RegistrationFieldsType>(initialState);
   const [errors, setErrors] = useState<{ [key: string]: string }>(validationErrors);
-  const [selectedCountry, setSelectedCountry] = useState('null country');
-  const [countryError, setCountryError] = useState('should be select');
+  const [selectedCountry, setSelectedCountry] = useState<{ [key: string]: string }>(
+    currentSelectCountry
+  );
+  const [errorCountry, setErrorCountry] = useState<{ [key: string]: string }>(currentErrorCountry);
   const [confirmError, setConfirmError] = useState('should not be a empty!');
 
   const [emailWrong, setEmailWrong] = useState(false);
   const [firstNameWrong, setFirstNameWrong] = useState(false);
   const [lastNameWrong, setLastNameWrong] = useState(false);
   const [birthdayWrong, setBirthdayWrong] = useState(false);
-  const [cityWrong, setCityWrong] = useState(false);
-  const [postalCodeWrong, setPostalCodeWrong] = useState(false);
-  const [streetWrong, setStreetWrong] = useState(false);
+  const [cityShippingWrong, setCityShippingWrong] = useState(false);
+  const [postalCodeShippingWrong, setPostalCodeShippingWrong] = useState(false);
+  const [streetShippingWrong, setStreetShippingWrong] = useState(false);
+  const [cityBillingWrong, setCityBillingWrong] = useState(false);
+  const [postalCodeBillingWrong, setPostalCodeBillingWrong] = useState(false);
+  const [streetBillingWrong, setStreetBillingWrong] = useState(false);
   const [passwordWrong, setPasswordWrong] = useState(false);
   const [confirmWrong, setConfirmWrong] = useState(false);
 
   const [formValid, setFormValid] = useState(false);
-  const [postalCodeEnable, setPostalCodeEnable] = useState(false);
   const { onSubmit } = props;
 
   useEffect(() => {
     if (
       Object.keys(errors).length === 0 &&
-      countryError !== 'should be select' &&
+      Object.keys(errorCountry).length === 0 &&
       confirmError === ' '
     ) {
       setFormValid(true);
     } else {
       setFormValid(false);
     }
-  }, [errors, countryError, confirmError]);
-
-  useEffect(() => {
-    if (countryError === ' ') {
-      setPostalCodeEnable(true);
-    } else {
-      setPostalCodeEnable(false);
-    }
-  }, [countryError]);
-
-  const handleDropdownChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setSelectedCountry(value);
-    setCountryError(' ');
-    setCostumerCountry(value);
-    newCustomer.postalCode = '';
-    validationErrors.postalCode = 'should not be a empty!';
-    setErrors({ ...validationErrors });
-    setNewCustomer({
-      ...newCustomer,
-      [name]: value
-    });
-  };
+  }, [errors, errorCountry, confirmError]);
 
   function checkConfirmPassword(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -101,7 +70,6 @@ function FormSignup(props: IFormProps) {
       [name]: value
     });
   }
-
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
     if (validationField(name, value) === 'empty') {
@@ -118,7 +86,6 @@ function FormSignup(props: IFormProps) {
         setConfirmError(' ');
       }
     }
-
     setNewCustomer({
       ...newCustomer,
       [name]: value
@@ -138,14 +105,23 @@ function FormSignup(props: IFormProps) {
       case 'dateOfBirth':
         setBirthdayWrong(true);
         break;
-      case 'city':
-        setCityWrong(true);
+      case 'cityShipping':
+        setCityShippingWrong(true);
         break;
-      case 'postalCode':
-        setPostalCodeWrong(true);
+      case 'postalCodeShipping':
+        setPostalCodeShippingWrong(true);
         break;
-      case 'street':
-        setStreetWrong(true);
+      case 'streetShipping':
+        setStreetShippingWrong(true);
+        break;
+      case 'cityBilling':
+        setCityBillingWrong(true);
+        break;
+      case 'postalCodeBilling':
+        setPostalCodeBillingWrong(true);
+        break;
+      case 'streetBilling':
+        setStreetBillingWrong(true);
         break;
       case 'password':
         setPasswordWrong(true);
@@ -218,65 +194,58 @@ function FormSignup(props: IFormProps) {
           error={errors.dateOfBirth}
           disabled={false}
         />
-        <div className={styles.block}>
-          <label htmlFor="country" className={styles.label}>
-            Country:
-            <select
-              value={selectedCountry}
-              onChange={(e: ChangeEvent<HTMLSelectElement>) => handleDropdownChange(e)}
-              name="country"
-              className={styles.input}>
-              <option value="null country" disabled hidden>
-                select country
-              </option>
-              {Object.entries(Country).map(([key, value]) => (
-                <option aria-selected="true" value={value} key={key}>
-                  {value}
-                </option>
-              ))}
-            </select>
-            {countryError && <span className={styles.error}>{countryError}</span>}
-          </label>
-          <InputField
-            label="Postal Code"
-            type="text"
-            name="postalCode"
-            classes={styles.input}
-            placeholder=""
+        <div className={`${styles.addressForm} `}>
+          <p>billing address</p>
+          <input type="checkbox" />
+          <p>also shipping address to</p>
+          <AddressForm
+            setName="Billing"
+            selectedCountry={selectedCountry.countryBilling}
+            setSelectedCountry={setSelectedCountry}
+            setErrors={setErrors}
+            validationErrors={validationErrors}
+            setNewCustomer={setNewCustomer}
+            countryError={errorCountry.countryBilling}
+            currentErrorCountry={currentErrorCountry}
+            setCountryError={setErrorCountry}
+            newCustomer={newCustomer}
+            cityError={errors.cityBilling}
+            streetError={errors.streetBilling}
+            postalCodeError={errors.postalCodeBilling}
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-            value={newCustomer.postalCode}
-            wrong={postalCodeWrong}
-            error={errors.postalCode}
-            disabled={!postalCodeEnable}
+            cityWrong={cityBillingWrong}
+            postalCodeWrong={postalCodeBillingWrong}
+            streetWrong={streetBillingWrong}
+            valuePostalCode={newCustomer.postalCodeBilling}
+            valueCity={newCustomer.cityBilling}
+            valueStreet={newCustomer.streetBilling}
           />
         </div>
-        <div className={styles.block}>
-          <InputField
-            label="City"
-            type="text"
-            name="city"
-            classes={styles.input}
-            placeholder="enter your city"
+        <div className={`${styles.addressForm} `}>
+          <p>shipping address</p>
+          <AddressForm
+            setName="Shipping"
+            selectedCountry={selectedCountry.countryShipping}
+            setSelectedCountry={setSelectedCountry}
+            setErrors={setErrors}
+            validationErrors={validationErrors}
+            currentErrorCountry={currentErrorCountry}
+            setNewCustomer={setNewCustomer}
+            countryError={errorCountry.countryShipping}
+            setCountryError={setErrorCountry}
+            newCustomer={newCustomer}
+            cityError={errors.cityShipping}
+            streetError={errors.streetShipping}
+            postalCodeError={errors.postalCodeShipping}
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
             onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-            value={newCustomer.city}
-            wrong={cityWrong}
-            error={errors.city}
-            disabled={false}
-          />
-          <InputField
-            label="Street"
-            type="text"
-            name="street"
-            classes={styles.input}
-            placeholder="your street"
-            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
-            onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-            value={newCustomer.street}
-            wrong={streetWrong}
-            error={errors.street}
-            disabled={false}
+            cityWrong={cityShippingWrong}
+            postalCodeWrong={postalCodeShippingWrong}
+            streetWrong={streetShippingWrong}
+            valuePostalCode={newCustomer.postalCodeShipping}
+            valueCity={newCustomer.cityShipping}
+            valueStreet={newCustomer.streetShipping}
           />
         </div>
         <div className={styles.block}>

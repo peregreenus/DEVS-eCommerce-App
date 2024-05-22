@@ -3,10 +3,14 @@ export type RegistrationFieldsType = {
   lastName: string;
   email: string;
   dateOfBirth: string;
-  country: string;
-  city: string;
-  postalCode: string;
-  street: string;
+  countryBilling: string;
+  cityBilling: string;
+  postalCodeBilling: string;
+  streetBilling: string;
+  countryShipping: string;
+  cityShipping: string;
+  postalCodeShipping: string;
+  streetShipping: string;
   password: string;
   confirmPassword: string;
 };
