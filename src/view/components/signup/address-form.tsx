@@ -4,8 +4,8 @@ import React, { ChangeEvent } from 'react';
 import * as styles from './signup-form.module.css';
 import InputField from './signup-form-input';
 import Country from '../../../data/types/country';
-import { AddressFormProps } from './inputPropsData';
 import { checkingCountry } from '../../../data/utils/validate-signup-form';
+import { AddressFormProps } from '../../../data/types/signup-props';
 
 export default function AddressForm({
   setName,

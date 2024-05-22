@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 import { RegistrationFieldsType } from '../../../data/types/registration-type';
 import InputField from './signup-form-input';
 import * as styles from './signup-form.module.css';
-import AddressForm from './addressForm';
+import AddressForm from './address-form';
 import { validationField } from '../../../data/utils/validate-signup-form';
 import {
   errorInitialState,
   initialErrorCountry,
   initialState,
   initialStateCountry
-} from './initialState';
-import { CustomerAddressesOptionsProps } from './inputPropsData';
+} from './initial-state';
+import { CustomerAddressesOptionsProps } from '../../../data/types/signup-props';
 
 interface IFormProps {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
