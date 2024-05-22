@@ -7,10 +7,10 @@ export type RegistrationFieldsType = {
   cityBilling: string;
   postalCodeBilling: string;
   streetBilling: string;
-  countryShipping: string;
-  cityShipping: string;
-  postalCodeShipping: string;
-  streetShipping: string;
+  countryShipping?: string;
+  cityShipping?: string;
+  postalCodeShipping?: string;
+  streetShipping?: string;
   password: string;
   confirmPassword: string;
 };

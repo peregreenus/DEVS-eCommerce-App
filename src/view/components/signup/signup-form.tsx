@@ -12,10 +12,16 @@ import {
   initialState,
   initialStateCountry
 } from './initialState';
+import { CustomerAddressesOptionsProps } from './inputPropsData';
 
 interface IFormProps {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }
+
+export const customerAddressesOption: CustomerAddressesOptionsProps = {
+  billingAddresses: [0],
+  shippingAddresses: [1]
+};
 
 function FormSignup(props: IFormProps) {
   const validationErrors: { [key: string]: string } = errorInitialState;
@@ -29,6 +35,11 @@ function FormSignup(props: IFormProps) {
   );
   const [errorCountry, setErrorCountry] = useState<{ [key: string]: string }>(currentErrorCountry);
   const [confirmError, setConfirmError] = useState('should not be a empty!');
+
+  const [defBilling, setDefBilling] = useState(false);
+  const [defShipping, setDefShipping] = useState(false);
+  const [shippingToo, setShippingToo] = useState(false);
+  const [disableAddress, setDisableAddress] = useState(false);
 
   const [emailWrong, setEmailWrong] = useState(false);
   const [firstNameWrong, setFirstNameWrong] = useState(false);
@@ -91,6 +102,57 @@ function FormSignup(props: IFormProps) {
       [name]: value
     });
   }
+  function handleChecked(e: ChangeEvent<HTMLInputElement>) {
+    switch (e.target.name) {
+      case 'defaultShipping':
+        setDefShipping((prev) => !prev);
+        if (!defShipping) {
+          customerAddressesOption.defaultShipping = 1;
+        } else delete customerAddressesOption.defaultShipping;
+        console.log(customerAddressesOption);
+        break;
+      case 'defaultBilling':
+        setDefBilling((prev) => !prev);
+        if (!defBilling) {
+          customerAddressesOption.defaultBilling = 0;
+        } else delete customerAddressesOption.defaultBilling;
+        if (shippingToo) {
+          if (customerAddressesOption.defaultBilling) {
+            customerAddressesOption.defaultShipping = customerAddressesOption.defaultBilling;
+          }
+        }
+        console.log(customerAddressesOption);
+        break;
+      default:
+        setShippingToo((prev) => !prev);
+        setDisableAddress((prev) => !prev);
+        if (!shippingToo) {
+          customerAddressesOption.shippingAddresses = [0];
+          if (customerAddressesOption.defaultBilling) {
+            customerAddressesOption.defaultShipping = customerAddressesOption.defaultBilling;
+          }
+          delete validationErrors.cityShipping;
+          delete validationErrors.postalCodeShipping;
+          delete validationErrors.streetShipping;
+          delete currentErrorCountry.countryShipping;
+          setErrors({ ...validationErrors });
+          setErrorCountry({ ...currentErrorCountry });
+        } else {
+          delete customerAddressesOption.defaultShipping;
+          customerAddressesOption.shippingAddresses = [1];
+          setDefShipping(false);
+          validationErrors.cityShipping = errorInitialState.cityShipping;
+          validationErrors.postalCodeShipping = errorInitialState.postalCodeShipping;
+          validationErrors.streetShipping = errorInitialState.streetShipping;
+          currentErrorCountry.countryShipping = errorCountry.countryShipping;
+          setErrors({ ...validationErrors });
+          setErrorCountry({ ...currentErrorCountry });
+        }
+        console.log(customerAddressesOption);
+        break;
+    }
+  }
+
   const handlerBlur = (e: ChangeEvent<HTMLInputElement>) => {
     switch (e.target.name) {
       case 'email':
@@ -195,9 +257,27 @@ function FormSignup(props: IFormProps) {
           disabled={false}
         />
         <div className={`${styles.addressForm} `}>
-          <p>billing address</p>
-          <input type="checkbox" />
-          <p>also shipping address to</p>
+          <p className={styles.addressFormName}>billing address</p>
+          <div className={styles.controlAddressForm}>
+            <div className={styles.checkBoxForm}>
+              <input
+                type="checkbox"
+                name="defaultBilling"
+                checked={defBilling}
+                onChange={handleChecked}
+              />
+              <p>default billing address</p>
+            </div>
+            <div className={styles.checkBoxForm}>
+              <input
+                type="checkbox"
+                name="alsoShipping"
+                checked={shippingToo}
+                onChange={handleChecked}
+              />
+              <p>also shipping address too</p>
+            </div>
+          </div>
           <AddressForm
             setName="Billing"
             selectedCountry={selectedCountry.countryBilling}
@@ -222,8 +302,19 @@ function FormSignup(props: IFormProps) {
             valueStreet={newCustomer.streetBilling}
           />
         </div>
-        <div className={`${styles.addressForm} `}>
-          <p>shipping address</p>
+        <div className={`${styles.addressForm} ${disableAddress ? styles.disableAddress : ''}`}>
+          <div className={styles.addressFormName}>shipping address</div>
+          <div className={styles.controlAddressForm}>
+            <div className={styles.checkBoxForm}>
+              <input
+                type="checkbox"
+                name="defaultShipping"
+                checked={defShipping}
+                onChange={handleChecked}
+              />
+              <p>default shipping address</p>
+            </div>
+          </div>
           <AddressForm
             setName="Shipping"
             selectedCountry={selectedCountry.countryShipping}
@@ -243,9 +334,9 @@ function FormSignup(props: IFormProps) {
             cityWrong={cityShippingWrong}
             postalCodeWrong={postalCodeShippingWrong}
             streetWrong={streetShippingWrong}
-            valuePostalCode={newCustomer.postalCodeShipping}
-            valueCity={newCustomer.cityShipping}
-            valueStreet={newCustomer.streetShipping}
+            valuePostalCode={newCustomer.postalCodeShipping ? newCustomer.postalCodeShipping : ''}
+            valueCity={newCustomer.cityShipping ? newCustomer.cityShipping : ''}
+            valueStreet={newCustomer.streetShipping ? newCustomer.streetShipping : ''}
           />
         </div>
         <div className={styles.block}>

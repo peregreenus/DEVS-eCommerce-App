@@ -5,6 +5,7 @@ import { Customer, CustomerResponse } from '../types/interfaces/customer.interfa
 import CTP from '../types/ctp';
 import { RegistrationFieldsType } from '../types/registration-type';
 import { bearerToken } from './getToken';
+import { customerAddressesOption } from '../../view/components/signup/signup-form';
 
 export default async function CustomerSignup(formCustomer: string): Promise<CustomerResponse> {
   const newCustomer: RegistrationFieldsType = JSON.parse(formCustomer);
@@ -25,21 +26,36 @@ export default async function CustomerSignup(formCustomer: string): Promise<Cust
         streetName: newCustomer.streetBilling,
         postalCode: newCustomer.postalCodeBilling,
         city: newCustomer.cityBilling
-      },
-      {
-        key: 'addr2',
-        country:
-          Object.keys(Country)[
-            Object.values(Country).indexOf(newCustomer.countryShipping as Country)
-          ],
-        streetName: newCustomer.streetShipping,
-        postalCode: newCustomer.postalCodeShipping,
-        city: newCustomer.cityShipping
       }
     ],
-    defaultBillingAddress: 0,
-    defaultShippingAddress: 1
+    billingAddresses: customerAddressesOption.billingAddresses,
+    shippingAddresses: customerAddressesOption.shippingAddresses
   };
+  if (
+    newCustomer.countryShipping &&
+    newCustomer.streetShipping &&
+    newCustomer.postalCodeShipping &&
+    newCustomer.cityShipping
+  ) {
+    data.addresses?.push({
+      key: 'addr2',
+      country:
+        Object.keys(Country)[
+          Object.values(Country).indexOf(newCustomer.countryShipping as Country)
+        ],
+      streetName: newCustomer.streetShipping,
+      postalCode: newCustomer.postalCodeShipping,
+      city: newCustomer.cityShipping
+    });
+  }
+
+  if (customerAddressesOption.defaultShipping) {
+    data.defaultShippingAddress = customerAddressesOption.defaultShipping;
+  }
+  if (customerAddressesOption.defaultBilling) {
+    data.defaultBillingAddress = customerAddressesOption.defaultBilling;
+  }
+
   return fetch(url, {
     method: 'POST',
     headers: {

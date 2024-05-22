@@ -38,3 +38,10 @@ export interface AddressFormProps {
   postalCodeError: string;
   streetError: string;
 }
+
+export interface CustomerAddressesOptionsProps {
+  billingAddresses: number[];
+  shippingAddresses?: number[];
+  defaultShipping?: number;
+  defaultBilling?: number;
+}
