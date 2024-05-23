@@ -6,9 +6,111 @@ import { getLSToken } from '../../../data/utils/getLS';
 // Визначення типу даних продукту
 interface ProductData {
   id: string;
-  name: string;
-  description: string;
-  // Додайте інші поля за потреби
+  version: number;
+  masterData: {
+    current: {
+      categories: [
+        {
+          id: string;
+          typeId: string;
+        }
+      ];
+      description: {
+        en: string;
+        ru: string;
+      };
+      masterVariant: {
+        attributes: [];
+        id: number;
+        images: [
+          {
+            dimensions: {
+              h: number;
+              w: number;
+            };
+            url: string;
+          }
+        ];
+        prices: [
+          {
+            value: {
+              type: string;
+              fractionDigits: number;
+              centAmount: number;
+              currencyCode: string;
+            };
+            id: string;
+          }
+        ];
+        sku: string;
+      };
+      name: {
+        en: string;
+        ru: string;
+      };
+      slug: {
+        en: string;
+      };
+      variants: [];
+      // searchKeywords: {};
+    };
+    hasStagedChanges: boolean;
+    published: boolean;
+    staged: {
+      categories: [
+        {
+          id: string;
+          typeId: string;
+        }
+      ];
+      description: {
+        en: string;
+      };
+      masterVariant: {
+        attributes: [];
+        id: number;
+        images: [
+          {
+            dimensions: {
+              h: number;
+              w: number;
+            };
+            url: string;
+          }
+        ];
+        prices: [
+          {
+            value: {
+              type: string;
+              fractionDigits: number;
+              centAmount: number;
+              currencyCode: string;
+            };
+            id: string;
+          }
+        ];
+        sku: string;
+      };
+      name: {
+        en: string;
+      };
+      slug: {
+        en: string;
+      };
+      variants: [];
+      // searchKeywords: {};
+    };
+  };
+  productType: {
+    id: string;
+    typeId: string;
+  };
+  taxCategory: {
+    id: string;
+    typeId: string;
+  };
+  createdAt: string;
+  lastModifiedAt: string;
 }
 
 async function getProduct(productId: string, { state }: MainProps): Promise<ProductData | null> {
@@ -70,8 +172,10 @@ export function Product({ state, setState }: MainProps) {
 
   return (
     <div>
-      <h1>{product.name}</h1>
-      <p>{product.description}</p>
+      <h1>{product.id}</h1>
+      <h1>{product.masterData.current.name.ru}</h1>
+      <p>{product.masterData.current.description.ru}</p>
+      {/* <p>{JSON.stringify(product.masterData)}</p> */}
       {/* Відобразіть інші поля продукту */}
     </div>
   );
