@@ -1,7 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { MainProps } from '../../../data/types/main-props';
 import CTP from '../../../data/types/ctp';
 import { getLSToken } from '../../../data/utils/getLS';
+// import { bearerToken, getAnonToken } from '../../../data/api/getToken';
+// import { setLSToken } from '../../../data/utils/setLS';
 
 // Визначення типу даних продукту
 interface ProductData {
@@ -122,6 +125,10 @@ async function getProduct(productId: string, { state }: MainProps): Promise<Prod
   // eslint-disable-next-line no-console
   console.log(state);
   const BEARER_TOKEN = getLSToken();
+
+  // eslint-disable-next-line no-console
+  console.log('BEARER_TOKEN=>', BEARER_TOKEN);
+
   const headers = new Headers({
     Authorization: `Bearer ${BEARER_TOKEN}`
   });
@@ -146,11 +153,13 @@ async function getProduct(productId: string, { state }: MainProps): Promise<Prod
 export function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<ProductData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  // eslint-disable-next-line no-console
+  console.log('--------------------');
 
   useEffect(() => {
     async function fetchProduct() {
       setLoading(true);
-      const fetchedProduct = await getProduct('5484cdbf-c8c5-408a-8ba4-8ba32ff52cdc', {
+      const fetchedProduct = await getProduct('04462b41-4ea3-46e2-9776-a79b603b1843', {
         state,
         setState
       });
@@ -161,7 +170,7 @@ export function Product({ state, setState }: MainProps) {
     }
 
     fetchProduct();
-  }, [state, setState]);
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -171,11 +180,13 @@ export function Product({ state, setState }: MainProps) {
     return <div>Product not found</div>;
   }
 
+  // eslint-disable-next-line no-console
+
   return (
     <div>
       <h1>{product.id}</h1>
-      <h1>{product.masterData.current.name.ru}</h1>
-      <p>{product.masterData.current.description.ru}</p>
+      <h1>{product.masterData.current.name.en}</h1>
+      {/* <p>{product.masterData.current.description.en}</p> */}
       {/* <p>{JSON.stringify(product.masterData)}</p> */}
       {/* Відобразіть інші поля продукту */}
     </div>

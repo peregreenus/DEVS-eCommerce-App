@@ -13,11 +13,7 @@ function Greeting() {
 
   const buttons = [
     { path: '/catalog', label: 'Catalog' },
-    { path: '/about', label: 'About' },
-    { path: '/signup', label: 'Signup' },
-    { path: '/login', label: 'Login' },
-    { path: '/logout', label: 'LogOut' },
-    { path: '/cart', label: 'Cart' }
+    { path: '/product', label: 'Product' }
   ];
 
   return (

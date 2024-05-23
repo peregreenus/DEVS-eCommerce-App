@@ -8,11 +8,15 @@ import { AppState } from './data/types/main-props';
 import { getAnonToken } from './data/api/getToken';
 import Logout from './view/pages/Logout/logout';
 import { Product } from './view/pages/Product/product';
+import { getLSToken } from './data/utils/getLS';
 
 function App() {
-  useEffect(() => {
-    getAnonToken();
-  }, []);
+  if (!getLSToken) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+      getAnonToken();
+    }, []);
+  }
 
   const [state, setState] = useState<AppState>({
     showMsg: true,
@@ -25,7 +29,8 @@ function App() {
     if (bearerToken && !state.userLoggedIn) {
       setState((prevState) => ({ ...prevState, userLoggedIn: true, showMsg: false }));
     }
-  }, [state.userLoggedIn]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <BrowserRouter>

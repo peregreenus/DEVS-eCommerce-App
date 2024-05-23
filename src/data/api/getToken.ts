@@ -1,4 +1,5 @@
 import CTP from '../types/ctp';
+import { setLSToken } from '../utils/setLS';
 /* eslint-disable no-console */
 export const bearerToken = { token: null };
 
@@ -24,6 +25,9 @@ export async function getAnonToken() {
     const tokenData = await response.json();
     bearerToken.token = tokenData.access_token;
     console.log('getToken.ts: Anonymous token:', bearerToken);
+    if (bearerToken.token) {
+      setLSToken(bearerToken.token);
+    }
   } catch (error) {
     console.error('Error:', error);
   }
