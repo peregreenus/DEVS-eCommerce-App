@@ -50,6 +50,7 @@ interface ProductData {
       };
       slug: {
         en: string;
+        ru: string;
       };
       variants: [];
       // searchKeywords: {};
@@ -65,6 +66,7 @@ interface ProductData {
       ];
       description: {
         en: string;
+        ru: string;
       };
       masterVariant: {
         attributes: [];
@@ -93,9 +95,11 @@ interface ProductData {
       };
       name: {
         en: string;
+        ru: string;
       };
       slug: {
         en: string;
+        ru: string;
       };
       variants: [];
       // searchKeywords: {};
@@ -140,9 +144,6 @@ async function getProduct(productId: string, { state }: MainProps): Promise<Prod
 // Компонент Product
 // eslint-disable-next-line import/prefer-default-export
 export function Product({ state, setState }: MainProps) {
-  // eslint-disable-next-line no-console
-  console.log('Sdddddd', state);
-
   const [product, setProduct] = useState<ProductData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
