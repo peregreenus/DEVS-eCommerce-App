@@ -1,11 +1,13 @@
 import CTP from '../types/ctp';
+import { MainProps } from '../types/main-props';
 
 /* eslint-disable no-console */
 async function logInCustomer(
   email: FormDataEntryValue,
   password: FormDataEntryValue,
   bearerToken: string,
-  cartId: string
+  cartId: string,
+  { setState }: MainProps
 ) {
   const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/me/login`;
   const data = {
@@ -30,6 +32,7 @@ async function logInCustomer(
     const customer = await response.json();
     console.log('Customer:', customer);
     localStorage.setItem('cart', JSON.stringify(customer.cart));
+    setState((prevState) => ({ ...prevState, userLoggedIn: true, showMsg: false }));
 
     return customer;
   } catch (err) {

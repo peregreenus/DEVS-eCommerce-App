@@ -25,9 +25,10 @@ export default function Singup({ state, setState }: MainProps) {
   const navigate = useNavigate();
   const signupProcess = (res: CustomerResponse) => {
     if (res.message && res.statusCode && res.statusCode >= 400) {
+      console.log(res);
       switch (res.statusCode) {
         case 400:
-          setErrorMessage('Customer with this email is already exist', res.statusCode);
+          setErrorMessage(res.message, res.statusCode);
           break;
         default:
           setErrorMessage('Internal server error', res.statusCode);
@@ -38,10 +39,13 @@ export default function Singup({ state, setState }: MainProps) {
         showSignupError: true
       }));
     } else if (res.customer?.email) {
-      getTokenForLogin(res.customer?.email, userPass.pass)
+      getTokenForLogin(res.customer?.email, userPass.pass, { state, setState })
         .then((token) => {
           if (res.customer?.email && userPass.pass) {
-            logInCustomer(res.customer?.email, userPass.pass, `${token}`, '').catch((err) => {
+            logInCustomer(res.customer?.email, userPass.pass, `${token}`, '', {
+              state,
+              setState
+            }).catch((err) => {
               throw new Error(err);
             });
           }
