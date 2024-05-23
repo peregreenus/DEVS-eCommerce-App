@@ -26,6 +26,7 @@
   pointer-events: none;
 }
 .hideMessage {
+  position: absolute;
   opacity: 0;
   transition: 0.4s all ease-in;
   visibility: hidden;

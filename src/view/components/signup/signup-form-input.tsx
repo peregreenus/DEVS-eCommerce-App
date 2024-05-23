@@ -1,34 +1,20 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import * as styles from './signup-form.module.css';
+import { InputProps } from './inputPropsData';
 
-interface InputProps {
-  type: 'text' | 'number' | 'email' | 'password' | 'date';
-  label: string;
-  value: string | number;
-  name: string;
-  placeholder: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onBlur: (e: ChangeEvent<HTMLInputElement>) => void;
-  classes: string;
-  wrong: boolean;
-  error: string | null;
-  disabled: boolean;
-}
-
-export default function InputField(props: InputProps) {
-  const {
-    type,
-    label,
-    name,
-    placeholder,
-    onChange,
-    onBlur,
-    value,
-    classes,
-    wrong,
-    error,
-    disabled
-  } = props;
+export default function InputField({
+  type,
+  label,
+  name,
+  placeholder,
+  onChange,
+  onBlur,
+  value,
+  classes,
+  wrong,
+  error,
+  disabled
+}: InputProps) {
   return (
     <label htmlFor={name} className={styles.label}>
       {label}

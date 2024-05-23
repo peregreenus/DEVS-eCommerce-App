@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 
-let costumerCountry: string = '';
+const checkingCountry = {
+  billing: '',
+  shipping: ''
+};
 
-function setCostumerCountry(country: string) {
-  costumerCountry = country;
-}
 function validationField(fieldName: string, fieldValue: string): string {
   let returnValue: string = '';
   if (fieldName === 'email') {
@@ -46,7 +46,7 @@ function validationField(fieldName: string, fieldValue: string): string {
       returnValue = 'empty';
     }
   }
-  if (fieldName === 'city') {
+  if (fieldName === 'cityShipping' || fieldName === 'cityBilling') {
     const requirements = /^[A-Za-z0-9- ]{3,16}$/;
     if (!requirements.test(fieldValue)) {
       returnValue = 'should be 3-16 characters and should not include any special character';
@@ -54,7 +54,7 @@ function validationField(fieldName: string, fieldValue: string): string {
       returnValue = 'empty';
     }
   }
-  if (fieldName === 'street') {
+  if (fieldName === 'streetShipping' || fieldName === 'streetBilling') {
     const requirements = /^[A-Za-z0-9- ]{3,16}$/;
     if (!requirements.test(fieldValue)) {
       returnValue = 'should be 3-16 characters and should not include any special character';
@@ -71,9 +71,39 @@ function validationField(fieldName: string, fieldValue: string): string {
       returnValue = 'empty';
     }
   }
-  if (fieldName === 'postalCode') {
+  if (fieldName === 'postalCodeShipping') {
     let requirements: RegExp;
-    switch (costumerCountry) {
+    switch (checkingCountry.shipping) {
+      case 'United States':
+        requirements = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
+        break;
+      case 'Canada':
+        requirements = /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i;
+        break;
+      case 'Belarus':
+      case 'Russia':
+        requirements = /^[0-9]{6}$/;
+        break;
+      case 'Ukraine':
+      case 'Germany':
+        requirements = /^[0-9]{5}$/;
+        break;
+      case 'Austria':
+        requirements = /^[0-9]{4}$/;
+        break;
+      default:
+        requirements = /^[A-Za-z0-9]{15,16}$/;
+        break;
+    }
+    if (!requirements.test(fieldValue)) {
+      returnValue = 'postal code not valid for this country';
+    } else {
+      returnValue = 'empty';
+    }
+  }
+  if (fieldName === 'postalCodeBilling') {
+    let requirements: RegExp;
+    switch (checkingCountry.billing) {
       case 'United States':
         requirements = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
         break;
@@ -104,4 +134,4 @@ function validationField(fieldName: string, fieldValue: string): string {
   return returnValue;
 }
 
-export { validationField, setCostumerCountry };
+export { validationField, checkingCountry };
