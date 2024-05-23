@@ -23,7 +23,7 @@ export async function getAnonToken() {
 
     const tokenData = await response.json();
     bearerToken.token = tokenData.access_token;
-    console.log('Anonymous token:', bearerToken);
+    console.log('getToken.ts: Anonymous token:', bearerToken);
   } catch (error) {
     console.error('Error:', error);
   }

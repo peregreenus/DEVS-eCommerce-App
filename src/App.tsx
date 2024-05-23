@@ -7,9 +7,13 @@ import Login from './view/pages/Login/Login';
 import { AppState } from './data/types/main-props';
 import { getAnonToken } from './data/api/getToken';
 import Logout from './view/pages/Logout/logout';
+import { Product } from './view/pages/Product/product';
 
 function App() {
-  getAnonToken();
+  useEffect(() => {
+    getAnonToken();
+  }, []);
+
   const [state, setState] = useState<AppState>({
     showMsg: true,
     userLoggedIn: false
@@ -31,6 +35,7 @@ function App() {
         <Route path="/login" element={<Login state={state} setState={setState} />} />
         <Route path="/logout" element={<Logout state={state} setState={setState} />} />
         <Route path="/*" element={<Notfound state={state} setState={setState} />} />
+        <Route path="/product" element={<Product state={state} setState={setState} />} />
       </Routes>
     </BrowserRouter>
   );
