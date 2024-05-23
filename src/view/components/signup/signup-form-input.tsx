@@ -1,6 +1,6 @@
 import React from 'react';
 import * as styles from './signup-form.module.css';
-import { InputProps } from './inputPropsData';
+import { InputProps } from '../../../data/types/signup-props';
 
 export default function InputField({
   type,
