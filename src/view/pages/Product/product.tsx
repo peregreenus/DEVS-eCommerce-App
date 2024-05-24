@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { MainProps } from '../../../data/types/main-props';
@@ -7,121 +8,164 @@ import { getLSToken } from '../../../data/utils/getLS';
 // import { setLSToken } from '../../../data/utils/setLS';
 
 // Визначення типу даних продукту
-interface ProductData {
+interface ProductProjectionsData {
   id: string;
   version: number;
-  masterData: {
-    current: {
-      categories: [
-        {
-          id: string;
-          typeId: string;
-        }
-      ];
-      description: {
-        en: string;
-        ru: string;
-      };
-      masterVariant: {
-        attributes: [];
-        id: number;
-        images: [
-          {
-            dimensions: {
-              h: number;
-              w: number;
-            };
-            url: string;
-          }
-        ];
-        prices: [
-          {
-            value: {
-              type: string;
-              fractionDigits: number;
-              centAmount: number;
-              currencyCode: string;
-            };
-            id: string;
-          }
-        ];
-        sku: string;
-      };
-      name: {
-        en: string;
-        ru: string;
-      };
-      slug: {
-        en: string;
-        ru: string;
-      };
-      variants: [];
-      // searchKeywords: {};
-    };
-    hasStagedChanges: boolean;
-    published: boolean;
-    staged: {
-      categories: [
-        {
-          id: string;
-          typeId: string;
-        }
-      ];
-      description: {
-        en: string;
-        ru: string;
-      };
-      masterVariant: {
-        attributes: [];
-        id: number;
-        images: [
-          {
-            dimensions: {
-              h: number;
-              w: number;
-            };
-            url: string;
-          }
-        ];
-        prices: [
-          {
-            value: {
-              type: string;
-              fractionDigits: number;
-              centAmount: number;
-              currencyCode: string;
-            };
-            id: string;
-          }
-        ];
-        sku: string;
-      };
-      name: {
-        en: string;
-        ru: string;
-      };
-      slug: {
-        en: string;
-        ru: string;
-      };
-      variants: [];
-      // searchKeywords: {};
-    };
-  };
   productType: {
-    id: string;
     typeId: string;
-  };
-  taxCategory: {
     id: string;
-    typeId: string;
   };
+  name: {
+    en: string;
+  };
+  categories: [];
+  slug: {
+    en: string;
+  };
+  masterVariant: {
+    id: 1;
+    prices: [];
+    images: [];
+    attributes: [
+      {
+        name: string;
+        value: {
+          it: string;
+          de: string;
+          en: string;
+        };
+      }
+    ];
+  };
+  variants: [];
+  searchKeywords: {};
+  hasStagedChanges: boolean;
+  published: boolean;
   createdAt: string;
   lastModifiedAt: string;
 }
 
-async function getProduct(productId: string, { state }: MainProps): Promise<ProductData | null> {
-  const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/products/${productId}`;
+// interface ProductData {
+//   id: string;
+//   version: number;
+//   name: {
+//     us: string;
+//   };
+//   masterData: {
+//     current: {
+//       categories: [
+//         {
+//           id: string;
+//           typeId: string;
+//         }
+//       ];
+//       description: {
+//         en: string;
+//         ru: string;
+//       };
+//       masterVariant: {
+//         attributes: [];
+//         id: number;
+//         images: [
+//           {
+//             dimensions: {
+//               h: number;
+//               w: number;
+//             };
+//             url: string;
+//           }
+//         ];
+//         prices: [
+//           {
+//             value: {
+//               type: string;
+//               fractionDigits: number;
+//               centAmount: number;
+//               currencyCode: string;
+//             };
+//             id: string;
+//           }
+//         ];
+//         sku: string;
+//       };
+//       name: {
+//         en: string;
+//         ru: string;
+//       };
+//       slug: {
+//         en: string;
+//         ru: string;
+//       };
+//       variants: [];
+//       // searchKeywords: {};
+//     };
+//     hasStagedChanges: boolean;
+//     published: boolean;
+//     staged: {
+//       categories: [
+//         {
+//           id: string;
+//           typeId: string;
+//         }
+//       ];
+//       description: {
+//         en: string;
+//         ru: string;
+//       };
+//       masterVariant: {
+//         attributes: [];
+//         id: number;
+//         images: [
+//           {
+//             dimensions: {
+//               h: number;
+//               w: number;
+//             };
+//             url: string;
+//           }
+//         ];
+//         prices: [
+//           {
+//             value: {
+//               type: string;
+//               fractionDigits: number;
+//               centAmount: number;
+//               currencyCode: string;
+//             };
+//             id: string;
+//           }
+//         ];
+//         sku: string;
+//       };
+//       name: {
+//         en: string;
+//         ru: string;
+//       };
+//       slug: {
+//         en: string;
+//         ru: string;
+//       };
+//       variants: [];
+//       // searchKeywords: {};
+//     };
+//   };
+//   productType: {
+//     id: string;
+//     typeId: string;
+//   };
+//   taxCategory: {
+//     id: string;
+//     typeId: string;
+//   };
+//   createdAt: string;
+//   lastModifiedAt: string;
+// }
+
+async function getProduct(
+  productId: string,
+  { state }: MainProps
+): Promise<ProductProjectionsData | null> {
+  const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/product-projections/${productId}`;
   // eslint-disable-next-line no-console
   console.log(state);
   const BEARER_TOKEN = getLSToken();
@@ -133,7 +177,7 @@ async function getProduct(productId: string, { state }: MainProps): Promise<Prod
     Authorization: `Bearer ${BEARER_TOKEN}`
   });
 
-  let data: ProductData | null = null;
+  let data: ProductProjectionsData | null = null;
 
   try {
     const response = await fetch(url, { headers });
@@ -151,7 +195,7 @@ async function getProduct(productId: string, { state }: MainProps): Promise<Prod
 // Компонент Product
 // eslint-disable-next-line import/prefer-default-export
 export function Product({ state, setState }: MainProps) {
-  const [product, setProduct] = useState<ProductData | null>(null);
+  const [product, setProduct] = useState<ProductProjectionsData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   // eslint-disable-next-line no-console
   console.log('--------------------');
@@ -159,7 +203,7 @@ export function Product({ state, setState }: MainProps) {
   useEffect(() => {
     async function fetchProduct() {
       setLoading(true);
-      const fetchedProduct = await getProduct('04462b41-4ea3-46e2-9776-a79b603b1843', {
+      const fetchedProduct = await getProduct('f1494ea5-c0fd-44b7-8125-f108cf5d862e', {
         state,
         setState
       });
@@ -184,9 +228,9 @@ export function Product({ state, setState }: MainProps) {
 
   return (
     <div>
-      <h1>{product.id}</h1>
-      <h1>{product.masterData.current.name.en}</h1>
-      {/* <p>{product.masterData.current.description.en}</p> */}
+      {/* <h1>{product.id}</h1> */}
+      <h1>{product.name.en}</h1>
+      <p>{product.categories}</p>
       {/* <p>{JSON.stringify(product.masterData)}</p> */}
       {/* Відобразіть інші поля продукту */}
     </div>
