@@ -18,6 +18,9 @@ interface ProductProjectionsData {
   name: {
     en: string;
   };
+  description: {
+    en: string;
+  };
   categories: [];
   slug: {
     en: string;
@@ -203,7 +206,7 @@ export function Product({ state, setState }: MainProps) {
   useEffect(() => {
     async function fetchProduct() {
       setLoading(true);
-      const fetchedProduct = await getProduct('f1494ea5-c0fd-44b7-8125-f108cf5d862e', {
+      const fetchedProduct = await getProduct('fa925d2c-e043-44d8-aff0-e5c810f6111a', {
         state,
         setState
       });
@@ -228,9 +231,9 @@ export function Product({ state, setState }: MainProps) {
 
   return (
     <div>
-      {/* <h1>{product.id}</h1> */}
+      <p>{product.id}</p>
       <h1>{product.name.en}</h1>
-      <p>{product.categories}</p>
+      <pre>{product.description.en}</pre>
       {/* <p>{JSON.stringify(product.masterData)}</p> */}
       {/* Відобразіть інші поля продукту */}
     </div>
