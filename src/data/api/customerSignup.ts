@@ -4,7 +4,6 @@ import Country from '../types/country';
 import { Customer, CustomerResponse } from '../types/interfaces/customer.interface';
 import CTP from '../types/ctp';
 import { RegistrationFieldsType } from '../types/registration-type';
-import { bearerAnonToken } from './getToken';
 import { customerAddressesOption } from '../../view/components/signup/signup-form';
 
 export default async function CustomerSignup(formCustomer: string): Promise<CustomerResponse> {
@@ -59,7 +58,7 @@ export default async function CustomerSignup(formCustomer: string): Promise<Cust
   return fetch(url, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${bearerAnonToken.token}`,
+      Authorization: `Bearer ${localStorage.getItem('bearerAnonToken')}`,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(data)

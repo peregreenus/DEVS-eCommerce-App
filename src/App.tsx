@@ -6,11 +6,11 @@ import Signup from './view/pages/Signup/signup';
 import Notfound from './view/pages/NotFound/not-found';
 import Login from './view/pages/Login/Login';
 import { AppState } from './data/types/main-props';
-import { bearerAnonToken, getAnonToken } from './data/api/getToken';
+import getAnonToken from './data/api/getToken';
 import Logout from './view/pages/Logout/logout';
 
 function App() {
-  if (!bearerAnonToken.token && !localStorage.getItem('bearerToken')) {
+  if (!localStorage.getItem('bearerAnonToken') && !localStorage.getItem('bearerToken')) {
     getAnonToken();
   }
   const [state, setState] = useState<AppState>({

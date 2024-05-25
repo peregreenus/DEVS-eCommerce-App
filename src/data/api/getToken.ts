@@ -1,9 +1,7 @@
 import CTP from '../types/ctp';
 import createCart from './createCart';
-/* eslint-disable no-console */
-export const bearerAnonToken = { token: null };
 
-export async function getAnonToken() {
+export default async function getAnonToken() {
   const url = `${CTP.AUTH_URL}oauth/${CTP.PROJECT_KEY}/anonymous/token`;
   const data = new URLSearchParams();
   data.append('grant_type', 'client_credentials');
@@ -23,9 +21,8 @@ export async function getAnonToken() {
     });
 
     const tokenData = await response.json();
-    bearerAnonToken.token = tokenData.access_token;
-    createCart(`${bearerAnonToken.token}`);
-    console.log('Anonymous token:', bearerAnonToken);
+    localStorage.setItem('bearerAnonToken', tokenData.access_token);
+    createCart(tokenData.access_token);
   } catch (error) {
     console.error('Error:', error);
   }
