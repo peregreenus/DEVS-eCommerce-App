@@ -32,6 +32,7 @@ async function logInCustomer(
     const customer = await response.json();
     console.log('Customer:', customer);
     localStorage.setItem('cart', JSON.stringify(customer.cart));
+    localStorage.setItem('customer', JSON.stringify(customer));
     setState((prevState) => ({ ...prevState, userLoggedIn: true, showMsg: false }));
 
     return customer;

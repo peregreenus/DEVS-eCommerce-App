@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from './view/pages/Main/main';
@@ -12,22 +13,24 @@ import { getLSToken } from './data/utils/getLS';
 import { Product } from './view/pages/Product/product';
 
 function App() {
-  if (!getLSToken) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-      getAnonToken();
-    }, []);
-  }
-
   const [state, setState] = useState<AppState>({
     showMsg: true,
     userLoggedIn: false
     // here we can add new parameters
   });
 
+  if (!getLSToken()) {
+    getAnonToken();
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    // useEffect(() => {
+    //   if (!state.userLoggedIn) {
+    //     getAnonToken();
+    //   }
+    // }, [state]);
+  }
+
   useEffect(() => {
-    const bearerToken = localStorage.getItem('bearerToken');
-    if (bearerToken && !state.userLoggedIn) {
+    if (localStorage.getItem('customer') && !state.userLoggedIn) {
       setState((prevState) => ({ ...prevState, userLoggedIn: true, showMsg: false }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

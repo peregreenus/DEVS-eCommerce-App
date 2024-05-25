@@ -6,9 +6,10 @@ import { getAnonToken } from '../../../data/api/getToken';
 function Logout({ setState }: MainProps) {
   localStorage.removeItem('bearerToken');
   localStorage.removeItem('cart');
+  localStorage.removeItem('customer');
   getAnonToken();
   useEffect(() => {
-    setState((prevState) => ({ ...prevState, userLoggedIn: false }));
+    setState((prevState) => ({ ...prevState, userLoggedIn: false, showMsg: true }));
   }, [setState]);
   return <Navigate to="/login" />;
 }
