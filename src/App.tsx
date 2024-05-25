@@ -10,7 +10,7 @@ import { getAnonToken } from './data/api/getToken';
 import Logout from './view/pages/Logout/logout';
 // import { Product } from './view/pages/Product/product';
 import { getLSToken } from './data/utils/getLS';
-import { Product } from './view/pages/Product/product';
+import Product from './view/pages/Product/product';
 
 function App() {
   const [state, setState] = useState<AppState>({
@@ -21,12 +21,6 @@ function App() {
 
   if (!getLSToken()) {
     getAnonToken();
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    // useEffect(() => {
-    //   if (!state.userLoggedIn) {
-    //     getAnonToken();
-    //   }
-    // }, [state]);
   }
 
   useEffect(() => {

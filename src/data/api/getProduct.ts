@@ -1,5 +1,6 @@
 import CTP from '../types/ctp';
-import { ProductProjectionsData } from '../types/interfaces/ProductProjectionsData';
+import { IProduct } from '../types/interfaces/product';
+// import { ProductProjectionsData } from '../types/interfaces/ProductProjectionsData';
 import { MainProps } from '../types/main-props';
 import { getLSToken } from '../utils/getLS';
 
@@ -7,7 +8,7 @@ import { getLSToken } from '../utils/getLS';
 export async function getProduct(
   productId: string | undefined,
   { state }: MainProps
-): Promise<ProductProjectionsData | null> {
+): Promise<IProduct | null> {
   const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/product-projections/${productId}`;
   // eslint-disable-next-line no-console
   console.log(state);
@@ -21,7 +22,7 @@ export async function getProduct(
     // 'Content-Type': 'text/html'
   });
 
-  let data: ProductProjectionsData | null = null;
+  let data: IProduct | null = null;
 
   try {
     const response = await fetch(url, { headers });
