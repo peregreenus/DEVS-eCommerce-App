@@ -21,7 +21,10 @@ function handleSubmit(
   return getTokenForLogin(email!, password!, { state, setState })
     .then((token) => {
       if (email && password) {
-        logInCustomer(email, password, `${token}`, '', { state, setState }).catch((err) => {
+        logInCustomer(email, password, `${token}`, `${localStorage.getItem('cart')}`, {
+          state,
+          setState
+        }).catch((err) => {
           throw new Error(err);
         });
       }

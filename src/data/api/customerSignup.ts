@@ -4,7 +4,7 @@ import Country from '../types/country';
 import { Customer, CustomerResponse } from '../types/interfaces/customer.interface';
 import CTP from '../types/ctp';
 import { RegistrationFieldsType } from '../types/registration-type';
-import { bearerToken } from './getToken';
+import { bearerAnonToken } from './getToken';
 import { customerAddressesOption } from '../../view/components/signup/signup-form';
 
 export default async function CustomerSignup(formCustomer: string): Promise<CustomerResponse> {
@@ -59,12 +59,13 @@ export default async function CustomerSignup(formCustomer: string): Promise<Cust
   return fetch(url, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${bearerToken.token}`,
+      Authorization: `Bearer ${bearerAnonToken.token}`,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(data)
   })
     .then((response) => {
+      console.log(response);
       return response.json();
     })
     .catch((err) => console.error(err));
