@@ -8,7 +8,7 @@
     "start": "webpack serve --env development",
     "build": "webpack --env production && node copy-redirects.ts",
     "prettier": "prettier . --write",
-    "lint": "eslint . --ext .tsx",
+    "lint": "eslint . --ext .tsx --fix",
     "prepare": "husky"
   },
   "keywords": [],
