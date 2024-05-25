@@ -2,7 +2,7 @@ import CTP from '../types/ctp';
 
 /* eslint-disable no-console */
 async function createCart(bearerToken: string) {
-  const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/carts`;
+  const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/me/carts`;
 
   const data = {
     currency: 'USD'
@@ -23,8 +23,8 @@ async function createCart(bearerToken: string) {
     }
 
     const cart = await response.json();
-    // console.log('Cart:', cart);
-    return cart;
+    localStorage.setItem('cart', cart.id);
+    return cart.id;
   } catch (error) {
     console.error(error);
     return '';

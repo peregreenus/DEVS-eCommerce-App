@@ -5,6 +5,7 @@ import { MainProps } from '../../../data/types/main-props';
 function Logout({ setState }: MainProps) {
   localStorage.removeItem('bearerToken');
   localStorage.removeItem('cart');
+  localStorage.removeItem('bearerAnonToken');
   useEffect(() => {
     setState((prevState) => ({ ...prevState, userLoggedIn: false }));
   }, [setState]);
