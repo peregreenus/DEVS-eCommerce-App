@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MainProps } from '../../../data/types/main-props';
-// import { ProductProjectionsData } from '../../../data/types/interfaces/ProductProjectionsData';
 import { getProduct } from '../../../data/api/getProduct';
 import * as classes from './product.module.css';
 import Footer from '../../components/common/footer/footer';
@@ -64,9 +63,16 @@ function Product({ state, setState }: MainProps) {
                   />
                 </svg>
               </div>
-              {product.masterVariant.images.map((image) => (
-                <img className={classes.sliderImg} key={image.url} src={image.url} alt="product" />
-              ))}
+              <div className={classes.prevWrapper}>
+                {product.masterVariant.images.map((image) => (
+                  <img
+                    className={classes.sliderImg}
+                    key={image.url}
+                    src={image.url}
+                    alt="product"
+                  />
+                ))}
+              </div>
               <div className={`${classes.btnRight} ${classes.cbtn}`}>
                 <svg
                   width="80px"
