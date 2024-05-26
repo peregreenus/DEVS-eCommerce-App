@@ -2,7 +2,7 @@ import CTP from '../types/ctp';
 import { IProduct } from '../types/interfaces/product';
 // import { ProductProjectionsData } from '../types/interfaces/ProductProjectionsData';
 import { MainProps } from '../types/main-props';
-import { getLSToken } from '../utils/getLS';
+import { getLSAnonToken, getLSToken } from '../utils/getLS';
 
 // eslint-disable-next-line import/prefer-default-export
 export async function getProduct(
@@ -12,7 +12,7 @@ export async function getProduct(
   const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/product-projections/${productId}`;
   // eslint-disable-next-line no-console
   console.log(state);
-  const BEARER_TOKEN = getLSToken();
+  const BEARER_TOKEN = state.userLoggedIn ? getLSToken() : getLSAnonToken();
 
   // eslint-disable-next-line no-console
   console.log('BEARER_TOKEN=>', BEARER_TOKEN);
