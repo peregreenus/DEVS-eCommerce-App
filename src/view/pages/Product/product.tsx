@@ -7,15 +7,11 @@ import Footer from '../../components/common/footer/footer';
 import Header from '../../components/common/header/header';
 import { IProduct } from '../../../data/types/interfaces/product';
 
-// Компонент Product
-// eslint-disable-next-line import/prefer-default-export
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  // const { productId } = useParams();
-  // eslint-disable-next-line no-console
-  console.log('--------------------');
   const { id } = useParams();
+  const [numImage, setNumImage] = useState<number>(0);
 
   useEffect(() => {
     async function fetchProduct() {
@@ -26,13 +22,16 @@ function Product({ state, setState }: MainProps) {
       });
       setProduct(fetchedProduct);
       setLoading(false);
+      if (fetchedProduct && fetchedProduct.masterVariant.images.length > 0) {
+        setNumImage(0);
+      }
       // eslint-disable-next-line no-console
       console.log('product=>', fetchedProduct);
     }
 
     fetchProduct();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id, state, setState]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -40,6 +39,27 @@ function Product({ state, setState }: MainProps) {
 
   if (!product) {
     return <div>Product not found</div>;
+  }
+
+  const imgCount: number = product.masterVariant.images.length;
+  const isImage = product.masterVariant.images && imgCount > 0;
+
+  function slideLeft() {
+    if (numImage > 0) {
+      setNumImage(numImage - 1);
+    }
+  }
+
+  function slideRight() {
+    if (numImage < imgCount - 1) {
+      setNumImage(numImage + 1);
+    }
+  }
+
+  function selectImage(index: number) {
+    setNumImage(index);
+    // eslint-disable-next-line no-console
+    console.log(1111111);
   }
 
   return (
@@ -50,7 +70,13 @@ function Product({ state, setState }: MainProps) {
         <div className={classes.wrapper}>
           <div className={classes.card}>
             <div className={classes.slider}>
-              <div className={`${classes.btnLeft} ${classes.btn}`}>
+              <div
+                className={classes.btn}
+                onClick={slideLeft}
+                onKeyDown={slideLeft}
+                role="button"
+                tabIndex={0}
+                aria-label="left scrool">
                 <svg
                   width="80px"
                   height="80px"
@@ -64,16 +90,27 @@ function Product({ state, setState }: MainProps) {
                 </svg>
               </div>
               <div className={classes.prevWrapper}>
-                {product.masterVariant.images.map((image) => (
-                  <img
-                    className={classes.sliderImg}
-                    key={image.url}
-                    src={image.url}
-                    alt="product"
-                  />
+                {product.masterVariant.images.map((img, index) => (
+                  <div
+                    key={img.url}
+                    className={classes.imgContainer}
+                    // className={`${classes.imgContainer} ${index === numImage ? classes.active : ''}`}
+                    onClick={() => selectImage(index)}
+                    onKeyDown={() => selectImage(index)}
+                    style={{ cursor: 'pointer' }}
+                    role="button"
+                    tabIndex={0}>
+                    <img className={classes.sliderImg} src={img.url} alt="product" />
+                  </div>
                 ))}
               </div>
-              <div className={`${classes.btnRight} ${classes.cbtn}`}>
+              <div
+                className={classes.btn}
+                onClick={slideRight}
+                onKeyDown={slideRight}
+                role="button"
+                tabIndex={0}
+                aria-label="right scrool">
                 <svg
                   width="80px"
                   height="80px"
@@ -87,11 +124,11 @@ function Product({ state, setState }: MainProps) {
                 </svg>
               </div>
             </div>
-            {product.masterVariant.images && product.masterVariant.images.length > 0 ? (
+            {isImage ? (
               <div className={classes.preview}>
                 <img
                   className={classes.previewImg}
-                  src={product.masterVariant.images[0].url}
+                  src={product.masterVariant.images[numImage].url}
                   alt="product"
                 />
               </div>

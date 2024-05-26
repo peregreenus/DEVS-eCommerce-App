@@ -25,22 +25,18 @@ const config: Configuration = {
             loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: '[name]__[local]___[hash:base64:5]',
+                localIdentName: '[name]__[local]___[hash:base64:5]'
               },
-              importLoaders: 1,
-            },
+              importLoaders: 1
+            }
           },
-          'sass-loader',
-        ],
+          'sass-loader'
+        ]
       },
       {
         test: /\.(sc|sa|c)ss$/i,
         exclude: /\.module\.(sc|sa|c)ss$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader',
-        ],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
