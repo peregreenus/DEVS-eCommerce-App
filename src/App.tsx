@@ -16,7 +16,7 @@ function App() {
   if (!localStorage.getItem('bearerAnonToken') && !localStorage.getItem('bearerToken')) {
     getAnonToken();
   }
-  
+
   const [state, setState] = useState<AppState>({
     showMsg: true,
     userLoggedIn: false
