@@ -16,11 +16,38 @@
       width: 60%;
       background-color: #456534;
       min-width: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding: 1rem;
+
+      .slider {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow: hidden;
+        gap: 1rem;
+        .sliderImg {
+          width: 10%;
+        }
+        .btnLeft {
+        }
+        .btnLeft {
+        }
+        .btn {
+        }
+      }
     }
     .price {
       width: 35%;
       background-color: #8fb37b;
       min-width: 100px;
+    }
+    .preview {
+      display: flex;
+      justify-content: center;
+      .previewImg {
+        width: 75%;
+      }
     }
     .description {
       font-size: 1.5rem;
