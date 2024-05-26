@@ -1,0 +1,50 @@
+.product {
+  display: flex;
+  flex-direction: column;
+  min-height: 95%;
+  justify-content: center;
+  /* width: 80vw; */
+
+  .wrapper {
+    min-width: 80vw;
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .card {
+      width: 60%;
+      background-color: #456534;
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding: 1rem;
+
+      .slider {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow: hidden;
+        gap: 1rem;
+        .sliderImg {
+          width: 10%;
+        }
+      }
+    }
+    .price {
+      width: 35%;
+      background-color: #8fb37b;
+      min-width: 100px;
+    }
+    .preview {
+      display: flex;
+      justify-content: center;
+      .previewImg {
+        width: 75%;
+      }
+    }
+    .description {
+      font-size: 1.5rem;
+    }
+  }
+}

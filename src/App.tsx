@@ -8,23 +8,31 @@ import Login from './view/pages/Login/Login';
 import { AppState } from './data/types/main-props';
 import getAnonToken from './data/api/getToken';
 import Logout from './view/pages/Logout/logout';
+// import { Product } from './view/pages/Product/product';
+import { getLSToken } from './data/utils/getLS';
+import Product from './view/pages/Product/product';
 
 function App() {
   if (!localStorage.getItem('bearerAnonToken') && !localStorage.getItem('bearerToken')) {
     getAnonToken();
   }
+
   const [state, setState] = useState<AppState>({
     showMsg: true,
     userLoggedIn: false
     // here we can add new parameters
   });
 
+  if (!getLSToken()) {
+    getAnonToken();
+  }
+
   useEffect(() => {
-    const bearerToken = localStorage.getItem('bearerToken');
-    if (bearerToken && !state.userLoggedIn) {
+    if (localStorage.getItem('customer') && !state.userLoggedIn) {
       setState((prevState) => ({ ...prevState, userLoggedIn: true, showMsg: false }));
     }
-  }, [state.userLoggedIn]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <BrowserRouter>
@@ -33,6 +41,8 @@ function App() {
         <Route path="/signup" element={<Signup state={state} setState={setState} />} />
         <Route path="/login" element={<Login state={state} setState={setState} />} />
         <Route path="/logout" element={<Logout state={state} setState={setState} />} />
+        <Route path="/product" element={<Product state={state} setState={setState} />} />
+        <Route path="/product/:id" element={<Product state={state} setState={setState} />} />
         <Route path="/*" element={<Notfound state={state} setState={setState} />} />
       </Routes>
     </BrowserRouter>
