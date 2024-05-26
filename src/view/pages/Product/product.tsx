@@ -6,6 +6,7 @@ import * as classes from './product.module.css';
 import Footer from '../../components/common/footer/footer';
 import Header from '../../components/common/header/header';
 import { IProduct } from '../../../data/types/interfaces/product';
+import ImageComponent from './ImageComponent';
 
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
@@ -56,11 +57,16 @@ function Product({ state, setState }: MainProps) {
     }
   }
 
-  function selectImage(index: number) {
+  const selectImage = (index: number) => {
     setNumImage(index);
-    // eslint-disable-next-line no-console
-    console.log(1111111);
-  }
+  };
+
+  // function selectImageByKey(e: KeyboardEvent, index: number) {
+  //   if (e.key === 'Enter' || e.key === ' ') {
+  //     e.preventDefault();
+  //     setNumImage(index);
+  //   }
+  // }
 
   return (
     <div>
@@ -91,17 +97,14 @@ function Product({ state, setState }: MainProps) {
               </div>
               <div className={classes.prevWrapper}>
                 {product.masterVariant.images.map((img, index) => (
-                  <div
+                  <ImageComponent
                     key={img.url}
-                    className={classes.imgContainer}
-                    // className={`${classes.imgContainer} ${index === numImage ? classes.active : ''}`}
+                    index={0}
+                    isSelected={numImage === index}
                     onClick={() => selectImage(index)}
-                    onKeyDown={() => selectImage(index)}
-                    style={{ cursor: 'pointer' }}
-                    role="button"
-                    tabIndex={0}>
-                    <img className={classes.sliderImg} src={img.url} alt="product" />
-                  </div>
+                    imgUrl={img.url}
+                    aria-label="Toggle image"
+                  />
                 ))}
               </div>
               <div
