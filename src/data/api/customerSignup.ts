@@ -4,7 +4,7 @@ import Country from '../types/country';
 import { Customer, CustomerResponse } from '../types/interfaces/customer.interface';
 import CTP from '../types/ctp';
 import { RegistrationFieldsType } from '../types/registration-type';
-import { bearerToken } from './getToken';
+import { customerAddressesOption } from '../../view/components/signup/signup-form';
 
 export default async function CustomerSignup(formCustomer: string): Promise<CustomerResponse> {
   const newCustomer: RegistrationFieldsType = JSON.parse(formCustomer);
@@ -17,23 +17,54 @@ export default async function CustomerSignup(formCustomer: string): Promise<Cust
     dateOfBirth: newCustomer.dateOfBirth,
     addresses: [
       {
+        key: 'addr1',
         country:
-          Object.keys(Country)[Object.values(Country).indexOf(newCustomer.country as Country)],
-        streetName: newCustomer.street,
-        postalCode: newCustomer.postalCode,
-        city: newCustomer.city
+          Object.keys(Country)[
+            Object.values(Country).indexOf(newCustomer.countryBilling as Country)
+          ],
+        streetName: newCustomer.streetBilling,
+        postalCode: newCustomer.postalCodeBilling,
+        city: newCustomer.cityBilling
       }
-    ]
+    ],
+    billingAddresses: customerAddressesOption.billingAddresses,
+    shippingAddresses: customerAddressesOption.shippingAddresses
   };
+  if (
+    newCustomer.countryShipping &&
+    newCustomer.streetShipping &&
+    newCustomer.postalCodeShipping &&
+    newCustomer.cityShipping
+  ) {
+    data.addresses?.push({
+      key: 'addr2',
+      country:
+        Object.keys(Country)[
+          Object.values(Country).indexOf(newCustomer.countryShipping as Country)
+        ],
+      streetName: newCustomer.streetShipping,
+      postalCode: newCustomer.postalCodeShipping,
+      city: newCustomer.cityShipping
+    });
+  }
+
+  if (customerAddressesOption.defaultShipping) {
+    data.defaultShippingAddress = customerAddressesOption.defaultShipping;
+  }
+  if (customerAddressesOption.defaultBilling) {
+    data.defaultBillingAddress = customerAddressesOption.defaultBilling;
+  }
+
   return fetch(url, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${bearerToken.token}`,
+      Authorization: `Bearer ${localStorage.getItem('bearerAnonToken')}`,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(data)
   })
     .then((response) => {
+      console.log(response);
       return response.json();
     })
     .catch((err) => console.error(err));

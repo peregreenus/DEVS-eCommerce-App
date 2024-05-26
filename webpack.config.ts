@@ -1,6 +1,5 @@
 import path from 'path';
 import { Configuration } from 'webpack';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import EslingPlugin from 'eslint-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -21,6 +20,10 @@ const config: Configuration = {
       {
         test: /\.(sc|sa|c)ss$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource'
       }
     ]
   },
@@ -44,9 +47,6 @@ const config: Configuration = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/index.html'),
       filename: 'index.html'
-    }),
-    new CopyWebpackPlugin({
-      patterns: [{ from: './src/assets/', to: './assets/' }]
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css'

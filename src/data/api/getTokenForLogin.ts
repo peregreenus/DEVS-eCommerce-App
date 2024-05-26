@@ -32,6 +32,7 @@ async function getTokenForLogin(
 
     const { access_token: bearerToken, refresh_token: refreshToken } = tokenData;
     localStorage.setItem('bearerToken', bearerToken);
+    localStorage.removeItem('bearerAnonToken');
     console.log('bearerToken:', bearerToken);
     console.log('refreshToken:', refreshToken);
     setState((prevState) => ({ ...prevState, userLoggedIn: true, showMsg: false }));
