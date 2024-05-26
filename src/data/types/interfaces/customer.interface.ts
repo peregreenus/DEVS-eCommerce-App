@@ -1,4 +1,5 @@
 export interface CustomerAddresses {
+  key: string;
   country: string;
   streetName: string;
   postalCode: string;
