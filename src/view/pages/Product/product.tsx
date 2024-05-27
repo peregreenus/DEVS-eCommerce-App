@@ -6,13 +6,15 @@ import * as classes from './product.module.css';
 import Footer from '../../components/common/footer/footer';
 import Header from '../../components/common/header/header';
 import { IProduct } from '../../../data/types/interfaces/product';
-import ImageComponent from './ImageComponent';
+import PreviewImageComponent from './ImageComponent';
+import Modal from '../../components/common/modal/modal';
 
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const { id } = useParams();
   const [numImage, setNumImage] = useState<number>(0);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     async function fetchProduct() {
@@ -61,12 +63,9 @@ function Product({ state, setState }: MainProps) {
     setNumImage(index);
   };
 
-  // function selectImageByKey(e: KeyboardEvent, index: number) {
-  //   if (e.key === 'Enter' || e.key === ' ') {
-  //     e.preventDefault();
-  //     setNumImage(index);
-  //   }
-  // }
+  function modalShow() {
+    setModal(true);
+  }
 
   return (
     <div>
@@ -97,13 +96,12 @@ function Product({ state, setState }: MainProps) {
               </div>
               <div className={classes.prevWrapper}>
                 {product.masterVariant.images.map((img, index) => (
-                  <ImageComponent
+                  <PreviewImageComponent
                     key={img.url}
                     index={0}
                     isSelected={numImage === index}
                     onClick={() => selectImage(index)}
                     imgUrl={img.url}
-                    aria-label="Toggle image"
                   />
                 ))}
               </div>
@@ -132,7 +130,13 @@ function Product({ state, setState }: MainProps) {
                 <img
                   className={classes.previewImg}
                   src={product.masterVariant.images[numImage].url}
+                  onKeyDown={() => modalShow()}
+                  onClick={() => modalShow()}
                   alt="product"
+                  // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
+                  role="button"
+                  tabIndex={0}
+                  aria-label="Toggle modal"
                 />
               </div>
             ) : (
@@ -147,6 +151,19 @@ function Product({ state, setState }: MainProps) {
           <div className={classes.description}>{product.description.en}</div>
         </div>
       </section>
+      <Modal visible={modal} setVisible={setModal}>
+        <img
+          className={classes.previewImg}
+          src={product.masterVariant.images[numImage].url}
+          onKeyDown={() => modalShow()}
+          onClick={() => modalShow()}
+          alt="product"
+          // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
+          role="button"
+          tabIndex={0}
+          aria-label="Toggle modal"
+        />
+      </Modal>
       <Footer />
     </div>
   );
