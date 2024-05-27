@@ -18,7 +18,24 @@ const config: Configuration = {
         exclude: /node_modules/
       },
       {
+        test: /\.module\.(sc|sa|c)ss$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[name]__[local]___[hash:base64:5]'
+              },
+              importLoaders: 1
+            }
+          },
+          'sass-loader'
+        ]
+      },
+      {
         test: /\.(sc|sa|c)ss$/i,
+        exclude: /\.module\.(sc|sa|c)ss$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
       {

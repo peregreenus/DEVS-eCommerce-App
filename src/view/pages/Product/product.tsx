@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MainProps } from '../../../data/types/main-props';
-// import { ProductProjectionsData } from '../../../data/types/interfaces/ProductProjectionsData';
 import { getProduct } from '../../../data/api/getProduct';
 import * as classes from './product.module.css';
 import Footer from '../../components/common/footer/footer';
 import Header from '../../components/common/header/header';
 import { IProduct } from '../../../data/types/interfaces/product';
+import ImageComponent from './ImageComponent';
 
-// Компонент Product
-// eslint-disable-next-line import/prefer-default-export
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  // const { productId } = useParams();
-  // eslint-disable-next-line no-console
-  console.log('--------------------');
   const { id } = useParams();
+  const [numImage, setNumImage] = useState<number>(0);
 
   useEffect(() => {
     async function fetchProduct() {
@@ -27,13 +23,16 @@ function Product({ state, setState }: MainProps) {
       });
       setProduct(fetchedProduct);
       setLoading(false);
+      if (fetchedProduct && fetchedProduct.masterVariant.images.length > 0) {
+        setNumImage(0);
+      }
       // eslint-disable-next-line no-console
       console.log('product=>', fetchedProduct);
     }
 
     fetchProduct();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id, state, setState]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -43,6 +42,32 @@ function Product({ state, setState }: MainProps) {
     return <div>Product not found</div>;
   }
 
+  const imgCount: number = product.masterVariant.images.length;
+  const isImage = product.masterVariant.images && imgCount > 0;
+
+  function slideLeft() {
+    if (numImage > 0) {
+      setNumImage(numImage - 1);
+    }
+  }
+
+  function slideRight() {
+    if (numImage < imgCount - 1) {
+      setNumImage(numImage + 1);
+    }
+  }
+
+  const selectImage = (index: number) => {
+    setNumImage(index);
+  };
+
+  // function selectImageByKey(e: KeyboardEvent, index: number) {
+  //   if (e.key === 'Enter' || e.key === ' ') {
+  //     e.preventDefault();
+  //     setNumImage(index);
+  //   }
+  // }
+
   return (
     <div>
       <Header state={state} setState={setState} />
@@ -51,7 +76,13 @@ function Product({ state, setState }: MainProps) {
         <div className={classes.wrapper}>
           <div className={classes.card}>
             <div className={classes.slider}>
-              <div className={`${classes.btnLeft} ${classes.btn}`}>
+              <div
+                className={classes.btn}
+                onClick={slideLeft}
+                onKeyDown={slideLeft}
+                role="button"
+                tabIndex={0}
+                aria-label="left scrool">
                 <svg
                   width="80px"
                   height="80px"
@@ -64,10 +95,25 @@ function Product({ state, setState }: MainProps) {
                   />
                 </svg>
               </div>
-              {product.masterVariant.images.map((image) => (
-                <img className={classes.sliderImg} key={image.url} src={image.url} alt="product" />
-              ))}
-              <div className={`${classes.btnRight} ${classes.cbtn}`}>
+              <div className={classes.prevWrapper}>
+                {product.masterVariant.images.map((img, index) => (
+                  <ImageComponent
+                    key={img.url}
+                    index={0}
+                    isSelected={numImage === index}
+                    onClick={() => selectImage(index)}
+                    imgUrl={img.url}
+                    aria-label="Toggle image"
+                  />
+                ))}
+              </div>
+              <div
+                className={classes.btn}
+                onClick={slideRight}
+                onKeyDown={slideRight}
+                role="button"
+                tabIndex={0}
+                aria-label="right scrool">
                 <svg
                   width="80px"
                   height="80px"
@@ -81,11 +127,11 @@ function Product({ state, setState }: MainProps) {
                 </svg>
               </div>
             </div>
-            {product.masterVariant.images && product.masterVariant.images.length > 0 ? (
+            {isImage ? (
               <div className={classes.preview}>
                 <img
                   className={classes.previewImg}
-                  src={product.masterVariant.images[0].url}
+                  src={product.masterVariant.images[numImage].url}
                   alt="product"
                 />
               </div>

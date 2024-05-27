@@ -1,4 +1,8 @@
 // eslint-disable-next-line import/prefer-default-export
+export function getLSAnonToken() {
+  return localStorage.getItem('bearerAnonToken');
+}
+
 export function getLSToken() {
   return localStorage.getItem('bearerToken');
 }

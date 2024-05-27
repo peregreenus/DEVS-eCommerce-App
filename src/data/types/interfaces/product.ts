@@ -3,7 +3,7 @@ interface Dimensions {
   h: number;
 }
 
-interface Image {
+export interface Image {
   url: string;
   dimensions: Dimensions;
 }

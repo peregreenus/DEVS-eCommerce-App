@@ -14,7 +14,7 @@ function Greeting() {
   const buttons = [
     { path: '/catalog', label: 'Catalog' },
     { path: '/product', label: 'Product' },
-    { path: '/product/fa925d2c-e043-44d8-aff0-e5c810f6111a', label: 'ProductID' }
+    { path: '/product/5b76e475-2027-4492-b409-c3e2bff291d7', label: 'ProductID' }
   ];
 
   return (
