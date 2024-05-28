@@ -1,0 +1,4 @@
+.profileMenu {
+  display: flex;
+  flex-direction: column;
+}

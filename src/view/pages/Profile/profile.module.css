@@ -1,0 +1,20 @@
+.profilePage {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.profileMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.profileTabsItem {
+  width: 15rem;
+  height: 4rem;
+}
+
+.profileTabActive {
+  background-color: var(--accent-color);
+}

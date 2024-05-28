@@ -33,8 +33,12 @@ function App() {
         <Route path="/" element={<Main state={state} setState={setState} />} />
         <Route path="/signup" element={<Signup state={state} setState={setState} />} />
         <Route path="/login" element={<Login state={state} setState={setState} />} />
-        <Route path="/profile" element={<Profile state={state} setState={setState} />} />
-        <Route path="/logout" element={<Logout state={state} setState={setState} />} />
+        {state.userLoggedIn && (
+          <>
+            <Route path="/profile" element={<Profile state={state} setState={setState} />} />
+            <Route path="/logout" element={<Logout state={state} setState={setState} />} />
+          </>
+        )}
         <Route path="/*" element={<Notfound state={state} setState={setState} />} />
       </Routes>
     </BrowserRouter>
