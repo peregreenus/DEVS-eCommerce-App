@@ -84,6 +84,21 @@
   }
 }
 
+.modalWrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.modalImg {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: auto;
+}
+
 @media (max-width: 768px) {
   .product {
     .wrapper {
