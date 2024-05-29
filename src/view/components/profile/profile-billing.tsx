@@ -4,16 +4,24 @@ import {
   CustomerAddresses,
   CustomerProfileResponse
 } from '../../../data/types/interfaces/customer.interface';
+import * as styles from './profile.content.module.css';
 
-function BillingTabContent({ addresses, billingAddressIds }: CustomerProfileResponse) {
+function BillingTabContent({
+  addresses,
+  billingAddressIds,
+  defaultBillingAddressId
+}: CustomerProfileResponse) {
   const billingAddresses: CustomerAddresses[] = [];
-
+  let defaultBillingAddress: string | undefined = '';
   if (billingAddressIds && addresses) {
     billingAddressIds.forEach((bilEl) => {
       addresses.forEach((adEl) => {
         if (adEl.id === bilEl) {
           billingAddresses.push(adEl);
           console.log(adEl);
+        }
+        if (adEl.id === defaultBillingAddressId) {
+          defaultBillingAddress = defaultBillingAddressId;
         }
       });
     });
@@ -22,7 +30,13 @@ function BillingTabContent({ addresses, billingAddressIds }: CustomerProfileResp
   return (
     <div>
       {billingAddresses.map((value) => (
-        <div key={value.id}>
+        <div
+          key={value.id}
+          className={`${defaultBillingAddress === value.id ? styles.defaultAddress : ''}`}>
+          <span>
+            <input type="checkbox" checked={defaultBillingAddress === value.id} />
+            Default
+          </span>
           <p>Your Country: {value.country}</p>
           <p>Postal Code:: {value.postalCode}</p>
           <p>Your City: {value.city}</p>

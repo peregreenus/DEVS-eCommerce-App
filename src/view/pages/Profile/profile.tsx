@@ -87,12 +87,14 @@ export default function Profile({ state, setState }: MainProps) {
               <ShippingTabContent
                 addresses={profileData?.addresses}
                 shippingAddressIds={profileData?.shippingAddressIds}
+                defaultShippingAddressId={profileData?.defaultShippingAddressId}
               />
             )}
             {activeTab === 2 && (
               <BillingTabContent
                 addresses={profileData?.addresses}
                 billingAddressIds={profileData?.billingAddressIds}
+                defaultBillingAddressId={profileData?.defaultBillingAddressId}
               />
             )}
           </div>

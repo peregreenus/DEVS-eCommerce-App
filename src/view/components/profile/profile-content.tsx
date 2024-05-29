@@ -7,10 +7,10 @@ export default function ProfileTabContent({ ...profileData }: CustomerProfileRes
     <div>
       <div>
         <p>Your Name: {profileData?.firstName}</p>
-        <p>Your Birth Date: {profileData?.dateOfBirth}</p>
         <p>Your Last Name: {profileData?.lastName}</p>
+        <p>Your Birth Date: {profileData?.dateOfBirth}</p>
         <p>Your Email: {profileData?.email}</p>
-        <p>Your Password: {profileData?.password}</p>
+        {/* <p>Your Password: {profileData?.password}</p> */}
       </div>
       {/* <label htmlFor="firstName">
           Your Name:

@@ -4,15 +4,23 @@ import {
   CustomerAddresses,
   CustomerProfileResponse
 } from '../../../data/types/interfaces/customer.interface';
+import * as styles from './profile.content.module.css';
 
-function ShippingTabContent({ addresses, shippingAddressIds }: CustomerProfileResponse) {
+function ShippingTabContent({
+  addresses,
+  shippingAddressIds,
+  defaultShippingAddressId
+}: CustomerProfileResponse) {
   const shippingAddresses: CustomerAddresses[] = [];
-
+  let defaultShippingAddress: string | undefined = '';
   if (shippingAddressIds && addresses) {
     shippingAddressIds.forEach((shipEl) => {
       addresses.forEach((adEl) => {
         if (adEl.id === shipEl) {
           shippingAddresses.push(adEl);
+        }
+        if (adEl.id === defaultShippingAddressId) {
+          defaultShippingAddress = defaultShippingAddressId;
         }
       });
     });
@@ -21,7 +29,13 @@ function ShippingTabContent({ addresses, shippingAddressIds }: CustomerProfileRe
   return (
     <div>
       {shippingAddresses.map((value) => (
-        <div key={value.id}>
+        <div
+          key={value.id}
+          className={`${defaultShippingAddress === value.id ? styles.defaultAddress : ''}`}>
+          <span>
+            <input type="checkbox" checked={defaultShippingAddress === value.id} />
+            Default
+          </span>
           <p>Your Country: {value.country}</p>
           <p>Postal Code:: {value.postalCode}</p>
           <p>Your City: {value.city}</p>

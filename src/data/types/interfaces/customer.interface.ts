@@ -68,4 +68,6 @@ export interface CustomerProfileResponse {
   isEmailVerified?: boolean;
   stores?: Array<string>;
   authenticationMode?: string;
+  defaultBillingAddressId?: string;
+  defaultShippingAddressId?: string;
 }
