@@ -4,8 +4,8 @@ import { CustomerProfileResponse } from '../../../data/types/interfaces/customer
 
 export default function ProfileTabContent({ ...profileData }: CustomerProfileResponse) {
   return (
-    <div className="tab__container ">
-      <div className="tab__content">
+    <div>
+      <div>
         <p>Your Name: {profileData?.firstName}</p>
         <p>Your Birth Date: {profileData?.dateOfBirth}</p>
         <p>Your Last Name: {profileData?.lastName}</p>
