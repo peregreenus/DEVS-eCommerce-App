@@ -32,7 +32,7 @@ function Greeting() {
             <MyButton
               key={button.path}
               type="button"
-              className="btn-center"
+              className={`${classes.btnCenter} ${classes.myBtn}`}
               onClick={() => goToPage(button.path)}>
               {button.label}
             </MyButton>

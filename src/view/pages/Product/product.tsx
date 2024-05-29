@@ -9,8 +9,8 @@ import { IProduct } from '../../../data/types/interfaces/product';
 import PreviewImageComponent from './ImageComponent';
 import Modal from '../../components/common/modal/modal';
 // import MyButton from '../../components/common/Button/MyButton';
-import ArrowRightIcon from '../../../data/types/ArrowRightIcon';
-import ArrowLeftIcon from '../../../data/types/ArrowLertIcon';
+import ArrowRightIcon from '../../../data/utils/ArrowRightIcon';
+import ArrowLeftIcon from '../../../data/utils/ArrowLeftIcon';
 import MyButton from '../../components/common/Button/MyButton';
 
 function Product({ state, setState }: MainProps) {
@@ -137,8 +137,11 @@ function Product({ state, setState }: MainProps) {
       </section>
       <Modal visible={modal} setVisible={setModal}>
         <div className={classes.modalWrapper}>
-          <MyButton type="button" className={classes.modalBtn} onClick={() => slideLeft()}>
-            <ArrowLeftIcon width="10rem" height="10rem" />
+          <MyButton
+            type="button"
+            className={`${classes.modalBtn} ${classes.modalBtnLeft}`}
+            onClick={() => slideLeft()}>
+            <ArrowLeftIcon width="6rem" height="6rem" />
           </MyButton>
           <img
             className={classes.modalImg}
@@ -151,8 +154,11 @@ function Product({ state, setState }: MainProps) {
             tabIndex={0}
             aria-label="Toggle modal"
           />
-          <MyButton type="button" className={classes.modalBtn} onClick={() => slideRight()}>
-            <ArrowRightIcon width="10rem" height="10rem" />
+          <MyButton
+            type="button"
+            className={`${classes.modalBtn} ${classes.modalBtnRight}`}
+            onClick={() => slideRight()}>
+            <ArrowRightIcon width="6rem" height="6rem" />
           </MyButton>
         </div>
       </Modal>
