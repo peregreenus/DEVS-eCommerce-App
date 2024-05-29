@@ -10,7 +10,8 @@
   -ms-user-select: none; /* IE/Edge */
 
   .wrapper {
-    min-width: 95vw;
+    min-width: 75vw;
+    width: 800px;
     display: flex;
     gap: 2rem;
     justify-content: center;
@@ -117,11 +118,11 @@
   background-color: rgba(255, 255, 255, 0.8);
 }
 .modalBtnLeft {
-  left: 0;
+  left: 1rem;
 }
 
 .modalBtnRight {
-  right: 0;
+  right: 1rem;
 }
 
 @media (max-width: 768px) {
