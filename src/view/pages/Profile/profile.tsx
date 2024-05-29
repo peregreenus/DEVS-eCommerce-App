@@ -47,52 +47,54 @@ export default function Profile({ state, setState }: MainProps) {
   return (
     <>
       <Header state={state} setState={setState} />
-      <h3>Profiles</h3>
       <div className={styles.profilePage}>
-        <div className={styles.profileMenu}>
-          <div
-            role="presentation"
-            key="Profile"
-            className={`${styles.profileTabsItem} ${activeTab === 0 ? styles.profileTabActive : ''}`}
-            onClick={() => tabsToggle(0)}>
-            Profile
+        <h3>Profiles</h3>
+        <div className={styles.container}>
+          <div className={styles.menu}>
+            <button
+              type="button"
+              key="Profile"
+              className={`${styles.tabsItem} ${activeTab === 0 ? styles.tabActive : ''}`}
+              onClick={() => tabsToggle(0)}>
+              Profile
+            </button>
+            <button
+              type="button"
+              key="Shipping Addresses"
+              className={`${styles.tabsItem} ${activeTab === 1 ? styles.tabActive : ''}`}
+              onClick={() => tabsToggle(1)}>
+              Shipping Addresses
+            </button>
+            <button
+              type="button"
+              key="Billing Addresses"
+              className={`${styles.tabsItem} ${activeTab === 2 ? styles.tabActive : ''}`}
+              onClick={() => tabsToggle(2)}>
+              Billing Addresses
+            </button>
           </div>
-          <div
-            role="presentation"
-            key="Shipping Addresses"
-            className={`${styles.profileTabsItem} ${activeTab === 1 ? styles.profileTabActive : ''}`}
-            onClick={() => tabsToggle(1)}>
-            Shipping Addresses
+          <div className={styles.content}>
+            {activeTab === 0 && (
+              <ProfileTabContent
+                firstName={profileData?.firstName}
+                lastName={profileData?.lastName}
+                email={profileData?.email}
+                password={profileData?.password}
+              />
+            )}
+            {activeTab === 1 && (
+              <ShippingTabContent
+                addresses={profileData?.addresses}
+                shippingAddressIds={profileData?.shippingAddressIds}
+              />
+            )}
+            {activeTab === 2 && (
+              <BillingTabContent
+                addresses={profileData?.addresses}
+                billingAddressIds={profileData?.billingAddressIds}
+              />
+            )}
           </div>
-          <div
-            role="presentation"
-            key="Billing Addresses"
-            className={`${styles.profileTabsItem} ${activeTab === 2 ? styles.profileTabActive : ''}`}
-            onClick={() => tabsToggle(2)}>
-            Billing Addresses
-          </div>
-        </div>
-        <div className={styles.contentProfile}>
-          {activeTab === 0 && (
-            <ProfileTabContent
-              firstName={profileData?.firstName}
-              lastName={profileData?.lastName}
-              email={profileData?.email}
-              password={profileData?.password}
-            />
-          )}
-          {activeTab === 1 && (
-            <ShippingTabContent
-              addresses={profileData?.addresses}
-              shippingAddressIds={profileData?.shippingAddressIds}
-            />
-          )}
-          {activeTab === 2 && (
-            <BillingTabContent
-              addresses={profileData?.addresses}
-              billingAddressIds={profileData?.billingAddressIds}
-            />
-          )}
         </div>
       </div>
 
