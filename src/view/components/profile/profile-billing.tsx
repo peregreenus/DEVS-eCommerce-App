@@ -21,10 +21,14 @@ function BillingTabContent({ addresses, billingAddressIds }: CustomerProfileResp
 
   return (
     <div>
-      <p>Your Country: {billingAddresses[0].country}</p>
-      <p>Postal Code:: {billingAddresses[0].postalCode}</p>
-      <p>Your City: {billingAddresses[0].city}</p>
-      <p>Your Street: {billingAddresses[0].streetName}</p>
+      {billingAddresses.map((value) => (
+        <div key={value.id}>
+          <p>Your Country: {value.country}</p>
+          <p>Postal Code:: {value.postalCode}</p>
+          <p>Your City: {value.city}</p>
+          <p>Your Street: {value.streetName}</p>
+        </div>
+      ))}
       {/* <label htmlFor="country">
             Your Country:
             <input type="text" name="country" value={address1.country} />

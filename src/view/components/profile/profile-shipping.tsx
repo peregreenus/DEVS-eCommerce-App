@@ -13,17 +13,21 @@ function ShippingTabContent({ addresses, shippingAddressIds }: CustomerProfileRe
       addresses.forEach((adEl) => {
         if (adEl.id === shipEl) {
           shippingAddresses.push(adEl);
-          console.log(adEl);
         }
       });
     });
+    console.log(shippingAddresses);
   }
   return (
     <div>
-      <p>Your Country: {shippingAddresses[0].country}</p>
-      <p>Postal Code:: {shippingAddresses[0].postalCode}</p>
-      <p>Your City: {shippingAddresses[0].city}</p>
-      <p>Your Street: {shippingAddresses[0].streetName}</p>
+      {shippingAddresses.map((value) => (
+        <div key={value.id}>
+          <p>Your Country: {value.country}</p>
+          <p>Postal Code:: {value.postalCode}</p>
+          <p>Your City: {value.city}</p>
+          <p>Your Street: {value.streetName}</p>
+        </div>
+      ))}
       {/* <label htmlFor="country">
             Your Country:
             <input type="text" name="country" value={address1.country} />

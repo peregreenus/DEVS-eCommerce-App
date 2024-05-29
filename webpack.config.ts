@@ -18,7 +18,24 @@ const config: Configuration = {
         exclude: /node_modules/
       },
       {
+        test: /\.module\.(sc|sa|c)ss$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[name]__[local]___[hash:base64:5]'
+              },
+              importLoaders: 1
+            }
+          },
+          'sass-loader'
+        ]
+      },
+      {
         test: /\.(sc|sa|c)ss$/i,
+        exclude: /\.module\.(sc|sa|c)ss$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
       {
@@ -33,6 +50,7 @@ const config: Configuration = {
   output: {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
     clean: true,
     compareBeforeEmit: true
   },
@@ -41,7 +59,13 @@ const config: Configuration = {
     hot: true,
     port: 8080,
     static: path.join(__dirname, 'public'),
-    historyApiFallback: true
+    historyApiFallback: {
+      disableDotRule: true,
+      rewrites: [
+        { from: /^\/$/, to: '/index.html' },
+        { from: /./, to: '/index.html' }
+      ]
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({

@@ -64,6 +64,7 @@ export interface CustomerProfileResponse {
   addresses?: CustomerAddresses[];
   shippingAddressIds?: string[];
   billingAddressIds?: string[];
+  dateOfBirth?: string;
   isEmailVerified?: boolean;
   stores?: Array<string>;
   authenticationMode?: string;

@@ -77,6 +77,7 @@ export default function Profile({ state, setState }: MainProps) {
             {activeTab === 0 && (
               <ProfileTabContent
                 firstName={profileData?.firstName}
+                dateOfBirth={profileData?.dateOfBirth}
                 lastName={profileData?.lastName}
                 email={profileData?.email}
                 password={profileData?.password}
