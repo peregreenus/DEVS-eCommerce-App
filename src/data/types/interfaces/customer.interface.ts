@@ -1,4 +1,5 @@
 export interface CustomerAddresses {
+  id?: string;
   key: string;
   country: string;
   streetName: string;
@@ -41,4 +42,32 @@ export interface CustomerResponse {
   errors?: [];
   message?: string;
   statusCode?: number;
+}
+
+export interface CustomerProfileResponse {
+  id?: string;
+  version?: number;
+  createdAt?: Date;
+  lastModifiedAt?: Date;
+  lastModifiedBy?: {
+    clientId?: string;
+    isPlatformClient?: boolean;
+  };
+  createdBy?: {
+    clientId?: string;
+    isPlatformClient?: boolean;
+  };
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  password?: string;
+  addresses?: CustomerAddresses[];
+  shippingAddressIds?: string[];
+  billingAddressIds?: string[];
+  dateOfBirth?: string;
+  isEmailVerified?: boolean;
+  stores?: Array<string>;
+  authenticationMode?: string;
+  defaultBillingAddressId?: string;
+  defaultShippingAddressId?: string;
 }

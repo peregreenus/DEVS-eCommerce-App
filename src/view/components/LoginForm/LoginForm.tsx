@@ -65,10 +65,10 @@ function LoginForm({ state, setState }: MainProps) {
             setFailAuthMessage(`${message}`);
           }
           resetErrorMessages();
-
           if (localStorage.getItem('bearerToken')) {
             navigate('/');
           }
+          localStorage.removeItem('bearerAnonToken');
         });
 
         if (inputRef.current) inputRef.current.focus();
