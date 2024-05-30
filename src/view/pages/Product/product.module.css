@@ -10,7 +10,8 @@
   -ms-user-select: none; /* IE/Edge */
 
   .wrapper {
-    min-width: 95vw;
+    min-width: 75vw;
+    width: 800px;
     display: flex;
     gap: 2rem;
     justify-content: center;
@@ -32,9 +33,20 @@
         width: 85%;
         margin: 0 auto;
         align-items: center;
+
         .btn {
-          width: 20%;
+          width: 10%;
+          /* height: 3rem; */
+          border: none;
+          border-radius: 50%;
+          background-color: rgba(255, 255, 255, 0.1);
+          transition: all 0.4s ease-in-out;
         }
+        .btn:hover {
+          cursor: pointer;
+          background-color: rgba(255, 255, 255, 0.8);
+        }
+
         .prevWrapper {
           display: flex;
           flex-wrap: nowrap;
@@ -82,6 +94,46 @@
       font-size: 1.5rem;
     }
   }
+}
+
+.modalWrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.modalImg {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: auto;
+}
+
+.modalBtn {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  width: 6rem;
+  height: 6rem;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease-in-out;
+}
+
+.modalBtn:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.modalBtnLeft {
+  left: 1rem;
+}
+
+.modalBtnRight {
+  right: 1rem;
 }
 
 @media (max-width: 768px) {

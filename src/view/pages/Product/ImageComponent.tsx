@@ -8,7 +8,7 @@ interface ImageProps {
   onClick: (index: number) => void;
 }
 
-function ImageComponent({ index, imgUrl, isSelected, onClick }: ImageProps) {
+function PreviewImageComponent({ index, imgUrl, isSelected, onClick }: ImageProps) {
   const handleClick = () => {
     onClick(index);
   };
@@ -23,4 +23,4 @@ function ImageComponent({ index, imgUrl, isSelected, onClick }: ImageProps) {
   );
 }
 
-export default ImageComponent;
+export default PreviewImageComponent;
