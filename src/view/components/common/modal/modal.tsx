@@ -9,7 +9,7 @@ interface ModalProps {
 }
 
 function Modal({ children, visible, setVisible }: ModalProps) {
-  const rootClasses = [cl.myModal];
+  const rootClasses = [cl.modal];
   if (visible) {
     rootClasses.push(cl.active);
   }

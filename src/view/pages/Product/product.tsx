@@ -9,9 +9,9 @@ import { IProduct } from '../../../data/types/interfaces/product';
 import PreviewImageComponent from './ImageComponent';
 import Modal from '../../components/common/modal/modal';
 // import MyButton from '../../components/common/Button/MyButton';
-import ArrowRightIcon from '../../../data/utils/ArrowRightIcon';
-import ArrowLeftIcon from '../../../data/utils/ArrowLeftIcon';
-import MyButton from '../../components/common/Button/MyButton';
+import ArrowRightIcon from '../../components/common/other/ArrowRightIcon';
+import ArrowLeftIcon from '../../components/common/other/ArrowLeftIcon';
+import MyButton from '../../components/common/Button/Button';
 
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);

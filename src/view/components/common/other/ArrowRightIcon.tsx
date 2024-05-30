@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconProps } from '../types/interfaces/iconProps';
+import { IconProps } from '../../../../data/types/interfaces/iconProps';
 
 function ArrowRightIcon({ width, height, fill = '#000' }: IconProps) {
   return (
