@@ -1,16 +1,27 @@
 import React from 'react';
 import { CustomerProfileResponse } from '../../../data/types/interfaces/customer.interface';
-// import * as styles from './profile-components.module.css';
+import * as styles from './profile.content.module.css';
 
 export default function ProfileTabContent({ ...profileData }: CustomerProfileResponse) {
   return (
-    <div>
-      <div>
-        <p>Your Name: {profileData?.firstName}</p>
-        <p>Your Last Name: {profileData?.lastName}</p>
-        <p>Your Birth Date: {profileData?.dateOfBirth}</p>
-        <p>Your Email: {profileData?.email}</p>
-        {/* <p>Your Password: {profileData?.password}</p> */}
+    <div className={styles.profileTabContent}>
+      <div className={styles.profileContent}>
+        <p className={styles.profileContentString}>
+          <span>Name: </span>
+          {profileData?.firstName}
+        </p>
+        <p className={styles.profileContentString}>
+          <span>Last Name: </span>
+          {profileData?.lastName}
+        </p>
+        <p className={styles.profileContentString}>
+          <span>Birth Date: </span>
+          {profileData?.dateOfBirth}
+        </p>
+        <p className={styles.profileContentString}>
+          <span>Email: </span>
+          {profileData?.email}
+        </p>
       </div>
       {/* <label htmlFor="firstName">
           Your Name:

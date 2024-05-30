@@ -7,8 +7,8 @@ import * as styles from './profile.module.css';
 import ProfileTabContent from '../../components/profile/profile-content';
 import getCustomerProfile from '../../../data/api/customerProfile';
 import { CustomerProfileResponse } from '../../../data/types/interfaces/customer.interface';
-import ShippingTabContent from '../../components/profile/profile-shipping';
-// import BillingTabContent from '../../components/profile/profile-billing';
+import AddressesTabContent from '../../components/profile/profile-addresses';
+import ChangePasswordTabContent from '../../components/profile/profile-password';
 
 const initialStateProfile = {
   firstName: '',
@@ -63,15 +63,15 @@ export default function Profile({ state, setState }: MainProps) {
               key="Shipping Addresses"
               className={`${styles.tabsItem} ${activeTab === 1 ? styles.tabActive : ''}`}
               onClick={() => tabsToggle(1)}>
-              Shipping Addresses
+              Addresses
             </button>
-            {/* <button
+            <button
               type="button"
-              key="Billing Addresses"
+              key="Change Password"
               className={`${styles.tabsItem} ${activeTab === 2 ? styles.tabActive : ''}`}
               onClick={() => tabsToggle(2)}>
-              Billing Addresses
-            </button> */}
+              Change Password
+            </button>
           </div>
           <div className={styles.content}>
             {activeTab === 0 && (
@@ -80,11 +80,10 @@ export default function Profile({ state, setState }: MainProps) {
                 dateOfBirth={profileData?.dateOfBirth}
                 lastName={profileData?.lastName}
                 email={profileData?.email}
-                password={profileData?.password}
               />
             )}
             {activeTab === 1 && (
-              <ShippingTabContent
+              <AddressesTabContent
                 addresses={profileData?.addresses}
                 shippingAddressIds={profileData?.shippingAddressIds}
                 defaultShippingAddressId={profileData?.defaultShippingAddressId}
@@ -92,18 +91,10 @@ export default function Profile({ state, setState }: MainProps) {
                 defaultBillingAddressId={profileData?.defaultBillingAddressId}
               />
             )}
-            {/* {activeTab === 2 && (
-              <BillingTabContent
-                addresses={profileData?.addresses}
-                billingAddressIds={profileData?.billingAddressIds}
-                defaultBillingAddressId={profileData?.defaultBillingAddressId}
-              />
-            )} */}
+            {activeTab === 2 && <ChangePasswordTabContent />}
           </div>
         </div>
       </div>
-
-      {/* <ProfileTabContent activeTab={activeTab} profileData={profileData} /> */}
       <Footer />
     </>
   );
