@@ -8,7 +8,7 @@ import ProfileTabContent from '../../components/profile/profile-content';
 import getCustomerProfile from '../../../data/api/customerProfile';
 import { CustomerProfileResponse } from '../../../data/types/interfaces/customer.interface';
 import ShippingTabContent from '../../components/profile/profile-shipping';
-import BillingTabContent from '../../components/profile/profile-billing';
+// import BillingTabContent from '../../components/profile/profile-billing';
 
 const initialStateProfile = {
   firstName: '',
@@ -65,13 +65,13 @@ export default function Profile({ state, setState }: MainProps) {
               onClick={() => tabsToggle(1)}>
               Shipping Addresses
             </button>
-            <button
+            {/* <button
               type="button"
               key="Billing Addresses"
               className={`${styles.tabsItem} ${activeTab === 2 ? styles.tabActive : ''}`}
               onClick={() => tabsToggle(2)}>
               Billing Addresses
-            </button>
+            </button> */}
           </div>
           <div className={styles.content}>
             {activeTab === 0 && (
@@ -88,15 +88,17 @@ export default function Profile({ state, setState }: MainProps) {
                 addresses={profileData?.addresses}
                 shippingAddressIds={profileData?.shippingAddressIds}
                 defaultShippingAddressId={profileData?.defaultShippingAddressId}
+                billingAddressIds={profileData?.billingAddressIds}
+                defaultBillingAddressId={profileData?.defaultBillingAddressId}
               />
             )}
-            {activeTab === 2 && (
+            {/* {activeTab === 2 && (
               <BillingTabContent
                 addresses={profileData?.addresses}
                 billingAddressIds={profileData?.billingAddressIds}
                 defaultBillingAddressId={profileData?.defaultBillingAddressId}
               />
-            )}
+            )} */}
           </div>
         </div>
       </div>
