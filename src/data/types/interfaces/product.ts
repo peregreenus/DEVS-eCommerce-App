@@ -4,6 +4,7 @@ interface Dimensions {
 }
 
 export interface Image {
+  label: string | undefined;
   url: string;
   dimensions: Dimensions;
 }

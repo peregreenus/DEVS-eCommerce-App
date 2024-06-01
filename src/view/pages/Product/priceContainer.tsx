@@ -15,7 +15,6 @@ function PriceContainer({ discounted, value, onClick }: PriceContainerProps) {
         <div className={classes.priceNew}>{value.centAmount}</div>
       )}
       <Button className={`${classes.buyButton}`} onClick={onClick}>
-        {' '}
         Add to cart
       </Button>
     </div>
