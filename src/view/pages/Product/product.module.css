@@ -1,6 +1,7 @@
 .product {
   display: flex;
   flex-direction: column;
+  min-width: 75vw;
   min-height: 95%;
   justify-content: center;
   align-items: center;
@@ -10,16 +11,16 @@
   -ms-user-select: none; /* IE/Edge */
 
   .wrapper {
-    min-width: 75vw;
-    width: 800px;
     display: flex;
     gap: 2rem;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     margin-top: 3rem;
+    padding: 2rem;
 
     .card {
-      width: 80%;
+      /* width: 90vw; */
+      max-width: min(95vw, 80rem);
       display: flex;
       flex-direction: column;
       gap: 2rem;
@@ -35,8 +36,6 @@
         align-items: center;
 
         .btn {
-          width: 10%;
-          /* height: 3rem; */
           border: none;
           border-radius: 50%;
           background-color: rgba(255, 255, 255, 0.1);
@@ -52,7 +51,7 @@
           flex-wrap: nowrap;
           overflow: hidden;
           align-items: center;
-          justify-content: start;
+          justify-content: center;
           align-items: stretch;
           gap: 1rem;
 
@@ -77,23 +76,27 @@
           }
         }
       }
-    }
-    .price {
-      min-width: 100px;
-      border: 1px solid black;
-      border-radius: 0.5rem;
-    }
-    .preview {
-      display: flex;
-      justify-content: center;
-      .previewImg {
-        width: 75%;
+      .preview {
+        display: flex;
+        justify-content: center;
+        .previewImg {
+          width: 75%;
+        }
       }
     }
+
+    .price {
+      min-width: 20rem;
+      max-width: 30rem;
+      border: 1px solid black;
+      border-radius: 0.5rem;
+      flex: 1 100%;
+    }
+
     .description {
       font-size: 1.5rem;
     }
-  }
+  } 
 }
 
 .modalWrapper {
@@ -139,8 +142,18 @@
 @media (max-width: 768px) {
   .product {
     .wrapper {
+      display: flex;
+      flex-direction: column;
+    
       .card {
-        width: 85%;
+        max-width: unset;
+        width: 100%;
+      }
+      .price {
+        width: 100%;
+        min-width: unset;
+        max-width: unset;
+        
       }
     }
   }

@@ -11,7 +11,7 @@ import Modal from '../../components/common/modal/modal';
 // import MyButton from '../../components/common/Button/MyButton';
 import ArrowRightIcon from '../../components/common/other/ArrowRightIcon';
 import ArrowLeftIcon from '../../components/common/other/ArrowLeftIcon';
-import MyButton from '../../components/common/Button/Button';
+import Button from '../../components/common/Button/Button';
 
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
@@ -79,15 +79,9 @@ function Product({ state, setState }: MainProps) {
         <div className={classes.wrapper}>
           <div className={classes.card}>
             <div className={classes.slider}>
-              <div
-                className={classes.btn}
-                onClick={slideLeft}
-                onKeyDown={slideLeft}
-                role="button"
-                tabIndex={0}
-                aria-label="left scrool">
-                <ArrowLeftIcon width="10rem" height="10rem" />
-              </div>
+              <Button type="button" className={classes.btn} onClick={() => slideLeft()}>
+                <ArrowLeftIcon width="6rem" height="6rem" />
+              </Button>
               <div className={classes.prevWrapper}>
                 {product.masterVariant.images.map((img, index) => (
                   <PreviewImageComponent
@@ -99,15 +93,9 @@ function Product({ state, setState }: MainProps) {
                   />
                 ))}
               </div>
-              <div
-                className={classes.btn}
-                onClick={slideRight}
-                onKeyDown={slideRight}
-                role="button"
-                tabIndex={0}
-                aria-label="right scrool">
-                <ArrowRightIcon width="10rem" height="10rem" />
-              </div>
+              <Button type="button" className={classes.btn} onClick={() => slideRight()}>
+                <ArrowRightIcon width="6rem" height="6rem" />
+              </Button>
             </div>
             {isImage ? (
               <div className={classes.preview}>
@@ -137,12 +125,12 @@ function Product({ state, setState }: MainProps) {
       </section>
       <Modal visible={modal} setVisible={setModal}>
         <div className={classes.modalWrapper}>
-          <MyButton
+          <Button
             type="button"
             className={`${classes.modalBtn} ${classes.modalBtnLeft}`}
             onClick={() => slideLeft()}>
             <ArrowLeftIcon width="6rem" height="6rem" />
-          </MyButton>
+          </Button>
           <img
             className={classes.modalImg}
             src={product.masterVariant.images[numImage].url}
@@ -154,12 +142,12 @@ function Product({ state, setState }: MainProps) {
             tabIndex={0}
             aria-label="Toggle modal"
           />
-          <MyButton
+          <Button
             type="button"
             className={`${classes.modalBtn} ${classes.modalBtnRight}`}
             onClick={() => slideRight()}>
             <ArrowRightIcon width="6rem" height="6rem" />
-          </MyButton>
+          </Button>
         </div>
       </Modal>
       <Footer />
