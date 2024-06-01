@@ -1,8 +1,9 @@
 import React from 'react';
 import * as classes from './product.module.css';
 import PriceContainerProps from '../../../data/types/interfaces/priceContainerProps';
+import Button from '../../components/common/Button/Button';
 
-function PriceContainer({ discounted, value }: PriceContainerProps) {
+function PriceContainer({ discounted, value, onClick }: PriceContainerProps) {
   return (
     <div className={classes.price}>
       {discounted ? (
@@ -13,6 +14,10 @@ function PriceContainer({ discounted, value }: PriceContainerProps) {
       ) : (
         <div className={classes.priceNew}>{value.centAmount}</div>
       )}
+      <Button className={`${classes.buyButton}`} onClick={onClick}>
+        {' '}
+        Add to cart
+      </Button>
     </div>
   );
 }

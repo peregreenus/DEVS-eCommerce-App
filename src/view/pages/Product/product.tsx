@@ -78,6 +78,11 @@ function Product({ state, setState }: MainProps) {
     setShowFullDescription((prev) => !prev);
   };
 
+  const addToCard = () => {
+    // eslint-disable-next-line no-console
+    console.log('add to card');
+  };
+
   return (
     <div>
       <Header state={state} setState={setState} />
@@ -125,6 +130,7 @@ function Product({ state, setState }: MainProps) {
           <PriceContainer
             discounted={product.masterVariant.prices[0].discounted}
             value={product.masterVariant.prices[0].value}
+            onClick={() => addToCard()}
           />
         </div>
         <div className={classes.wrapperDescription}>

@@ -16,6 +16,7 @@ interface IDiscounted {
 interface PriceContainerProps {
   discounted?: IDiscounted;
   value: IValue;
+  onClick: () => void;
 }
 
 export default PriceContainerProps;
