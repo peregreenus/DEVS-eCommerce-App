@@ -93,10 +93,50 @@
       flex: 1 100%;
     }
 
+    .priceOld {
+      text-decoration: line-through;
+    }
+
+    .priceNew {
+      font-weight: 600;
+      color: green;
+    }
+  }
+
+  .wrapperDescription {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+      /* width: 90vw; */
+    max-width: min(95vw, 100rem);
+
     .description {
       font-size: 1.5rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-  } 
+
+    .description.hide {
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .description.show {
+      display: block;
+    }
+
+    .readMoreBtn {
+      background: none;
+      color: blue;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      text-decoration: underline;
+      font-size: 1.2rem;
+    }
+  }
 }
 
 .modalWrapper {
@@ -144,7 +184,7 @@
     .wrapper {
       display: flex;
       flex-direction: column;
-    
+
       .card {
         max-width: unset;
         width: 100%;
@@ -153,8 +193,10 @@
         width: 100%;
         min-width: unset;
         max-width: unset;
-        
       }
     }
+  .wrapperDescription {
+    width: 95%;
+  }
   }
 }

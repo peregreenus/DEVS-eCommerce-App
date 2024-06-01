@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MainProps } from '../../../data/types/main-props';
@@ -12,6 +13,7 @@ import Modal from '../../components/common/modal/modal';
 import ArrowRightIcon from '../../components/common/other/ArrowRightIcon';
 import ArrowLeftIcon from '../../components/common/other/ArrowLeftIcon';
 import Button from '../../components/common/Button/Button';
+import PriceContainer from './priceContainer';
 
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
@@ -19,6 +21,7 @@ function Product({ state, setState }: MainProps) {
   const { id } = useParams();
   const [numImage, setNumImage] = useState<number>(0);
   const [modal, setModal] = useState(false);
+  const [showFullDescription, setShowFullDescription] = useState(false);
 
   useEffect(() => {
     async function fetchProduct() {
@@ -71,6 +74,10 @@ function Product({ state, setState }: MainProps) {
     setModal(true);
   }
 
+  const toggleDescription = () => {
+    setShowFullDescription((prev) => !prev);
+  };
+
   return (
     <div>
       <Header state={state} setState={setState} />
@@ -115,12 +122,20 @@ function Product({ state, setState }: MainProps) {
               <p>No images available</p>
             )}
           </div>
-          <div className={classes.price}>
-            <sub>{product.masterVariant.prices[0].value.centAmount}</sub>
-          </div>
+          <PriceContainer
+            discounted={product.masterVariant.prices[0].discounted}
+            value={product.masterVariant.prices[0].value}
+          />
         </div>
-        <div className={classes.wrapper}>
-          <div className={classes.description}>{product.description.en}</div>
+        <div className={classes.wrapperDescription}>
+          <div
+            className={`${classes.description} ${showFullDescription ? classes.show : classes.hide}`}
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{ __html: product.description.en }}
+          />
+          <button onClick={toggleDescription} className={classes.readMoreBtn}>
+            {showFullDescription ? 'Read less...' : 'Read more...'}
+          </button>
         </div>
       </section>
       <Modal visible={modal} setVisible={setModal}>

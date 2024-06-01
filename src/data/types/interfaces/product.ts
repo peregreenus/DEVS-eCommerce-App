@@ -16,6 +16,7 @@ interface Value {
 }
 
 interface Price {
+  discounted: any;
   id: string;
   value: Value;
   country: string;
