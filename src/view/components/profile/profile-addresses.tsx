@@ -1,10 +1,16 @@
 /* eslint-disable no-console */
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import {
   CustomerAddresses,
   CustomerProfileResponse
 } from '../../../data/types/interfaces/customer.interface';
 import * as styles from './profile.content.module.css';
+import EditPencilIcon from '../common/icons/editPencilIcon';
+import AddPlusIcon from '../common/icons/addPlusIcon';
+import useModal from '../../../data/hooks/useModal';
+import EditAddressModal from './editAddressModal';
+import EditingAddresses from './editing-addresses';
+import Country from '../../../data/types/country';
 
 function AddressesTabContent({
   addresses,
@@ -15,12 +21,20 @@ function AddressesTabContent({
 }: CustomerProfileResponse) {
   const [defShipping, setDefShipping] = useState('');
   const [defBilling, setDefBilling] = useState('');
+  const { isVisible, toggleVisible } = useModal();
+
   const shippingAddresses: CustomerAddresses[] = [];
   const billingAddresses: CustomerAddresses[] = [];
-
+  const textb = '';
   if (shippingAddressIds && billingAddressIds && addresses) {
     shippingAddressIds.forEach((shipEl) => {
       addresses.forEach((addressEl) => {
+        // console.log(addressEl.country);
+        // console.log(addressEl.country);
+        // // eslint-disable-next-line no-param-reassign
+        // addressEl.country =
+        //   Object.values(Country)[Object.keys(Country).indexOf(addressEl.country as Country)];
+        // console.log(addressEl.country);
         if (addressEl.id === shipEl) {
           shippingAddresses.push(addressEl);
         }
@@ -31,6 +45,12 @@ function AddressesTabContent({
     });
     billingAddressIds.forEach((bilEl) => {
       addresses.forEach((addressEl) => {
+        // console.log(addressEl.country);
+        // console.log(addressEl.country);
+        // // eslint-disable-next-line no-param-reassign
+        // addressEl.country =
+        //   Object.values(Country)[Object.keys(Country).indexOf(addressEl.country as Country)];
+        // console.log(addressEl.country);
         if (addressEl.id === bilEl) {
           billingAddresses.push(addressEl);
         }
@@ -40,15 +60,29 @@ function AddressesTabContent({
       });
     });
   }
+  function modalShow(key: string) {
+    toggleVisible(key);
+  }
 
   function changeDefShippingValue(e: ChangeEvent) {
     setDefShipping(e.currentTarget.id);
-    console.log(defShipping);
   }
 
   function chengDefBillingValue(e: ChangeEvent) {
     setDefBilling(e.currentTarget.id);
-    console.log(defBilling);
+  }
+
+  function handleSubmitAddress(
+    e: FormEvent<HTMLFormElement>,
+    typeAddress: string,
+    idAddress: string
+  ) {
+    e.preventDefault();
+    const addressDetails = new FormData(e.currentTarget);
+    console.log(Object.fromEntries(addressDetails.entries()));
+    console.log(typeAddress);
+    console.log(idAddress);
+    modalShow(`${typeAddress}-${idAddress}`);
   }
 
   return (
@@ -56,109 +90,144 @@ function AddressesTabContent({
       <div className={styles.addressContent}>
         <div className={styles.addressHead}>
           <h5>Shipping Addresses</h5>
-          <button type="button">+</button>
+          <button
+            type="button"
+            className={styles.controlProfileButton}
+            onClick={() => modalShow('new')}>
+            <AddPlusIcon width="1.5rem" height="1.5rem" />
+            {textb}
+          </button>
         </div>
 
         {shippingAddresses.map((value) => (
-          <div
-            key={value.id}
-            className={`${styles.address} ${defShipping === value.id ? styles.defaultAddress : ''}`}>
-            <div className={styles.addressControl}>
-              <span>
-                <input
-                  type="radio"
-                  name="shippingRadio"
-                  id={value.id}
-                  checked={defShipping === value.id}
-                  onChange={changeDefShippingValue}
+          <div key={value.id}>
+            <div
+              key={value.id}
+              className={`${styles.address} ${defShipping === value.id ? styles.defaultAddress : ''} \
+              ${!isVisible[`Shipping-${value.id}`] ? styles.showTextAddressContent : styles.hideTextAddressContent}`}>
+              <div className={styles.addressControl}>
+                <span>
+                  <input
+                    type="radio"
+                    name="shippingRadio"
+                    id={value.id}
+                    checked={defShipping === value.id}
+                    onChange={changeDefShippingValue}
+                  />
+                  set default
+                </span>
+                <button
+                  type="button"
+                  className={styles.controlProfileButton}
+                  onClick={() => modalShow(`Shipping-${value.id}`)}>
+                  <EditPencilIcon width="1.5rem" height="1.5rem" />
+                  {textb}
+                </button>
+              </div>
+              <div className={styles.addressBlock}>
+                <p className={styles.profileContentString}>
+                  <span>Country: </span>
+                  {Object.values(Country)[Object.keys(Country).indexOf(value.country as Country)]}
+                </p>
+                <p className={styles.profileContentString}>
+                  <span>Postal Code: </span>
+                  {value.postalCode}
+                </p>
+              </div>
+              <div className={styles.addressBlock}>
+                <p className={styles.profileContentString}>
+                  <span>City: </span>
+                  {value.city}
+                </p>
+                <p className={styles.profileContentString}>
+                  <span>Street: </span>
+                  {value.streetName}
+                </p>
+              </div>
+            </div>
+            {isVisible[`Shipping-${value.id}`] && (
+              <EditAddressModal toggleVisible={() => toggleVisible(`Shipping-${value.id}`)}>
+                <EditingAddresses
+                  id={`Shipping-${value.id}`}
+                  addressData={value}
+                  onSubmit={(e: FormEvent<HTMLFormElement>) =>
+                    handleSubmitAddress(e, 'Shipping', `${value.id}`)
+                  }
                 />
-                set default
-              </span>
-              <button type="button">edit</button>
-            </div>
-            <div className={styles.addressBlock}>
-              <p className={styles.profileContentString}>
-                <span>Country: </span>
-                {value.country}
-              </p>
-              <p className={styles.profileContentString}>
-                <span>Postal Code: </span>
-                {value.postalCode}
-              </p>
-            </div>
-            <div className={styles.addressBlock}>
-              <p className={styles.profileContentString}>
-                <span>City: </span>
-                {value.city}
-              </p>
-              <p className={styles.profileContentString}>
-                <span>Street: </span>
-                {value.streetName}
-              </p>
-            </div>
+              </EditAddressModal>
+            )}
           </div>
         ))}
       </div>
       <div className={styles.addressContent}>
         <div className={styles.addressHead}>
           <h5>Billing Addresses</h5>
-          <button type="button">+</button>
+          <button
+            type="button"
+            className={styles.controlProfileButton}
+            onClick={() => modalShow('new')}>
+            <AddPlusIcon width="1.5rem" height="1.5rem" />
+            {textb}
+          </button>
         </div>
         {billingAddresses.map((value) => (
-          <div
-            key={value.id}
-            className={`${styles.address} ${defBilling === value.id ? styles.defaultAddress : ''}`}>
-            <div className={styles.addressControl}>
-              <span>
-                <input
-                  type="radio"
-                  name="billingRadio"
-                  id={value.id}
-                  checked={defBilling === value.id}
-                  onChange={chengDefBillingValue}
+          <div key={value.id}>
+            <div
+              className={`${styles.address} ${defBilling === value.id ? styles.defaultAddress : ''}
+                         ${!isVisible[`Billing-${value.id}`] ? styles.showTextAddressContent : styles.hideTextAddressContent}`}>
+              <div className={styles.addressControl}>
+                <span>
+                  <input
+                    type="radio"
+                    name="billingRadio"
+                    id={value.id}
+                    checked={defBilling === value.id}
+                    onChange={chengDefBillingValue}
+                  />
+                  set default
+                </span>
+                <button
+                  type="button"
+                  className={styles.controlProfileButton}
+                  onClick={() => modalShow(`Billing-${value.id}`)}>
+                  <EditPencilIcon width="1.5rem" height="1.5rem" />
+                  {textb}
+                </button>
+              </div>
+              <div className={styles.addressBlock}>
+                <p className={styles.profileContentString}>
+                  <span>Country: </span>
+                  {Object.values(Country)[Object.keys(Country).indexOf(value.country as Country)]}
+                </p>
+                <p className={styles.profileContentString}>
+                  <span>Postal Code: </span>
+                  {value.postalCode}
+                </p>
+              </div>
+              <div className={styles.addressBlock}>
+                <p className={styles.profileContentString}>
+                  <span>City: </span>
+                  {value.city}
+                </p>
+                <p className={styles.profileContentString}>
+                  <span>Street: </span>
+                  {value.streetName}
+                </p>
+              </div>
+            </div>
+            {isVisible[`Billing-${value.id}`] && (
+              <EditAddressModal toggleVisible={() => toggleVisible(`Billing-${value.id}`)}>
+                <EditingAddresses
+                  id={`Billing-${value.id}`}
+                  addressData={value}
+                  onSubmit={(e: FormEvent<HTMLFormElement>) =>
+                    handleSubmitAddress(e, 'Billing', `${value.id}`)
+                  }
                 />
-                set default
-              </span>
-              <button type="button">edit</button>
-            </div>
-            <div className={styles.addressBlock}>
-              <p className={styles.profileContentString}>
-                <span>Country: </span>
-                {value.country}
-              </p>
-              <p className={styles.profileContentString}>
-                <span>Postal Code: </span>
-                {value.postalCode}
-              </p>
-            </div>
-            <div className={styles.addressBlock}>
-              <p className={styles.profileContentString}>
-                <span>City: </span>
-                {value.city}
-              </p>
-              <p className={styles.profileContentString}>
-                <span>Street: </span>
-                {value.streetName}
-              </p>
-            </div>
+              </EditAddressModal>
+            )}
           </div>
         ))}
-        {/* <label htmlFor="country">
-            Your Country:
-            <input type="text" name="country" value={address1.country} />
-          </label>
-          <label htmlFor="postal">
-            Postal Code:
-            <input type="text" name="postalCode" value={address1.postalCode} />
-          </label>
-          <label htmlFor="city">
-            Your City:
-            <input type="text" name="city" value={address1.city} />
-          </label>
-          <label htmlFor="street">
-            Your Street:
-            <input type="text" name="street" value={address1.streetName} />
-          </label> */}
       </div>
     </div>
   );
