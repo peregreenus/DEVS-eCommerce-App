@@ -1,25 +1,56 @@
 /* eslint-disable no-console */
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import * as styles from './profile-addresses.module.css';
 import { CustomerAddresses } from '../../../../data/types/interfaces/customer.interface';
 import SaveMarkIcon from '../../common/icons/saveMarcIcon';
 import Country from '../../../../data/types/country';
+import { checkingCountry, validationField } from '../../../../data/utils/validate-form';
+import { errorInitialAddressState } from './initial-state';
+import CloseXIcon from '../../common/icons/closeXIcon';
 
 interface EditingAddressFormProps {
   id: string;
   addressData: CustomerAddresses;
+  onClick: () => void;
   onSubmit: (e: FormEvent<HTMLFormElement>, typeAddress: string, idAddress: string) => void;
 }
 
-export default function EditingAddresses({ onSubmit, id, addressData }: EditingAddressFormProps) {
+export default function EditingAddresses({
+  onClick,
+  onSubmit,
+  id,
+  addressData
+}: EditingAddressFormProps) {
+  const validationErrors: { [key: string]: string } = errorInitialAddressState;
   const currentSelectCountry: string =
     Object.values(Country)[Object.keys(Country).indexOf(addressData.country as Country)];
   const [newAddressData, setAddressData] = useState<CustomerAddresses>(addressData);
   const [selectedCountry, setSelectedCountry] = useState(currentSelectCountry);
+  const [errors, setErrors] = useState<{ [key: string]: string }>(validationErrors);
+  const [isValid, setFormValid] = useState(false);
 
+  checkingCountry.address = currentSelectCountry;
   const textb = '';
+
+  useEffect(() => {
+    console.log(errors);
+    if (Object.values(errors).every((str) => str === '')) {
+      setFormValid(true);
+    } else {
+      setFormValid(false);
+    }
+  }, [errors]);
+
   function handleChangeAddress(e: ChangeEvent<HTMLInputElement>) {
-    const { name, value } = e.target;
+    const { name, value } = e.currentTarget;
+    if (validationField(name, value) === 'empty') {
+      console.log(name);
+      validationErrors[name] = '';
+    } else {
+      validationErrors[name] = validationField(name, value);
+    }
+    setErrors({ ...validationErrors });
+
     setAddressData({
       ...newAddressData,
       [name]: value
@@ -32,24 +63,32 @@ export default function EditingAddresses({ onSubmit, id, addressData }: EditingA
   const handleDropdownChangeCountry = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setSelectedCountry(value);
+    checkingCountry.address = value;
+    newAddressData.postalCode = '';
+    validationErrors.postalCode = 'should not be a empty!';
     setAddressData({
       ...newAddressData,
       [name]: value
     });
   };
+
   return (
     <form
       name={id}
       className={styles.addressForm}
       onSubmit={(e: FormEvent<HTMLFormElement>) => onSubmit(e, typeAddress, idAddress)}>
       <div className={styles.controlBlock}>
-        <button type="submit" className={styles.controlProfileButton}>
-          <SaveMarkIcon width="1.5rem" height="1.5rem" />
+        <button type="submit" className={styles.controlProfileButton} disabled={!isValid}>
+          <SaveMarkIcon width="1.5rem" height="1.5rem" fill={!isValid ? 'grey' : 'green'} />
+          {textb}
+        </button>
+        <button type="button" className={styles.controlProfileButton} onClick={onClick}>
+          <CloseXIcon width="1.5rem" height="1.5rem" />
           {textb}
         </button>
       </div>
-      <div className={styles.block}>
-        <label htmlFor="country" className={styles.label}>
+      <div className={styles.editInfoContainer}>
+        <label className={styles.label} htmlFor="country">
           Country:
           <select
             value={selectedCountry}
@@ -61,13 +100,15 @@ export default function EditingAddresses({ onSubmit, id, addressData }: EditingA
                 aria-selected="true"
                 value={value}
                 key={key}
-                selected={value === currentSelectCountry}>
+                defaultValue={currentSelectCountry}>
                 {value}
               </option>
             ))}
           </select>
         </label>
-        <label htmlFor="postalCode">
+      </div>
+      <div className={styles.editInfoContainer}>
+        <label className={styles.label} htmlFor="postalCode">
           Postal Code:
           <input
             id={newAddressData.id}
@@ -78,9 +119,11 @@ export default function EditingAddresses({ onSubmit, id, addressData }: EditingA
             className={styles.inputAddressField}
           />
         </label>
+        {errors.postalCode && <span className={styles.error}>{errors.postalCode}</span>}
       </div>
-      <div className={styles.block}>
-        <label htmlFor="city">
+
+      <div className={styles.editInfoContainer}>
+        <label className={styles.label} htmlFor="city">
           City:
           <input
             id={newAddressData.id}
@@ -91,7 +134,10 @@ export default function EditingAddresses({ onSubmit, id, addressData }: EditingA
             className={styles.inputAddressField}
           />
         </label>
-        <label htmlFor="streetName">
+        {errors.city && <span className={styles.error}>{errors.city}</span>}
+      </div>
+      <div className={styles.editInfoContainer}>
+        <label className={styles.label} htmlFor="streetName">
           Street:
           <input
             id={newAddressData.id}
@@ -102,6 +148,7 @@ export default function EditingAddresses({ onSubmit, id, addressData }: EditingA
             className={styles.inputAddressField}
           />
         </label>
+        {errors.streetName && <span className={styles.error}>{errors.streetName}</span>}
       </div>
     </form>
   );

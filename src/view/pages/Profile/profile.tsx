@@ -69,6 +69,7 @@ export default function Profile({ state, setState }: MainProps) {
                 dateOfBirth={profileData?.dateOfBirth}
                 lastName={profileData?.lastName}
                 email={profileData?.email}
+                setUpdate={setUpdate}
               />
             )}
             {activeTab === 1 && (

@@ -148,6 +148,9 @@ function AddressesTabContent({
                 <EditingAddresses
                   id={`Shipping-${value.id}`}
                   addressData={value}
+                  onClick={() => {
+                    modalShow(`Shipping-${value.id}`);
+                  }}
                   onSubmit={(e: FormEvent<HTMLFormElement>) =>
                     handleSubmitAddress(e, 'Shipping', `${value.id}`)
                   }
@@ -219,6 +222,9 @@ function AddressesTabContent({
                 <EditingAddresses
                   id={`Billing-${value.id}`}
                   addressData={value}
+                  onClick={() => {
+                    modalShow(`Billing-${value.id}`);
+                  }}
                   onSubmit={(e: FormEvent<HTMLFormElement>) =>
                     handleSubmitAddress(e, 'Billing', `${value.id}`)
                   }

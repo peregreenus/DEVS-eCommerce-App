@@ -2,19 +2,27 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  gap: 1rem;
   align-items: center;
+  gap: 1rem;
+  min-height: 85vh;
+  padding: 5rem 0;
+  align-items: center;
+  background-image: url('../../../assets/img/Default_draw_a_picture_about_Welcome_to_Galactic_Exclusive_yo_1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 
   .container {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     gap: 1rem;
-    width: 70rem;
-    align-self: center;
+    padding: 3rem;
+    border-radius: 2rem;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.7) 0 100%);
   }
   .menu {
     display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
   }
 
@@ -23,7 +31,8 @@
   }
   .tabsItem {
     font-size: 1.8rem;
-    width: 20rem;
+    width: 17rem;
+    min-width: fit-content;
     height: 4rem;
     border: var(--border-color) 1px solid;
     background-color: var(--default-bg-color);
@@ -38,5 +47,17 @@
 
   .tabActive {
     background-color: var(--border-color);
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    padding: 1rem;
+    width: 90%;
+    margin: 0 auto;
+  }
+  .menu {
+    flex-direction: column;
+    align-items: center;
   }
 }

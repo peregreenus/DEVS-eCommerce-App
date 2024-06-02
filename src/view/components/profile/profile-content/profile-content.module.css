@@ -24,3 +24,20 @@
   border-radius: 0.5rem;
   cursor: pointer;
 }
+
+.editInfoContainer {
+  display: flex;
+  flex-direction: column;
+
+  .error {
+    color: var(--accent-color);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+    font-size: 1.2rem;
+  }
+  .controlProfileButton:disabled {
+    cursor: not-allowed;
+    background-color: var(--gray-bg-color);
+    color: rgba(220, 220, 220, 0.433);
+  }
+}
