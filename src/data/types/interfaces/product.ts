@@ -15,10 +15,15 @@ interface Value {
   fractionDigits: number;
 }
 
+interface Discount {
+  value: Value;
+}
+
 interface Price {
   id: string;
   value: Value;
   country: string;
+  discounted: Discount;
 }
 
 interface Attribute {
