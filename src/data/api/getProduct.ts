@@ -4,7 +4,7 @@ import { IProduct } from '../types/interfaces/product';
 import { MainProps } from '../types/main-props';
 import { getLSAnonToken, getLSToken } from '../utils/getLS';
 
-export async function getProduct(
+async function getProduct(
   productId: string | undefined,
   { state }: MainProps
 ): Promise<IProduct | null> {
