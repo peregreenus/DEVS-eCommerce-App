@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable react/button-has-type */
 import React, { useEffect, useState } from 'react';
@@ -8,13 +9,13 @@ import * as classes from './product.module.css';
 import Header from '../../components/common/header/header';
 import { IProduct } from '../../../data/types/interfaces/product';
 import PreviewImageComponent from './ImageComponent';
-import Modal from '../../components/common/modal/modal';
-// import MyButton from '../../components/common/Button/MyButton';
 import ArrowRightIcon from '../../components/common/other/ArrowRightIcon';
 import ArrowLeftIcon from '../../components/common/other/ArrowLeftIcon';
 import Button from '../../components/common/Button/Button';
 import PriceContainer from './priceContainer';
 import noImage from '../../../assets/img/no-image.png';
+import ProductModal from './productModal';
+import Notfound from '../NotFound/not-found';
 
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
@@ -49,7 +50,7 @@ function Product({ state, setState }: MainProps) {
   }
 
   if (!product) {
-    return <div>Product not found</div>;
+    return <Notfound state={state} setState={setState} />;
   }
 
   const imgCount: number = product.masterVariant.images.length;
@@ -79,9 +80,9 @@ function Product({ state, setState }: MainProps) {
     setShowFullDescription((prev) => !prev);
   };
 
-  const addToCard = () => {
+  const addToCart = () => {
     // eslint-disable-next-line no-console
-    console.log('add to card');
+    console.log('add to cart');
   };
 
   return (
@@ -136,7 +137,7 @@ function Product({ state, setState }: MainProps) {
           <PriceContainer
             discounted={product.masterVariant.prices[0].discounted}
             value={product.masterVariant.prices[0].value}
-            onClick={() => addToCard()}
+            onClick={() => addToCart()}
           />
         </div>
         <div className={classes.wrapperDescription}>
@@ -150,35 +151,16 @@ function Product({ state, setState }: MainProps) {
           </button>
         </div>
       </section>
-      <Modal visible={modal} setVisible={setModal}>
-        {isImage ? (
-          <div className={classes.modalWrapper}>
-            <Button
-              type="button"
-              className={`${classes.modalBtn} ${classes.modalBtnLeft}`}
-              onClick={() => slideLeft()}>
-              <ArrowLeftIcon width="6rem" height="6rem" />
-            </Button>
-            <img
-              className={classes.modalImg}
-              src={product.masterVariant.images[numImage].url}
-              onKeyDown={() => modalShow()}
-              onClick={() => modalShow()}
-              alt="product"
-              // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
-              role="button"
-              tabIndex={0}
-              aria-label="Toggle modal"
-            />
-            <Button
-              type="button"
-              className={`${classes.modalBtn} ${classes.modalBtnRight}`}
-              onClick={() => slideRight()}>
-              <ArrowRightIcon width="6rem" height="6rem" />
-            </Button>
-          </div>
-        ) : null}
-      </Modal>
+
+      <ProductModal
+        modal={modal}
+        setModal={setModal}
+        imagesUrl={product.masterVariant.images[numImage].url}
+        isImage={isImage}
+        slideLeft={slideLeft}
+        slideRight={slideRight}
+        modalShow={modalShow}
+      />
     </div>
   );
 }
