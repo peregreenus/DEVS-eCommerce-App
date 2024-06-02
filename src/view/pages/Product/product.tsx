@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MainProps } from '../../../data/types/main-props';
-import { getProduct } from '../../../data/api/getProduct';
+import getProduct from '../../../data/api/getProduct';
 import * as classes from './product.module.css';
 import Footer from '../../components/common/footer/footer';
 import Header from '../../components/common/header/header';
@@ -12,6 +12,7 @@ import Modal from '../../components/common/modal/modal';
 import ArrowRightIcon from '../../components/common/other/ArrowRightIcon';
 import ArrowLeftIcon from '../../components/common/other/ArrowLeftIcon';
 import MyButton from '../../components/common/Button/Button';
+import Loader from '../../components/Loader/Loader';
 
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
@@ -41,7 +42,7 @@ function Product({ state, setState }: MainProps) {
   }, [id, state, setState]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (!product) {
