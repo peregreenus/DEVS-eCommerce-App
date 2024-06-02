@@ -13,7 +13,7 @@ function PreviewImages({ numImage, product, setModal }: ImageProps) {
   return (
     // eslint-disable-next-line react/jsx-no-comment-textnodes
     <div className={classes.preview}>
-      <div className={classes.lenta} style={{ left: `${-Math.floor(numImage * 100)}vw ` }}>
+      <div className={classes.lenta} style={{ left: `${-Math.floor(numImage * 83)}vw ` }}>
         {product.masterVariant.images.map((img) => (
           <div className={classes.imgContainer} key={img.url}>
             <img

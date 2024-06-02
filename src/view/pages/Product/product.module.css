@@ -11,6 +11,7 @@
   -ms-user-select: none; /* IE/Edge */
 
   .wrapper {
+    width: 95%;
     display: flex;
     gap: 2rem;
     justify-content: center;
@@ -19,11 +20,10 @@
     padding: 2rem;
 
     .card {
-      max-width: min(95vw, 80rem);
-      min-width: max(300px, 40rem);
+      width: 75vw;
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 1vw;
       padding: 1rem;
       border: 1px solid black;
       border-radius: 0.5rem;
@@ -90,18 +90,26 @@
         .lenta {
           position: absolute;
           top: 0;
-          height: 50vh;
+          height: 100%;
           display: flex;
-          gap: 35vw;
+          gap: 10vw;
           align-items: center;
           transition: all 0.3s ease-in-out;
 
           .imgContainer {
+            height: 100%;
+            width: 73vw;
+            
             .previewImg {
-              width: 65vw;
+              width: 100%; /* Займає всю ширину контейнера */
+              height: 100%; /* Займає всю висоту контейнера */
+              object-fit: contain;
             }
           }
+          
         }
+
+        
 
         .previewNoimage {
           width: 75%;
@@ -120,11 +128,9 @@
       justify-content: center;
       align-items: center;
       gap: 1rem;
-      min-width: 20rem;
-      max-width: 30rem;
+      
       border: 1px solid black;
       border-radius: 0.5rem;
-      flex: 1 100%;
       padding: 1rem;
 
       .buyButton {
