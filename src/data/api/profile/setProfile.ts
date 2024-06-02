@@ -6,6 +6,8 @@ import { getLSToken, getLSVersionProfileCustomer } from '../../utils/getLS';
 export default async function setCustomerInfo(dataString: string) {
   const bearerToken: string | null = getLSToken();
   const versionProfileCustomer: number = Number(getLSVersionProfileCustomer());
+  const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/me`;
+
   let actionType: string = '';
   let actionData: string = '';
   let fieldName: string = '';
@@ -36,9 +38,6 @@ export default async function setCustomerInfo(dataString: string) {
     default:
       break;
   }
-  console.log(actionType);
-  console.log(actionData);
-  const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/me`;
   const data: Customer = {
     version: versionProfileCustomer,
     actions: [
