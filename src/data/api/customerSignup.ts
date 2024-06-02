@@ -27,8 +27,8 @@ export default async function CustomerSignup(formCustomer: string): Promise<Cust
         city: newCustomer.cityBilling
       }
     ],
-    billingAddresses: customerAddressesOption.billingAddresses,
-    shippingAddresses: customerAddressesOption.shippingAddresses
+    billingAddresses: [0],
+    shippingAddresses: [1]
   };
   if (
     newCustomer.countryShipping &&
@@ -46,15 +46,24 @@ export default async function CustomerSignup(formCustomer: string): Promise<Cust
       postalCode: newCustomer.postalCodeShipping,
       city: newCustomer.cityShipping
     });
+  } else {
+    data.addresses?.push({
+      key: 'addr2',
+      country:
+        Object.keys(Country)[Object.values(Country).indexOf(newCustomer.countryBilling as Country)],
+      streetName: newCustomer.streetBilling,
+      postalCode: newCustomer.postalCodeBilling,
+      city: newCustomer.cityBilling
+    });
   }
 
   if (customerAddressesOption.defaultShipping) {
-    data.defaultShippingAddress = customerAddressesOption.defaultShipping;
+    data.defaultShippingAddress = customerAddressesOption.defaultShipping - 1;
   }
   if (customerAddressesOption.defaultBilling) {
-    data.defaultBillingAddress = customerAddressesOption.defaultBilling;
+    data.defaultBillingAddress = customerAddressesOption.defaultBilling - 1;
   }
-
+  console.log(data);
   return fetch(url, {
     method: 'POST',
     headers: {

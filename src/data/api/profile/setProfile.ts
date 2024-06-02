@@ -70,7 +70,6 @@ export default async function setCustomerInfo(dataString: string) {
     default:
       break;
   }
-  console.log(data);
   return fetch(url, {
     method: 'POST',
     headers: {

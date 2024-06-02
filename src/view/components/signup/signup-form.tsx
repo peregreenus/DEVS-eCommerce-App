@@ -107,14 +107,14 @@ function FormSignup(props: IFormProps) {
       case 'defaultShipping':
         setDefShipping((prev) => !prev);
         if (!defShipping) {
-          customerAddressesOption.defaultShipping = 1;
+          customerAddressesOption.defaultShipping = 2;
         } else delete customerAddressesOption.defaultShipping;
         console.log(customerAddressesOption);
         break;
       case 'defaultBilling':
         setDefBilling((prev) => !prev);
         if (!defBilling) {
-          customerAddressesOption.defaultBilling = 0;
+          customerAddressesOption.defaultBilling = 1;
         } else delete customerAddressesOption.defaultBilling;
         if (shippingToo) {
           if (customerAddressesOption.defaultBilling) {

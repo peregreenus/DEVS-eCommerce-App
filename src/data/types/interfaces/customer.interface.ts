@@ -1,6 +1,6 @@
 export interface CustomerAddresses {
   id?: string;
-  key: string;
+  key?: string;
   country: string;
   streetName: string;
   postalCode: string;
@@ -12,6 +12,8 @@ export interface CustomerActions {
   firstName?: string;
   lastName?: string;
   dateOfBirth?: string;
+  addressId?: string;
+  address?: CustomerAddresses;
 }
 
 export interface Customer {

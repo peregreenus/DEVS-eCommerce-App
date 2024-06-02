@@ -15,6 +15,7 @@ export default function Profile({ state, setState }: MainProps) {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
   const [profileData, setProfileData] = useState<CustomerProfileResponse>();
+  const [update, setUpdate] = useState(false);
 
   function tabsToggle(index: number) {
     setActiveTab(index);
@@ -25,12 +26,13 @@ export default function Profile({ state, setState }: MainProps) {
       await getCustomerProfile(`${localStorage.getItem('bearerToken')}`)
         .then((res) => {
           setLSVersionProfileCustomer(`${res.version}`);
+          console.log(res);
           setProfileData(res);
         })
         .then(() => setIsDataLoaded(true));
     }
     getCustomerInfo();
-  }, [activeTab]);
+  }, [update]);
   return isDataLoaded ? (
     <>
       <Header state={state} setState={setState} />
@@ -76,6 +78,7 @@ export default function Profile({ state, setState }: MainProps) {
                 defaultShippingAddressId={profileData?.defaultShippingAddressId}
                 billingAddressIds={profileData?.billingAddressIds}
                 defaultBillingAddressId={profileData?.defaultBillingAddressId}
+                setUpdate={setUpdate}
               />
             )}
             {activeTab === 2 && <ChangePasswordTabContent />}

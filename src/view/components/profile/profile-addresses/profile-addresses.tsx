@@ -1,9 +1,6 @@
 /* eslint-disable no-console */
-import React, { ChangeEvent, FormEvent, useState } from 'react';
-import {
-  CustomerAddresses,
-  CustomerProfileResponse
-} from '../../../../data/types/interfaces/customer.interface';
+import React, { ChangeEvent, FormEvent } from 'react';
+import { CustomerAddresses } from '../../../../data/types/interfaces/customer.interface';
 import * as styles from './profile-addresses.module.css';
 import EditPencilIcon from '../../common/icons/editPencilIcon';
 import AddPlusIcon from '../../common/icons/addPlusIcon';
@@ -11,16 +8,20 @@ import useModal from '../../../../data/hooks/useModal';
 import EditAddressModal from './editAddressModal';
 import EditingAddresses from './editing-addresses';
 import Country from '../../../../data/types/country';
+import setCustomerAddress from '../../../../data/api/profile/setAddress';
+import { setLSVersionProfileCustomer } from '../../../../data/utils/setLS';
+import { ProfileUpdateProps } from '../../../../data/types/profile-props';
 
 function AddressesTabContent({
+  setUpdate,
   addresses,
   shippingAddressIds,
-  defaultShippingAddressId,
-  billingAddressIds,
-  defaultBillingAddressId
-}: CustomerProfileResponse) {
-  const [defShipping, setDefShipping] = useState('');
-  const [defBilling, setDefBilling] = useState('');
+  // defaultShippingAddressId,
+  billingAddressIds
+  // defaultBillingAddressId
+}: ProfileUpdateProps) {
+  // const [defShipping, setDefShipping] = useState('');
+  // const [defBilling, setDefBilling] = useState('');
   const { isVisible, toggleVisible } = useModal();
 
   const shippingAddresses: CustomerAddresses[] = [];
@@ -29,34 +30,22 @@ function AddressesTabContent({
   if (shippingAddressIds && billingAddressIds && addresses) {
     shippingAddressIds.forEach((shipEl) => {
       addresses.forEach((addressEl) => {
-        // console.log(addressEl.country);
-        // console.log(addressEl.country);
-        // // eslint-disable-next-line no-param-reassign
-        // addressEl.country =
-        //   Object.values(Country)[Object.keys(Country).indexOf(addressEl.country as Country)];
-        // console.log(addressEl.country);
         if (addressEl.id === shipEl) {
           shippingAddresses.push(addressEl);
         }
-        if (addressEl.id === defaultShippingAddressId) {
-          setDefShipping(`${defaultShippingAddressId}`);
-        }
+        // if (addressEl.id === defaultShippingAddressId) {
+        //   setDefShipping(`${defaultShippingAddressId}`);
+        // }
       });
     });
     billingAddressIds.forEach((bilEl) => {
       addresses.forEach((addressEl) => {
-        // console.log(addressEl.country);
-        // console.log(addressEl.country);
-        // // eslint-disable-next-line no-param-reassign
-        // addressEl.country =
-        //   Object.values(Country)[Object.keys(Country).indexOf(addressEl.country as Country)];
-        // console.log(addressEl.country);
         if (addressEl.id === bilEl) {
           billingAddresses.push(addressEl);
         }
-        if (addressEl.id === defaultBillingAddressId) {
-          setDefShipping(`${defaultBillingAddressId}`);
-        }
+        // if (addressEl.id === defaultBillingAddressId) {
+        //   setDefShipping(`${defaultBillingAddressId}`);
+        // }
       });
     });
   }
@@ -65,25 +54,34 @@ function AddressesTabContent({
   }
 
   function changeDefShippingValue(e: ChangeEvent) {
-    setDefShipping(e.currentTarget.id);
+    console.log(e.currentTarget.id);
+    // setDefShipping(e.currentTarget.id);
   }
 
   function chengDefBillingValue(e: ChangeEvent) {
-    setDefBilling(e.currentTarget.id);
+    console.log(e.currentTarget.id);
+    // setDefBilling(e.currentTarget.id);
   }
 
-  function handleSubmitAddress(
+  const handleSubmitAddress = async (
     e: FormEvent<HTMLFormElement>,
     typeAddress: string,
     idAddress: string
-  ) {
+  ) => {
     e.preventDefault();
     const addressDetails = new FormData(e.currentTarget);
     console.log(Object.fromEntries(addressDetails.entries()));
+    const updateAddress = JSON.stringify(Object.fromEntries(addressDetails.entries()));
+    await setCustomerAddress(updateAddress, idAddress, typeAddress)
+      .then((response) => setLSVersionProfileCustomer(response.version))
+      .then(() => {
+        setUpdate((prev) => !prev);
+        modalShow(`${typeAddress}-${idAddress}`);
+      });
+
     console.log(typeAddress);
     console.log(idAddress);
-    modalShow(`${typeAddress}-${idAddress}`);
-  }
+  };
 
   return (
     <div className={styles.addressesTabContent}>
@@ -98,12 +96,12 @@ function AddressesTabContent({
             {textb}
           </button>
         </div>
-
+        {/* ${defShipping === value.id ? styles.defaultAddress : ''} */}
         {shippingAddresses.map((value) => (
           <div key={value.id}>
             <div
               key={value.id}
-              className={`${styles.address} ${defShipping === value.id ? styles.defaultAddress : ''} \
+              className={`${styles.address} 
               ${!isVisible[`Shipping-${value.id}`] ? styles.showTextAddressContent : styles.hideTextAddressContent}`}>
               <div className={styles.addressControl}>
                 <span>
@@ -111,7 +109,7 @@ function AddressesTabContent({
                     type="radio"
                     name="shippingRadio"
                     id={value.id}
-                    checked={defShipping === value.id}
+                    // checked={defShipping === value.id}
                     onChange={changeDefShippingValue}
                   />
                   set default
@@ -170,10 +168,11 @@ function AddressesTabContent({
             {textb}
           </button>
         </div>
+        {/* ${defBilling === value.id ? styles.defaultAddress : ''} */}
         {billingAddresses.map((value) => (
           <div key={value.id}>
             <div
-              className={`${styles.address} ${defBilling === value.id ? styles.defaultAddress : ''}
+              className={`${styles.address}
                          ${!isVisible[`Billing-${value.id}`] ? styles.showTextAddressContent : styles.hideTextAddressContent}`}>
               <div className={styles.addressControl}>
                 <span>
@@ -181,7 +180,7 @@ function AddressesTabContent({
                     type="radio"
                     name="billingRadio"
                     id={value.id}
-                    checked={defBilling === value.id}
+                    // checked={defBilling === value.id}
                     onChange={chengDefBillingValue}
                   />
                   set default

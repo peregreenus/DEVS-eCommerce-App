@@ -56,11 +56,12 @@ export default function EditingAddresses({ onSubmit, id, addressData }: EditingA
             onChange={(e: ChangeEvent<HTMLSelectElement>) => handleDropdownChangeCountry(e)}
             name="country"
             className={styles.inputAddressField}>
-            <option value={currentSelectCountry} disabled hidden>
-              {currentSelectCountry}
-            </option>
             {Object.entries(Country).map(([key, value]) => (
-              <option aria-selected="true" value={value} key={key}>
+              <option
+                aria-selected="true"
+                value={value}
+                key={key}
+                selected={value === currentSelectCountry}>
                 {value}
               </option>
             ))}
