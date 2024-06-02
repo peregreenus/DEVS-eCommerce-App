@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-no-bind */
-/* eslint-disable jsx-a11y/img-redundant-alt */
-/* eslint-disable react/button-has-type */
+
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MainProps } from '../../../data/types/main-props';
@@ -20,7 +19,10 @@ import Notfound from '../NotFound/not-found';
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [leftVisible, setLeftVisible] = useState<boolean>(false);
+  const [rightVisible, setRightVisible] = useState<boolean>(true);
   const { id } = useParams();
+
   const [numImage, setNumImage] = useState<number>(0);
   const [modal, setModal] = useState(false);
   const [showFullDescription, setShowFullDescription] = useState(false);
@@ -56,24 +58,24 @@ function Product({ state, setState }: MainProps) {
   const imgCount: number = product.masterVariant.images.length;
   const isImage = product.masterVariant.images && imgCount > 0;
 
+  const selectImage = (index: number) => {
+    setNumImage(index);
+    // eslint-disable-next-line no-console
+    console.log(index);
+    setLeftVisible(index !== 0);
+    setRightVisible(index < imgCount - 1);
+  };
+
   function slideLeft() {
     if (numImage > 0) {
-      setNumImage(numImage - 1);
+      selectImage(numImage - 1);
     }
   }
 
   function slideRight() {
     if (numImage < imgCount - 1) {
-      setNumImage(numImage + 1);
+      selectImage(numImage + 1);
     }
-  }
-
-  const selectImage = (index: number) => {
-    setNumImage(index);
-  };
-
-  function modalShow() {
-    setModal(true);
   }
 
   const toggleDescription = () => {
@@ -94,9 +96,19 @@ function Product({ state, setState }: MainProps) {
           <div className={classes.card}>
             {isImage ? (
               <div className={classes.slider}>
-                <Button type="button" className={classes.btn} onClick={() => slideLeft()}>
-                  <ArrowLeftIcon width="6rem" height="6rem" />
-                </Button>
+                {leftVisible ? (
+                  <Button type="button" className={classes.btn} onClick={() => slideLeft()}>
+                    <ArrowLeftIcon width="6rem" height="6rem" />
+                  </Button>
+                ) : (
+                  <Button
+                    type="button"
+                    className={`${classes.btn} ${classes.btnDisabled}`}
+                    disabled>
+                    <ArrowLeftIcon width="6rem" height="6rem" fill="gray" />
+                  </Button>
+                )}
+
                 <div className={classes.prevWrapper}>
                   {product.masterVariant.images.map((img, index) => (
                     <PreviewImageComponent
@@ -108,9 +120,18 @@ function Product({ state, setState }: MainProps) {
                     />
                   ))}
                 </div>
-                <Button type="button" className={classes.btn} onClick={() => slideRight()}>
-                  <ArrowRightIcon width="6rem" height="6rem" />
-                </Button>
+                {rightVisible ? (
+                  <Button type="button" className={classes.btn} onClick={() => slideRight()}>
+                    <ArrowRightIcon width="6rem" height="6rem" />
+                  </Button>
+                ) : (
+                  <Button
+                    type="button"
+                    className={`${classes.btn} ${classes.btnDisabled}`}
+                    disabled>
+                    <ArrowRightIcon width="6rem" height="6rem" fill="gray" />
+                  </Button>
+                )}
               </div>
             ) : null}
 
@@ -119,8 +140,8 @@ function Product({ state, setState }: MainProps) {
                 <img
                   className={classes.previewImg}
                   src={product.masterVariant.images[numImage].url}
-                  onKeyDown={() => modalShow()}
-                  onClick={() => modalShow()}
+                  onKeyDown={() => setModal(true)}
+                  onClick={() => setModal(true)}
                   alt={product.masterVariant.images[numImage].label}
                   // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
                   role="button"
@@ -130,7 +151,7 @@ function Product({ state, setState }: MainProps) {
               </div>
             ) : (
               <div className={classes.preview}>
-                <img className={classes.previewNoimage} src={noImage} alt="no image" />
+                <img className={classes.previewNoimage} src={noImage} alt="no aviable" />
               </div>
             )}
           </div>
@@ -146,7 +167,7 @@ function Product({ state, setState }: MainProps) {
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{ __html: product.description.en }}
           />
-          <button onClick={toggleDescription} className={classes.readMoreBtn}>
+          <button onClick={toggleDescription} className={classes.readMoreBtn} type="button">
             {showFullDescription ? 'Read less...' : 'Read more...'}
           </button>
         </div>
@@ -157,9 +178,11 @@ function Product({ state, setState }: MainProps) {
         setModal={setModal}
         imagesUrl={product.masterVariant.images[numImage].url}
         isImage={isImage}
+        leftVisible={leftVisible}
+        rightVisible={rightVisible}
         slideLeft={slideLeft}
         slideRight={slideRight}
-        modalShow={modalShow}
+        modalShow={() => setModal(true)}
       />
     </div>
   );

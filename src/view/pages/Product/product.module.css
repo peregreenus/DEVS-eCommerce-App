@@ -45,6 +45,9 @@
           cursor: pointer;
           background-color: rgba(255, 255, 255, 0.8);
         }
+        .btnDisabled:hover {
+          cursor: default;
+        }
 
         .prevWrapper {
           display: flex;

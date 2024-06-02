@@ -17,6 +17,7 @@ interface Value {
 }
 
 interface Price {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   discounted: any;
   id: string;
   value: Value;

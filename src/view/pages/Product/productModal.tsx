@@ -7,17 +7,30 @@ import * as classes from './product.module.css';
 import { ProductModalParam } from '../../../data/types/interfaces/productModalParam';
 
 function ProductModal(param: ProductModalParam) {
-  const { modal, setModal, imagesUrl, isImage, slideLeft, slideRight, modalShow } = param;
+  const {
+    modal,
+    setModal,
+    imagesUrl,
+    isImage,
+    leftVisible,
+    rightVisible,
+    slideLeft,
+    slideRight,
+    modalShow
+  } = param;
   return (
     <Modal visible={modal} setVisible={setModal}>
       {isImage ? (
         <div className={classes.modalWrapper}>
-          <Button
-            type="button"
-            className={`${classes.modalBtn} ${classes.modalBtnLeft}`}
-            onClick={() => slideLeft()}>
-            <ArrowLeftIcon width="6rem" height="6rem" />
-          </Button>
+          {leftVisible ? (
+            <Button
+              type="button"
+              className={`${classes.modalBtn} ${classes.modalBtnLeft}`}
+              onClick={() => slideLeft()}>
+              <ArrowLeftIcon width="6rem" height="6rem" />
+            </Button>
+          ) : null}
+
           <img
             className={classes.modalImg}
             src={imagesUrl}
@@ -29,12 +42,14 @@ function ProductModal(param: ProductModalParam) {
             tabIndex={0}
             aria-label="Toggle modal"
           />
-          <Button
-            type="button"
-            className={`${classes.modalBtn} ${classes.modalBtnRight}`}
-            onClick={() => slideRight()}>
-            <ArrowRightIcon width="6rem" height="6rem" />
-          </Button>
+          {rightVisible ? (
+            <Button
+              type="button"
+              className={`${classes.modalBtn} ${classes.modalBtnRight}`}
+              onClick={() => slideRight()}>
+              <ArrowRightIcon width="6rem" height="6rem" />
+            </Button>
+          ) : null}
         </div>
       ) : null}
     </Modal>
