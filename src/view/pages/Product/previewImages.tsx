@@ -15,7 +15,7 @@ function PreviewImages({ numImage, product, setModal }: ImageProps) {
     <div className={classes.preview}>
       <div className={classes.lenta} style={{ left: `${-Math.floor(numImage * 100)}vw ` }}>
         {product.masterVariant.images.map((img) => (
-          <div className={classes.imgContainer}>
+          <div className={classes.imgContainer} key={img.url}>
             <img
               className={classes.previewImg}
               src={img.url}

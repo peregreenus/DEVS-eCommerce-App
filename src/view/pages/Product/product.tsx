@@ -163,18 +163,19 @@ function Product({ state, setState }: MainProps) {
           </button>
         </div>
       </section>
-
-      <ProductModal
-        modal={modal}
-        setModal={setModal}
-        imagesUrl={product.masterVariant.images[numImage].url}
-        isImage={isImage}
-        leftVisible={leftVisible}
-        rightVisible={rightVisible}
-        slideLeft={slideLeft}
-        slideRight={slideRight}
-        modalShow={() => setModal(true)}
-      />
+      {isImage ? (
+        <ProductModal
+          modal={modal}
+          setModal={setModal}
+          imagesUrl={product.masterVariant.images[numImage].url}
+          isImage={isImage}
+          leftVisible={leftVisible}
+          rightVisible={rightVisible}
+          slideLeft={slideLeft}
+          slideRight={slideRight}
+          modalShow={() => setModal(true)}
+        />
+      ) : null}
     </div>
   );
 }
