@@ -11,6 +11,7 @@ import Logout from './view/pages/Logout/logout';
 import Profile from './view/pages/Profile/profile';
 // import { getLSToken } from './data/utils/getLS';
 import Product from './view/pages/Product/product';
+// import ProductRand from './view/pages/Product/productrand';
 
 function App() {
   if (!(localStorage.getItem('bearerAnonToken') || localStorage.getItem('bearerToken'))) {
