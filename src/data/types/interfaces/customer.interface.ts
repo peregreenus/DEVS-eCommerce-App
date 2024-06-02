@@ -1,20 +1,30 @@
 export interface CustomerAddresses {
   id?: string;
-  key: string;
+  key?: string;
   country: string;
   streetName: string;
   postalCode: string;
   city: string;
 }
+export interface CustomerActions {
+  email?: string;
+  action?: string;
+  firstName?: string;
+  lastName?: string;
+  dateOfBirth?: string;
+  addressId?: string;
+  address?: CustomerAddresses;
+}
 
 export interface Customer {
+  version?: number;
   key?: string;
   customerNumber?: string;
   externalId?: string;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
+  email?: string;
+  password?: string;
+  firstName?: string;
+  lastName?: string;
   middleName?: string;
   title?: string;
   anonymousCart?: string;
@@ -35,6 +45,7 @@ export interface Customer {
   authenticationMode?: string;
   createdAt?: Date;
   lastModifiedAt?: Date;
+  actions?: CustomerActions[];
 }
 
 export interface CustomerResponse {

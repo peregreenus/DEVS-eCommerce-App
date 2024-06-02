@@ -7,10 +7,14 @@ export function getLSToken() {
   return localStorage.getItem('bearerToken');
 }
 
-export function getLSCastomer() {
-  return localStorage.getItem('castomer');
+export function getLSCustomer() {
+  return localStorage.getItem('customer');
 }
 
 export function getLSCart() {
   return localStorage.getItem('cart');
+}
+
+export function getLSVersionProfileCustomer() {
+  return localStorage.getItem('versionProfileCustomer');
 }
