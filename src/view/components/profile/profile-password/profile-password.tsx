@@ -1,6 +1,6 @@
 import React from 'react';
-import * as styles from './profile.content.module.css';
-import SaveMarkIcon from '../common/icons/saveMarcIcon';
+import * as styles from './profile-password.module.css';
+import SaveMarkIcon from '../../common/icons/saveMarcIcon';
 
 export default function ChangePasswordTabContent() {
   const textb = '';

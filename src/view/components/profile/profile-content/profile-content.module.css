@@ -1,0 +1,26 @@
+.profileTabContent {
+  .profileContent {
+    border: 1px var(--border-color) solid;
+    border-radius: 1rem;
+    margin: 1.5rem;
+  }
+}
+
+.profileContentString {
+  display: flex;
+  height: 4rem;
+  gap: 1rem;
+  font-size: 1.8rem;
+  span {
+    font-size: 1.55rem;
+    color: var(--body-text-color);
+  }
+}
+.controlProfileButton {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--default-bg-color);
+  border: 1px var(--border-color) solid;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}

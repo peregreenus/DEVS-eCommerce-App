@@ -4,33 +4,17 @@ import { MainProps } from '../../../data/types/main-props';
 import Header from '../../components/common/header/header';
 import Footer from '../../components/common/footer/footer';
 import * as styles from './profile.module.css';
-import ProfileTabContent from '../../components/profile/profile-content';
-import getCustomerProfile from '../../../data/api/customerProfile';
+import ProfileTabContent from '../../components/profile/profile-content/profile-content';
+import getCustomerProfile from '../../../data/api/profile/getProfile';
 import { CustomerProfileResponse } from '../../../data/types/interfaces/customer.interface';
-import AddressesTabContent from '../../components/profile/profile-addresses';
-import ChangePasswordTabContent from '../../components/profile/profile-password';
-
-const initialStateProfile = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  addresses: [
-    {
-      key: '',
-      country: '',
-      streetName: '',
-      postalCode: '',
-      city: ''
-    }
-  ],
-  shippingAddressIds: [''],
-  billingAddressIds: [''],
-  password: ''
-};
+import AddressesTabContent from '../../components/profile/profile-addresses/profile-addresses';
+import ChangePasswordTabContent from '../../components/profile/profile-password/profile-password';
+import { setLSVersionProfileCustomer } from '../../../data/utils/setLS';
 
 export default function Profile({ state, setState }: MainProps) {
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
-  const [profileData, setProfileData] = useState<CustomerProfileResponse>(initialStateProfile);
+  const [profileData, setProfileData] = useState<CustomerProfileResponse>();
 
   function tabsToggle(index: number) {
     setActiveTab(index);
@@ -38,13 +22,16 @@ export default function Profile({ state, setState }: MainProps) {
 
   useEffect(() => {
     async function getCustomerInfo() {
-      const fetchedInfo = await getCustomerProfile(`${localStorage.getItem('bearerToken')}`);
-      console.log(fetchedInfo);
-      setProfileData({ ...fetchedInfo });
+      await getCustomerProfile(`${localStorage.getItem('bearerToken')}`)
+        .then((res) => {
+          setLSVersionProfileCustomer(`${res.version}`);
+          setProfileData(res);
+        })
+        .then(() => setIsDataLoaded(true));
     }
     getCustomerInfo();
-  }, []);
-  return (
+  }, [activeTab]);
+  return isDataLoaded ? (
     <>
       <Header state={state} setState={setState} />
       <div className={styles.profilePage}>
@@ -97,5 +84,7 @@ export default function Profile({ state, setState }: MainProps) {
       </div>
       <Footer />
     </>
+  ) : (
+    <div>Loading...</div>
   );
 }

@@ -3,14 +3,14 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 import {
   CustomerAddresses,
   CustomerProfileResponse
-} from '../../../data/types/interfaces/customer.interface';
-import * as styles from './profile.content.module.css';
-import EditPencilIcon from '../common/icons/editPencilIcon';
-import AddPlusIcon from '../common/icons/addPlusIcon';
-import useModal from '../../../data/hooks/useModal';
+} from '../../../../data/types/interfaces/customer.interface';
+import * as styles from './profile-addresses.module.css';
+import EditPencilIcon from '../../common/icons/editPencilIcon';
+import AddPlusIcon from '../../common/icons/addPlusIcon';
+import useModal from '../../../../data/hooks/useModal';
 import EditAddressModal from './editAddressModal';
 import EditingAddresses from './editing-addresses';
-import Country from '../../../data/types/country';
+import Country from '../../../../data/types/country';
 
 function AddressesTabContent({
   addresses,

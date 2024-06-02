@@ -1,6 +1,6 @@
 import React from 'react';
-import EditPencilIcon from '../common/icons/editPencilIcon';
-import * as styles from './profile.content.module.css';
+import EditPencilIcon from '../../common/icons/editPencilIcon';
+import * as styles from './profile-content.module.css';
 
 interface ProfileContentProps {
   data: string;

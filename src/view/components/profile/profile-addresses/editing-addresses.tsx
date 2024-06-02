@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 import React, { ChangeEvent, FormEvent, useState } from 'react';
-import * as styles from './profile.content.module.css';
-import { CustomerAddresses } from '../../../data/types/interfaces/customer.interface';
-import SaveMarkIcon from '../common/icons/saveMarcIcon';
-import Country from '../../../data/types/country';
+import * as styles from './profile-addresses.module.css';
+import { CustomerAddresses } from '../../../../data/types/interfaces/customer.interface';
+import SaveMarkIcon from '../../common/icons/saveMarcIcon';
+import Country from '../../../../data/types/country';
 
 interface EditingAddressFormProps {
   id: string;

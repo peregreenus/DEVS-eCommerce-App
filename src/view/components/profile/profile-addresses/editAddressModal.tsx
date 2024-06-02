@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { ReactNode } from 'react';
-import * as styles from './profile.content.module.css';
+import * as styles from './profile-addresses.module.css';
 
 interface EditAddressModalProps {
   children: ReactNode;

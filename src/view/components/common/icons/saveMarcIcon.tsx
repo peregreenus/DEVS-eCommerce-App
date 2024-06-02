@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconProps } from '../../../../data/types/interfaces/iconProps';
 
-export default function SaveMarkIcon({ width, height, fill = '#000' }: IconProps) {
+export default function SaveMarkIcon({ width, height, fill = 'green' }: IconProps) {
   return (
     <svg
       width={width}
