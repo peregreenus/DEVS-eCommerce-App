@@ -80,15 +80,31 @@
         }
       }
       .preview {
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 50vh;
+        overflow: hidden;
 
-        .previewImg {
-          height: 75%;
+        .lenta {
+          position: absolute;
+          top: 0;
+          height: 50vh;
+          display: flex;
+          gap: 35vw;
+          align-items: center;
           transition: all 0.3s ease-in-out;
+
+          .imgContainer {
+            .previewImg {
+              width: 65vw;
+            }
+          }
+          
         }
+
+        
 
         .previewNoimage {
           width: 75%;

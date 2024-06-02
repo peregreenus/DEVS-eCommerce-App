@@ -15,6 +15,7 @@ import PriceContainer from './priceContainer';
 import noImage from '../../../assets/img/no-image.png';
 import ProductModal from './productModal';
 import Notfound from '../NotFound/not-found';
+import PreviewImages from './previewImages';
 
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
@@ -60,8 +61,6 @@ function Product({ state, setState }: MainProps) {
 
   const selectImage = (index: number) => {
     setNumImage(index);
-    // eslint-disable-next-line no-console
-    console.log(index);
     setLeftVisible(index !== 0);
     setRightVisible(index < imgCount - 1);
   };
@@ -136,19 +135,11 @@ function Product({ state, setState }: MainProps) {
             ) : null}
 
             {isImage ? (
-              <div className={classes.preview}>
-                <img
-                  className={classes.previewImg}
-                  src={product.masterVariant.images[numImage].url}
-                  onKeyDown={() => setModal(true)}
-                  onClick={() => setModal(true)}
-                  alt={product.masterVariant.images[numImage].label}
-                  // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
-                  role="button"
-                  tabIndex={0}
-                  aria-label="Toggle modal"
-                />
-              </div>
+              <PreviewImages
+                numImage={numImage}
+                product={product}
+                setModal={() => setModal(true)}
+              />
             ) : (
               <div className={classes.preview}>
                 <img className={classes.previewNoimage} src={noImage} alt="no aviable" />
