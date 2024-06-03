@@ -9,20 +9,22 @@ export interface Image {
   dimensions: Dimensions;
 }
 
-interface Value {
+export interface Value {
   type: string;
   currencyCode: string;
   centAmount: number;
   fractionDigits: number;
 }
 
-interface Discount {
+export interface Discount {
   value: Value;
+  discount: {
+    typeId: string;
+    id: string;
+  };
 }
 
 interface Price {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  discounted: any;
   id: string;
   value: Value;
   country: string;
