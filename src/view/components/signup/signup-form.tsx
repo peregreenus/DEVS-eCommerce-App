@@ -5,7 +5,7 @@ import { RegistrationFieldsType } from '../../../data/types/registration-type';
 import InputField from './signup-form-input';
 import * as styles from './signup-form.module.css';
 import AddressForm from './address-form';
-import { validationField } from '../../../data/utils/validate-signup-form';
+import { validationField } from '../../../data/utils/validate-form';
 import {
   errorInitialState,
   initialErrorCountry,

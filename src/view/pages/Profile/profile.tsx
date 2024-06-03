@@ -37,7 +37,7 @@ export default function Profile({ state, setState }: MainProps) {
     <>
       <Header state={state} setState={setState} />
       <div className={styles.profilePage}>
-        <h3>Profiles</h3>
+        <h3>Profile</h3>
         <div className={styles.container}>
           <div className={styles.menu}>
             <button
@@ -69,6 +69,7 @@ export default function Profile({ state, setState }: MainProps) {
                 dateOfBirth={profileData?.dateOfBirth}
                 lastName={profileData?.lastName}
                 email={profileData?.email}
+                setUpdate={setUpdate}
               />
             )}
             {activeTab === 1 && (

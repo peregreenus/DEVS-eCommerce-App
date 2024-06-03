@@ -11,8 +11,8 @@ interface ProfileContentProps {
 export default function ProfileContentElement({ name, data, onClick }: ProfileContentProps) {
   const textb = '';
   return (
-    <>
-      <p className={styles.profileContentString}>{data}</p>
+    <div className={styles.profileContentString}>
+      <p>{data}</p>
       <button
         data-name={name}
         id={name}
@@ -22,6 +22,6 @@ export default function ProfileContentElement({ name, data, onClick }: ProfileCo
         <EditPencilIcon width="1.5rem" height="1.5rem" />
         {textb}
       </button>
-    </>
+    </div>
   );
 }

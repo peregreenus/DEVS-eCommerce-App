@@ -6,6 +6,8 @@ export interface ProfileContentInputProps {
   type: string;
   name: string;
   value: string;
+  error: string;
+  onClick: () => void;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
