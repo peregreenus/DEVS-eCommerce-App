@@ -124,21 +124,21 @@ function AddressesTabContent({
               </div>
               <div className={styles.addressBlock}>
                 <p className={styles.profileContentString}>
-                  <span>Country: </span>
+                  <p className={styles.fieldName}>Country: </p>
                   {Object.values(Country)[Object.keys(Country).indexOf(value.country as Country)]}
                 </p>
                 <p className={styles.profileContentString}>
-                  <span>Postal Code: </span>
+                  <p className={styles.fieldName}>Postal Code: </p>
                   {value.postalCode}
                 </p>
               </div>
               <div className={styles.addressBlock}>
                 <p className={styles.profileContentString}>
-                  <span>City: </span>
+                  <p className={styles.fieldName}>City: </p>
                   {value.city}
                 </p>
                 <p className={styles.profileContentString}>
-                  <span>Street: </span>
+                  <p className={styles.fieldName}>Street: </p>
                   {value.streetName}
                 </p>
               </div>
@@ -198,21 +198,21 @@ function AddressesTabContent({
               </div>
               <div className={styles.addressBlock}>
                 <p className={styles.profileContentString}>
-                  <span>Country: </span>
+                  <p className={styles.fieldName}>Country: </p>
                   {Object.values(Country)[Object.keys(Country).indexOf(value.country as Country)]}
                 </p>
                 <p className={styles.profileContentString}>
-                  <span>Postal Code: </span>
+                  <p className={styles.fieldName}>Postal Code: </p>
                   {value.postalCode}
                 </p>
               </div>
               <div className={styles.addressBlock}>
                 <p className={styles.profileContentString}>
-                  <span>City: </span>
+                  <p className={styles.fieldName}>City: </p>
                   {value.city}
                 </p>
                 <p className={styles.profileContentString}>
-                  <span>Street: </span>
+                  <p className={styles.fieldName}>Street: </p>
                   {value.streetName}
                 </p>
               </div>

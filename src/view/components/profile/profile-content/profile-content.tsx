@@ -8,6 +8,7 @@ import EditingProfileContent from './editing-content';
 import { setLSVersionProfileCustomer } from '../../../../data/utils/setLS';
 import { validationField } from '../../../../data/utils/validate-form';
 import { ProfileUpdateProps } from '../../../../data/types/profile-props';
+import { errorInitialProfileState } from '../initial-state';
 
 const initialStatEditing = {
   firstName: false,
@@ -17,7 +18,7 @@ const initialStatEditing = {
 };
 
 export default function ProfileTabContent({ ...profileData }: ProfileUpdateProps) {
-  const validationErrors: { [key: string]: string } = {};
+  const validationErrors: { [key: string]: string } = errorInitialProfileState;
   const [editing, setEditing] = useState<{ [key: string]: boolean }>(initialStatEditing);
   const [newProfileInfo, setNewProfileInfo] = useState<CustomerProfileResponse>({ ...profileData });
   const [errors, setErrors] = useState<{ [key: string]: string }>(validationErrors);
@@ -45,7 +46,7 @@ export default function ProfileTabContent({ ...profileData }: ProfileUpdateProps
     const { name, value } = e.currentTarget;
 
     if (validationField(name, value) === 'empty') {
-      delete validationErrors[name];
+      validationErrors[name] = '';
     } else {
       validationErrors[name] = validationField(name, value);
     }
@@ -59,89 +60,86 @@ export default function ProfileTabContent({ ...profileData }: ProfileUpdateProps
   return (
     <div className={styles.profileTabContent}>
       <div className={styles.profileContent}>
-        <div className={styles.profileContentString}>
-          <span>Name: </span>
-          {!editing.firstName ? (
-            <ProfileContentElement
-              name="firstName"
-              data={`${profileData.firstName}`}
-              onClick={() => setEditingContent('firstName')}
-            />
-          ) : (
-            <EditingProfileContent
-              type="text"
-              name="firstName"
-              value={`${newProfileInfo?.firstName}`}
-              onChange={handleChangeProfileInfo}
-              error={errors.firstName}
-              onSubmit={(e: FormEvent<HTMLFormElement>) => handleSave(e, 'firstName')}
-              onClick={() => setEditingContent('firstName')}
-            />
-          )}
-        </div>
+        <p className={styles.fieldName}>Name: </p>
+        {!editing.firstName ? (
+          <ProfileContentElement
+            name="firstName"
+            data={`${profileData.firstName}`}
+            onClick={() => setEditingContent('firstName')}
+          />
+        ) : (
+          <EditingProfileContent
+            type="text"
+            name="firstName"
+            value={`${newProfileInfo?.firstName}`}
+            onChange={handleChangeProfileInfo}
+            error={errors.firstName}
+            onSubmit={(e: FormEvent<HTMLFormElement>) => handleSave(e, 'firstName')}
+            onClick={() => setEditingContent('firstName')}
+          />
+        )}
+      </div>
 
-        <div className={styles.profileContentString}>
-          <span>Last Name: </span>
-          {!editing.lastName ? (
-            <ProfileContentElement
-              name="lastName"
-              data={`${profileData.lastName}`}
-              onClick={() => setEditingContent('lastName')}
-            />
-          ) : (
-            <EditingProfileContent
-              type="text"
-              name="lastName"
-              value={`${newProfileInfo?.lastName}`}
-              onChange={handleChangeProfileInfo}
-              error={errors.lastName}
-              onSubmit={(e: FormEvent<HTMLFormElement>) => handleSave(e, 'lastName')}
-              onClick={() => setEditingContent('lastName')}
-            />
-          )}
-        </div>
+      <div className={styles.profileContent}>
+        <p className={styles.fieldName}>Last Name: </p>
+        {!editing.lastName ? (
+          <ProfileContentElement
+            name="lastName"
+            data={`${profileData.lastName}`}
+            onClick={() => setEditingContent('lastName')}
+          />
+        ) : (
+          <EditingProfileContent
+            type="text"
+            name="lastName"
+            value={`${newProfileInfo?.lastName}`}
+            onChange={handleChangeProfileInfo}
+            error={errors.lastName}
+            onSubmit={(e: FormEvent<HTMLFormElement>) => handleSave(e, 'lastName')}
+            onClick={() => setEditingContent('lastName')}
+          />
+        )}
+      </div>
 
-        <div className={styles.profileContentString}>
-          <span>Birth Date: </span>
-          {!editing.dateOfBirth ? (
-            <ProfileContentElement
-              name="dateOfBirth"
-              data={`${newProfileInfo?.dateOfBirth}`}
-              onClick={() => setEditingContent('dateOfBirth')}
-            />
-          ) : (
-            <EditingProfileContent
-              type="date"
-              name="dateOfBirth"
-              value={`${profileData.dateOfBirth}`}
-              onChange={handleChangeProfileInfo}
-              error={errors.dateOfBirth}
-              onSubmit={(e: FormEvent<HTMLFormElement>) => handleSave(e, 'dateOfBirth')}
-              onClick={() => setEditingContent('dateOfBirth')}
-            />
-          )}
-        </div>
-
-        <div className={styles.profileContentString}>
-          <span>Email: </span>
-          {!editing.email ? (
-            <ProfileContentElement
-              name="email"
-              data={`${profileData.email}`}
-              onClick={() => setEditingContent('email')}
-            />
-          ) : (
-            <EditingProfileContent
-              type="text"
-              name="email"
-              value={`${newProfileInfo?.email}`}
-              onChange={handleChangeProfileInfo}
-              error={errors.email}
-              onSubmit={(e: FormEvent<HTMLFormElement>) => handleSave(e, 'email')}
-              onClick={() => setEditingContent('email')}
-            />
-          )}
-        </div>
+      <div className={styles.profileContent}>
+        <p className={styles.fieldName}>Birth Date: </p>
+        {!editing.dateOfBirth ? (
+          <ProfileContentElement
+            name="dateOfBirth"
+            data={`${newProfileInfo?.dateOfBirth}`}
+            onClick={() => setEditingContent('dateOfBirth')}
+          />
+        ) : (
+          <EditingProfileContent
+            type="date"
+            name="dateOfBirth"
+            value={`${profileData.dateOfBirth}`}
+            onChange={handleChangeProfileInfo}
+            error={errors.dateOfBirth}
+            onSubmit={(e: FormEvent<HTMLFormElement>) => handleSave(e, 'dateOfBirth')}
+            onClick={() => setEditingContent('dateOfBirth')}
+          />
+        )}
+      </div>
+      <div className={styles.profileContent}>
+        <p className={styles.fieldName}>Email: </p>
+        {!editing.email ? (
+          <ProfileContentElement
+            name="email"
+            data={`${profileData.email}`}
+            onClick={() => setEditingContent('email')}
+          />
+        ) : (
+          <EditingProfileContent
+            type="text"
+            name="email"
+            value={`${newProfileInfo?.email}`}
+            onChange={handleChangeProfileInfo}
+            error={errors.email}
+            onSubmit={(e: FormEvent<HTMLFormElement>) => handleSave(e, 'email')}
+            onClick={() => setEditingContent('email')}
+          />
+        )}
       </div>
     </div>
   );

@@ -16,8 +16,14 @@ export default function EditingProfileContent({
   const textb = '';
   return (
     <div className={styles.editInfoContainer}>
-      <form onSubmit={onSubmit}>
-        <input type={type} name={name} value={value} onChange={onChange} />
+      <form onSubmit={onSubmit} className={styles.infoForm}>
+        <input
+          type={type}
+          name={name}
+          value={value}
+          onChange={onChange}
+          className={styles.inputAddressField}
+        />
         <button type="submit" className={styles.controlProfileButton} disabled={!!error}>
           <SaveMarkIcon width="1.5rem" height="1.5rem" fill={error ? 'grey' : 'green'} />
           {textb}

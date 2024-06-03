@@ -5,7 +5,7 @@ import { CustomerAddresses } from '../../../../data/types/interfaces/customer.in
 import SaveMarkIcon from '../../common/icons/saveMarcIcon';
 import Country from '../../../../data/types/country';
 import { checkingCountry, validationField } from '../../../../data/utils/validate-form';
-import { errorInitialAddressState } from './initial-state';
+import { errorInitialAddressState } from '../initial-state';
 import CloseXIcon from '../../common/icons/closeXIcon';
 
 interface EditingAddressFormProps {
@@ -29,7 +29,9 @@ export default function EditingAddresses({
   const [errors, setErrors] = useState<{ [key: string]: string }>(validationErrors);
   const [isValid, setFormValid] = useState(false);
 
-  checkingCountry.address = currentSelectCountry;
+  const idArray = id.split('-');
+  const typeAddress = idArray[0];
+  const idAddress = idArray[1];
   const textb = '';
 
   useEffect(() => {
@@ -44,7 +46,6 @@ export default function EditingAddresses({
   function handleChangeAddress(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.currentTarget;
     if (validationField(name, value) === 'empty') {
-      console.log(name);
       validationErrors[name] = '';
     } else {
       validationErrors[name] = validationField(name, value);
@@ -57,15 +58,15 @@ export default function EditingAddresses({
     });
   }
 
-  const idArray = id.split('-');
-  const typeAddress = idArray[0];
-  const idAddress = idArray[1];
   const handleDropdownChangeCountry = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setSelectedCountry(value);
     checkingCountry.address = value;
+    console.log(`select country: ${value}`);
+    console.log(`checking country: ${checkingCountry.address}`);
     newAddressData.postalCode = '';
     validationErrors.postalCode = 'should not be a empty!';
+    setErrors({ ...validationErrors });
     setAddressData({
       ...newAddressData,
       [name]: value
@@ -89,7 +90,7 @@ export default function EditingAddresses({
       </div>
       <div className={styles.editInfoContainer}>
         <label className={styles.label} htmlFor="country">
-          Country:
+          <p>Country: </p>
           <select
             value={selectedCountry}
             onChange={(e: ChangeEvent<HTMLSelectElement>) => handleDropdownChangeCountry(e)}
@@ -109,7 +110,7 @@ export default function EditingAddresses({
       </div>
       <div className={styles.editInfoContainer}>
         <label className={styles.label} htmlFor="postalCode">
-          Postal Code:
+          <p>Postal Code: </p>
           <input
             id={newAddressData.id}
             type="text"
@@ -124,7 +125,7 @@ export default function EditingAddresses({
 
       <div className={styles.editInfoContainer}>
         <label className={styles.label} htmlFor="city">
-          City:
+          <p>City: </p>
           <input
             id={newAddressData.id}
             type="text"
@@ -138,7 +139,7 @@ export default function EditingAddresses({
       </div>
       <div className={styles.editInfoContainer}>
         <label className={styles.label} htmlFor="streetName">
-          Street:
+          <p>Street: </p>
           <input
             id={newAddressData.id}
             type="text"
