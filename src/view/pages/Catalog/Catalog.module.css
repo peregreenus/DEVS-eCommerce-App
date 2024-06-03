@@ -1,0 +1,15 @@
+.catalog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 3rem;
+}
+
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 300px));
+  justify-content: space-evenly;
+  gap: 2rem;
+  padding: 2rem 1rem;
+  width: 100%;
+}

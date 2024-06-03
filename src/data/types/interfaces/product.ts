@@ -16,12 +16,17 @@ interface Value {
   fractionDigits: number;
 }
 
+interface Discount {
+  value: Value;
+}
+
 interface Price {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   discounted: any;
   id: string;
   value: Value;
   country: string;
+  discounted: Discount;
 }
 
 interface Attribute {

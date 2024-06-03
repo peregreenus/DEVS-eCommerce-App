@@ -11,6 +11,7 @@ import Logout from './view/pages/Logout/logout';
 import Profile from './view/pages/Profile/profile';
 // import { getLSToken } from './data/utils/getLS';
 import Product from './view/pages/Product/product';
+import Catalog from './view/pages/Catalog/Catalog';
 // import ProductRand from './view/pages/Product/productrand';
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main state={state} setState={setState} />} />
+        <Route path="/catalog" element={<Catalog state={state} setState={setState} />} />
         <Route path="/signup" element={<Signup state={state} setState={setState} />} />
         <Route path="/login" element={<Login state={state} setState={setState} />} />
         {state.userLoggedIn && (
@@ -47,8 +49,8 @@ function App() {
             <Route path="/logout" element={<Logout state={state} setState={setState} />} />
           </>
         )}
-        <Route path="/product" element={<Product state={state} setState={setState} />} />
-        <Route path="/product/:id" element={<Product state={state} setState={setState} />} />
+        <Route path="catalog/product" element={<Product state={state} setState={setState} />} />
+        <Route path="catalog/product/:id" element={<Product state={state} setState={setState} />} />
         <Route path="/*" element={<Notfound state={state} setState={setState} />} />
       </Routes>
     </BrowserRouter>

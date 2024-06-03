@@ -1,0 +1,67 @@
+.card {
+  border-radius: 1rem;
+  padding: 2rem 1rem;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.imageWrapper {
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.cardImage {
+  width: 95%;
+  height: 95%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  object-fit: contain;
+}
+
+.cardTitle {
+  line-height: 2rem;
+  margin-bottom: 1rem;
+  height: 40px;
+}
+
+.cardDesc {
+  display: -webkit-box;
+  font-size: 1.3rem;
+  width: 100%;
+  height: 42px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.cardPrice {
+  display: block;
+  text-align: right;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.discountPrice {
+  color: #900;
+}
+
+.cancelPrice {
+  text-decoration: line-through;
+  color: #000;
+  opacity: 0.5;
+}
+
+@media (hover: hover) {
+  .card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  }
+}
