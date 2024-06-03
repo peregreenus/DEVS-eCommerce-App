@@ -165,6 +165,7 @@ function Product({ state, setState }: MainProps) {
       </section>
       {isImage ? (
         <ProductModal
+          product={product}
           modal={modal}
           setModal={setModal}
           imagesUrl={product.masterVariant.images[numImage].url}
@@ -174,6 +175,7 @@ function Product({ state, setState }: MainProps) {
           slideLeft={slideLeft}
           slideRight={slideRight}
           modalShow={() => setModal(true)}
+          numImage={numImage}
         />
       ) : null}
     </div>
