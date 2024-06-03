@@ -117,3 +117,11 @@
   border-radius: 0.5rem;
   cursor: pointer;
 }
+
+@media (max-width: 471px) {
+  .profileTabContent {
+    .profileContent {
+      flex-direction: column;
+    }
+  }
+}
