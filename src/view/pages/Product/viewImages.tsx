@@ -1,15 +1,16 @@
 /* eslint-disable array-callback-return */
 import React from 'react';
-import * as classes from './product.module.css';
+import * as classes from './productModal.module.css';
 import { IProduct } from '../../../data/types/interfaces/product';
 
 interface ImageProps {
   numImage: number;
   product: IProduct;
-  setModal: (f: boolean) => void;
+  alt: string;
+  onClick: () => void;
 }
 
-function PreviewImages({ numImage, product, setModal }: ImageProps) {
+function ViewImages({ numImage, product, alt, onClick }: ImageProps) {
   return (
     // eslint-disable-next-line react/jsx-no-comment-textnodes
     <div className={classes.preview}>
@@ -19,9 +20,9 @@ function PreviewImages({ numImage, product, setModal }: ImageProps) {
             <img
               className={classes.previewImg}
               src={img.url}
-              onKeyDown={() => setModal(true)}
-              onClick={() => setModal(true)}
-              alt={img.label}
+              onClick={() => onClick()}
+              onKeyDown={() => onClick()}
+              alt={alt}
               // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
               role="button"
               tabIndex={0}
@@ -34,4 +35,4 @@ function PreviewImages({ numImage, product, setModal }: ImageProps) {
   );
 }
 
-export default PreviewImages;
+export default ViewImages;
