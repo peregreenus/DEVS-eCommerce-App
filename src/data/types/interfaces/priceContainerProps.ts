@@ -1,21 +1,8 @@
-interface IValue {
-  type: string;
-  currencyCode: string;
-  centAmount: number;
-  fractionDigits: number;
-}
-
-interface IDiscounted {
-  value: IValue;
-  discount: {
-    typeId: string;
-    id: string;
-  };
-}
+import { Discount, Value } from './product';
 
 interface PriceContainerProps {
-  discounted?: IDiscounted;
-  value: IValue;
+  discounted?: Discount;
+  value: Value;
   onClick: () => void;
 }
 

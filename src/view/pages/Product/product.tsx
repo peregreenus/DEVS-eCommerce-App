@@ -10,7 +10,6 @@ import { IProduct } from '../../../data/types/interfaces/product';
 import PreviewImageComponent from './ImageComponent';
 import ArrowRightIcon from '../../components/common/other/ArrowRightIcon';
 import ArrowLeftIcon from '../../components/common/other/ArrowLeftIcon';
-import MyButton from '../../components/common/Button/Button';
 import Loader from '../../components/Loader/Loader';
 import Button from '../../components/common/Button/Button';
 import PriceContainer from './priceContainer';
