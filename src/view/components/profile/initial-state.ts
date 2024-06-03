@@ -11,4 +11,14 @@ export const errorInitialProfileState = {
   dateOfBirth: ''
 };
 
-export default { errorInitialAddressState };
+export const errorInitialPasswordState = {
+  currentPassword: 'should not be empty',
+  newPassword: 'should not be empty',
+  confirmNewPassword: 'should not be empty'
+};
+
+export const initialPasswordState = {
+  currentPassword: '',
+  newPassword: '',
+  confirmNewPassword: ''
+};

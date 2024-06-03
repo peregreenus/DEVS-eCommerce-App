@@ -10,6 +10,7 @@ import { CustomerProfileResponse } from '../../../data/types/interfaces/customer
 import AddressesTabContent from '../../components/profile/profile-addresses/profile-addresses';
 import ChangePasswordTabContent from '../../components/profile/profile-password/profile-password';
 import { setLSVersionProfileCustomer } from '../../../data/utils/setLS';
+import Loader from '../../components/Loader/Loader';
 
 export default function Profile({ state, setState }: MainProps) {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
@@ -82,13 +83,13 @@ export default function Profile({ state, setState }: MainProps) {
                 setUpdate={setUpdate}
               />
             )}
-            {activeTab === 2 && <ChangePasswordTabContent />}
+            {activeTab === 2 && <ChangePasswordTabContent state={state} setState={setState} />}
           </div>
         </div>
       </div>
       <Footer />
     </>
   ) : (
-    <div>Loading...</div>
+    <Loader />
   );
 }

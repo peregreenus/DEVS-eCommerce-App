@@ -67,7 +67,7 @@ function validationField(fieldName: string, fieldValue: string): string {
       returnValue = 'empty';
     }
   }
-  if (fieldName === 'password') {
+  if (fieldName === 'password' || fieldName === 'newPassword') {
     const requirements = /^(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*])(?!.*[^a-zA-Z0-9!@#$%^&*])(.{8,15})$/;
     if (!requirements.test(fieldValue)) {
       returnValue =
