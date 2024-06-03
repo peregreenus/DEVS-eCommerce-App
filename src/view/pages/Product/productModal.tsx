@@ -3,14 +3,16 @@ import Button from '../../components/common/Button/Button';
 import Modal from '../../components/common/modal/modal';
 import ArrowLeftIcon from '../../components/common/other/ArrowLeftIcon';
 import ArrowRightIcon from '../../components/common/other/ArrowRightIcon';
-import * as classes from './product.module.css';
+import * as classes from './productModal.module.css';
 import { ProductModalParam } from '../../../data/types/interfaces/productModalParam';
+import ViewImages from './viewImages';
 
 function ProductModal(param: ProductModalParam) {
   const {
     modal,
+    numImage,
     setModal,
-    imagesUrl,
+    product,
     isImage,
     leftVisible,
     rightVisible,
@@ -30,17 +32,12 @@ function ProductModal(param: ProductModalParam) {
               <ArrowLeftIcon width="6rem" height="6rem" />
             </Button>
           ) : null}
-
-          <img
-            className={classes.modalImg}
-            src={imagesUrl}
-            onKeyDown={() => modalShow()}
+          <ViewImages
+            key={0}
+            numImage={numImage}
             onClick={() => modalShow()}
             alt="product"
-            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
-            role="button"
-            tabIndex={0}
-            aria-label="Toggle modal"
+            product={product}
           />
           {rightVisible ? (
             <Button
