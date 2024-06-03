@@ -1,0 +1,73 @@
+.profileTabContent {
+  border: 1px var(--border-color) solid;
+  border-radius: 1rem;
+  margin: 1.5rem;
+  .profileContent {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 4rem;
+    font-size: 1.8rem;
+    .fieldName {
+      width: 11rem;
+      font-size: 1.8rem;
+      color: var(--body-text-color);
+    }
+    .controlProfileButton {
+      width: 2.5rem;
+      height: 2.5rem;
+      background-color: var(--default-bg-color);
+      border: 1px var(--border-color) solid;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+    .profileContentString {
+      display: flex;
+      gap: 0.5rem;
+      p {
+        word-break: normal;
+        overflow-wrap: anywhere;
+      }
+    }
+    .editInfoContainer {
+      display: flex;
+      flex-direction: column;
+      .infoForm {
+        display: flex;
+        gap: 0.5rem;
+        align-items: stretch;
+
+        .controlProfileButton:disabled {
+          cursor: not-allowed;
+          background-color: var(--gray-bg-color);
+          color: rgba(220, 220, 220, 0.433);
+        }
+        .inputAddressField {
+          width: 100%;
+          border: 1px var(--border-color) solid;
+          font-size: 1.8rem;
+          padding: 0.5rem 0.8rem;
+          height: 3rem;
+          border-radius: 1.2rem;
+          background-color: var(--default-bg-color);
+          color: var(--primary-text-color);
+          border-color: var(--border-color);
+        }
+      }
+      .error {
+        color: var(--accent-color);
+        font-family: 'Poppins', sans-serif;
+        font-weight: 200;
+        font-size: 1.2rem;
+        max-width: 40rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .profileTabContent {
+    .profileContent {
+      flex-direction: column;
+    }
+  }
+}

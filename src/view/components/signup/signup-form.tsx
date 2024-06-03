@@ -5,7 +5,7 @@ import { RegistrationFieldsType } from '../../../data/types/registration-type';
 import InputField from './signup-form-input';
 import * as styles from './signup-form.module.css';
 import AddressForm from './address-form';
-import { validationField } from '../../../data/utils/validate-signup-form';
+import { validationField } from '../../../data/utils/validate-form';
 import {
   errorInitialState,
   initialErrorCountry,
@@ -107,14 +107,14 @@ function FormSignup(props: IFormProps) {
       case 'defaultShipping':
         setDefShipping((prev) => !prev);
         if (!defShipping) {
-          customerAddressesOption.defaultShipping = 1;
+          customerAddressesOption.defaultShipping = 2;
         } else delete customerAddressesOption.defaultShipping;
         console.log(customerAddressesOption);
         break;
       case 'defaultBilling':
         setDefBilling((prev) => !prev);
         if (!defBilling) {
-          customerAddressesOption.defaultBilling = 0;
+          customerAddressesOption.defaultBilling = 1;
         } else delete customerAddressesOption.defaultBilling;
         if (shippingToo) {
           if (customerAddressesOption.defaultBilling) {

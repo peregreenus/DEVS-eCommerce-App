@@ -4,7 +4,6 @@ import Country from '../types/country';
 import { Customer, CustomerResponse } from '../types/interfaces/customer.interface';
 import CTP from '../types/ctp';
 import { RegistrationFieldsType } from '../types/registration-type';
-import { bearerToken } from './getToken';
 import { customerAddressesOption } from '../../view/components/signup/signup-form';
 
 export default async function CustomerSignup(formCustomer: string): Promise<CustomerResponse> {
@@ -28,8 +27,8 @@ export default async function CustomerSignup(formCustomer: string): Promise<Cust
         city: newCustomer.cityBilling
       }
     ],
-    billingAddresses: customerAddressesOption.billingAddresses,
-    shippingAddresses: customerAddressesOption.shippingAddresses
+    billingAddresses: [0],
+    shippingAddresses: [1]
   };
   if (
     newCustomer.countryShipping &&
@@ -47,24 +46,34 @@ export default async function CustomerSignup(formCustomer: string): Promise<Cust
       postalCode: newCustomer.postalCodeShipping,
       city: newCustomer.cityShipping
     });
+  } else {
+    data.addresses?.push({
+      key: 'addr2',
+      country:
+        Object.keys(Country)[Object.values(Country).indexOf(newCustomer.countryBilling as Country)],
+      streetName: newCustomer.streetBilling,
+      postalCode: newCustomer.postalCodeBilling,
+      city: newCustomer.cityBilling
+    });
   }
 
   if (customerAddressesOption.defaultShipping) {
-    data.defaultShippingAddress = customerAddressesOption.defaultShipping;
+    data.defaultShippingAddress = customerAddressesOption.defaultShipping - 1;
   }
   if (customerAddressesOption.defaultBilling) {
-    data.defaultBillingAddress = customerAddressesOption.defaultBilling;
+    data.defaultBillingAddress = customerAddressesOption.defaultBilling - 1;
   }
-
+  console.log(data);
   return fetch(url, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${bearerToken.token}`,
+      Authorization: `Bearer ${localStorage.getItem('bearerAnonToken')}`,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(data)
   })
     .then((response) => {
+      console.log(response);
       return response.json();
     })
     .catch((err) => console.error(err));

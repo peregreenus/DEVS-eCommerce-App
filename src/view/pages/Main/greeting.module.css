@@ -9,4 +9,27 @@
     justify-content: center;
     gap: 1rem;
   }
+
+  .myBtn {
+    font-size: 1.5rem;
+    padding: 5px 15px;
+    color: teal;
+    background: transparent;
+    border: 1px solid teal;
+    cursor: pointer;
+    border: none;
+    border-radius: 1rem;
+    width: 15rem;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: 0.4s all ease-in;
+  }
+
+  .btnCenter {
+    margin-top: 5rem;
+  }
+
+  .myBtn:hover {
+    background-color: rgb(255, 255, 255);
+  }
 }

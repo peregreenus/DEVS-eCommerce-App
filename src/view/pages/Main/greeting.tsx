@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import MyButton from '../../components/common/Button/MyButton';
+import MyButton from '../../components/common/Button/Button';
 import * as classes from './greeting.module.css';
 import * as classesMain from './main.module.css';
 
@@ -13,11 +13,7 @@ function Greeting() {
 
   const buttons = [
     { path: '/catalog', label: 'Catalog' },
-    { path: '/about', label: 'About' },
-    { path: '/signup', label: 'Signup' },
-    { path: '/login', label: 'Login' },
-    { path: '/logout', label: 'LogOut' },
-    { path: '/cart', label: 'Cart' }
+    { path: '/product/ee9499ae-03b9-46e2-9de0-01bd3441c439', label: 'ProductID' }
   ];
 
   return (
@@ -35,7 +31,7 @@ function Greeting() {
             <MyButton
               key={button.path}
               type="button"
-              className="btn-center"
+              className={`${classes.btnCenter} ${classes.myBtn}`}
               onClick={() => goToPage(button.path)}>
               {button.label}
             </MyButton>

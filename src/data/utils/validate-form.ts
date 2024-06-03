@@ -2,7 +2,8 @@
 
 const checkingCountry = {
   billing: '',
-  shipping: ''
+  shipping: '',
+  address: ''
 };
 
 function validationField(fieldName: string, fieldValue: string): string {
@@ -46,7 +47,7 @@ function validationField(fieldName: string, fieldValue: string): string {
       returnValue = 'empty';
     }
   }
-  if (fieldName === 'cityShipping' || fieldName === 'cityBilling') {
+  if (fieldName === 'cityShipping' || fieldName === 'cityBilling' || fieldName === 'city') {
     const requirements = /^[A-Za-z0-9- ]{3,16}$/;
     if (!requirements.test(fieldValue)) {
       returnValue = 'should be 3-16 characters and should not include any special character';
@@ -54,7 +55,11 @@ function validationField(fieldName: string, fieldValue: string): string {
       returnValue = 'empty';
     }
   }
-  if (fieldName === 'streetShipping' || fieldName === 'streetBilling') {
+  if (
+    fieldName === 'streetShipping' ||
+    fieldName === 'streetBilling' ||
+    fieldName === 'streetName'
+  ) {
     const requirements = /^[A-Za-z0-9- ]{3,16}$/;
     if (!requirements.test(fieldValue)) {
       returnValue = 'should be 3-16 characters and should not include any special character';
@@ -104,6 +109,37 @@ function validationField(fieldName: string, fieldValue: string): string {
   if (fieldName === 'postalCodeBilling') {
     let requirements: RegExp;
     switch (checkingCountry.billing) {
+      case 'United States':
+        requirements = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
+        break;
+      case 'Canada':
+        requirements = /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i;
+        break;
+      case 'Belarus':
+      case 'Russia':
+        requirements = /^[0-9]{6}$/;
+        break;
+      case 'Ukraine':
+      case 'Germany':
+        requirements = /^[0-9]{5}$/;
+        break;
+      case 'Austria':
+        requirements = /^[0-9]{4}$/;
+        break;
+      default:
+        requirements = /^[A-Za-z0-9]{15,16}$/;
+        break;
+    }
+    if (!requirements.test(fieldValue)) {
+      returnValue = 'postal code not valid for this country';
+    } else {
+      returnValue = 'empty';
+    }
+  }
+  if (fieldName === 'postalCode') {
+    let requirements: RegExp;
+    console.log(`logging address: ${checkingCountry.address}`);
+    switch (checkingCountry.address) {
       case 'United States':
         requirements = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
         break;
