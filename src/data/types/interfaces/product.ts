@@ -4,6 +4,7 @@ interface Dimensions {
 }
 
 export interface Image {
+  label: string | undefined;
   url: string;
   dimensions: Dimensions;
 }
@@ -20,6 +21,8 @@ interface Discount {
 }
 
 interface Price {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  discounted: any;
   id: string;
   value: Value;
   country: string;

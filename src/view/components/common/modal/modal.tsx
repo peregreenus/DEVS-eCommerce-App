@@ -20,7 +20,7 @@ function Modal({ children, visible, setVisible }: ModalProps) {
       onClick={() => setVisible(false)}
       onKeyDown={() => setVisible(false)}>
       <div
-        className={cl.myModalContent}
+        className={cl.modalContent}
         onClick={(e) => e.stopPropagation()}
         onKeyDown={(e) => e.stopPropagation()}>
         {children}

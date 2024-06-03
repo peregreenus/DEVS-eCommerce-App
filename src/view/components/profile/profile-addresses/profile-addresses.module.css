@@ -1,0 +1,82 @@
+.addressesTabContent {
+  position: relative;
+  .block,
+  .controlBlock {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .controlBlock {
+    justify-content: flex-end;
+  }
+  .defaultAddress {
+    background-color: rgba(188, 150, 150, 0.594);
+  }
+  .addressContent {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 1.5rem;
+    gap: 0.5rem;
+  }
+  .addressHead {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .addressControl {
+    display: flex;
+    justify-content: space-between;
+  }
+  .addressBlock {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
+  .address,
+  .showModalEditAddress {
+    border: 1px var(--border-color) solid;
+    border-radius: 0.5rem;
+  }
+  .showModalEditAddress {
+    align-items: center;
+    justify-content: center;
+  }
+  .showTextAddressContent {
+    opacity: 1;
+    transition: 0.4s all ease-in;
+  }
+  .hideTextAddressContent {
+    display: none;
+  }
+  .addressForm {
+    display: flex;
+    flex-direction: column;
+  }
+  .inputAddressField {
+    width: 20rem;
+    min-width: 10rem;
+    height: 3rem;
+    border: 1px var(--border-color) solid;
+  }
+}
+
+.profileContentString {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.8rem;
+  span {
+    font-size: 1.55rem;
+    color: var(--body-text-color);
+  }
+}
+.controlProfileButton {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--default-bg-color);
+  border: 1px var(--border-color) solid;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}

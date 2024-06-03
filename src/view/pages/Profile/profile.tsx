@@ -4,33 +4,18 @@ import { MainProps } from '../../../data/types/main-props';
 import Header from '../../components/common/header/header';
 import Footer from '../../components/common/footer/footer';
 import * as styles from './profile.module.css';
-import ProfileTabContent from '../../components/profile/profile-content';
-import getCustomerProfile from '../../../data/api/customerProfile';
+import ProfileTabContent from '../../components/profile/profile-content/profile-content';
+import getCustomerProfile from '../../../data/api/profile/getProfile';
 import { CustomerProfileResponse } from '../../../data/types/interfaces/customer.interface';
-import ShippingTabContent from '../../components/profile/profile-shipping';
-import BillingTabContent from '../../components/profile/profile-billing';
-
-const initialStateProfile = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  addresses: [
-    {
-      key: '',
-      country: '',
-      streetName: '',
-      postalCode: '',
-      city: ''
-    }
-  ],
-  shippingAddressIds: [''],
-  billingAddressIds: [''],
-  password: ''
-};
+import AddressesTabContent from '../../components/profile/profile-addresses/profile-addresses';
+import ChangePasswordTabContent from '../../components/profile/profile-password/profile-password';
+import { setLSVersionProfileCustomer } from '../../../data/utils/setLS';
 
 export default function Profile({ state, setState }: MainProps) {
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
-  const [profileData, setProfileData] = useState<CustomerProfileResponse>(initialStateProfile);
+  const [profileData, setProfileData] = useState<CustomerProfileResponse>();
+  const [update, setUpdate] = useState(false);
 
   function tabsToggle(index: number) {
     setActiveTab(index);
@@ -38,13 +23,17 @@ export default function Profile({ state, setState }: MainProps) {
 
   useEffect(() => {
     async function getCustomerInfo() {
-      const fetchedInfo = await getCustomerProfile(`${localStorage.getItem('bearerToken')}`);
-      console.log(fetchedInfo);
-      setProfileData({ ...fetchedInfo });
+      await getCustomerProfile(`${localStorage.getItem('bearerToken')}`)
+        .then((res) => {
+          setLSVersionProfileCustomer(`${res.version}`);
+          console.log(res);
+          setProfileData(res);
+        })
+        .then(() => setIsDataLoaded(true));
     }
     getCustomerInfo();
-  }, []);
-  return (
+  }, [update]);
+  return isDataLoaded ? (
     <>
       <Header state={state} setState={setState} />
       <div className={styles.profilePage}>
@@ -63,14 +52,14 @@ export default function Profile({ state, setState }: MainProps) {
               key="Shipping Addresses"
               className={`${styles.tabsItem} ${activeTab === 1 ? styles.tabActive : ''}`}
               onClick={() => tabsToggle(1)}>
-              Shipping Addresses
+              Addresses
             </button>
             <button
               type="button"
-              key="Billing Addresses"
+              key="Change Password"
               className={`${styles.tabsItem} ${activeTab === 2 ? styles.tabActive : ''}`}
               onClick={() => tabsToggle(2)}>
-              Billing Addresses
+              Change Password
             </button>
           </div>
           <div className={styles.content}>
@@ -80,29 +69,25 @@ export default function Profile({ state, setState }: MainProps) {
                 dateOfBirth={profileData?.dateOfBirth}
                 lastName={profileData?.lastName}
                 email={profileData?.email}
-                password={profileData?.password}
               />
             )}
             {activeTab === 1 && (
-              <ShippingTabContent
+              <AddressesTabContent
                 addresses={profileData?.addresses}
                 shippingAddressIds={profileData?.shippingAddressIds}
                 defaultShippingAddressId={profileData?.defaultShippingAddressId}
-              />
-            )}
-            {activeTab === 2 && (
-              <BillingTabContent
-                addresses={profileData?.addresses}
                 billingAddressIds={profileData?.billingAddressIds}
                 defaultBillingAddressId={profileData?.defaultBillingAddressId}
+                setUpdate={setUpdate}
               />
             )}
+            {activeTab === 2 && <ChangePasswordTabContent />}
           </div>
         </div>
       </div>
-
-      {/* <ProfileTabContent activeTab={activeTab} profileData={profileData} /> */}
       <Footer />
     </>
+  ) : (
+    <div>Loading...</div>
   );
 }
