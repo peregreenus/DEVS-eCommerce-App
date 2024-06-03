@@ -14,3 +14,8 @@ export interface ProfileContentInputProps {
 export interface ProfileUpdateProps extends CustomerProfileResponse {
   setUpdate: React.Dispatch<SetStateAction<boolean>>;
 }
+export type ProfilePasswordType = {
+  currentPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+};
