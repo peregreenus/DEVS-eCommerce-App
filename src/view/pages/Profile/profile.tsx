@@ -90,6 +90,10 @@ export default function Profile({ state, setState }: MainProps) {
       <Footer />
     </>
   ) : (
-    <Loader />
+    <>
+      <Header state={state} setState={setState} />
+      <Loader />
+      <Footer />
+    </>
   );
 }
