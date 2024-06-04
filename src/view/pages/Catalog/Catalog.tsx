@@ -9,15 +9,14 @@ import getProducts from '../../../data/api/getProducts';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import Loader from '../../components/Loader/Loader';
 import * as classes from './Catalog.module.css';
-// import getPriceLimits from '../../../data/utils/getPriceLimits';
-import searchProducts from '../../../data/api/searchProducts';
 import { MainProps } from '../../../data/types/main-props';
 import { SearchPriceFilter } from '../../../data/types/interfaces/SearchPriceFilter';
+import Filter from '../../components/common/Filter/filter';
 
 export default function Catalog({ state, setState }: MainProps) {
   const [products, setProducts] = useState<IProduct[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [priceFilter] = useState<SearchPriceFilter>({
+  const [priceFilter, setPriceFilter] = useState<SearchPriceFilter>({
     minPrice: 0,
     maxPrice: 1000000
   });
@@ -41,18 +40,13 @@ export default function Catalog({ state, setState }: MainProps) {
     fetchProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, setState]);
-  if (products) {
-    // const { minPrice, maxPrice } = getPriceLimits(products);
-    console.log('searchProducts');
-    console.log(searchProducts({ minPrice: 0, maxPrice: 1000000 }));
-  }
 
   return loading ? (
     <Loader />
   ) : (
     <div>
       <Header state={state} setState={setState} />
-      <div>filters</div>
+      <Filter priceFilter={priceFilter} setPriceFilter={setPriceFilter} />
 
       <div className={classes.catalog}>
         <h2>Catalog</h2>

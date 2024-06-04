@@ -27,8 +27,6 @@ async function getProducts(
     const response = await fetch(fullUrl, { method: 'GET', headers });
 
     const productsData = await response.json();
-    console.log('------------');
-    console.log(productsData.results);
     return productsData.results;
   } catch (error) {
     console.error(error);
