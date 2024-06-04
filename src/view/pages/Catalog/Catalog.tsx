@@ -10,10 +10,12 @@ import getProducts from '../../../data/api/getProducts';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import Loader from '../../components/Loader/Loader';
 import * as classes from './Catalog.module.css';
+import getPriceLimits from '../../../data/utils/getPriceLimits';
 
 export default function Catalog({ state, setState }: MainProps) {
   const [products, setProducts] = useState<IProduct[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  // const [limitsPrices, setlimitsPrices] = useState<number[]>([0, 0]);
   const navigate = useNavigate();
 
   const goToProduct = (id: string) => {
@@ -37,12 +39,15 @@ export default function Catalog({ state, setState }: MainProps) {
     fetchProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, setState]);
+  if (products) console.log(getPriceLimits(products));
 
   return loading ? (
     <Loader />
   ) : (
     <div>
       <Header state={state} setState={setState} />
+      <div>filters</div>
+
       <div className={classes.catalog}>
         <h2>Catalog</h2>
         <div className={classes.cardContainer}>
