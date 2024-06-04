@@ -5,6 +5,7 @@ import { IProduct } from '../types/interfaces/product';
 import { MainProps } from '../types/main-props';
 import { getLSToken, getLSAnonToken } from '../utils/getLS';
 
+
 async function getProducts(
   { minPrice, maxPrice }: AppFilter,
   { state }: MainProps
@@ -24,7 +25,6 @@ async function getProducts(
   const fullUrl = `${url}?limit=42&${params.toString()}`;
   try {
     const response = await fetch(fullUrl, { method: 'GET', headers });
-
     const productsData = await response.json();
     return productsData.results;
   } catch (error) {
