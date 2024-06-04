@@ -16,10 +16,24 @@ function Filter({ price, setPrice }: SearchPriceFilter) {
   return (
     <div className={classes.filter}>
       <sub className={classes.caption}>Filter</sub>
-      <sub>Price from</sub>
-      <input type="text" name="minValue" value={price.minPrice} onChange={handleMinPriceChange} />
-      <sub>to</sub>
-      <input type="text" name="maxValue" value={price.maxPrice} onChange={handleMaxPriceChange} />
+      <div className={classes.wrapper}>
+        <sub className={classes.label}>Price from</sub>
+        <input
+          className={classes.field}
+          type="text"
+          name="minValue"
+          value={price.minPrice}
+          onChange={handleMinPriceChange}
+        />
+        <sub className={classes.label}>to</sub>
+        <input
+          className={classes.field}
+          type="text"
+          name="maxValue"
+          value={price.maxPrice}
+          onChange={handleMaxPriceChange}
+        />
+      </div>
     </div>
   );
 }
