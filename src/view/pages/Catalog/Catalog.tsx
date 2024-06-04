@@ -10,7 +10,8 @@ import getProducts from '../../../data/api/getProducts';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import Loader from '../../components/Loader/Loader';
 import * as classes from './Catalog.module.css';
-import getPriceLimits from '../../../data/utils/getPriceLimits';
+// import getPriceLimits from '../../../data/utils/getPriceLimits';
+import searchProducts from '../../../data/api/searchProducts';
 
 export default function Catalog({ state, setState }: MainProps) {
   const [products, setProducts] = useState<IProduct[] | null>(null);
@@ -39,7 +40,10 @@ export default function Catalog({ state, setState }: MainProps) {
     fetchProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, setState]);
-  if (products) console.log(getPriceLimits(products));
+  if (products) {
+    // const { minPrice, maxPrice } = getPriceLimits(products);
+    console.log(searchProducts({ minPrice: 0, maxPrice: 100 }));
+  }
 
   return loading ? (
     <Loader />

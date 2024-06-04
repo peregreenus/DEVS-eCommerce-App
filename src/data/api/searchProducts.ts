@@ -1,8 +1,8 @@
 import CTP from '../types/ctp';
 import { IProduct } from '../types/interfaces/product';
+import { getLSAnonToken, getLSToken } from '../utils/getLS';
 
 type SearchFilter = {
-  projectKey: string;
   minPrice: number;
   maxPrice: number;
 };
@@ -12,8 +12,11 @@ export default async function searchProducts({
   maxPrice
 }: SearchFilter): Promise<IProduct[]> {
   const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/product-projections/search`;
+  const token = getLSToken();
+  const BEARER_TOKEN = token ? getLSToken() : getLSAnonToken();
   const headers = {
-    'Content-Type': 'application/x-www-form-urlencoded'
+    'Content-Type': 'application/x-www-form-urlencoded',
+    Authorization: `Bearer ${BEARER_TOKEN}`
   };
   const body = `filter=variants.price.centAmount:range (${minPrice} to ${maxPrice})`;
 
@@ -29,6 +32,8 @@ export default async function searchProducts({
     }
 
     const data = await response.json();
+    // eslint-disable-next-line no-console
+    console.log(data);
     return data;
   } catch (error) {
     console.error('Error:', error);
