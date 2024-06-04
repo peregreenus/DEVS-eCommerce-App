@@ -1,0 +1,39 @@
+.filter {
+  height: 25%;
+  border: 1px solid black;
+  border-radius: 0.2rem;
+  margin: 0.5rem;
+  position: relative;
+  min-height: 5rem;
+  padding: 1rem;
+
+  .caption {
+    position: absolute;
+    font-size: 1.5rem;
+    background: #fff;
+    top: -1.3rem;
+    left: 1.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+    .label {
+      margin-right: 2rem;
+    }
+
+    .field {
+      margin-right: 2rem;
+      padding: 0.3rem;
+    }
+
+    .btn {
+      padding: 0.3rem;
+      margin: 0.3rem;
+    }
+  }
+}
