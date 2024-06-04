@@ -26,22 +26,27 @@ function Filter({ price, setPrice }: SearchPriceFilter) {
     <div className={classes.filter}>
       <sub className={classes.caption}>Filter</sub>
       <div className={classes.wrapper}>
-        <sub className={classes.label}>Price from</sub>
-        <input
-          className={classes.field}
-          type="text"
-          name="minValue"
-          value={minVal}
-          onChange={handleMinPriceChange}
-        />
-        <sub className={classes.label}>to</sub>
-        <input
-          className={classes.field}
-          type="text"
-          name="maxVal"
-          value={maxVal}
-          onChange={handleMaxPriceChange}
-        />
+        <div>
+          <sub className={classes.label}>Price from</sub>
+          <input
+            className={classes.field}
+            type="text"
+            name="minValue"
+            value={minVal}
+            onChange={handleMinPriceChange}
+          />
+        </div>
+        <div>
+          <sub className={classes.label}>to</sub>
+          <input
+            className={classes.field}
+            type="text"
+            name="maxVal"
+            value={maxVal}
+            onChange={handleMaxPriceChange}
+          />
+        </div>
+
         <button className={classes.btn} onClick={() => aplyFilter()}>
           Aply
         </button>
