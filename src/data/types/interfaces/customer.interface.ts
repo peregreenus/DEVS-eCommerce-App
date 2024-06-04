@@ -6,6 +6,7 @@ export interface CustomerAddresses {
   postalCode: string;
   city: string;
 }
+
 export interface CostumerUpdatePassword {
   currentPassword: string;
   newPassword: string;
@@ -63,6 +64,34 @@ export interface CustomerResponse {
   message?: string;
   statusCode?: number;
   version?: string;
+}
+
+export interface CustomerProfileResponse {
+  id?: string;
+  version?: number;
+  createdAt?: Date;
+  lastModifiedAt?: Date;
+  lastModifiedBy?: {
+    clientId?: string;
+    isPlatformClient?: boolean;
+  };
+  createdBy?: {
+    clientId?: string;
+    isPlatformClient?: boolean;
+  };
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  password?: string;
+  addresses?: CustomerAddresses[];
+  shippingAddressIds?: string[];
+  billingAddressIds?: string[];
+  dateOfBirth?: string;
+  isEmailVerified?: boolean;
+  stores?: Array<string>;
+  authenticationMode?: string;
+  defaultBillingAddressId?: string;
+  defaultShippingAddressId?: string;
 }
 
 export interface CustomerProfileResponse {
