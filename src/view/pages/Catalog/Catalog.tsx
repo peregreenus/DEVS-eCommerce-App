@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IProduct } from '../../../data/types/interfaces/product';
-import { MainProps } from '../../../data/types/main-props';
 import Header from '../../components/common/header/header';
 import Footer from '../../components/common/footer/footer';
 import getProducts from '../../../data/api/getProducts';
@@ -12,10 +11,16 @@ import Loader from '../../components/Loader/Loader';
 import * as classes from './Catalog.module.css';
 // import getPriceLimits from '../../../data/utils/getPriceLimits';
 import searchProducts from '../../../data/api/searchProducts';
+import { MainProps } from '../../../data/types/main-props';
+import { SearchPriceFilter } from '../../../data/types/interfaces/SearchPriceFilter';
 
 export default function Catalog({ state, setState }: MainProps) {
   const [products, setProducts] = useState<IProduct[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [priceFilter] = useState<SearchPriceFilter>({
+    minPrice: 0,
+    maxPrice: 1000000
+  });
   // const [limitsPrices, setlimitsPrices] = useState<number[]>([0, 0]);
   const navigate = useNavigate();
 
@@ -26,11 +31,7 @@ export default function Catalog({ state, setState }: MainProps) {
   useEffect(() => {
     async function fetchProducts() {
       setLoading(true);
-      const fetchedProducts = await getProducts({
-        state,
-        setState
-      });
-
+      const fetchedProducts = await getProducts(priceFilter, { state, setState });
       if (fetchedProducts) {
         setProducts(fetchedProducts);
         setLoading(false);
@@ -42,7 +43,8 @@ export default function Catalog({ state, setState }: MainProps) {
   }, [state, setState]);
   if (products) {
     // const { minPrice, maxPrice } = getPriceLimits(products);
-    console.log(searchProducts({ minPrice: 0, maxPrice: 100 }));
+    console.log('searchProducts');
+    console.log(searchProducts({ minPrice: 0, maxPrice: 1000000 }));
   }
 
   return loading ? (
