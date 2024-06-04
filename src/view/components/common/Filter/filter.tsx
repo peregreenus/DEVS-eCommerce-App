@@ -17,7 +17,7 @@ function Filter({ price, setPrice }: SearchPriceFilter) {
     setMaxValue(parseInt(newMaxPrice, 10));
   };
 
-  function aplyFilter() {
+  function applyFilter() {
     // setPrice({ minPrice: minValue, maxPrice: maxValue });
     setPrice({ minPrice: minVal * 100, maxPrice: maxVal * 100 });
   }
@@ -47,8 +47,8 @@ function Filter({ price, setPrice }: SearchPriceFilter) {
           />
         </div>
 
-        <button className={classes.btn} onClick={() => aplyFilter()}>
-          Aply
+        <button className={classes.btn} onClick={() => applyFilter()}>
+          Apply
         </button>
       </div>
     </div>
