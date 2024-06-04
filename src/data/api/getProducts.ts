@@ -1,17 +1,16 @@
 /* eslint-disable no-console */
 import CTP from '../types/ctp';
-import { SearchPriceFilter } from '../types/interfaces/SearchPriceFilter';
+import { AppFilter } from '../types/interfaces/SearchPriceFilter';
 import { IProduct } from '../types/interfaces/product';
 import { MainProps } from '../types/main-props';
 import { getLSToken, getLSAnonToken } from '../utils/getLS';
 
 async function getProducts(
-  { minPrice, maxPrice }: SearchPriceFilter,
+  { minPrice, maxPrice }: AppFilter,
   { state }: MainProps
 ): Promise<IProduct[] | null> {
   // const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/product-projections?limit=42`;
   const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/product-projections/search`;
-
   const token = getLSToken();
   const BEARER_TOKEN = token || getLSAnonToken();
   console.log(`token => ${BEARER_TOKEN}`, state);

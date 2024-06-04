@@ -10,15 +10,15 @@ import ProductCard from '../../components/ProductCard/ProductCard';
 import Loader from '../../components/Loader/Loader';
 import * as classes from './Catalog.module.css';
 import { MainProps } from '../../../data/types/main-props';
-import { SearchPriceFilter } from '../../../data/types/interfaces/SearchPriceFilter';
 import Filter from '../../components/common/Filter/filter';
+import { AppFilter } from '../../../data/types/interfaces/SearchPriceFilter';
 
 export default function Catalog({ state, setState }: MainProps) {
   const [products, setProducts] = useState<IProduct[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [priceFilter, setPriceFilter] = useState<SearchPriceFilter>({
+  const [price, setPrice] = useState<AppFilter>({
     minPrice: 0,
-    maxPrice: 1000000
+    maxPrice: 100000000
   });
   // const [limitsPrices, setlimitsPrices] = useState<number[]>([0, 0]);
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ export default function Catalog({ state, setState }: MainProps) {
   useEffect(() => {
     async function fetchProducts() {
       setLoading(true);
-      const fetchedProducts = await getProducts(priceFilter, { state, setState });
+      const fetchedProducts = await getProducts(price, { state, setState });
       if (fetchedProducts) {
         setProducts(fetchedProducts);
         setLoading(false);
@@ -39,14 +39,14 @@ export default function Catalog({ state, setState }: MainProps) {
     }
     fetchProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state, setState]);
+  }, [state, price, setState]);
 
   return loading ? (
     <Loader />
   ) : (
     <div>
       <Header state={state} setState={setState} />
-      <Filter priceFilter={priceFilter} setPriceFilter={setPriceFilter} />
+      <Filter price={price} setPrice={setPrice} />
 
       <div className={classes.catalog}>
         <h2>Catalog</h2>
