@@ -4,6 +4,7 @@
 import React from 'react';
 import { ProductCardProps } from '../../../data/types/interfaces/productCardProps';
 import * as classes from './ProductCard.module.css';
+import formatPrice from '../../../data/utils/formatPrice';
 
 function ProductCard({ product, goToProduct }: ProductCardProps) {
   const discountedPrice = product.masterVariant.prices[0].discounted?.value.centAmount;
@@ -28,11 +29,11 @@ function ProductCard({ product, goToProduct }: ProductCardProps) {
         className={
           discountedPrice ? `${classes.cardPrice} ${classes.cancelPrice}` : classes.cardPrice
         }>
-        {`$${product.masterVariant.prices[0].value.centAmount}`}
+        {`${formatPrice(product.masterVariant.prices[0].value.centAmount)}`}
       </span>
       {discountedPrice ? (
         <span className={`${classes.cardPrice} ${classes.discountPrice}`}>
-          {`$${discountedPrice}`}
+          {`${formatPrice(discountedPrice)}`}
         </span>
       ) : (
         ''

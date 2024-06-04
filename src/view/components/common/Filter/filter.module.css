@@ -26,7 +26,12 @@
 
     .field {
       margin-right: 2rem;
+      padding: 0.3rem;
+    }
+
+    .btn {
+      padding: 0.3rem;
+
     }
   }
-
 }

@@ -1,17 +1,26 @@
-import React, { ChangeEvent } from 'react';
+/* eslint-disable react/button-has-type */
+import React, { ChangeEvent, useState } from 'react';
 import * as classes from './filter.module.css';
 import { SearchPriceFilter } from '../../../../data/types/interfaces/SearchPriceFilter';
 
 function Filter({ price, setPrice }: SearchPriceFilter) {
+  const [minVal, setMinValue] = useState(price.minPrice / 100);
+  const [maxVal, setMaxValue] = useState(price.maxPrice / 100);
+
   const handleMinPriceChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newMinPrice = event.currentTarget.value;
-    setPrice((prevPrice) => ({ ...prevPrice, minPrice: parseInt(newMinPrice, 10) }));
+    setMinValue(parseInt(newMinPrice, 10));
   };
 
   const handleMaxPriceChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newMaxPrice = event.currentTarget.value;
-    setPrice((prevPrice) => ({ ...prevPrice, maxPrice: parseInt(newMaxPrice, 10) }));
+    setMaxValue(parseInt(newMaxPrice, 10));
   };
+
+  function aplyFilter() {
+    // setPrice({ minPrice: minValue, maxPrice: maxValue });
+    setPrice({ minPrice: minVal * 100, maxPrice: maxVal * 100 });
+  }
 
   return (
     <div className={classes.filter}>
@@ -22,17 +31,20 @@ function Filter({ price, setPrice }: SearchPriceFilter) {
           className={classes.field}
           type="text"
           name="minValue"
-          value={price.minPrice}
+          value={minVal}
           onChange={handleMinPriceChange}
         />
         <sub className={classes.label}>to</sub>
         <input
           className={classes.field}
           type="text"
-          name="maxValue"
-          value={price.maxPrice}
+          name="maxVal"
+          value={maxVal}
           onChange={handleMaxPriceChange}
         />
+        <button className={classes.btn} onClick={() => aplyFilter()}>
+          Aply
+        </button>
       </div>
     </div>
   );
