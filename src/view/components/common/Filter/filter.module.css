@@ -22,13 +22,18 @@
     align-items: center;
     justify-content: center;
 
-    .label {
-      margin-right: 2rem;
-    }
+    .inputBlock {
+      display: flex;
+      align-items: center;
 
-    .field {
-      margin-right: 2rem;
-      padding: 0.3rem;
+      .label {
+        margin-right: 2rem;
+      }
+
+      .field {
+        margin-right: 2rem;
+        padding: 0.3rem;
+      }
     }
 
     .btn {

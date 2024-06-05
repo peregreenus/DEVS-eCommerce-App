@@ -37,6 +37,7 @@
         width: 85%;
         margin: 0 auto;
         align-items: center;
+        justify-content: center;
 
         .btn {
           border: none;
@@ -62,14 +63,13 @@
           justify-content: center;
           align-items: stretch;
           gap: 1rem;
-          
 
           .imgContainer {
             display: flex;
             justify-content: center;
             align-items: center;
             width: 35%;
-            
+
             transition: box-shadow 0.3s ease-in-out;
           }
 

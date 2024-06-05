@@ -10,17 +10,20 @@ import ProductCard from '../../components/ProductCard/ProductCard';
 import Loader from '../../components/Loader/Loader';
 import * as classes from './Catalog.module.css';
 import { MainProps } from '../../../data/types/main-props';
-import Filter from '../../components/common/Filter/filter';
+// import Filter from '../../components/common/Filter/filter';
 import { AppFilter } from '../../../data/types/interfaces/SearchPriceFilter';
+// import Categories from '../../components/common/Categories/categories';
+import getCategories from '../../../data/api/getCategories';
+import { ICategory } from '../../../data/types/interfaces/category';
 
 export default function Catalog({ state, setState }: MainProps) {
   const [products, setProducts] = useState<IProduct[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [price, setPrice] = useState<AppFilter>({
+  const [price] = useState<AppFilter>({
     minPrice: 0,
-    maxPrice: 100000000
+    maxPrice: 100000000000000
   });
-  // const [limitsPrices, setlimitsPrices] = useState<number[]>([0, 0]);
+  const [categories, setCategories] = useState<ICategory[]>();
   const navigate = useNavigate();
 
   const goToProduct = (id: string) => {
@@ -37,16 +40,30 @@ export default function Catalog({ state, setState }: MainProps) {
         console.log(fetchedProducts);
       }
     }
+    async function fetchCategiries() {
+      setLoading(true);
+      const fetchedCategories = await getCategories();
+      if (fetchedCategories) {
+        setCategories(fetchedCategories);
+        setLoading(false);
+        console.log(fetchedCategories);
+      }
+    }
+
+    fetchCategiries();
     fetchProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state, price, setState]);
+  }, [state, price]);
+
+  console.log(categories);
 
   return loading ? (
     <Loader />
   ) : (
     <div>
       <Header state={state} setState={setState} />
-      <Filter price={price} setPrice={setPrice} />
+      {/* <Categories categories={categories} setCategories={setCategories} />
+      <Filter state={state} setState={setState} /> */}
 
       <div className={classes.catalog}>
         <h2>Catalog</h2>
