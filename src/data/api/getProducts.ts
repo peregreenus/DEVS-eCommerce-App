@@ -5,7 +5,6 @@ import { IProduct } from '../types/interfaces/product';
 import { MainProps } from '../types/main-props';
 import { getLSToken, getLSAnonToken } from '../utils/getLS';
 
-
 async function getProducts(
   { minPrice, maxPrice }: AppFilter,
   { state }: MainProps
