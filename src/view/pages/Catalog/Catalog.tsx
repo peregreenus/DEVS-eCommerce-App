@@ -54,8 +54,6 @@ export default function Catalog({ state, setState }: MainProps) {
   ) : (
     <div>
       <Header state={state} setState={setState} />
-      <Filter price={price} setPrice={setPrice} />
-
       <div className={classes.catalog}>
         <h2>Catalog</h2>
         <Filter price={price} setPrice={setPrice} />
