@@ -58,7 +58,11 @@ export default function Catalog({ state, setState }: MainProps) {
   }, [price, categoryId]);
 
   return loading ? (
-    <Loader />
+    <>
+      <Header state={state} setState={setState} />
+      <Loader />
+      <Footer />
+    </>
   ) : (
     <div>
       <Header state={state} setState={setState} />
@@ -67,6 +71,7 @@ export default function Catalog({ state, setState }: MainProps) {
 
       <div className={classes.catalog}>
         <h2>Catalog</h2>
+        <Filter price={price} setPrice={setPrice} />
         <div className={classes.cardContainer}>
           {products?.map((product: IProduct) => {
             return <ProductCard key={product.id} product={product} goToProduct={goToProduct} />;
