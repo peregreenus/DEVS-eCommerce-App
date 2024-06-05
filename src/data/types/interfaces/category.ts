@@ -22,3 +22,8 @@ export interface ICategory {
   createdAt: string;
   lastModifiedAt: string;
 }
+
+export interface CategoryFilter {
+  categories: ICategory[];
+  setCategories: React.Dispatch<React.SetStateAction<ICategory[]>>;
+}

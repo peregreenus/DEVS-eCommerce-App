@@ -10,22 +10,21 @@ import ProductCard from '../../components/ProductCard/ProductCard';
 import Loader from '../../components/Loader/Loader';
 import * as classes from './Catalog.module.css';
 import { MainProps } from '../../../data/types/main-props';
-// import Filter from '../../components/common/Filter/filter';
+import Filter from '../../components/common/Filter/filter';
 import { AppFilter } from '../../../data/types/interfaces/SearchPriceFilter';
-// import Categories from '../../components/common/Categories/categories';
+import Categories from '../../components/common/Categories/categories';
 import getCategories from '../../../data/api/getCategories';
 import { ICategory } from '../../../data/types/interfaces/category';
 
 export default function Catalog({ state, setState }: MainProps) {
   const [products, setProducts] = useState<IProduct[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [price] = useState<AppFilter>({
+  const [price, setPrice] = useState<AppFilter>({
     minPrice: 0,
     maxPrice: 100000000000000
   });
-  const [categories, setCategories] = useState<ICategory[]>();
+  const [categories, setCategories] = useState<ICategory[]>([]);
   const navigate = useNavigate();
-
   const goToProduct = (id: string) => {
     navigate(`product/${id}`);
   };
@@ -62,8 +61,8 @@ export default function Catalog({ state, setState }: MainProps) {
   ) : (
     <div>
       <Header state={state} setState={setState} />
-      {/* <Categories categories={categories} setCategories={setCategories} />
-      <Filter state={state} setState={setState} /> */}
+      <Categories categories={categories} setCategories={setCategories} />
+      <Filter price={price} setPrice={setPrice} />
 
       <div className={classes.catalog}>
         <h2>Catalog</h2>

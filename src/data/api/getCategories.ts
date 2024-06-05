@@ -19,7 +19,7 @@ async function getCategories() {
     }
     const data = await response.json();
     console.log('getCategories', data);
-    return data;
+    return data.result;
   } catch (error) {
     console.error('Error fetching product:', error);
   }
