@@ -7,7 +7,7 @@ function Categories({ categories }: CategoryFilter) {
     <ul className={classes.list}>
       <li>All categories</li>
       {categories.map((category) => (
-        <li>{category.name.en}</li>
+        <li>{category.metaTitle.en}</li>
       ))}
     </ul>
   );

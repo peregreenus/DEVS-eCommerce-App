@@ -12,6 +12,7 @@ interface Parent {
 }
 
 export interface ICategory {
+  [x: string]: any;
   id: string;
   version: number;
   name: Name;
