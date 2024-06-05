@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/no-danger */
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
@@ -23,6 +24,7 @@ export default function Catalog({ state, setState }: MainProps) {
     minPrice: 0,
     maxPrice: 100000000000000
   });
+  const [categoryId, setCategoryId] = useState<string>('');
   const [categories, setCategories] = useState<ICategory[]>([]);
   const navigate = useNavigate();
   const goToProduct = (id: string) => {
@@ -57,14 +59,14 @@ export default function Catalog({ state, setState }: MainProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [price]);
 
-  console.log(categories);
+  console.log(categoryId);
 
   return loading ? (
     <Loader />
   ) : (
     <div>
       <Header state={state} setState={setState} />
-      <Categories categories={categories} setCategories={setCategories} />
+      <Categories categories={categories} setCategoryId={setCategoryId} categoryId={categoryId} />
       <Filter price={price} setPrice={setPrice} />
 
       <div className={classes.catalog}>
