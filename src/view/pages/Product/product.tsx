@@ -22,7 +22,7 @@ function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [leftVisible, setLeftVisible] = useState<boolean>(false);
-  const [rightVisible, setRightVisible] = useState<boolean>(false);
+  const [rightVisible, setRightVisible] = useState<boolean>(true);
   const { id } = useParams();
 
   const [numImage, setNumImage] = useState<number>(0);
@@ -58,7 +58,6 @@ function Product({ state, setState }: MainProps) {
   }
 
   const imgCount: number = product.masterVariant.images.length;
-  // if (imgCount === 1) setRightVisible(false);
   const isImage = product.masterVariant.images && imgCount > 0;
 
   const selectImage = (index: number) => {
@@ -121,7 +120,7 @@ function Product({ state, setState }: MainProps) {
                     />
                   ))}
                 </div>
-                {rightVisible || imgCount > 1 ? (
+                {rightVisible ? (
                   <Button type="button" className={classes.btn} onClick={() => slideRight()}>
                     <ArrowRightIcon width="6rem" height="6rem" />
                   </Button>

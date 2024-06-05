@@ -13,7 +13,7 @@ function Greeting() {
 
   const buttons = [
     { path: '/catalog', label: 'Catalog' },
-    { path: '/catalog/product/ee9499ae-03b9-46e2-9de0-01bd3441c439', label: 'ProductID' }
+    { path: '/product/ee9499ae-03b9-46e2-9de0-01bd3441c439', label: 'ProductID' }
   ];
 
   return (
