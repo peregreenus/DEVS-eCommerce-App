@@ -16,16 +16,22 @@ import { AppFilter } from '../../../data/types/interfaces/SearchPriceFilter';
 import Categories from '../../components/common/Categories/categories';
 import getCategories from '../../../data/api/getCategories';
 import { ICategory } from '../../../data/types/interfaces/category';
+import SortBar from '../../components/SortBar/SortBar';
 
 export default function Catalog({ state, setState }: MainProps) {
   const [products, setProducts] = useState<IProduct[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [sorting, setSorting] = useState<string>('');
   const [price, setPrice] = useState<AppFilter>({
     minPrice: 0,
     maxPrice: 100000000000000
   });
+
   const [categoryId, setCategoryId] = useState<string>('');
   const [categories, setCategories] = useState<ICategory[]>([]);
+
+  // const [limitsPrices, setlimitsPrices] = useState<number[]>([0, 0]);
+
   const navigate = useNavigate();
   const goToProduct = (id: string) => {
     navigate(`product/${id}`);
@@ -34,13 +40,14 @@ export default function Catalog({ state, setState }: MainProps) {
   useEffect(() => {
     async function fetchCategoriesAndProducts() {
       setLoading(true);
+
       try {
         const fetchedCategories = await getCategories({ state, setState });
         if (fetchedCategories) {
           setCategories(fetchedCategories);
           console.log(fetchedCategories);
 
-          const fetchedProducts = await getProducts(price, categoryId, { state, setState });
+          const fetchedProducts = await getProducts(sorting, price, categoryId, { state, setState });
           if (fetchedProducts) {
             setProducts(fetchedProducts);
             console.log(fetchedProducts);
@@ -55,7 +62,7 @@ export default function Catalog({ state, setState }: MainProps) {
 
     fetchCategoriesAndProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [price, categoryId]);
+  }, [price, categoryId, sorting]);
 
   return loading ? (
     <>
@@ -64,14 +71,13 @@ export default function Catalog({ state, setState }: MainProps) {
       <Footer />
     </>
   ) : (
-    <div>
+    <>
       <Header state={state} setState={setState} />
-      <Categories categories={categories} setCategoryId={setCategoryId} categoryId={categoryId} />
-      <Filter price={price} setPrice={setPrice} />
-
       <div className={classes.catalog}>
         <h2>Catalog</h2>
+        <Categories categories={categories} setCategoryId={setCategoryId} categoryId={categoryId} />
         <Filter price={price} setPrice={setPrice} />
+        <SortBar value={sorting} onChange={(e) => setSorting(e.target.value)} />
         <div className={classes.cardContainer}>
           {products?.map((product: IProduct) => {
             return <ProductCard key={product.id} product={product} goToProduct={goToProduct} />;
@@ -79,6 +85,6 @@ export default function Catalog({ state, setState }: MainProps) {
         </div>
       </div>
       <Footer />
-    </div>
+    </>
   );
 }

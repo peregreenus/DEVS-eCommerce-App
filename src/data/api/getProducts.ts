@@ -6,6 +6,7 @@ import { MainProps } from '../types/main-props';
 import { getLSToken, getLSAnonToken } from '../utils/getLS';
 
 async function getProducts(
+  sortingType: string,
   { minPrice, maxPrice }: AppFilter,
   categoryId: string,
   { state }: MainProps
@@ -20,8 +21,14 @@ async function getProducts(
 
   const params = new URLSearchParams();
   params.append('filter', `variants.price.centAmount:range (${minPrice} to ${maxPrice})`);
+
   const paramsCat = new URLSearchParams();
   paramsCat.append('filter', `categories.id:"${categoryId}"`);
+
+  if (sortingType) params.append('sort', `${sortingType}`);
+
+  console.log(`variants.scopedPrice.currentValue.centAmount:range (${minPrice} to ${maxPrice})`);
+
   const headers = new Headers({
     Authorization: `Bearer ${BEARER_TOKEN}`
   });
