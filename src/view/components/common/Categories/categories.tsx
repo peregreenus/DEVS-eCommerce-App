@@ -2,14 +2,7 @@
 /* eslint-disable react/button-has-type */
 import React from 'react';
 import * as classes from './categories.module.css';
-import { ICategory } from '../../../../data/types/interfaces/category';
-
-// Якщо ви використовуєте новий тип CategoriesProps
-interface CategoriesProps {
-  categories: ICategory[];
-  setCategoryId: React.Dispatch<React.SetStateAction<string>>;
-  categoryId: string;
-}
+import CategoriesProps from '../../../../data/types/interfaces/CategoriesProps';
 
 function Categories({ categories, setCategoryId }: CategoriesProps) {
   const handleCategoryClick = (id: string) => {
@@ -19,7 +12,7 @@ function Categories({ categories, setCategoryId }: CategoriesProps) {
   return (
     <ul className={classes.list}>
       <li>
-        <button onClick={() => handleCategoryClick('*')} className={classes.button}>
+        <button onClick={() => handleCategoryClick('')} className={classes.button}>
           All categories
         </button>
       </li>

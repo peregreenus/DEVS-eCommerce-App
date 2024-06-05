@@ -39,13 +39,11 @@ export default function Catalog({ state, setState }: MainProps) {
         if (fetchedCategories) {
           setCategories(fetchedCategories);
           console.log(fetchedCategories);
-          console.log('Відпрацювали категорії');
 
-          const fetchedProducts = await getProducts(price, { state, setState });
+          const fetchedProducts = await getProducts(price, categoryId, { state, setState });
           if (fetchedProducts) {
             setProducts(fetchedProducts);
             console.log(fetchedProducts);
-            console.log('Відпрацювали продукти');
           }
         }
       } catch (error) {
@@ -57,9 +55,7 @@ export default function Catalog({ state, setState }: MainProps) {
 
     fetchCategoriesAndProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [price]);
-
-  console.log(categoryId);
+  }, [price, categoryId]);
 
   return loading ? (
     <Loader />
