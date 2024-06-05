@@ -16,6 +16,7 @@ async function getProducts(
   const BEARER_TOKEN = token || getLSAnonToken();
   console.log(`token => ${BEARER_TOKEN}`, state);
 
+
   const params = new URLSearchParams();
   params.append('filter', `variants.price.centAmount:range (${minPrice} to ${maxPrice})`);
 
