@@ -9,12 +9,12 @@ function Filter({ price, setPrice }: SearchPriceFilter) {
 
   const handleMinPriceChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newMinPrice = event.currentTarget.value;
-    setMinValue(parseInt(newMinPrice, 10));
+    setMinValue(+newMinPrice);
   };
 
   const handleMaxPriceChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newMaxPrice = event.currentTarget.value;
-    setMaxValue(parseInt(newMaxPrice, 10));
+    setMaxValue(+newMaxPrice);
   };
 
   function applyFilter() {

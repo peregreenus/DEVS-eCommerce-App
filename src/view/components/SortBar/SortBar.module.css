@@ -1,0 +1,16 @@
+.wrapper {
+  align-self: flex-end;
+  font-size: 1.3rem;
+  margin: 0.5rem;
+  padding: 1rem;
+}
+
+.select {
+  font-size: inherit;
+  outline: transparent;
+  border: 1ps solid;
+  border-radius: 0.5rem;
+  width: 90px;
+  padding: 0.2rem;
+  cursor: pointer;
+}

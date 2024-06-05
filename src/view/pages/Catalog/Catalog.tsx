@@ -12,14 +12,17 @@ import * as classes from './Catalog.module.css';
 import { MainProps } from '../../../data/types/main-props';
 import Filter from '../../components/common/Filter/filter';
 import { AppFilter } from '../../../data/types/interfaces/SearchPriceFilter';
+import SortBar from '../../components/SortBar/SortBar';
 
 export default function Catalog({ state, setState }: MainProps) {
   const [products, setProducts] = useState<IProduct[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [sorting, setSorting] = useState<string>('');
   const [price, setPrice] = useState<AppFilter>({
     minPrice: 0,
-    maxPrice: 100000000
+    maxPrice: 100000000000
   });
+
   // const [limitsPrices, setlimitsPrices] = useState<number[]>([0, 0]);
   const navigate = useNavigate();
 
@@ -30,7 +33,8 @@ export default function Catalog({ state, setState }: MainProps) {
   useEffect(() => {
     async function fetchProducts() {
       setLoading(true);
-      const fetchedProducts = await getProducts(price, { state, setState });
+      const fetchedProducts = await getProducts(sorting, price, { state, setState });
+      
       if (fetchedProducts) {
         setProducts(fetchedProducts);
         setLoading(false);
@@ -39,17 +43,21 @@ export default function Catalog({ state, setState }: MainProps) {
     }
     fetchProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state, price, setState]);
+  }, [state, price, sorting, setState]);
 
   return loading ? (
-    <Loader />
+    <>
+      <Header state={state} setState={setState} />
+      <Loader />
+      <Footer />
+    </>
   ) : (
     <div>
       <Header state={state} setState={setState} />
-      <Filter price={price} setPrice={setPrice} />
-
       <div className={classes.catalog}>
         <h2>Catalog</h2>
+        <Filter price={price} setPrice={setPrice} />
+        <SortBar value={sorting} onChange={(e) => setSorting(e.target.value)} />
         <div className={classes.cardContainer}>
           {products?.map((product: IProduct) => {
             return <ProductCard key={product.id} product={product} goToProduct={goToProduct} />;

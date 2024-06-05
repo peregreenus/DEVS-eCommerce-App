@@ -5,8 +5,8 @@ import { IProduct } from '../types/interfaces/product';
 import { MainProps } from '../types/main-props';
 import { getLSToken, getLSAnonToken } from '../utils/getLS';
 
-
 async function getProducts(
+  sortingType: string,
   { minPrice, maxPrice }: AppFilter,
   { state }: MainProps
 ): Promise<IProduct[] | null> {
@@ -15,14 +15,20 @@ async function getProducts(
   const token = getLSToken();
   const BEARER_TOKEN = token || getLSAnonToken();
   console.log(`token => ${BEARER_TOKEN}`, state);
+
+
   const params = new URLSearchParams();
   params.append('filter', `variants.price.centAmount:range (${minPrice} to ${maxPrice})`);
-  // eslint-disable-next-line no-console
+
+  if (sortingType) params.append('sort', `${sortingType}`);
+
   console.log(`variants.scopedPrice.currentValue.centAmount:range (${minPrice} to ${maxPrice})`);
+
   const headers = new Headers({
     Authorization: `Bearer ${BEARER_TOKEN}`
   });
   const fullUrl = `${url}?limit=42&${params.toString()}`;
+
   try {
     const response = await fetch(fullUrl, { method: 'GET', headers });
     const productsData = await response.json();
