@@ -6,6 +6,7 @@ import { MainProps } from '../types/main-props';
 import { getLSToken, getLSAnonToken } from '../utils/getLS';
 
 async function getProducts(
+  sortingType: string,
   { minPrice, maxPrice }: AppFilter,
   { state }: MainProps
 ): Promise<IProduct[] | null> {
@@ -17,6 +18,8 @@ async function getProducts(
 
   const params = new URLSearchParams();
   params.append('filter', `variants.price.centAmount:range (${minPrice} to ${maxPrice})`);
+
+  if (sortingType) params.append('sort', `${sortingType}`);
 
   console.log(`variants.scopedPrice.currentValue.centAmount:range (${minPrice} to ${maxPrice})`);
 
