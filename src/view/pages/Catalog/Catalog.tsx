@@ -30,29 +30,32 @@ export default function Catalog({ state, setState }: MainProps) {
   };
 
   useEffect(() => {
-    async function fetchProducts() {
+    async function fetchCategoriesAndProducts() {
       setLoading(true);
-      const fetchedProducts = await getProducts(price, { state, setState });
-      if (fetchedProducts) {
-        setProducts(fetchedProducts);
+      try {
+        const fetchedCategories = await getCategories({ state, setState });
+        if (fetchedCategories) {
+          setCategories(fetchedCategories);
+          console.log(fetchedCategories);
+          console.log('Відпрацювали категорії');
+
+          const fetchedProducts = await getProducts(price, { state, setState });
+          if (fetchedProducts) {
+            setProducts(fetchedProducts);
+            console.log(fetchedProducts);
+            console.log('Відпрацювали продукти');
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
         setLoading(false);
-        console.log(fetchedProducts);
-      }
-    }
-    async function fetchCategiries() {
-      setLoading(true);
-      const fetchedCategories = await getCategories();
-      if (fetchedCategories) {
-        setCategories(fetchedCategories);
-        setLoading(false);
-        console.log(fetchedCategories);
       }
     }
 
-    fetchCategiries();
-    fetchProducts();
+    fetchCategoriesAndProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state, price]);
+  }, [price]);
 
   console.log(categories);
 

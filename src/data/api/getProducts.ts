@@ -26,8 +26,8 @@ async function getProducts(
     return productsData.results;
   } catch (error) {
     console.error(error);
-    return null;
   }
+  return null;
 }
 
 export default getProducts;
