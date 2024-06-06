@@ -8,14 +8,9 @@
     align-items: flex-start;
     gap: 1rem;
     flex-wrap: wrap;
-    .controlProfileButton:disabled {
-      cursor: not-allowed;
-      background-color: var(--gray-bg-color);
-      color: rgba(220, 220, 220, 0.433);
-    }
   }
   .defaultAddress {
-    background-color: rgba(188, 150, 150, 0.594);
+    background-color: rgba(212, 219, 235, 0.594);
   }
   .addressContent {
     display: flex;
@@ -34,6 +29,13 @@
     width: 100%;
     justify-content: space-between;
   }
+  .controlProfileButton:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    background-color: var(--gray-bg-color);
+    color: rgba(220, 220, 220, 0.433);
+  }
+
   .addressBlock {
     display: flex;
     flex-direction: column;
@@ -70,11 +72,12 @@
     display: flex;
     gap: 1rem;
     flex-direction: column;
-    .controlProfileButton:disabled {
+    /* .controlProfileButton:disabled {
       cursor: not-allowed;
+      pointer-events: none;
       background-color: var(--gray-bg-color);
       color: rgba(220, 220, 220, 0.433);
-    }
+    } */
   }
   .showModalEditAddress {
     .editInfoContainer {

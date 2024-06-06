@@ -1,6 +1,9 @@
 /* eslint-disable no-console */
-import React, { ChangeEvent, FormEvent } from 'react';
-import { CustomerAddresses } from '../../../../data/types/interfaces/customer.interface';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
+import {
+  CustomerAddresses,
+  CustomerProfileResponse
+} from '../../../../data/types/interfaces/customer.interface';
 import * as styles from './profile-addresses.module.css';
 import EditPencilIcon from '../../common/icons/editPencilIcon';
 import AddPlusIcon from '../../common/icons/addPlusIcon';
@@ -11,31 +14,37 @@ import Country from '../../../../data/types/country';
 import setCustomerAddress from '../../../../data/api/profile/setAddress';
 import { setLSVersionProfileCustomer } from '../../../../data/utils/setLS';
 import { ProfileUpdateProps } from '../../../../data/types/profile-props';
+import { checkingCountry } from '../../../../data/utils/validate-form';
+import setTypeAddress from '../../../../data/api/profile/setTypeAddress';
+import RemoveIcon from '../../common/icons/removeIcon';
+import removeAddress from '../../../../data/api/profile/deleteAddress';
+import SetDefAddress from '../../../../data/api/profile/setDefAddress';
 
 function AddressesTabContent({
   setUpdate,
   addresses,
   shippingAddressIds,
-  // defaultShippingAddressId,
-  billingAddressIds
-  // defaultBillingAddressId
+  defaultShippingAddressId,
+  billingAddressIds,
+  defaultBillingAddressId
 }: ProfileUpdateProps) {
-  // const [defShipping, setDefShipping] = useState('');
-  // const [defBilling, setDefBilling] = useState('');
+  let defShipping: string = '';
+  let defBilling: string = '';
   const { isVisible, toggleVisible } = useModal();
-
+  const [isNew, setNew] = useState<boolean>(false);
   const shippingAddresses: CustomerAddresses[] = [];
   const billingAddresses: CustomerAddresses[] = [];
-  const textb = '';
+  const textb: string = '';
+  let newAddressId: string = '';
   if (shippingAddressIds && billingAddressIds && addresses) {
     shippingAddressIds.forEach((shipEl) => {
       addresses.forEach((addressEl) => {
         if (addressEl.id === shipEl) {
           shippingAddresses.push(addressEl);
         }
-        // if (addressEl.id === defaultShippingAddressId) {
-        //   setDefShipping(`${defaultShippingAddressId}`);
-        // }
+        if (addressEl.id === defaultShippingAddressId) {
+          defShipping = `${defaultShippingAddressId}`;
+        }
       });
     });
     billingAddressIds.forEach((bilEl) => {
@@ -43,26 +52,46 @@ function AddressesTabContent({
         if (addressEl.id === bilEl) {
           billingAddresses.push(addressEl);
         }
-        // if (addressEl.id === defaultBillingAddressId) {
-        //   setDefShipping(`${defaultBillingAddressId}`);
-        // }
+        if (addressEl.id === defaultBillingAddressId) {
+          defBilling = `${defaultBillingAddressId}`;
+        }
       });
     });
   }
-  function modalShow(key: string) {
+  function modalShow(key: string, country: string) {
+    console.log(key);
+    if (country) {
+      checkingCountry.address =
+        Object.values(Country)[Object.keys(Country).indexOf(country as Country)];
+      setNew(false);
+    } else {
+      setNew(true);
+    }
     toggleVisible(key);
+    console.log(isVisible);
   }
 
-  function changeDefShippingValue(e: ChangeEvent) {
-    console.log(e.currentTarget.id);
-    // setDefShipping(e.currentTarget.id);
+  function setDefault(e: ChangeEvent<HTMLInputElement>, typeAddress: string) {
+    SetDefAddress(e.currentTarget.id, typeAddress).then((response) => {
+      setLSVersionProfileCustomer(response.version);
+      setUpdate((prev) => !prev);
+    });
   }
 
-  function chengDefBillingValue(e: ChangeEvent) {
-    console.log(e.currentTarget.id);
-    // setDefBilling(e.currentTarget.id);
+  function setNewAddressId(res: CustomerProfileResponse) {
+    if (res.addresses && res.shippingAddressIds && res.billingAddressIds) {
+      res.addresses.forEach((addressEl) => {
+        if (addressEl.id && res.shippingAddressIds && res.billingAddressIds) {
+          if (
+            !res.shippingAddressIds.includes(addressEl.id) &&
+            !res.billingAddressIds.includes(addressEl.id)
+          ) {
+            newAddressId = addressEl.id;
+          }
+        }
+      });
+    }
   }
-
   const handleSubmitAddress = async (
     e: FormEvent<HTMLFormElement>,
     typeAddress: string,
@@ -72,16 +101,24 @@ function AddressesTabContent({
     const addressDetails = new FormData(e.currentTarget);
     console.log(Object.fromEntries(addressDetails.entries()));
     const updateAddress = JSON.stringify(Object.fromEntries(addressDetails.entries()));
-    await setCustomerAddress(updateAddress, idAddress, typeAddress)
-      .then((response) => setLSVersionProfileCustomer(response.version))
+    await setCustomerAddress(updateAddress, idAddress)
+      .then((response) => {
+        setLSVersionProfileCustomer(response.version);
+        setNewAddressId(response);
+      })
+      .then(() => setTypeAddress(newAddressId, typeAddress))
       .then(() => {
         setUpdate((prev) => !prev);
-        modalShow(`${typeAddress}-${idAddress}`);
+        modalShow(`${typeAddress}-${idAddress}`, '');
       });
-
-    console.log(typeAddress);
-    console.log(idAddress);
   };
+  async function deleteAddress(id: string) {
+    console.log(id);
+    await removeAddress(id).then((response) => {
+      setLSVersionProfileCustomer(response.version);
+      setUpdate((prev) => !prev);
+    });
+  }
 
   return (
     <div className={styles.addressesTabContent}>
@@ -91,17 +128,36 @@ function AddressesTabContent({
           <button
             type="button"
             className={styles.controlProfileButton}
-            onClick={() => modalShow('new')}>
-            <AddPlusIcon width="1.5rem" height="1.5rem" />
+            disabled={Object.values(isVisible).includes(true)}
+            onClick={() => modalShow('Shipping-new', '')}>
+            <AddPlusIcon
+              width="1.5rem"
+              height="1.5rem"
+              fill={Object.values(isVisible).includes(true) ? '#e5e7eb' : 'grey'}
+            />
             {textb}
           </button>
         </div>
-        {/* ${defShipping === value.id ? styles.defaultAddress : ''} */}
+        {isVisible['Shipping-new'] && (
+          <EditAddressModal toggleVisible={() => toggleVisible('Shipping-new')}>
+            <EditingAddresses
+              id="Shipping-new"
+              addressData={{ city: '', postalCode: '', streetName: '', country: '' }}
+              onClick={() => {
+                modalShow('Shipping-new', '');
+              }}
+              onSubmit={(e: FormEvent<HTMLFormElement>) =>
+                handleSubmitAddress(e, 'Shipping', 'new')
+              }
+              isNew={isNew}
+            />
+          </EditAddressModal>
+        )}
         {shippingAddresses.map((value) => (
           <div key={value.id}>
             <div
               key={value.id}
-              className={`${styles.address} 
+              className={`${defShipping === value.id ? styles.defaultAddress : ''} ${styles.address} 
               ${!isVisible[`Shipping-${value.id}`] ? styles.showTextAddressContent : styles.hideTextAddressContent}`}>
               <div className={styles.addressControl}>
                 <span>
@@ -109,38 +165,57 @@ function AddressesTabContent({
                     type="radio"
                     name="shippingRadio"
                     id={value.id}
-                    // checked={defShipping === value.id}
-                    onChange={changeDefShippingValue}
+                    checked={defaultShippingAddressId?.includes(`${value.id}`)}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setDefault(e, 'shipping')}
                   />
                   set default
                 </span>
-                <button
-                  type="button"
-                  className={styles.controlProfileButton}
-                  onClick={() => modalShow(`Shipping-${value.id}`)}>
-                  <EditPencilIcon width="1.5rem" height="1.5rem" />
-                  {textb}
-                </button>
+                <div>
+                  <button
+                    type="button"
+                    className={styles.controlProfileButton}
+                    disabled={Object.values(isVisible).includes(true)}
+                    onClick={() => modalShow(`Shipping-${value.id}`, value.country)}>
+                    <EditPencilIcon
+                      width="1.5rem"
+                      height="1.5rem"
+                      fill={Object.values(isVisible).includes(true) ? '#e5e7eb' : 'grey'}
+                    />
+                    {textb}
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.controlProfileButton}
+                    disabled={Object.values(isVisible).includes(true)}
+                    onClick={() => deleteAddress(`${value.id}`)}>
+                    <RemoveIcon
+                      width="1.5rem"
+                      height="1.5rem"
+                      fill={Object.values(isVisible).includes(true) ? '#e5e7eb' : 'grey'}
+                    />
+                    {textb}
+                  </button>
+                </div>
               </div>
               <div className={styles.addressBlock}>
-                <p className={styles.profileContentString}>
+                <div className={styles.profileContentString}>
                   <p className={styles.fieldName}>Country: </p>
                   {Object.values(Country)[Object.keys(Country).indexOf(value.country as Country)]}
-                </p>
-                <p className={styles.profileContentString}>
+                </div>
+                <div className={styles.profileContentString}>
                   <p className={styles.fieldName}>Postal Code: </p>
                   {value.postalCode}
-                </p>
+                </div>
               </div>
               <div className={styles.addressBlock}>
-                <p className={styles.profileContentString}>
+                <div className={styles.profileContentString}>
                   <p className={styles.fieldName}>City: </p>
                   {value.city}
-                </p>
-                <p className={styles.profileContentString}>
+                </div>
+                <div className={styles.profileContentString}>
                   <p className={styles.fieldName}>Street: </p>
                   {value.streetName}
-                </p>
+                </div>
               </div>
             </div>
             {isVisible[`Shipping-${value.id}`] && (
@@ -149,11 +224,12 @@ function AddressesTabContent({
                   id={`Shipping-${value.id}`}
                   addressData={value}
                   onClick={() => {
-                    modalShow(`Shipping-${value.id}`);
+                    modalShow(`Shipping-${value.id}`, value.country);
                   }}
                   onSubmit={(e: FormEvent<HTMLFormElement>) =>
                     handleSubmitAddress(e, 'Shipping', `${value.id}`)
                   }
+                  isNew={isNew}
                 />
               </EditAddressModal>
             )}
@@ -166,16 +242,33 @@ function AddressesTabContent({
           <button
             type="button"
             className={styles.controlProfileButton}
-            onClick={() => modalShow('new')}>
-            <AddPlusIcon width="1.5rem" height="1.5rem" />
+            disabled={Object.values(isVisible).includes(true)}
+            onClick={() => modalShow('Billing-new', '')}>
+            <AddPlusIcon
+              width="1.5rem"
+              height="1.5rem"
+              fill={Object.values(isVisible).includes(true) ? '#e5e7eb' : 'grey'}
+            />
             {textb}
           </button>
         </div>
-        {/* ${defBilling === value.id ? styles.defaultAddress : ''} */}
+        {isVisible['Billing-new'] && (
+          <EditAddressModal toggleVisible={() => toggleVisible('Billing-new')}>
+            <EditingAddresses
+              id="Billing-new"
+              addressData={{ city: '', postalCode: '', streetName: '', country: '' }}
+              onClick={() => {
+                modalShow('Billing-new', '');
+              }}
+              onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmitAddress(e, 'Billing', 'new')}
+              isNew={isNew}
+            />
+          </EditAddressModal>
+        )}
         {billingAddresses.map((value) => (
           <div key={value.id}>
             <div
-              className={`${styles.address}
+              className={`${defBilling === value.id ? styles.defaultAddress : ''} ${styles.address}
                          ${!isVisible[`Billing-${value.id}`] ? styles.showTextAddressContent : styles.hideTextAddressContent}`}>
               <div className={styles.addressControl}>
                 <span>
@@ -183,38 +276,57 @@ function AddressesTabContent({
                     type="radio"
                     name="billingRadio"
                     id={value.id}
-                    // checked={defBilling === value.id}
-                    onChange={chengDefBillingValue}
+                    checked={defaultBillingAddressId?.includes(`${value.id}`)}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setDefault(e, 'billing')}
                   />
                   set default
                 </span>
-                <button
-                  type="button"
-                  className={styles.controlProfileButton}
-                  onClick={() => modalShow(`Billing-${value.id}`)}>
-                  <EditPencilIcon width="1.5rem" height="1.5rem" />
-                  {textb}
-                </button>
+                <div>
+                  <button
+                    type="button"
+                    className={styles.controlProfileButton}
+                    disabled={Object.values(isVisible).includes(true)}
+                    onClick={() => modalShow(`Billing-${value.id}`, value.country)}>
+                    <EditPencilIcon
+                      width="1.5rem"
+                      height="1.5rem"
+                      fill={Object.values(isVisible).includes(true) ? '#e5e7eb' : 'grey'}
+                    />
+                    {textb}
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.controlProfileButton}
+                    disabled={Object.values(isVisible).includes(true)}
+                    onClick={() => deleteAddress(`${value.id}`)}>
+                    <RemoveIcon
+                      width="1.5rem"
+                      height="1.5rem"
+                      fill={Object.values(isVisible).includes(true) ? '#e5e7eb' : 'grey'}
+                    />
+                    {textb}
+                  </button>
+                </div>
               </div>
               <div className={styles.addressBlock}>
-                <p className={styles.profileContentString}>
+                <div className={styles.profileContentString}>
                   <p className={styles.fieldName}>Country: </p>
                   {Object.values(Country)[Object.keys(Country).indexOf(value.country as Country)]}
-                </p>
-                <p className={styles.profileContentString}>
+                </div>
+                <div className={styles.profileContentString}>
                   <p className={styles.fieldName}>Postal Code: </p>
                   {value.postalCode}
-                </p>
+                </div>
               </div>
               <div className={styles.addressBlock}>
-                <p className={styles.profileContentString}>
+                <div className={styles.profileContentString}>
                   <p className={styles.fieldName}>City: </p>
                   {value.city}
-                </p>
-                <p className={styles.profileContentString}>
+                </div>
+                <div className={styles.profileContentString}>
                   <p className={styles.fieldName}>Street: </p>
                   {value.streetName}
-                </p>
+                </div>
               </div>
             </div>
             {isVisible[`Billing-${value.id}`] && (
@@ -223,11 +335,12 @@ function AddressesTabContent({
                   id={`Billing-${value.id}`}
                   addressData={value}
                   onClick={() => {
-                    modalShow(`Billing-${value.id}`);
+                    modalShow(`Billing-${value.id}`, value.country);
                   }}
                   onSubmit={(e: FormEvent<HTMLFormElement>) =>
                     handleSubmitAddress(e, 'Billing', `${value.id}`)
                   }
+                  isNew={isNew}
                 />
               </EditAddressModal>
             )}

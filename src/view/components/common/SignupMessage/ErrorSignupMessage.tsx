@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import * as styles from './SignupMessage.module.css';
+import * as styles from './ErrorSignupMessage.module.css';
 import { SignupProps } from '../../../../data/types/signup-props';
 
 const signupErrorMessage = { message: '', statusCode: 0 };
@@ -11,10 +11,10 @@ export function setErrorMessage(message: string, statusCode: number) {
 
 export default function ErrorSignupMessage({ showSignupState, setShowSignupState }: SignupProps) {
   const OkClick = () => {
-    setShowSignupState((prevState) => ({ ...prevState, showSignupError: false }));
+    setShowSignupState(false);
   };
   return (
-    <div className={`${showSignupState.showSignupError ? styles.successLink : ''}`}>
+    <div className={`${showSignupState ? styles.successLink : ''}`}>
       <p>Signup Failed</p>
       <p>{signupErrorMessage.message}</p>
       <div className={styles.buttonContainer}>
