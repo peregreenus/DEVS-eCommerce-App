@@ -12,7 +12,6 @@ import * as classes from './Catalog.module.css';
 import { MainProps } from '../../../data/types/main-props';
 import Filter from '../../components/common/Filter/filter';
 import { AppFilter } from '../../../data/types/interfaces/SearchPriceFilter';
-import SortBar from '../../components/SortBar/SortBar';
 
 export default function Catalog({ state, setState }: MainProps) {
   const [products, setProducts] = useState<IProduct[] | null>(null);
