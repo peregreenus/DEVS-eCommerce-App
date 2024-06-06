@@ -69,10 +69,10 @@ function validationField(fieldName: string, fieldValue: string): string {
   }
 
   if (fieldName === 'password' || fieldName === 'newPassword') {
-    const requirements = /^(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*])(?!.*[^a-zA-Z0-9!@#$%^&*])(.{8,15})$/;
+    const requirements = /^(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*])(?!.*[^a-zA-Z0-9!@#$%^&*])(.{8,25})$/;
     if (!requirements.test(fieldValue)) {
       returnValue =
-        'minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, and 1 number. (allowed char: latin char and !@#$%^&*)';
+        '8-25 characters, at least 1 uppercase letter, 1 lowercase letter, and 1 number. (allowed char: latin char and !@#$%^&*)';
     } else {
       returnValue = 'empty';
     }

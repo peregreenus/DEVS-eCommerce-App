@@ -7,48 +7,33 @@ import { validationField } from '../../../../data/utils/validate-form';
 import { errorInitialPasswordState, initialPasswordState } from '../initial-state';
 import { ProfilePasswordType } from '../../../../data/types/profile-props';
 import setCustomerPassword from '../../../../data/api/profile/setPassword';
-import { setLSVersionProfileCustomer } from '../../../../data/utils/setLS';
-import { CustomerResponse } from '../../../../data/types/interfaces/customer.interface';
 import { MainProps } from '../../../../data/types/main-props';
-import getTokenForLogin from '../../../../data/api/getTokenForLogin';
-import logInCustomer from '../../../../data/api/logInCustomer';
-import { SignupState } from '../../../../data/types/signup-props';
-import getAnonToken from '../../../../data/api/getToken';
+import AutoLoginProcess from '../../../../data/utils/autoLoginProcess';
 
 const userPassChange = { pass: '' };
-const signupErrorMessage = { message: '', statusCode: 0 };
-
-export function setErrorMessage(message: string, statusCode: number) {
-  signupErrorMessage.message = message;
-  signupErrorMessage.statusCode = statusCode;
-}
 
 export default function ChangePasswordTabContent({ state, setState }: MainProps) {
   const validationErrors: { [key: string]: string } = errorInitialPasswordState;
-  const [showSignupState, setShowSignupState] = useState<SignupState>({
-    showSignupSuccess: false,
-    showSignupError: false
-  });
+  const autoLoginErrorMessage = { message: '', statusCode: 0 };
+  const [changePasswordState, setChangePasswordState] = useState(false);
   const [newPassword, setNewPassword] = useState<ProfilePasswordType>({
     ...initialPasswordState
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>(validationErrors);
   const [isValid, setFormValid] = useState(false);
   const navigate = useNavigate();
+
   useEffect(() => {
-    console.log(errors);
     if (Object.values(errors).every((str) => str === '')) {
       setFormValid(true);
     } else {
       setFormValid(false);
     }
   }, [errors]);
+
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
-    setShowSignupState((prevState) => ({
-      ...prevState,
-      showSignupError: false
-    }));
+    setChangePasswordState(false);
     switch (name) {
       case 'currentPassword':
         if (!value) {
@@ -72,71 +57,37 @@ export default function ChangePasswordTabContent({ state, setState }: MainProps)
         }
         break;
     }
-
     setErrors({ ...validationErrors });
-
     setNewPassword((prev) => ({
       ...prev,
       [name]: value
     }));
   };
 
-  const signupProcess = (res: CustomerResponse) => {
-    if (res.message && res.statusCode && res.statusCode >= 400) {
-      console.log(res);
-      switch (res.statusCode) {
-        case 400:
-          setErrorMessage(res.message, res.statusCode);
-          break;
-        default:
-          setErrorMessage('Internal server error', res.statusCode);
-          break;
-      }
-      setShowSignupState((prevState) => ({
-        ...prevState,
-        showSignupError: true
-      }));
-    } else if (res?.email && res?.version) {
-      console.log(res?.version);
-      setLSVersionProfileCustomer(res?.version);
-      localStorage.removeItem('bearerToken');
-      localStorage.removeItem('cart');
-      localStorage.removeItem('bearerAnonToken');
-      getAnonToken();
-      getTokenForLogin(res?.email, userPassChange.pass, { state, setState })
-        .then((token) => {
-          if (res?.email && userPassChange.pass) {
-            logInCustomer(res?.email, userPassChange.pass, `${token}`, '', {
-              state,
-              setState
-            }).catch((err) => {
-              throw new Error(err);
-            });
-          }
-          return token;
-        })
-        .then(() => navigate('/'))
-        .catch((err) => console.error(err));
-      userPassChange.pass = '';
-    }
-  };
-
-  const setPasswordChange = async (e: FormEvent<HTMLFormElement>) => {
+  const setPassword = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const userPassword = new FormData(e.currentTarget);
     userPassChange.pass = String(userPassword.get('newPassword'));
     const userPasswordData = JSON.stringify(Object.fromEntries(userPassword.entries()));
     await setCustomerPassword(userPasswordData).then((response) => {
-      console.log(response);
-      signupProcess(response);
+      AutoLoginProcess(userPassChange.pass, response, { state, setState }).then((res) => {
+        if (res?.autoLoginState) {
+          navigate('/');
+        } else {
+          setChangePasswordState(true);
+          autoLoginErrorMessage.statusCode = res?.errorMessage.statusCode;
+          autoLoginErrorMessage.message = res?.errorMessage.message;
+        }
+      });
     });
+    userPassChange.pass = '';
   };
   const textb = '';
   return (
     <div className={styles.profilePasswordContent}>
       <form
         className={styles.passwordContent}
-        onSubmit={(e: FormEvent<HTMLFormElement>) => setPasswordChange(e)}>
+        onSubmit={(e: FormEvent<HTMLFormElement>) => setPassword(e)}>
         <div className={styles.editPasswordForm}>
           <label htmlFor="currentPassword">
             <p>Current Password: </p>
@@ -185,11 +136,10 @@ export default function ChangePasswordTabContent({ state, setState }: MainProps)
           {textb}
         </button>
       </form>
-      <div
-        className={` ${showSignupState.showSignupError ? styles.showMessage : styles.hideMessage} `}>
+      <div className={` ${changePasswordState ? styles.showMessage : styles.hideMessage} `}>
         <div>
-          <p>Error: :{signupErrorMessage.statusCode}</p>
-          <p>Message: {signupErrorMessage.message}</p>
+          <p>Error: :{autoLoginErrorMessage.statusCode}</p>
+          <p>Message: {autoLoginErrorMessage.message}</p>
         </div>
       </div>
     </div>
