@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/no-danger */
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
@@ -13,36 +14,59 @@ import { MainProps } from '../../../data/types/main-props';
 import Filter from '../../components/common/Filter/filter';
 import { AppFilter } from '../../../data/types/interfaces/SearchPriceFilter';
 
+import getCategories from '../../../data/api/getCategories';
+import { ICategory } from '../../../data/types/interfaces/category';
+import SortBar from '../../components/SortBar/SortBar';
+import Categories from '../../components/common/Categories/categories';
+
 export default function Catalog({ state, setState }: MainProps) {
   const [products, setProducts] = useState<IProduct[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [sorting, setSorting] = useState<string>('');
   const [price, setPrice] = useState<AppFilter>({
     minPrice: 0,
-    maxPrice: 100000000000
+    maxPrice: 100000000000000
   });
 
-  // const [limitsPrices, setlimitsPrices] = useState<number[]>([0, 0]);
-  const navigate = useNavigate();
+  const [categoryId, setCategoryId] = useState<string>('');
+  const [categories, setCategories] = useState<ICategory[]>([]);
 
+  // const [limitsPrices, setlimitsPrices] = useState<number[]>([0, 0]);
+
+  const navigate = useNavigate();
   const goToProduct = (id: string) => {
     navigate(`product/${id}`);
   };
 
   useEffect(() => {
-    async function fetchProducts() {
+    async function fetchCategoriesAndProducts() {
       setLoading(true);
-      const fetchedProducts = await getProducts(sorting, price, { state, setState });
-      
-      if (fetchedProducts) {
-        setProducts(fetchedProducts);
+
+      try {
+        const fetchedCategories = await getCategories({ state, setState });
+        if (fetchedCategories) {
+          setCategories(fetchedCategories);
+          console.log(fetchedCategories);
+
+          const fetchedProducts = await getProducts(sorting, price, categoryId, {
+            state,
+            setState
+          });
+          if (fetchedProducts) {
+            setProducts(fetchedProducts);
+            console.log(fetchedProducts);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
         setLoading(false);
-        console.log(fetchedProducts);
       }
     }
-    fetchProducts();
+
+    fetchCategoriesAndProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state, price, sorting, setState]);
+  }, [price, categoryId, sorting]);
 
   return loading ? (
     <>
@@ -51,10 +75,11 @@ export default function Catalog({ state, setState }: MainProps) {
       <Footer />
     </>
   ) : (
-    <div>
+    <>
       <Header state={state} setState={setState} />
       <div className={classes.catalog}>
         <h2>Catalog</h2>
+        <Categories categories={categories} setCategoryId={setCategoryId} categoryId={categoryId} />
         <Filter price={price} setPrice={setPrice} />
         <SortBar value={sorting} onChange={(e) => setSorting(e.target.value)} />
         <div className={classes.cardContainer}>
@@ -64,6 +89,6 @@ export default function Catalog({ state, setState }: MainProps) {
         </div>
       </div>
       <Footer />
-    </div>
+    </>
   );
 }
