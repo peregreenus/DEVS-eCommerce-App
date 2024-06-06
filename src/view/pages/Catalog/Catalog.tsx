@@ -47,7 +47,10 @@ export default function Catalog({ state, setState }: MainProps) {
           setCategories(fetchedCategories);
           console.log(fetchedCategories);
 
-          const fetchedProducts = await getProducts(sorting, price, categoryId, { state, setState });
+          const fetchedProducts = await getProducts(sorting, price, categoryId, {
+            state,
+            setState
+          });
           if (fetchedProducts) {
             setProducts(fetchedProducts);
             console.log(fetchedProducts);
