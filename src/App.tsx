@@ -49,6 +49,12 @@ function App() {
             <Route path="/logout" element={<Logout state={state} setState={setState} />} />
           </>
         )}
+        {!state.userLoggedIn && (
+          <>
+            <Route path="/profile" element={<Login state={state} setState={setState} />} />
+            <Route path="/logout" element={<Login state={state} setState={setState} />} />
+          </>
+        )}
         <Route path="catalog/product" element={<Product state={state} setState={setState} />} />
         <Route path="catalog/product/:id" element={<Product state={state} setState={setState} />} />
         <Route path="/*" element={<Notfound state={state} setState={setState} />} />

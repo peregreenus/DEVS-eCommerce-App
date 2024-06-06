@@ -8,6 +8,7 @@ import { getLSToken, getLSAnonToken } from '../utils/getLS';
 async function getProducts(
   sortingType: string,
   { minPrice, maxPrice }: AppFilter,
+  categoryId: string,
   { state }: MainProps
 ): Promise<IProduct[] | null> {
   // const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/product-projections?limit=42`;
@@ -18,6 +19,8 @@ async function getProducts(
 
   const params = new URLSearchParams();
   params.append('filter', `variants.price.centAmount:range (${minPrice} to ${maxPrice})`);
+  const paramsCat = new URLSearchParams();
+  paramsCat.append('filter', `categories.id:"${categoryId}"`);
 
   if (sortingType) params.append('sort', `${sortingType}`);
 
@@ -26,7 +29,11 @@ async function getProducts(
   const headers = new Headers({
     Authorization: `Bearer ${BEARER_TOKEN}`
   });
-  const fullUrl = `${url}?limit=42&${params.toString()}`;
+
+  const fullUrl =
+    categoryId === ''
+      ? `${url}?limit=42&${params.toString()}`
+      : `${url}?limit=42&${paramsCat.toString()}&${params.toString()}`;
 
   try {
     const response = await fetch(fullUrl, { method: 'GET', headers });

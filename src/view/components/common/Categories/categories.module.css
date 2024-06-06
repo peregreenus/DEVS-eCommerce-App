@@ -1,0 +1,20 @@
+.list {
+  margin: 2rem;
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+
+  .button {
+    border: none;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    color: gray;
+    cursor: pointer;
+  }
+
+  .active {
+    cursor: default;
+    color: black;
+    font-weight: 600;
+  }
+}

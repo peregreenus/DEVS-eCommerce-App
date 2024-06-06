@@ -7,7 +7,7 @@ export default async function getAnonToken() {
   data.append('grant_type', 'client_credentials');
   data.append(
     'scope',
-    `view_published_products:${CTP.PROJECT_KEY} manage_my_orders:${CTP.PROJECT_KEY} manage_my_profile:${CTP.PROJECT_KEY}`
+    `view_published_products:${CTP.PROJECT_KEY} view_categories:${CTP.PROJECT_KEY} manage_my_orders:${CTP.PROJECT_KEY} manage_my_profile:${CTP.PROJECT_KEY}`
   );
 
   try {
