@@ -6,75 +6,45 @@ import Header from '../../components/common/header/header';
 import * as styles from './signup.module.css';
 import Footer from '../../components/common/footer/footer';
 import { MainProps } from '../../../data/types/main-props';
-import { SignupState } from '../../../data/types/signup-props';
 import CustomerSignup from '../../../data/api/customerSignup';
 import ErrorSignupMessage, {
   setErrorMessage
 } from '../../components/common/SignupMessage/ErrorSignupMessage';
-import { CustomerResponse } from '../../../data/types/interfaces/customer.interface';
-import getTokenForLogin from '../../../data/api/getTokenForLogin';
-import logInCustomer from '../../../data/api/logInCustomer';
+
+import AutoLoginProcess from '../../../data/utils/autoLoginProcess';
 
 const userPass = { pass: '' };
 
 export default function Singup({ state, setState }: MainProps) {
-  const [showSignupState, setShowSignupState] = useState<SignupState>({
-    showSignupSuccess: false,
-    showSignupError: false
-  });
+  const [showSignupState, setShowSignupState] = useState(false);
   const navigate = useNavigate();
-  const signupProcess = (res: CustomerResponse) => {
-    if (res.message && res.statusCode && res.statusCode >= 400) {
-      console.log(res);
-      switch (res.statusCode) {
-        case 400:
-          setErrorMessage(res.message, res.statusCode);
-          break;
-        default:
-          setErrorMessage('Internal server error', res.statusCode);
-          break;
-      }
-      setShowSignupState((prevState) => ({
-        ...prevState,
-        showSignupError: true
-      }));
-    } else if (res.customer?.email) {
-      getTokenForLogin(res.customer?.email, userPass.pass, { state, setState })
-        .then((token) => {
-          if (res.customer?.email && userPass.pass) {
-            logInCustomer(res.customer?.email, userPass.pass, `${token}`, '', {
-              state,
-              setState
-            }).catch((err) => {
-              throw new Error(err);
-            });
-          }
-          return token;
-        })
-        .then(() => navigate('/'))
-        .catch((err) => console.error(err));
-      userPass.pass = '';
-    }
-  };
 
   const handleRegistrationSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const userDetails = new FormData(e.currentTarget);
     userPass.pass = String(userDetails.get('password'));
     const customer = JSON.stringify(Object.fromEntries(userDetails.entries()));
-    await CustomerSignup(customer).then((res) => signupProcess(res));
+    await CustomerSignup(customer).then((response) =>
+      AutoLoginProcess(userPass.pass, response, { state, setState }).then((res) => {
+        if (res?.autoLoginState) {
+          navigate('/');
+        } else {
+          setShowSignupState(true);
+          setErrorMessage(res?.errorMessage.message, res?.errorMessage.statusCode);
+        }
+      })
+    );
+    userPass.pass = '';
   };
 
   return (
     <>
       <Header state={state} setState={setState} />
       <div className={styles.signup}>
-        <div
-          className={` ${showSignupState.showSignupSuccess || showSignupState.showSignupError ? styles.disableForm : styles.showForm} `}>
+        <div className={` ${showSignupState ? styles.disableForm : styles.showForm} `}>
           <FormSignup onSubmit={handleRegistrationSubmit} />
         </div>
-        <div
-          className={` ${showSignupState.showSignupError ? styles.showMessage : styles.hideMessage} `}>
+        <div className={` ${showSignupState ? styles.showMessage : styles.hideMessage} `}>
           <ErrorSignupMessage
             showSignupState={showSignupState}
             setShowSignupState={setShowSignupState}

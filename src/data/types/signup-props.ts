@@ -1,15 +1,10 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { RegistrationFieldsType } from './registration-type';
 
-export interface SignupState {
-  showSignupSuccess: boolean;
-  showSignupError: boolean;
-}
-
-export interface SignupProps {
-  showSignupState: SignupState;
-  setShowSignupState: React.Dispatch<React.SetStateAction<SignupState>>;
-}
+export type SignupProps = {
+  showSignupState: boolean;
+  setShowSignupState: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 export interface InputProps {
   type: 'text' | 'number' | 'email' | 'password' | 'date';
