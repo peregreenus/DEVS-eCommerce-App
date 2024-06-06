@@ -26,7 +26,7 @@ function Filter({ price, setPrice }: SearchPriceFilter) {
     <div className={classes.filter}>
       <sub className={classes.caption}>Filter</sub>
       <div className={classes.wrapper}>
-        <div className={classes.inputBlock}>
+        <div>
           <sub className={classes.label}>Price from</sub>
           <input
             className={classes.field}
@@ -36,7 +36,7 @@ function Filter({ price, setPrice }: SearchPriceFilter) {
             onChange={handleMinPriceChange}
           />
         </div>
-        <div className={classes.inputBlock}>
+        <div>
           <sub className={classes.label}>to</sub>
           <input
             className={classes.field}

@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/no-danger */
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
@@ -13,9 +12,6 @@ import * as classes from './Catalog.module.css';
 import { MainProps } from '../../../data/types/main-props';
 import Filter from '../../components/common/Filter/filter';
 import { AppFilter } from '../../../data/types/interfaces/SearchPriceFilter';
-import Categories from '../../components/common/Categories/categories';
-import getCategories from '../../../data/api/getCategories';
-import { ICategory } from '../../../data/types/interfaces/category';
 import SortBar from '../../components/SortBar/SortBar';
 
 export default function Catalog({ state, setState }: MainProps) {
@@ -24,15 +20,12 @@ export default function Catalog({ state, setState }: MainProps) {
   const [sorting, setSorting] = useState<string>('');
   const [price, setPrice] = useState<AppFilter>({
     minPrice: 0,
-    maxPrice: 100000000000000
+    maxPrice: 100000000000
   });
 
-  const [categoryId, setCategoryId] = useState<string>('');
-  const [categories, setCategories] = useState<ICategory[]>([]);
-
   // const [limitsPrices, setlimitsPrices] = useState<number[]>([0, 0]);
-
   const navigate = useNavigate();
+
   const goToProduct = (id: string) => {
     navigate(`product/${id}`);
   };
@@ -74,11 +67,10 @@ export default function Catalog({ state, setState }: MainProps) {
       <Footer />
     </>
   ) : (
-    <>
+    <div>
       <Header state={state} setState={setState} />
       <div className={classes.catalog}>
         <h2>Catalog</h2>
-        <Categories categories={categories} setCategoryId={setCategoryId} categoryId={categoryId} />
         <Filter price={price} setPrice={setPrice} />
         <SortBar value={sorting} onChange={(e) => setSorting(e.target.value)} />
         <div className={classes.cardContainer}>
@@ -88,6 +80,6 @@ export default function Catalog({ state, setState }: MainProps) {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }

@@ -5,27 +5,38 @@ import { CustomerAddresses } from '../../../../data/types/interfaces/customer.in
 import SaveMarkIcon from '../../common/icons/saveMarcIcon';
 import Country from '../../../../data/types/country';
 import { checkingCountry, validationField } from '../../../../data/utils/validate-form';
-import { errorInitialAddressState } from '../initial-state';
+import { errorInitialAddressNewState, errorInitialAddressState } from '../initial-state';
 import CloseXIcon from '../../common/icons/closeXIcon';
 
-interface EditingAddressFormProps {
+type EditingAddressFormProps = {
   id: string;
   addressData: CustomerAddresses;
   onClick: () => void;
   onSubmit: (e: FormEvent<HTMLFormElement>, typeAddress: string, idAddress: string) => void;
-}
+  isNew: boolean;
+};
 
 export default function EditingAddresses({
   onClick,
   onSubmit,
   id,
-  addressData
+  addressData,
+  isNew
 }: EditingAddressFormProps) {
-  const validationErrors: { [key: string]: string } = errorInitialAddressState;
-  const currentSelectCountry: string =
-    Object.values(Country)[Object.keys(Country).indexOf(addressData.country as Country)];
+  let validationErrors: { [key: string]: string };
+  let currentSelectCountry: string;
+  if (isNew) {
+    validationErrors = errorInitialAddressNewState;
+    currentSelectCountry = '';
+  } else {
+    validationErrors = errorInitialAddressState;
+    currentSelectCountry =
+      Object.values(Country)[Object.keys(Country).indexOf(addressData.country as Country)];
+  }
+
   const [newAddressData, setAddressData] = useState<CustomerAddresses>(addressData);
   const [selectedCountry, setSelectedCountry] = useState(currentSelectCountry);
+  console.log(`current country : ${selectedCountry}`);
   const [errors, setErrors] = useState<{ [key: string]: string }>(validationErrors);
   const [isValid, setFormValid] = useState(false);
 
@@ -33,7 +44,6 @@ export default function EditingAddresses({
   const typeAddress = idArray[0];
   const idAddress = idArray[1];
   const textb = '';
-
   useEffect(() => {
     console.log(errors);
     if (Object.values(errors).every((str) => str === '')) {
@@ -51,7 +61,6 @@ export default function EditingAddresses({
       validationErrors[name] = validationField(name, value);
     }
     setErrors({ ...validationErrors });
-
     setAddressData({
       ...newAddressData,
       [name]: value
@@ -60,12 +69,13 @@ export default function EditingAddresses({
 
   const handleDropdownChangeCountry = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setSelectedCountry(value);
     checkingCountry.address = value;
+    setSelectedCountry(value);
     console.log(`select country: ${value}`);
     console.log(`checking country: ${checkingCountry.address}`);
     newAddressData.postalCode = '';
     validationErrors.postalCode = 'should not be a empty!';
+    validationErrors.country = '';
     setErrors({ ...validationErrors });
     setAddressData({
       ...newAddressData,
@@ -92,21 +102,24 @@ export default function EditingAddresses({
         <label className={styles.label} htmlFor="country">
           <p>Country: </p>
           <select
-            value={selectedCountry}
+            // value={selectedCountry}
+            defaultValue={isNew ? 'select country' : selectedCountry}
             onChange={(e: ChangeEvent<HTMLSelectElement>) => handleDropdownChangeCountry(e)}
             name="country"
             className={styles.inputAddressField}>
+            {isNew && (
+              <option disabled value="select country">
+                select country
+              </option>
+            )}
             {Object.entries(Country).map(([key, value]) => (
-              <option
-                aria-selected="true"
-                value={value}
-                key={key}
-                defaultValue={currentSelectCountry}>
+              <option aria-selected="true" value={value} key={key}>
                 {value}
               </option>
             ))}
           </select>
         </label>
+        {errors.country && <span className={styles.error}>{errors.country}</span>}
       </div>
       <div className={styles.editInfoContainer}>
         <label className={styles.label} htmlFor="postalCode">

@@ -27,7 +27,6 @@ export default function Profile({ state, setState }: MainProps) {
       await getCustomerProfile(`${localStorage.getItem('bearerToken')}`)
         .then((res) => {
           setLSVersionProfileCustomer(`${res.version}`);
-          console.log(res);
           setProfileData(res);
         })
         .then(() => setIsDataLoaded(true));
