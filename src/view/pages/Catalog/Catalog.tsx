@@ -34,7 +34,7 @@ export default function Catalog({ state, setState }: MainProps) {
     async function fetchProducts() {
       setLoading(true);
       const fetchedProducts = await getProducts(sorting, price, { state, setState });
-      
+
       if (fetchedProducts) {
         setProducts(fetchedProducts);
         setLoading(false);
