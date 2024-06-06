@@ -21,6 +21,7 @@ async function getProducts(
   params.append('filter', `variants.price.centAmount:range (${minPrice} to ${maxPrice})`);
   const paramsCat = new URLSearchParams();
   paramsCat.append('filter', `categories.id:"${categoryId}"`);
+
   if (sortingType) params.append('sort', `${sortingType}`);
 
   console.log(`variants.scopedPrice.currentValue.centAmount:range (${minPrice} to ${maxPrice})`);
@@ -28,6 +29,7 @@ async function getProducts(
   const headers = new Headers({
     Authorization: `Bearer ${BEARER_TOKEN}`
   });
+
   const fullUrl =
     categoryId === ''
       ? `${url}?limit=42&${params.toString()}`

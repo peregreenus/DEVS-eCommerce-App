@@ -13,6 +13,7 @@ import * as classes from './Catalog.module.css';
 import { MainProps } from '../../../data/types/main-props';
 import Filter from '../../components/common/Filter/filter';
 import { AppFilter } from '../../../data/types/interfaces/SearchPriceFilter';
+import SortBar from '../../components/SortBar/SortBar';
 
 import getCategories from '../../../data/api/getCategories';
 import { ICategory } from '../../../data/types/interfaces/category';
@@ -41,7 +42,7 @@ export default function Catalog({ state, setState }: MainProps) {
   useEffect(() => {
     async function fetchCategoriesAndProducts() {
       setLoading(true);
-
+      
       try {
         const fetchedCategories = await getCategories({ state, setState });
         if (fetchedCategories) {
