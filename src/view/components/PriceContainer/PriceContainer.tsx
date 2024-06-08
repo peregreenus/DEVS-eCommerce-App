@@ -1,8 +1,8 @@
 import React from 'react';
-import * as classes from './product.module.css';
 import PriceContainerProps from '../../../data/types/interfaces/priceContainerProps';
-import Button from '../../components/common/Button/Button';
 import formatPrice from '../../../data/utils/formatPrice';
+import * as classes from './PriceContainer.module.css';
+import Button from '../common/Button/Button';
 
 function PriceContainer({ discounted, value, onClick }: PriceContainerProps) {
   return (

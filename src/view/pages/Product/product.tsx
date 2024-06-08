@@ -1,10 +1,10 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-no-bind */
 
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MainProps } from '../../../data/types/main-props';
 import getProduct from '../../../data/api/getProduct';
-import * as classes from './product.module.css';
 import Header from '../../components/common/header/header';
 import { IProduct } from '../../../data/types/interfaces/product';
 import PreviewImageComponent from './ImageComponent';
@@ -12,11 +12,13 @@ import ArrowRightIcon from '../../components/common/other/ArrowRightIcon';
 import ArrowLeftIcon from '../../components/common/other/ArrowLeftIcon';
 import Loader from '../../components/Loader/Loader';
 import Button from '../../components/common/Button/Button';
-import PriceContainer from './priceContainer';
 import noImage from '../../../assets/img/no-image.png';
-import ProductModal from './productModal';
 import Notfound from '../NotFound/not-found';
 import PreviewImages from './previewImages';
+import ProductModal from '../../components/ProductModal/ProductModal';
+import PriceContainer from '../../components/PriceContainer/PriceContainer';
+import * as classes from './product.module.css';
+import Description from '../../components/Description/Description';
 
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
@@ -27,7 +29,6 @@ function Product({ state, setState }: MainProps) {
 
   const [numImage, setNumImage] = useState<number>(0);
   const [modal, setModal] = useState(false);
-  const [showFullDescription, setShowFullDescription] = useState(false);
 
   useEffect(() => {
     async function fetchProduct() {
@@ -41,12 +42,9 @@ function Product({ state, setState }: MainProps) {
       if (fetchedProduct && fetchedProduct.masterVariant.images.length > 0) {
         setNumImage(0);
       }
-      // eslint-disable-next-line no-console
       console.log('product=>', fetchedProduct);
     }
-
     fetchProduct();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, state, setState]);
 
   if (loading) {
@@ -77,10 +75,6 @@ function Product({ state, setState }: MainProps) {
       selectImage(numImage + 1);
     }
   }
-
-  const toggleDescription = () => {
-    setShowFullDescription((prev) => !prev);
-  };
 
   const addToCart = () => {
     // eslint-disable-next-line no-console
@@ -153,16 +147,7 @@ function Product({ state, setState }: MainProps) {
             onClick={() => addToCart()}
           />
         </div>
-        <div className={classes.wrapperDescription}>
-          <div
-            className={`${classes.description} ${showFullDescription ? classes.show : classes.hide}`}
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{ __html: product.description.en }}
-          />
-          <button onClick={toggleDescription} className={classes.readMoreBtn} type="button">
-            {showFullDescription ? 'Read less...' : 'Read more...'}
-          </button>
-        </div>
+        <Description htmlContent={product.description.en} />
       </section>
       {isImage ? (
         <ProductModal

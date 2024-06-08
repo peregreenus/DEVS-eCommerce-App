@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 import React from 'react';
-import * as classes from './productModal.module.css';
+import * as classes from './viewimages.module.css';
 import { IProduct } from '../../../data/types/interfaces/product';
 
 interface ImageProps {
