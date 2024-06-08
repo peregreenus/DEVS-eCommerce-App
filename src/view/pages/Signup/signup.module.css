@@ -1,11 +1,11 @@
-.signup {
+.signupPage {
   padding: 1rem 0;
-  background-image: url('../../../assets/img/Default_draw_a_picture_about_Welcome_to_Galactic_Exclusive_yo_1.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
-  min-height: 85rem;
-  padding: 5rem 0;
+  gap: 1rem;
+  min-height: 85vh;
+  padding: 3rem 0;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -46,4 +46,14 @@
 
 .hideButton {
   display: none;
+}
+.link {
+  border-radius: 0.2rem;
+  margin-top: 1rem;
+  padding: 0.5rem 2rem;
+  font-size: 1.2rem;
+}
+.link a:last-child {
+  margin: 0 1rem;
+  font-size: 1.6rem;
 }

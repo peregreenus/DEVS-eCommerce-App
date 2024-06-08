@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React, { FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FormSignup from '../../components/signup/signup-form';
 import Header from '../../components/common/header/header';
 import * as styles from './signup.module.css';
@@ -40,7 +40,12 @@ export default function Singup({ state, setState }: MainProps) {
   return (
     <>
       <Header state={state} setState={setState} />
-      <div className={styles.signup}>
+
+      <div className={styles.signupPage}>
+        <h2>Register</h2>
+        <p className={styles.link}>
+          OR if you already have an account<Link to="/login">Login</Link>
+        </p>
         <div className={` ${showSignupState ? styles.disableForm : styles.showForm} `}>
           <FormSignup onSubmit={handleRegistrationSubmit} />
         </div>

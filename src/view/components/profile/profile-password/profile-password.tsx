@@ -23,6 +23,8 @@ export default function ChangePasswordTabContent({ state, setState }: MainProps)
   const [isValid, setFormValid] = useState(false);
   const navigate = useNavigate();
 
+  const textb = 'submit';
+
   useEffect(() => {
     if (Object.values(errors).every((str) => str === '')) {
       setFormValid(true);
@@ -82,57 +84,49 @@ export default function ChangePasswordTabContent({ state, setState }: MainProps)
     });
     userPassChange.pass = '';
   };
-  const textb = '';
+
   return (
     <div className={styles.profilePasswordContent}>
       <form
-        className={styles.passwordContent}
+        className={styles.formEditPassword}
         onSubmit={(e: FormEvent<HTMLFormElement>) => setPassword(e)}>
-        <div className={styles.editPasswordForm}>
-          <label htmlFor="currentPassword">
-            <p>Current Password: </p>
-            <input
-              type="password"
-              name="currentPassword"
-              value={newPassword.currentPassword}
-              className={`${styles.inputAddressField} ${errors.currentPassword ? styles.errorBorder : ''}`}
-              onChange={handlePasswordChange}
-            />
-            {errors.currentPassword && (
-              <span className={styles.error}>{errors.currentPassword}</span>
-            )}
-          </label>
-        </div>
-        <div className={styles.editPasswordForm}>
-          <label htmlFor="newPassword">
-            <p>New Password: </p>
-            <input
-              type="password"
-              name="newPassword"
-              value={newPassword.newPassword}
-              className={`${styles.inputAddressField} ${errors.newPassword ? styles.errorBorder : ''}`}
-              onChange={handlePasswordChange}
-            />
-            {errors.newPassword && <span className={styles.error}>{errors.newPassword}</span>}
-          </label>
-        </div>
-        <div className={styles.editPasswordForm}>
-          <label htmlFor="confirmNewPassword">
-            <p>Confirm New Password: </p>
-            <input
-              type="password"
-              name="confirmNewPassword"
-              value={newPassword.confirmNewPassword}
-              className={`${styles.inputAddressField} ${errors.confirmNewPassword ? styles.errorBorder : ''}`}
-              onChange={handlePasswordChange}
-            />
-            {errors.confirmNewPassword && (
-              <span className={styles.error}>{errors.confirmNewPassword}</span>
-            )}
-          </label>
-        </div>
-        <button type="submit" className={styles.controlProfileButton} disabled={!isValid}>
-          <SaveMarkIcon width="1.5rem" height="1.5rem" fill={!isValid ? 'grey' : 'green'} />
+        <label htmlFor="currentPassword" className={styles.editPasswordContainer}>
+          <p>Current Password: </p>
+          <input
+            type="password"
+            name="currentPassword"
+            value={newPassword.currentPassword}
+            className={`${styles.inputAddressField} ${errors.currentPassword ? styles.errorBorder : ''}`}
+            onChange={handlePasswordChange}
+          />
+          {errors.currentPassword && <span className={styles.error}>{errors.currentPassword}</span>}
+        </label>
+        <label htmlFor="newPassword" className={styles.editPasswordContainer}>
+          <p>New Password: </p>
+          <input
+            type="password"
+            name="newPassword"
+            value={newPassword.newPassword}
+            className={`${styles.inputAddressField} ${errors.newPassword ? styles.errorBorder : ''}`}
+            onChange={handlePasswordChange}
+          />
+          {errors.newPassword && <span className={styles.error}>{errors.newPassword}</span>}
+        </label>
+        <label htmlFor="confirmNewPassword" className={styles.editPasswordContainer}>
+          <p>Confirm New Password: </p>
+          <input
+            type="password"
+            name="confirmNewPassword"
+            value={newPassword.confirmNewPassword}
+            className={`${styles.inputAddressField} ${errors.confirmNewPassword ? styles.errorBorder : ''}`}
+            onChange={handlePasswordChange}
+          />
+          {errors.confirmNewPassword && (
+            <span className={styles.error}>{errors.confirmNewPassword}</span>
+          )}
+        </label>
+        <button type="submit" className={styles.submitPasswordButton} disabled={!isValid}>
+          <SaveMarkIcon width="1.5rem" height="1.5rem" fill={!isValid ? '#e5e7eb' : 'green'} />
           {textb}
         </button>
       </form>

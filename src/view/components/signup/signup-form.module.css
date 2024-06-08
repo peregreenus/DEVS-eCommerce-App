@@ -17,7 +17,7 @@
   font-size: 1.8rem;
   padding: 0.5rem 1.6rem;
   height: 3rem;
-  border-radius: 1.2rem;
+  border-radius: 0.2rem;
   background-color: var(--default-bg-color);
   color: var(--primary-text-color);
   border-color: var(--border-color);
@@ -35,7 +35,7 @@
   padding: 1rem 4rem;
   width: 20rem;
   height: 4rem;
-  border-radius: 1.2rem;
+  border-radius: 0.2rem;
   background-color: var(--primary-text-color);
   color: var(--light-text-color);
   border-color: var(--border-color);
@@ -73,26 +73,15 @@
   align-items: center;
   color: var(--body-text-color);
   width: fit-content;
-  padding: 10rem;
+  gap: 1rem;
+  padding: 3rem;
   border-radius: 2rem;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.7) 0 100%);
-}
-.link {
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.7) 0 100%);
-  border-radius: 1.2rem;
-  margin-top: 1rem;
-  padding: 0.5rem 2rem;
-  font-size: 1.2rem;
 }
 
-.link a:last-child {
-  margin: 0 1rem;
-  font-size: 1.6rem;
-}
 .addressForm {
   padding: 0 3rem;
   border: 1px solid var(--default-bg-color);
-  border-radius: 1rem;
+  border-radius: 0.2rem;
   margin: 0.5rem 0;
   transition: 0.4s all ease-in;
   visibility: visible;

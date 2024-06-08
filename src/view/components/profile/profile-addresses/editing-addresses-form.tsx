@@ -89,20 +89,19 @@ export default function EditingAddresses({
       className={styles.addressForm}
       onSubmit={(e: FormEvent<HTMLFormElement>) => onSubmit(e, typeAddress, idAddress)}>
       <div className={styles.controlBlock}>
-        <button type="submit" className={styles.controlProfileButton} disabled={!isValid}>
+        <button type="submit" className={styles.controlAddressButton} disabled={!isValid}>
           <SaveMarkIcon width="1.5rem" height="1.5rem" fill={!isValid ? 'grey' : 'green'} />
           {textb}
         </button>
-        <button type="button" className={styles.controlProfileButton} onClick={onClick}>
+        <button type="button" className={styles.controlAddressButton} onClick={onClick}>
           <CloseXIcon width="1.5rem" height="1.5rem" />
           {textb}
         </button>
       </div>
-      <div className={styles.editInfoContainer}>
+      <div className={styles.editAddressContainer}>
         <label className={styles.label} htmlFor="country">
           <p>Country: </p>
           <select
-            // value={selectedCountry}
             defaultValue={isNew ? 'select country' : selectedCountry}
             onChange={(e: ChangeEvent<HTMLSelectElement>) => handleDropdownChangeCountry(e)}
             name="country"
@@ -121,7 +120,7 @@ export default function EditingAddresses({
         </label>
         {errors.country && <span className={styles.error}>{errors.country}</span>}
       </div>
-      <div className={styles.editInfoContainer}>
+      <div className={styles.editAddressContainer}>
         <label className={styles.label} htmlFor="postalCode">
           <p>Postal Code: </p>
           <input
@@ -136,7 +135,7 @@ export default function EditingAddresses({
         {errors.postalCode && <span className={styles.error}>{errors.postalCode}</span>}
       </div>
 
-      <div className={styles.editInfoContainer}>
+      <div className={styles.editAddressContainer}>
         <label className={styles.label} htmlFor="city">
           <p>City: </p>
           <input
@@ -150,7 +149,7 @@ export default function EditingAddresses({
         </label>
         {errors.city && <span className={styles.error}>{errors.city}</span>}
       </div>
-      <div className={styles.editInfoContainer}>
+      <div className={styles.editAddressContainer}>
         <label className={styles.label} htmlFor="streetName">
           <p>Street: </p>
           <input

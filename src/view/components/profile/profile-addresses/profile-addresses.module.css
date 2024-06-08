@@ -1,124 +1,141 @@
 .addressesTabContent {
   position: relative;
-  .block,
-  .controlBlock {
-    justify-content: flex-end;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  .defaultAddress {
-    background-color: rgba(212, 219, 235, 0.594);
-  }
-  .addressContent {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    padding: 1.5rem;
-    gap: 0.5rem;
-  }
-  .addressHead {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-  .addressControl {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-  }
-  .controlProfileButton:disabled {
-    cursor: not-allowed;
-    pointer-events: none;
-    background-color: var(--gray-bg-color);
-    color: rgba(220, 220, 220, 0.433);
-  }
-
-  .addressBlock {
-    display: flex;
-    flex-direction: column;
-    .profileContentString {
-      display: flex;
-      gap: 0.5rem;
-      font-size: 1.8rem;
-    }
-    .fieldName {
-      width: 12rem;
-
-      color: var(--body-text-color);
-    }
-  }
-
-  .showModalEditAddress,
-  .address {
-    border: 1px var(--border-color) solid;
-    border-radius: 0.5rem;
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-  }
-  .showTextAddressContent {
-    opacity: 1;
-    transition: 0.4s all ease-in;
-  }
-  .hideTextAddressContent {
-    display: none;
-  }
-  .addressForm {
-    width: 100%;
-    display: flex;
-    gap: 1rem;
-    flex-direction: column;
-    /* .controlProfileButton:disabled {
-      cursor: not-allowed;
-      pointer-events: none;
-      background-color: var(--gray-bg-color);
-      color: rgba(220, 220, 220, 0.433);
-    } */
-  }
-  .showModalEditAddress {
-    .editInfoContainer {
-      display: flex;
-      flex-direction: column;
-      .error {
-        color: var(--accent-color);
-        font-family: 'Poppins', sans-serif;
-        font-weight: 200;
-        font-size: 1.2rem;
-      }
-      .inputAddressField {
-        border: 1px var(--border-color) solid;
-        width: 100%;
-        font-size: 1.8rem;
-        padding: 0.5rem 0.8rem;
-        height: 3rem;
-        border-radius: 1.2rem;
-        background-color: var(--default-bg-color);
-        color: var(--primary-text-color);
-        border-color: var(--border-color);
-      }
-      .label {
-        display: flex;
-        gap: 0.5rem;
-        p {
-          width: 12rem;
-          color: var(--body-text-color);
-        }
-      }
-    }
-  }
+}
+.addressContent {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 1.5rem;
+  gap: 0.5rem;
+}
+.addressHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+.controlBlock {
+  justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.2rem;
+  flex-wrap: wrap;
+}
+.controlAddressButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--default-bg-color);
+  border: none;
+  cursor: pointer;
+}
+.controlAddressButton:hover,
+.controlAddressButton:active {
+  background-color: var(--border-color);
+}
+.addNewAddressButton {
+  width: 10rem;
+  gap: 0.2rem;
+  font-size: 1.2rem;
+}
+.controlAddressButton:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  background-color: var(--gray-bg-color);
+  color: rgba(220, 220, 220, 0.433);
+}
+.address {
+  border: 1px var(--border-color) solid;
+  border-radius: 0.2rem;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
 }
 
-.controlProfileButton {
-  width: 2.5rem;
-  height: 2.5rem;
-  background-color: var(--default-bg-color);
+.defaultAddress {
+  border-color: var(--accent-color);
+}
+
+.addressControl {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.addressRadio {
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+}
+.error {
+  color: var(--accent-color);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 200;
+  font-size: 1.2rem;
+}
+
+.showModalEditAddress {
   border: 1px var(--border-color) solid;
-  border-radius: 0.5rem;
-  cursor: pointer;
+  border-radius: 0.2rem;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.addressForm {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.inputAddressField {
+  border: 1px var(--border-color) solid;
+  width: 100%;
+  font-size: 1.8rem;
+  padding: 0.5rem 0.8rem;
+  height: 3rem;
+  border-radius: 0.2rem;
+  background-color: var(--default-bg-color);
+  color: var(--primary-text-color);
+  border-color: var(--border-color);
+}
+.label {
+  display: flex;
+  gap: 0.5rem;
+  p {
+    width: 12rem;
+    color: var(--body-text-color);
+  }
+}
+.addressBlock {
+  display: flex;
+  flex-direction: column;
+}
+.addressContentString {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 1.8rem;
+}
+.fieldName {
+  width: 12rem;
+
+  color: var(--body-text-color);
+}
+.editAddressContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.showTextAddressContent {
+  opacity: 1;
+  transition: 0.4s all ease-in;
+}
+.hideTextAddressContent {
+  display: none;
 }
 
 @media (max-width: 471px) {
