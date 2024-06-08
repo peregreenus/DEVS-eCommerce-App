@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import CTP from '../../types/ctp';
 import { Customer } from '../../types/interfaces/customer.interface';
 import { getLSToken, getLSVersionProfileCustomer } from '../../utils/getLS';
@@ -7,11 +6,6 @@ export default async function removeAddress(idAddress: string) {
   const bearerToken: string | null = getLSToken();
   const versionProfileCustomer: number = Number(getLSVersionProfileCustomer());
   const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/me`;
-  // typeAddress: string
-  // let actionTypeForIds: string = 'removeShippingAddressId';
-  // if (typeAddress === 'billing') {
-  //   actionTypeForIds = 'removeBillingAddressId';
-  // }
   const data: Customer = {
     version: versionProfileCustomer,
     actions: [

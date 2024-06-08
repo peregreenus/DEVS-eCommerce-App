@@ -19,7 +19,7 @@ export default function ProfileContentElement({ name, data, onClick }: ProfileCo
         type="button"
         className={styles.controlProfileButton}
         onClick={onClick}>
-        <EditPencilIcon width="1.5rem" height="1.5rem" />
+        <EditPencilIcon width="1.5rem" height="1.5rem" fill="grey" />
         {textb}
       </button>
     </div>

@@ -8,8 +8,8 @@ import * as styles from './profile-addresses.module.css';
 import EditPencilIcon from '../../common/icons/editPencilIcon';
 import AddPlusIcon from '../../common/icons/addPlusIcon';
 import useModal from '../../../../data/hooks/useModal';
-import EditAddressModal from './editAddressModal';
-import EditingAddresses from './editing-addresses';
+import EditAddressModal from './edit-address-modal';
+import EditingAddresses from './editing-addresses-form';
 import Country from '../../../../data/types/country';
 import setCustomerAddress from '../../../../data/api/profile/setAddress';
 import { setLSVersionProfileCustomer } from '../../../../data/utils/setLS';
@@ -34,6 +34,7 @@ function AddressesTabContent({
   const [isNew, setNew] = useState<boolean>(false);
   const shippingAddresses: CustomerAddresses[] = [];
   const billingAddresses: CustomerAddresses[] = [];
+  const textAdd: string = 'add address';
   const textb: string = '';
   let newAddressId: string = '';
   if (shippingAddressIds && billingAddressIds && addresses) {
@@ -127,7 +128,7 @@ function AddressesTabContent({
           <h5>Shipping Addresses</h5>
           <button
             type="button"
-            className={styles.controlProfileButton}
+            className={`${styles.controlAddressButton} ${styles.addNewAddressButton}`}
             disabled={Object.values(isVisible).includes(true)}
             onClick={() => modalShow('Shipping-new', '')}>
             <AddPlusIcon
@@ -135,7 +136,7 @@ function AddressesTabContent({
               height="1.5rem"
               fill={Object.values(isVisible).includes(true) ? '#e5e7eb' : 'grey'}
             />
-            {textb}
+            {textAdd}
           </button>
         </div>
         {isVisible['Shipping-new'] && (
@@ -154,13 +155,13 @@ function AddressesTabContent({
           </EditAddressModal>
         )}
         {shippingAddresses.map((value) => (
-          <div key={value.id}>
+          <div id={value.id}>
             <div
               key={value.id}
               className={`${defShipping === value.id ? styles.defaultAddress : ''} ${styles.address} 
               ${!isVisible[`Shipping-${value.id}`] ? styles.showTextAddressContent : styles.hideTextAddressContent}`}>
               <div className={styles.addressControl}>
-                <span>
+                <p className={styles.addressRadio}>
                   <input
                     type="radio"
                     name="shippingRadio"
@@ -169,11 +170,11 @@ function AddressesTabContent({
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setDefault(e, 'shipping')}
                   />
                   set default
-                </span>
-                <div>
+                </p>
+                <div className={styles.controlBlock}>
                   <button
                     type="button"
-                    className={styles.controlProfileButton}
+                    className={styles.controlAddressButton}
                     disabled={Object.values(isVisible).includes(true)}
                     onClick={() => modalShow(`Shipping-${value.id}`, value.country)}>
                     <EditPencilIcon
@@ -185,7 +186,7 @@ function AddressesTabContent({
                   </button>
                   <button
                     type="button"
-                    className={styles.controlProfileButton}
+                    className={styles.controlAddressButton}
                     disabled={Object.values(isVisible).includes(true)}
                     onClick={() => deleteAddress(`${value.id}`)}>
                     <RemoveIcon
@@ -198,21 +199,21 @@ function AddressesTabContent({
                 </div>
               </div>
               <div className={styles.addressBlock}>
-                <div className={styles.profileContentString}>
+                <div className={styles.addressContentString}>
                   <p className={styles.fieldName}>Country: </p>
                   {Object.values(Country)[Object.keys(Country).indexOf(value.country as Country)]}
                 </div>
-                <div className={styles.profileContentString}>
+                <div className={styles.addressContentString}>
                   <p className={styles.fieldName}>Postal Code: </p>
                   {value.postalCode}
                 </div>
               </div>
               <div className={styles.addressBlock}>
-                <div className={styles.profileContentString}>
+                <div className={styles.addressContentString}>
                   <p className={styles.fieldName}>City: </p>
                   {value.city}
                 </div>
-                <div className={styles.profileContentString}>
+                <div className={styles.addressContentString}>
                   <p className={styles.fieldName}>Street: </p>
                   {value.streetName}
                 </div>
@@ -241,7 +242,7 @@ function AddressesTabContent({
           <h5>Billing Addresses</h5>
           <button
             type="button"
-            className={styles.controlProfileButton}
+            className={`${styles.controlAddressButton} ${styles.addNewAddressButton}`}
             disabled={Object.values(isVisible).includes(true)}
             onClick={() => modalShow('Billing-new', '')}>
             <AddPlusIcon
@@ -249,7 +250,7 @@ function AddressesTabContent({
               height="1.5rem"
               fill={Object.values(isVisible).includes(true) ? '#e5e7eb' : 'grey'}
             />
-            {textb}
+            {textAdd}
           </button>
         </div>
         {isVisible['Billing-new'] && (
@@ -271,7 +272,7 @@ function AddressesTabContent({
               className={`${defBilling === value.id ? styles.defaultAddress : ''} ${styles.address}
                          ${!isVisible[`Billing-${value.id}`] ? styles.showTextAddressContent : styles.hideTextAddressContent}`}>
               <div className={styles.addressControl}>
-                <span>
+                <p className={styles.addressRadio}>
                   <input
                     type="radio"
                     name="billingRadio"
@@ -280,11 +281,11 @@ function AddressesTabContent({
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setDefault(e, 'billing')}
                   />
                   set default
-                </span>
-                <div>
+                </p>
+                <div className={styles.controlBlock}>
                   <button
                     type="button"
-                    className={styles.controlProfileButton}
+                    className={styles.controlAddressButton}
                     disabled={Object.values(isVisible).includes(true)}
                     onClick={() => modalShow(`Billing-${value.id}`, value.country)}>
                     <EditPencilIcon
@@ -296,7 +297,7 @@ function AddressesTabContent({
                   </button>
                   <button
                     type="button"
-                    className={styles.controlProfileButton}
+                    className={styles.controlAddressButton}
                     disabled={Object.values(isVisible).includes(true)}
                     onClick={() => deleteAddress(`${value.id}`)}>
                     <RemoveIcon
@@ -309,21 +310,21 @@ function AddressesTabContent({
                 </div>
               </div>
               <div className={styles.addressBlock}>
-                <div className={styles.profileContentString}>
+                <div className={styles.addressContentString}>
                   <p className={styles.fieldName}>Country: </p>
                   {Object.values(Country)[Object.keys(Country).indexOf(value.country as Country)]}
                 </div>
-                <div className={styles.profileContentString}>
+                <div className={styles.addressContentString}>
                   <p className={styles.fieldName}>Postal Code: </p>
                   {value.postalCode}
                 </div>
               </div>
               <div className={styles.addressBlock}>
-                <div className={styles.profileContentString}>
+                <div className={styles.addressContentString}>
                   <p className={styles.fieldName}>City: </p>
                   {value.city}
                 </div>
-                <div className={styles.profileContentString}>
+                <div className={styles.addressContentString}>
                   <p className={styles.fieldName}>Street: </p>
                   {value.streetName}
                 </div>
