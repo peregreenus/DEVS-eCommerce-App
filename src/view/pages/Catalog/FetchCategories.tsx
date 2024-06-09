@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 import React, { useEffect } from 'react';
 import getCategories from '../../../data/api/getCategories';
 import { ICategory } from '../../../data/types/interfaces/category';
@@ -9,12 +8,7 @@ interface FetchCategoriesProps extends MainProps {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const FetchCategories: React.FC<FetchCategoriesProps> = ({
-  state,
-  setState,
-  setCategories,
-  setLoading
-}) => {
+function FetchCategories({ state, setState, setCategories, setLoading }: FetchCategoriesProps) {
   useEffect(() => {
     async function fetchCategories() {
       const fetchedCategories = await getCategories({ state, setState });
@@ -27,6 +21,6 @@ const FetchCategories: React.FC<FetchCategoriesProps> = ({
   }, [state, setState, setCategories, setLoading]);
 
   return null;
-};
+}
 
 export default FetchCategories;

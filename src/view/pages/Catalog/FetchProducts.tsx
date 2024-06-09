@@ -1,5 +1,4 @@
-/* eslint-disable react/function-component-definition */
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import getProducts from '../../../data/api/getProducts';
 import { AppFilter } from '../../../data/types/interfaces/SearchPriceFilter';
 import { MainProps } from '../../../data/types/main-props';
@@ -11,13 +10,7 @@ interface FetchProductsProps extends MainProps {
   categoryId: string;
 }
 
-const FetchProducts: React.FC<FetchProductsProps> = ({
-  sorting,
-  price,
-  categoryId,
-  state,
-  setState
-}) => {
+function FetchProducts({ sorting, price, categoryId, state, setState }: FetchProductsProps) {
   const { setProducts } = useProductContext();
 
   useEffect(() => {
@@ -31,6 +24,6 @@ const FetchProducts: React.FC<FetchProductsProps> = ({
   }, [sorting, price, categoryId, state, setState, setProducts]);
 
   return null;
-};
+}
 
 export default FetchProducts;

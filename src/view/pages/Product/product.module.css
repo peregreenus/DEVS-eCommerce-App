@@ -21,6 +21,7 @@
     flex-wrap: nowrap;
     margin-top: 3rem;
     padding: 2rem;
+    height: 65vh;
 
     .card {
       width: 75vw;
@@ -35,6 +36,7 @@
         display: flex;
         flex-wrap: nowrap;
         width: 85%;
+        height: 10%;
         margin: 0 auto;
         align-items: center;
 
@@ -62,10 +64,15 @@
           justify-content: center;
           align-items: stretch;
           gap: 1rem;
+          height: 100%;
+          .imgContainer {
+
+          }
 
           .sliderImg {
-            width: 90%;
-            height: auto;
+            width: auto;
+            height: 100%;
+            
           }
 
           .active {
@@ -74,46 +81,7 @@
         }
       }
 
-      .preview {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 50vh;
-        overflow: hidden;
 
-        .lenta {
-          position: absolute;
-          top: 0;
-          height: 100%;
-          display: flex;
-          gap: 12vw;
-          align-items: center;
-          transition: all 0.3s ease-in-out;
-
-          .imgContainer {
-            height: 100%;
-            width: 73vw;
-
-            .previewImg {
-              width: 100%;
-              /* Займає всю ширину контейнера */
-              height: 100%;
-              /* Займає всю висоту контейнера */
-              object-fit: contain;
-            }
-          }
-        }
-
-        .previewNoimage {
-          width: 75%;
-        }
-
-        .previewImg:hover {
-          cursor: pointer;
-          box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
-        }
-      }
     }
   }
 }
