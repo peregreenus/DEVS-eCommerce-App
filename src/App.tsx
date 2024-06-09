@@ -9,10 +9,8 @@ import { AppState } from './data/types/main-props';
 import getAnonToken from './data/api/getToken';
 import Logout from './view/pages/Logout/logout';
 import Profile from './view/pages/Profile/profile';
-// import { getLSToken } from './data/utils/getLS';
-import Product from './view/pages/Product/product';
 import Catalog from './view/pages/Catalog/Catalog';
-// import ProductRand from './view/pages/Product/productrand';
+import Product from './view/pages/Product/Product';
 
 function App() {
   if (!(localStorage.getItem('bearerAnonToken') || localStorage.getItem('bearerToken'))) {
@@ -24,10 +22,6 @@ function App() {
     userLoggedIn: false
     // here we can add new parameters
   });
-
-  // if (!getLSToken()) {
-  //   getAnonToken();
-  // }
 
   useEffect(() => {
     if (localStorage.getItem('bearerToken') && !state.userLoggedIn) {

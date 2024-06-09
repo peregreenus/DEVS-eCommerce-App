@@ -3,6 +3,7 @@
 import CTP from '../types/ctp';
 import { ErrorProps } from '../types/errorProps';
 import { MainProps } from '../types/main-props';
+import createCart from './Cart/createCart';
 
 async function getTokenForLogin(
   email: FormDataEntryValue,
@@ -35,6 +36,7 @@ async function getTokenForLogin(
     localStorage.removeItem('bearerAnonToken');
     console.log('bearerToken:', bearerToken);
     console.log('refreshToken:', refreshToken);
+    createCart(tokenData.access_token);
     setState((prevState) => ({ ...prevState, userLoggedIn: true, showMsg: false }));
 
     return bearerToken;
