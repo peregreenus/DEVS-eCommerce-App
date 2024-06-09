@@ -1,12 +1,13 @@
 /* eslint-disable no-console */
 import CTP from '../../types/ctp';
-import Cart, { LineItem } from '../../types/interfaces/cart';
+import { LineItem } from '../../types/interfaces/cart';
 import { IProduct } from '../../types/interfaces/product';
 import { getLSAnonToken, getLSToken } from '../../utils/getLS';
+import getCart from './GetCart';
 
-async function RemoveFromCart(product: IProduct, cart: Cart) {
+async function RemoveFromCart(product: IProduct) {
   const BEARER_TOKEN = getLSToken() || getLSAnonToken();
-
+  const cart = await getCart();
   const lineItem: LineItem | undefined = cart.lineItems.find(
     (item: LineItem) => item.productId === product.id
   );

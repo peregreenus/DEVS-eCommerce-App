@@ -1,13 +1,13 @@
 import CTP from '../../types/ctp';
-import Cart from '../../types/interfaces/cart';
 import { IProduct } from '../../types/interfaces/product';
 import { getLSAnonToken, getLSToken } from '../../utils/getLS';
+import getCart from './GetCart';
 // import getCart from './GetCart';
 
-async function AddToCart(product: IProduct, cart: Cart) {
+async function AddToCart(product: IProduct) {
   const token = getLSToken();
   const BEARER_TOKEN = token ? getLSToken() : getLSAnonToken();
-
+  const cart = await getCart();
   const requestBody = {
     version: cart.version,
     actions: [

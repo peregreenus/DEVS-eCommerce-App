@@ -46,13 +46,9 @@
 }
 
 @media (max-width: 768px) {
-
-
-      .price {
-        width: unset;
-        min-width: unset;
-        max-width: unset;
-      }
-
-
+  .price {
+    width: unset;
+    min-width: unset;
+    max-width: unset;
+  }
 }

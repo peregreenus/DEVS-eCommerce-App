@@ -20,8 +20,8 @@ import * as classes from './product.module.css';
 import Description from '../../components/Description/Description';
 import AddToCart from '../../../data/api/Cart/AddToCart';
 import { getLSCart } from '../../../data/utils/getLS';
-import getAnonCart from '../../../data/api/Cart/GetAnonCart';
 import RemoveFromCart from '../../../data/api/Cart/RemoveFromCart';
+import getCart from '../../../data/api/Cart/GetCart';
 
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
@@ -45,7 +45,7 @@ function Product({ state, setState }: MainProps) {
       if (!product) return false;
       const cartId: string | null = getLSCart();
       if (cartId) {
-        const cart = await getAnonCart();
+        const cart = await getCart();
         if (cart.lineItems.some((item: lineItemProp) => item.productId === product.id)) {
           return true;
         }
@@ -102,17 +102,13 @@ function Product({ state, setState }: MainProps) {
   // eslint-disable-next-line @typescript-eslint/naming-convention
 
   const addToCart = async () => {
-    const cartId: string | null = getLSCart();
-    const cart = await getAnonCart();
     if (!inCart) {
-      if (cartId) {
-        await AddToCart(product, cart);
-      }
+      await AddToCart(product);
+
       setInCart(true);
     } else {
-      if (cartId) {
-        await RemoveFromCart(product, cart);
-      }
+      await RemoveFromCart(product);
+
       setInCart(false);
     }
   };

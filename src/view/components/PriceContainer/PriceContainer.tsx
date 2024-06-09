@@ -16,7 +16,7 @@ function PriceContainer({ discounted, value, inCart, onClick }: PriceContainerPr
         <div className={classes.priceNew}>{formatPrice(value.centAmount)}</div>
       )}
       <Button className={`${classes.buyButton}`} onClick={onClick}>
-        {!inCart ? <>Add to cart</> : <>Remove</>}
+        {!inCart ? <>Add to cart</> : <>Remove from cart</>}
       </Button>
     </div>
   );
