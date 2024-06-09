@@ -46,13 +46,13 @@
 }
 
 @media (max-width: 768px) {
-  .product {
-    .wrapper {
+
+
       .price {
-        width: 100%;
+        width: unset;
         min-width: unset;
         max-width: unset;
       }
-    }
-  }
+
+
 }
