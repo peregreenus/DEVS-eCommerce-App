@@ -1,4 +1,3 @@
-/* eslint-disable react/button-has-type */
 import React, { ChangeEvent, useState } from 'react';
 import * as classes from './filter.module.css';
 import { SearchPriceFilter } from '../../../../data/types/interfaces/SearchPriceFilter';
@@ -17,9 +16,12 @@ function Filter({ price, setPrice }: SearchPriceFilter) {
     setMaxValue(+newMaxPrice);
   };
 
-  function applyFilter() {
-    // setPrice({ minPrice: minValue, maxPrice: maxValue });
+  function applyFilter(): void {
     setPrice({ minPrice: minVal * 100, maxPrice: maxVal * 100 });
+  }
+
+  function resetFilter(): void {
+    throw new Error('Function not implemented.');
   }
 
   return (
@@ -47,8 +49,11 @@ function Filter({ price, setPrice }: SearchPriceFilter) {
           />
         </div>
 
-        <button className={classes.btn} onClick={() => applyFilter()}>
+        <button type="button" className={classes.btn} onClick={() => applyFilter()}>
           Apply
+        </button>
+        <button type="button" className={classes.btn} onClick={() => resetFilter()}>
+          Reset
         </button>
       </div>
     </div>
