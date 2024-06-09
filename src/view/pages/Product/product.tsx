@@ -113,11 +113,6 @@ function Product({ state, setState }: MainProps) {
     }
   };
 
-  // interface PriceContainerProps {
-  //   discounted: Discont;
-
-  // }
-
   return (
     <div>
       <Header state={state} setState={setState} />
