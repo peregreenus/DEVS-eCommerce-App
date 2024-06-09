@@ -13,6 +13,11 @@ interface TotalPrice {
   fractionDigits: number;
 }
 
+export interface LineItem {
+  id: string;
+  productId: string;
+}
+
 interface Cart {
   type: string;
   id: string;
@@ -21,7 +26,7 @@ interface Cart {
   lastModifiedAt: string;
   lastModifiedBy: LastModifiedBy;
   createdBy: CreatedBy;
-  lineItems: string[];
+  lineItems: LineItem[];
   cartState: string;
   totalPrice: TotalPrice;
   shippingMode: string;

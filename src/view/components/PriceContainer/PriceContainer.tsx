@@ -4,7 +4,7 @@ import formatPrice from '../../../data/utils/formatPrice';
 import * as classes from './PriceContainer.module.css';
 import Button from '../common/Button/Button';
 
-function PriceContainer({ discounted, value, onClick }: PriceContainerProps) {
+function PriceContainer({ discounted, value, inCart, onClick }: PriceContainerProps) {
   return (
     <div className={classes.price}>
       {discounted ? (
@@ -16,7 +16,7 @@ function PriceContainer({ discounted, value, onClick }: PriceContainerProps) {
         <div className={classes.priceNew}>{formatPrice(value.centAmount)}</div>
       )}
       <Button className={`${classes.buyButton}`} onClick={onClick}>
-        Add to cart
+        {!inCart ? <>Add to cart</> : <>Remove</>}
       </Button>
     </div>
   );

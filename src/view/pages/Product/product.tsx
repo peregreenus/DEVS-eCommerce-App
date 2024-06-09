@@ -1,6 +1,5 @@
-/* eslint-disable no-console */
 /* eslint-disable react/jsx-no-bind */
-
+/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MainProps } from '../../../data/types/main-props';
@@ -21,8 +20,8 @@ import * as classes from './product.module.css';
 import Description from '../../components/Description/Description';
 import AddToCart from '../../../data/api/Cart/AddToCart';
 import { getLSCart } from '../../../data/utils/getLS';
-// import getCartById from '../../../data/api/Cart/GetCartById';
 import getAnonCart from '../../../data/api/Cart/GetAnonCart';
+import RemoveFromCart from '../../../data/api/Cart/RemoveFromCart';
 
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
@@ -33,8 +32,27 @@ function Product({ state, setState }: MainProps) {
 
   const [numImage, setNumImage] = useState<number>(0);
   const [modal, setModal] = useState(false);
+  const [inCart, setInCart] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  interface lineItemProp {
+    id: string;
+    productId: string;
+  }
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    async function productInCart(product: IProduct | null) {
+      if (!product) return false;
+      const cartId: string | null = getLSCart();
+      if (cartId) {
+        const cart = await getAnonCart();
+        if (cart.lineItems.some((item: lineItemProp) => item.productId === product.id)) {
+          return true;
+        }
+      }
+      return false;
+    }
+
     async function fetchProduct() {
       setLoading(true);
       const fetchedProduct = await getProduct(id, {
@@ -47,6 +65,7 @@ function Product({ state, setState }: MainProps) {
         setNumImage(0);
       }
       console.log('product=>', fetchedProduct);
+      setInCart(await productInCart(fetchedProduct));
     }
     fetchProduct();
   }, [id, state, setState]);
@@ -80,18 +99,28 @@ function Product({ state, setState }: MainProps) {
     }
   }
 
-  const addToCart = async () => {
-    // eslint-disable-next-line no-console
-    console.log('add to cart');
-    const cartId: string | null = getLSCart();
-    if (cartId) {
-      const cart = await getAnonCart();
-      console.log('cart');
-      console.log(cart);
+  // eslint-disable-next-line @typescript-eslint/naming-convention
 
-      await AddToCart(product, cart);
+  const addToCart = async () => {
+    const cartId: string | null = getLSCart();
+    const cart = await getAnonCart();
+    if (!inCart) {
+      if (cartId) {
+        await AddToCart(product, cart);
+      }
+      setInCart(true);
+    } else {
+      if (cartId) {
+        await RemoveFromCart(product, cart);
+      }
+      setInCart(false);
     }
   };
+
+  // interface PriceContainerProps {
+  //   discounted: Discont;
+
+  // }
 
   return (
     <div>
@@ -156,6 +185,7 @@ function Product({ state, setState }: MainProps) {
           <PriceContainer
             discounted={product.masterVariant.prices[0].discounted}
             value={product.masterVariant.prices[0].value}
+            inCart={inCart}
             onClick={() => addToCart()}
           />
         </div>
