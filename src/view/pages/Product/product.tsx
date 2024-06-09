@@ -19,6 +19,10 @@ import ProductModal from '../../components/ProductModal/ProductModal';
 import PriceContainer from '../../components/PriceContainer/PriceContainer';
 import * as classes from './product.module.css';
 import Description from '../../components/Description/Description';
+import AddToCart from '../../../data/api/Cart/AddToCart';
+import { getLSCart } from '../../../data/utils/getLS';
+// import getCartById from '../../../data/api/Cart/GetCartById';
+import getAnonCart from '../../../data/api/Cart/GetAnonCart';
 
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
@@ -76,9 +80,17 @@ function Product({ state, setState }: MainProps) {
     }
   }
 
-  const addToCart = () => {
+  const addToCart = async () => {
     // eslint-disable-next-line no-console
     console.log('add to cart');
+    const cartId: string | null = getLSCart();
+    if (cartId) {
+      const cart = await getAnonCart();
+      console.log('cart');
+      console.log(cart);
+
+      await AddToCart(product, cart);
+    }
   };
 
   return (

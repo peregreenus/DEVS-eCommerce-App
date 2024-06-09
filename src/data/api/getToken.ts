@@ -1,5 +1,5 @@
 import CTP from '../types/ctp';
-import createCart from './createCart';
+import createCart from './Cart/createCart';
 
 export default async function getAnonToken() {
   const url = `${CTP.AUTH_URL}oauth/${CTP.PROJECT_KEY}/anonymous/token`;
@@ -7,7 +7,7 @@ export default async function getAnonToken() {
   data.append('grant_type', 'client_credentials');
   data.append(
     'scope',
-    `view_published_products:${CTP.PROJECT_KEY} view_categories:${CTP.PROJECT_KEY} manage_my_orders:${CTP.PROJECT_KEY} manage_my_profile:${CTP.PROJECT_KEY}`
+    `view_published_products:${CTP.PROJECT_KEY} view_categories:${CTP.PROJECT_KEY} view_orders:${CTP.PROJECT_KEY} manage_my_orders:${CTP.PROJECT_KEY} manage_my_profile:${CTP.PROJECT_KEY}`
   );
 
   try {
