@@ -37,23 +37,30 @@ function Cart({ state, setState }: MainProps) {
   }
 
   async function incProduct(lineItem: LineItem): Promise<void> {
-    console.log('inc', lineItem);
     const product = await getProduct(lineItem.productId, { state, setState });
     if (product) {
       await AddToCart(product, 1);
-      const updatedCart = await getCart(); // Fetch the updated cart
-      setCart(updatedCart); // Update the cart state
+      const updatedCart = await getCart();
+      setCart(updatedCart);
     }
   }
 
   async function decProduct(lineItem: LineItem): Promise<void> {
-    console.log('dec', lineItem);
-    if (lineItem.quantity <= 1) return; // Ensure quantity doesn't go negative
+    if (lineItem.quantity <= 1) return;
     const product = await getProduct(lineItem.productId, { state, setState });
     if (product) {
       await RemoveFromCart(product, 1);
-      const updatedCart = await getCart(); // Fetch the updated cart
-      setCart(updatedCart); // Update the cart state
+      const updatedCart = await getCart();
+      setCart(updatedCart);
+    }
+  }
+
+  async function removeProduct(lineItem: LineItem): Promise<void> {
+    const product = await getProduct(lineItem.productId, { state, setState });
+    if (product) {
+      await RemoveFromCart(product, lineItem.quantity);
+      const updatedCart = await getCart();
+      setCart(updatedCart);
     }
   }
 
@@ -100,7 +107,10 @@ function Cart({ state, setState }: MainProps) {
                       Total:&#32;
                       {formatPrice(item.variant.prices[0].value.centAmount * item.quantity)}
                     </div>
-                    <button className={classes.removeBtn} type="button">
+                    <button
+                      className={classes.removeBtn}
+                      type="button"
+                      onClick={() => removeProduct(item)}>
                       Remove
                     </button>
                   </li>
