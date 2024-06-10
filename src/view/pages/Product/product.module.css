@@ -66,13 +66,11 @@
           gap: 1rem;
           height: 100%;
           .imgContainer {
-
           }
 
           .sliderImg {
             width: auto;
             height: 100%;
-            
           }
 
           .active {
@@ -80,8 +78,6 @@
           }
         }
       }
-
-
     }
   }
 }

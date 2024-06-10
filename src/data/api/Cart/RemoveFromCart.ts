@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import CTP from '../../types/ctp';
-import { LineItem } from '../../types/interfaces/cart';
+import { LineItem } from '../../types/interfaces/ICart';
 import { IProduct } from '../../types/interfaces/product';
 import { getLSAnonToken, getLSToken } from '../../utils/getLS';
 import getCart from './GetCart';

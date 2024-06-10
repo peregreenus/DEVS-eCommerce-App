@@ -1,8 +1,8 @@
 import React from 'react';
 import Button from '../common/Button/Button';
 import Modal from '../common/modal/modal';
-import ArrowLeftIcon from '../common/other/ArrowLeftIcon';
-import ArrowRightIcon from '../common/other/ArrowRightIcon';
+import ArrowLeftIcon from '../common/icons/ArrowLeftIcon';
+import ArrowRightIcon from '../common/icons/ArrowRightIcon';
 import * as classes from './productmodal.module.css';
 import { ProductModalParam } from '../../../data/types/interfaces/productModalParam';
 import ViewImages from '../ViewImages/ViewImages';
