@@ -122,7 +122,7 @@ function Cart({ state, setState }: MainProps) {
                 <button type="button" className={classes.clearBtn}>
                   Clear
                 </button>
-                <button type="button" className={classes.clearBtn}>
+                <button type="button" className={classes.clearBtn} onClick={navigateCatalog}>
                   Continue shopping
                 </button>
               </div>
@@ -133,7 +133,7 @@ function Cart({ state, setState }: MainProps) {
               <h3>No products in the cart</h3>
               <p>But it&#39;s never too late to fix it :&#41;</p>
               <button className={classes.welcomeBtn} type="button" onClick={navigateCatalog}>
-                Welcome!
+                Welcome do it!
               </button>
             </div>
           )}
