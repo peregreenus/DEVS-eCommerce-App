@@ -1,4 +1,4 @@
-import CTP from '../types/ctp';
+import CTP from '../../types/ctp';
 
 /* eslint-disable no-console */
 async function createCart(bearerToken: string) {
@@ -24,6 +24,9 @@ async function createCart(bearerToken: string) {
 
     const cart = await response.json();
     localStorage.setItem('cart', cart.id);
+    localStorage.setItem('cartA', JSON.stringify(cart));
+    console.log('cart');
+    console.log(cart);
     return cart.id;
   } catch (error) {
     console.error(error);

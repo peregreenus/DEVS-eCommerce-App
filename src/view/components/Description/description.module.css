@@ -1,0 +1,42 @@
+.wrapperDescription {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  max-width: min(95vw, 100rem);
+
+  .description {
+    font-size: 1.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .description.hide {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .description.show {
+    display: block;
+  }
+
+  .readMoreBtn {
+    background: none;
+    color: blue;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+    font-size: 1.2rem;
+  }
+  .btnHide {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapperDescription {
+    width: 95%;
+  }
+}

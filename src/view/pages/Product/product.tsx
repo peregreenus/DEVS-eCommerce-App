@@ -1,22 +1,27 @@
 /* eslint-disable react/jsx-no-bind */
-
+/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MainProps } from '../../../data/types/main-props';
 import getProduct from '../../../data/api/getProduct';
-import * as classes from './product.module.css';
 import Header from '../../components/common/header/header';
 import { IProduct } from '../../../data/types/interfaces/product';
 import PreviewImageComponent from './ImageComponent';
-import ArrowRightIcon from '../../components/common/other/ArrowRightIcon';
-import ArrowLeftIcon from '../../components/common/other/ArrowLeftIcon';
+import ArrowRightIcon from '../../components/common/icons/ArrowRightIcon';
+import ArrowLeftIcon from '../../components/common/icons/ArrowLeftIcon';
 import Loader from '../../components/Loader/Loader';
 import Button from '../../components/common/Button/Button';
-import PriceContainer from './priceContainer';
 import noImage from '../../../assets/img/no-image.png';
-import ProductModal from './productModal';
 import Notfound from '../NotFound/not-found';
 import PreviewImages from './previewImages';
+import ProductModal from '../../components/ProductModal/ProductModal';
+import PriceContainer from '../../components/PriceContainer/PriceContainer';
+import * as classes from './product.module.css';
+import Description from '../../components/Description/Description';
+import AddToCart from '../../../data/api/Cart/AddToCart';
+import { getLSCart } from '../../../data/utils/getLS';
+import RemoveFromCart from '../../../data/api/Cart/RemoveFromCart';
+import getCart from '../../../data/api/Cart/GetCart';
 
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
@@ -27,9 +32,27 @@ function Product({ state, setState }: MainProps) {
 
   const [numImage, setNumImage] = useState<number>(0);
   const [modal, setModal] = useState(false);
-  const [showFullDescription, setShowFullDescription] = useState(false);
+  const [inCart, setInCart] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  interface lineItemProp {
+    id: string;
+    productId: string;
+  }
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    async function productInCart(product: IProduct | null) {
+      if (!product) return false;
+      const cartId: string | null = getLSCart();
+      if (cartId) {
+        const cart = await getCart();
+        if (cart.lineItems.some((item: lineItemProp) => item.productId === product.id)) {
+          return true;
+        }
+      }
+      return false;
+    }
+
     async function fetchProduct() {
       setLoading(true);
       const fetchedProduct = await getProduct(id, {
@@ -41,12 +64,10 @@ function Product({ state, setState }: MainProps) {
       if (fetchedProduct && fetchedProduct.masterVariant.images.length > 0) {
         setNumImage(0);
       }
-      // eslint-disable-next-line no-console
       console.log('product=>', fetchedProduct);
+      setInCart(await productInCart(fetchedProduct));
     }
-
     fetchProduct();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, state, setState]);
 
   if (loading) {
@@ -78,13 +99,18 @@ function Product({ state, setState }: MainProps) {
     }
   }
 
-  const toggleDescription = () => {
-    setShowFullDescription((prev) => !prev);
-  };
+  // eslint-disable-next-line @typescript-eslint/naming-convention
 
-  const addToCart = () => {
-    // eslint-disable-next-line no-console
-    console.log('add to cart');
+  const addToCart = async () => {
+    if (!inCart) {
+      await AddToCart(product);
+
+      setInCart(true);
+    } else {
+      await RemoveFromCart(product);
+
+      setInCart(false);
+    }
   };
 
   return (
@@ -150,19 +176,11 @@ function Product({ state, setState }: MainProps) {
           <PriceContainer
             discounted={product.masterVariant.prices[0].discounted}
             value={product.masterVariant.prices[0].value}
+            inCart={inCart}
             onClick={() => addToCart()}
           />
         </div>
-        <div className={classes.wrapperDescription}>
-          <div
-            className={`${classes.description} ${showFullDescription ? classes.show : classes.hide}`}
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{ __html: product.description.en }}
-          />
-          <button onClick={toggleDescription} className={classes.readMoreBtn} type="button">
-            {showFullDescription ? 'Read less...' : 'Read more...'}
-          </button>
-        </div>
+        <Description htmlContent={product.description.en} />
       </section>
       {isImage ? (
         <ProductModal

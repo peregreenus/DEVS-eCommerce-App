@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 import React from 'react';
-import * as classes from './product.module.css';
+import * as classes from './previewImages.module.css';
 import { IProduct } from '../../../data/types/interfaces/product';
 
 interface ImageProps {
@@ -12,7 +12,7 @@ interface ImageProps {
 function PreviewImages({ numImage, product, setModal }: ImageProps) {
   return (
     // eslint-disable-next-line react/jsx-no-comment-textnodes
-    <div className={classes.preview}>
+    <div className={classes.previewBottom}>
       <div className={classes.lenta} style={{ left: `${-Math.floor(numImage * 85)}vw ` }}>
         {product.masterVariant.images.map((img) => (
           <div className={classes.imgContainer} key={img.url}>

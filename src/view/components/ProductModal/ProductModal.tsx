@@ -1,11 +1,11 @@
 import React from 'react';
-import Button from '../../components/common/Button/Button';
-import Modal from '../../components/common/modal/modal';
-import ArrowLeftIcon from '../../components/common/other/ArrowLeftIcon';
-import ArrowRightIcon from '../../components/common/other/ArrowRightIcon';
-import * as classes from './productModal.module.css';
+import Button from '../common/Button/Button';
+import Modal from '../common/modal/modal';
+import ArrowLeftIcon from '../common/icons/ArrowLeftIcon';
+import ArrowRightIcon from '../common/icons/ArrowRightIcon';
+import * as classes from './productmodal.module.css';
 import { ProductModalParam } from '../../../data/types/interfaces/productModalParam';
-import ViewImages from './viewImages';
+import ViewImages from '../ViewImages/ViewImages';
 
 function ProductModal(param: ProductModalParam) {
   const {

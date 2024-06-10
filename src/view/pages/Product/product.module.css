@@ -21,6 +21,7 @@
     flex-wrap: nowrap;
     margin-top: 3rem;
     padding: 2rem;
+    height: 65vh;
 
     .card {
       width: 75vw;
@@ -35,6 +36,7 @@
         display: flex;
         flex-wrap: nowrap;
         width: 85%;
+        height: 10%;
         margin: 0 auto;
         align-items: center;
 
@@ -62,22 +64,13 @@
           justify-content: center;
           align-items: stretch;
           gap: 1rem;
-
+          height: 100%;
           .imgContainer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 35%;
-            transition: box-shadow 0.3s ease-in-out;
-          }
-
-          .imgContainer:hover {
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
           }
 
           .sliderImg {
-            width: 90%;
-            height: auto;
+            width: auto;
+            height: 100%;
           }
 
           .active {
@@ -85,128 +78,6 @@
           }
         }
       }
-
-      .preview {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 50vh;
-        overflow: hidden;
-
-        .lenta {
-          position: absolute;
-          top: 0;
-          height: 100%;
-          display: flex;
-          gap: 12vw;
-          align-items: center;
-          transition: all 0.3s ease-in-out;
-
-          .imgContainer {
-            height: 100%;
-            width: 73vw;
-
-            .previewImg {
-              width: 100%;
-              /* Займає всю ширину контейнера */
-              height: 100%;
-              /* Займає всю висоту контейнера */
-              object-fit: contain;
-            }
-          }
-        }
-
-        .previewNoimage {
-          width: 75%;
-        }
-
-        .previewImg:hover {
-          cursor: pointer;
-          box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
-        }
-      }
-    }
-
-    .price {
-      width: 20%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-
-      border: 1px solid black;
-      border-radius: 0.5rem;
-      padding: 1rem;
-
-      .buyButton {
-        padding: 0.2rem;
-        color: azure;
-        font-size: 1.5rem;
-        background: transparent;
-        border: none;
-        border-radius: 1.5rem;
-        padding: 1rem;
-        background-color: rgb(213, 233, 34);
-        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
-        transition: 0.4s all ease-in;
-      }
-
-      .buyButton:hover {
-        cursor: pointer;
-        background-color: rgb(130, 143, 11);
-      }
-
-      .buyButton:active {
-        background-color: rgb(62, 230, 11);
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-        transform: translateY(2px);
-      }
-    }
-
-    .priceOld {
-      text-decoration: line-through;
-      font-size: 1.3rem;
-    }
-
-    .priceNew {
-      font-weight: 600;
-      color: green;
-    }
-  }
-
-  .wrapperDescription {
-    display: flex;
-    flex-direction: column;
-    padding: 2rem;
-    max-width: min(95vw, 100rem);
-
-    .description {
-      font-size: 1.5rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .description.hide {
-      display: -webkit-box;
-      -webkit-line-clamp: 5;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .description.show {
-      display: block;
-    }
-
-    .readMoreBtn {
-      background: none;
-      color: blue;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      text-decoration: underline;
-      font-size: 1.2rem;
     }
   }
 }
@@ -222,16 +93,6 @@
         width: 100%;
         padding-left: 5rem;
       }
-
-      .price {
-        width: 100%;
-        min-width: unset;
-        max-width: unset;
-      }
-    }
-
-    .wrapperDescription {
-      width: 95%;
     }
   }
 }
