@@ -27,14 +27,29 @@ function Cart({ state, setState }: MainProps) {
       <Header state={state} setState={setState} />
       <section className={classes.cart}>
         <h2>Cart</h2>
-        <div>Product list:</div>
         <ul>
           {cart && cart.lineItems ? (
-            cart.lineItems.map((item: LineItem) => <li key={item.id}>{item.name.en}</li>)
+            cart.lineItems.map((item: LineItem) => (
+              <li key={item.id}>
+                <div className={classes.rowWrapper}>
+                  <div>
+                    <img
+                      className={classes.img}
+                      src={item.variant.images[0].url}
+                      alt={item.name.en}
+                    />
+                  </div>
+                  <div>{item.name.en}</div>
+                  <div>{item.variant.prices[0].value.centAmount}</div>
+                  <button type="button">Remove</button>
+                </div>
+              </li>
+            ))
           ) : (
             <p>No items in the cart</p>
           )}
         </ul>
+        <button type="button">Clear</button>
       </section>
     </>
   );

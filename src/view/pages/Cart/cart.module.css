@@ -11,4 +11,17 @@
   h2 {
     text-align: center;
   }
+  li {
+    list-style: none;
+  }
+  .rowWrapper {
+    display: flex;
+    height: 5rem;
+    align-items: center;
+
+    .img {
+      width: 5rem;
+
+    }
+  }
 }
