@@ -10,7 +10,8 @@ import getAnonToken from './data/api/getToken';
 import Logout from './view/pages/Logout/logout';
 import Profile from './view/pages/Profile/profile';
 import Catalog from './view/pages/Catalog/Catalog';
-import Product from './view/pages/Product/Product';
+import Product from './view/pages/Product/product';
+import Cart from './view/pages/Cart/Cart';
 
 function App() {
   if (!(localStorage.getItem('bearerAnonToken') || localStorage.getItem('bearerToken'))) {
@@ -37,6 +38,7 @@ function App() {
         <Route path="/catalog" element={<Catalog state={state} setState={setState} />} />
         <Route path="/signup" element={<Signup state={state} setState={setState} />} />
         <Route path="/login" element={<Login state={state} setState={setState} />} />
+        <Route path="/cart" element={<Cart state={state} setState={setState} />} />
         {state.userLoggedIn && (
           <>
             <Route path="/profile" element={<Profile state={state} setState={setState} />} />

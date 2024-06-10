@@ -7,8 +7,8 @@ import getProduct from '../../../data/api/getProduct';
 import Header from '../../components/common/header/header';
 import { IProduct } from '../../../data/types/interfaces/product';
 import PreviewImageComponent from './ImageComponent';
-import ArrowRightIcon from '../../components/common/other/ArrowRightIcon';
-import ArrowLeftIcon from '../../components/common/other/ArrowLeftIcon';
+import ArrowRightIcon from '../../components/common/icons/ArrowRightIcon';
+import ArrowLeftIcon from '../../components/common/icons/ArrowLeftIcon';
 import Loader from '../../components/Loader/Loader';
 import Button from '../../components/common/Button/Button';
 import noImage from '../../../assets/img/no-image.png';
@@ -112,11 +112,6 @@ function Product({ state, setState }: MainProps) {
       setInCart(false);
     }
   };
-
-  // interface PriceContainerProps {
-  //   discounted: Discont;
-
-  // }
 
   return (
     <div>
