@@ -2,9 +2,8 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 3rem;
   min-height: 85vh;
   padding: 3rem 0;
   width: 100%;

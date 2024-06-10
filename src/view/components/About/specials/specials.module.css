@@ -1,0 +1,14 @@
+.specials {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.RSLinks {
+  border-radius: 50%;
+  width: 20rem;
+}
+.RSLinks:hover,
+.RSLinks:active {
+  background-color: rgb(255, 193, 67);
+}

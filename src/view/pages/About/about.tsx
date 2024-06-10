@@ -9,7 +9,7 @@ import membersJson from '../../../data/contains/members.json';
 import { Members } from '../../components/About/team/member-props';
 import Loader from '../../components/Loader/Loader';
 import Contributions from '../../components/About/contributions/contributions';
-import Contacts from '../../components/About/contacts/contacts';
+import Specials from '../../components/About/specials/specials';
 
 export default function About({ state, setState }: MainProps) {
   const data: Members = membersJson;
@@ -25,7 +25,7 @@ export default function About({ state, setState }: MainProps) {
             <Team members={data.members} />
             <Contributions />
           </div>
-          <Contacts />
+          <Specials />
         </div>
       )}
 
