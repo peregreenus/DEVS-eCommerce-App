@@ -5,7 +5,7 @@ import { IProduct } from '../../types/interfaces/product';
 import { getLSAnonToken, getLSToken } from '../../utils/getLS';
 import getCart from './GetCart';
 
-async function RemoveFromCart(product: IProduct) {
+async function RemoveFromCart(product: IProduct, quantity = 1) {
   const BEARER_TOKEN = getLSToken() || getLSAnonToken();
   const cart = await getCart();
   const lineItem: LineItem | undefined = cart.lineItems.find(
@@ -22,7 +22,7 @@ async function RemoveFromCart(product: IProduct) {
         {
           action: 'removeLineItem',
           lineItemId,
-          quantity: 1
+          quantity
         }
       ]
     };

@@ -45,12 +45,7 @@ const config: Configuration = {
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-    fallback: {
-      path: require.resolve('path-browserify'),
-      crypto: require.resolve('crypto-browserify'),
-      os: require.resolve('os-browserify/browser')
-    }
+    extensions: ['.tsx', '.ts', '.js']
   },
   output: {
     filename: '[name].[contenthash].js',

@@ -12,9 +12,12 @@ import cartIcon from '../../../assets/icon/modal-cart-dummy.svg';
 import formatPrice from '../../../data/utils/formatPrice';
 import PlusIcon from '../../components/common/icons/plus';
 import MinusIcon from '../../components/common/icons/minus';
+import AddToCart from '../../../data/api/Cart/AddToCart';
+import getProduct from '../../../data/api/getProduct';
+import RemoveFromCart from '../../../data/api/Cart/RemoveFromCart';
 
 function Cart({ state, setState }: MainProps) {
-  const [cart, setCart] = useState<ICart>();
+  const [cart, setCart] = useState<ICart | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,6 +34,34 @@ function Cart({ state, setState }: MainProps) {
 
   function navigateCatalog(): void {
     navigate('/catalog');
+  }
+
+  async function incProduct(lineItem: LineItem): Promise<void> {
+    const product = await getProduct(lineItem.productId, { state, setState });
+    if (product) {
+      await AddToCart(product, 1);
+      const updatedCart = await getCart();
+      setCart(updatedCart);
+    }
+  }
+
+  async function decProduct(lineItem: LineItem): Promise<void> {
+    if (lineItem.quantity <= 1) return;
+    const product = await getProduct(lineItem.productId, { state, setState });
+    if (product) {
+      await RemoveFromCart(product, 1);
+      const updatedCart = await getCart();
+      setCart(updatedCart);
+    }
+  }
+
+  async function removeProduct(lineItem: LineItem): Promise<void> {
+    const product = await getProduct(lineItem.productId, { state, setState });
+    if (product) {
+      await RemoveFromCart(product, lineItem.quantity);
+      const updatedCart = await getCart();
+      setCart(updatedCart);
+    }
   }
 
   return (
@@ -55,22 +86,33 @@ function Cart({ state, setState }: MainProps) {
                     </div>
                     <div className={classes.nameWrapper}>{item.name.en}</div>
                     <div className={classes.counterWrapper}>
-                      <button className={classes.btnQuantity} type="button">
+                      <button
+                        className={classes.btnQuantity}
+                        type="button"
+                        onClick={() => decProduct(item)}>
                         <MinusIcon />
                       </button>
                       <span className={classes.labelQuantity}>{item.quantity}</span>
-                      <button className={classes.btnQuantity} type="button">
+                      <button
+                        className={classes.btnQuantity}
+                        type="button"
+                        onClick={() => incProduct(item)}>
                         <PlusIcon />
                       </button>
                     </div>
                     <div className={classes.priceWrapper}>
-                      {formatPrice(item.variant.prices[0].value.centAmount)}
+                      {item.variant.prices[0].discounted
+                        ? formatPrice(item.variant.prices[0].discounted.value.centAmount)
+                        : formatPrice(item.variant.prices[0].value.centAmount)}
                     </div>
                     <div className={classes.priceWrapper}>
                       Total:&#32;
-                      {formatPrice(item.variant.prices[0].value.centAmount * item.quantity)}
+                      {formatPrice(item.totalPrice.centAmount)}
                     </div>
-                    <button className={classes.removeBtn} type="button">
+                    <button
+                      className={classes.removeBtn}
+                      type="button"
+                      onClick={() => removeProduct(item)}>
                       Remove
                     </button>
                   </li>
@@ -80,7 +122,7 @@ function Cart({ state, setState }: MainProps) {
                 <button type="button" className={classes.clearBtn}>
                   Clear
                 </button>
-                <button type="button" className={classes.clearBtn}>
+                <button type="button" className={classes.clearBtn} onClick={navigateCatalog}>
                   Continue shopping
                 </button>
               </div>
@@ -91,7 +133,7 @@ function Cart({ state, setState }: MainProps) {
               <h3>No products in the cart</h3>
               <p>But it&#39;s never too late to fix it :&#41;</p>
               <button className={classes.welcomeBtn} type="button" onClick={navigateCatalog}>
-                Welcome!
+                Welcome do it!
               </button>
             </div>
           )}

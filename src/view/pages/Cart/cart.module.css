@@ -14,7 +14,6 @@
   }
 
   .cartWrapper {
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -28,7 +27,7 @@
       li {
         list-style: none;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr  2fr auto;
+        grid-template-columns: 1fr 1fr 1fr 1fr 2fr auto;
         align-items: center;
         gap: 1rem;
         padding: 0.5rem 0;
@@ -111,22 +110,21 @@
       }
       .welcomeBtn {
         justify-self: center;
-      background-color: #7bdf1d;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 0.25rem;
-      cursor: pointer;
-      transition: 0.3s all ease-in-out;
+        background-color: #7bdf1d;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        transition: 0.3s all ease-in-out;
       }
       .welcomeBtn:hover {
         background-color: rgb(12, 126, 31);
       }
-     
     }
     .bottonBtnsSect {
       display: flex;
-      gap: 2rem
+      gap: 2rem;
     }
   }
 }
