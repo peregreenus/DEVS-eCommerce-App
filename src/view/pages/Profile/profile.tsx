@@ -4,11 +4,11 @@ import { MainProps } from '../../../data/types/main-props';
 import Header from '../../components/common/header/header';
 import Footer from '../../components/common/footer/footer';
 import * as styles from './profile.module.css';
-import ProfileTabContent from '../../components/profile/profile-content/profile-content';
+import ProfileTabContent from '../../components/Profile/profile-content/profile-content';
 import getCustomerProfile from '../../../data/api/profile/getProfile';
 import { CustomerProfileResponse } from '../../../data/types/interfaces/customer.interface';
-import AddressesTabContent from '../../components/profile/profile-addresses/profile-addresses';
-import ChangePasswordTabContent from '../../components/profile/profile-password/profile-password';
+import AddressesTabContent from '../../components/Profile/profile-addresses/profile-addresses';
+import ChangePasswordTabContent from '../../components/Profile/profile-password/profile-password';
 import { setLSVersionProfileCustomer } from '../../../data/utils/setLS';
 import Loader from '../../components/Loader/Loader';
 

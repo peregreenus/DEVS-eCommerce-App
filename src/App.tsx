@@ -12,6 +12,7 @@ import Profile from './view/pages/Profile/profile';
 // import { getLSToken } from './data/utils/getLS';
 import Product from './view/pages/Product/product';
 import Catalog from './view/pages/Catalog/Catalog';
+import About from './view/pages/About/about';
 // import ProductRand from './view/pages/Product/productrand';
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main state={state} setState={setState} />} />
         <Route path="/catalog" element={<Catalog state={state} setState={setState} />} />
+        <Route path="/about" element={<About state={state} setState={setState} />} />
         <Route path="/signup" element={<Signup state={state} setState={setState} />} />
         <Route path="/login" element={<Login state={state} setState={setState} />} />
         {state.userLoggedIn && (

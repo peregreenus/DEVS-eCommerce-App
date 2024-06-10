@@ -1,0 +1,10 @@
+.contributions {
+  max-width: 40%;
+  border-left: 1px var(--accent-color) solid;
+  padding-left: 1rem;
+
+  p {
+    margin-top: 1rem;
+    font-size: 1.6rem;
+  }
+}

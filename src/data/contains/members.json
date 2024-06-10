@@ -1,0 +1,28 @@
+{
+  "members": [
+    {
+      "key": 2,
+      "name": "Andrey Zmeevskiy",
+      "photo": "https://avatars.githubusercontent.com/u/26045860?v=4",
+      "gitHubLInk": "https://github.com/Andrewz256",
+      "teamRole": "Front-end developer",
+      "bio": "set up the working environment, create signup, profile, about page, "
+    },
+    {
+      "key": 1,
+      "name": "Oleksandr Zelenskyi",
+      "photo": "https://avatars.githubusercontent.com/u/15693438?v=4",
+      "gitHubLInk": "https://github.com/Zelenskiy",
+      "teamRole": "Front-end developer",
+      "bio": "set up the commercetools, create main, product page"
+    },
+    {
+      "key": 0,
+      "name": "Aliaksandr Andreichuk",
+      "photo": "https://avatars.githubusercontent.com/u/70761678?v=4",
+      "gitHubLInk": "https://github.com/peregreenus",
+      "teamRole": "Team Lead, Front-end developer",
+      "bio": "set up the ci/cd, git, create login, catalog page"
+    }
+  ]
+}
