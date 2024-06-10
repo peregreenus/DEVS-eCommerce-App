@@ -101,11 +101,13 @@ function Cart({ state, setState }: MainProps) {
                       </button>
                     </div>
                     <div className={classes.priceWrapper}>
-                      {formatPrice(item.variant.prices[0].value.centAmount)}
+                      {item.variant.prices[0].discounted
+                        ? formatPrice(item.variant.prices[0].discounted.value.centAmount)
+                        : item.variant.prices[0].value.centAmount}
                     </div>
                     <div className={classes.priceWrapper}>
                       Total:&#32;
-                      {formatPrice(item.variant.prices[0].value.centAmount * item.quantity)}
+                      {formatPrice(item.totalPrice.centAmount)}
                     </div>
                     <button
                       className={classes.removeBtn}

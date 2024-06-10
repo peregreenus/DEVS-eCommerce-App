@@ -25,6 +25,15 @@ export interface LineItem {
         centAmount: number;
         fractionDigits: number;
       };
+      discounted: {
+        id: string;
+        value: {
+          type: string;
+          currencyCode: string;
+          centAmount: number;
+          fractionDigits: number;
+        };
+      };
       key: string;
     }[];
     images: {
