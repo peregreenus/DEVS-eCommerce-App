@@ -12,9 +12,12 @@ import cartIcon from '../../../assets/icon/modal-cart-dummy.svg';
 import formatPrice from '../../../data/utils/formatPrice';
 import PlusIcon from '../../components/common/icons/plus';
 import MinusIcon from '../../components/common/icons/minus';
+import AddToCart from '../../../data/api/Cart/AddToCart';
+import getProduct from '../../../data/api/getProduct';
+import RemoveFromCart from '../../../data/api/Cart/RemoveFromCart';
 
 function Cart({ state, setState }: MainProps) {
-  const [cart, setCart] = useState<ICart>();
+  const [cart, setCart] = useState<ICart | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,6 +34,27 @@ function Cart({ state, setState }: MainProps) {
 
   function navigateCatalog(): void {
     navigate('/catalog');
+  }
+
+  async function incProduct(lineItem: LineItem): Promise<void> {
+    console.log('inc', lineItem);
+    const product = await getProduct(lineItem.productId, { state, setState });
+    if (product) {
+      await AddToCart(product, 1);
+      const updatedCart = await getCart(); // Fetch the updated cart
+      setCart(updatedCart); // Update the cart state
+    }
+  }
+
+  async function decProduct(lineItem: LineItem): Promise<void> {
+    console.log('dec', lineItem);
+    if (lineItem.quantity <= 1) return; // Ensure quantity doesn't go negative
+    const product = await getProduct(lineItem.productId, { state, setState });
+    if (product) {
+      await RemoveFromCart(product, 1);
+      const updatedCart = await getCart(); // Fetch the updated cart
+      setCart(updatedCart); // Update the cart state
+    }
   }
 
   return (
@@ -55,11 +79,17 @@ function Cart({ state, setState }: MainProps) {
                     </div>
                     <div className={classes.nameWrapper}>{item.name.en}</div>
                     <div className={classes.counterWrapper}>
-                      <button className={classes.btnQuantity} type="button">
+                      <button
+                        className={classes.btnQuantity}
+                        type="button"
+                        onClick={() => decProduct(item)}>
                         <MinusIcon />
                       </button>
                       <span className={classes.labelQuantity}>{item.quantity}</span>
-                      <button className={classes.btnQuantity} type="button">
+                      <button
+                        className={classes.btnQuantity}
+                        type="button"
+                        onClick={() => incProduct(item)}>
                         <PlusIcon />
                       </button>
                     </div>

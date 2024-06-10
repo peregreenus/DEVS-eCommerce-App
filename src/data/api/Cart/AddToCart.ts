@@ -4,7 +4,7 @@ import { getLSAnonToken, getLSToken } from '../../utils/getLS';
 import getCart from './GetCart';
 // import getCart from './GetCart';
 
-async function AddToCart(product: IProduct) {
+async function AddToCart(product: IProduct, quantity = 1) {
   const token = getLSToken();
   const BEARER_TOKEN = token ? getLSToken() : getLSAnonToken();
   const cart = await getCart();
@@ -15,7 +15,7 @@ async function AddToCart(product: IProduct) {
         action: 'addLineItem',
         productId: product.id,
         variantId: product.masterVariant.id,
-        quantity: 1
+        quantity
       }
     ]
   };
