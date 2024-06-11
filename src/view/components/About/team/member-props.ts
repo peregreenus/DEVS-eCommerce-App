@@ -3,6 +3,7 @@ export interface MemberProps {
   photo: string;
   gitHubLInk: string;
   teamRole: string;
+  skills: string;
   bio: string;
   key: number;
 }

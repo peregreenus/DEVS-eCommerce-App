@@ -21,10 +21,8 @@ export default function About({ state, setState }: MainProps) {
       {data && (
         <div className={styles.aboutPage}>
           <h2>About us</h2>
-          <div className={styles.container}>
-            <Team members={data.members} />
-            <Contributions />
-          </div>
+          <Team members={data.members} />
+          <Contributions />
           <Specials />
         </div>
       )}

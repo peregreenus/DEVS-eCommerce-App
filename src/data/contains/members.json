@@ -3,26 +3,29 @@
     {
       "key": 2,
       "name": "Andrey Zmeevskiy",
-      "photo": "https://avatars.githubusercontent.com/u/26045860?v=4",
+      "photo": "zmeevskiy",
       "gitHubLInk": "https://github.com/Andrewz256",
       "teamRole": "Front-end developer",
-      "bio": "set up the working environment, create signup, profile, about page, "
+      "skills": "JavaScript, HTML5, CSS3,  Git, GitHub, TypeScript, basic React, Python, Django and C#",
+      "bio": "I am learn quickly by practicing, deepen my knowledge by reading books. I set up a working environment on the project, focused on create signup, profile, about page, "
     },
     {
       "key": 1,
       "name": "Oleksandr Zelenskyi",
-      "photo": "https://avatars.githubusercontent.com/u/15693438?v=4",
+      "photo": "zelenskiy",
       "gitHubLInk": "https://github.com/Zelenskiy",
       "teamRole": "Front-end developer",
-      "bio": "set up the commercetools, create main, product page"
+      "skills": "HTML5, CSS3, JavaScript, Git, GitHub, React, TypeScript, Python, Flask, SQL",
+      "bio": "I am Communicative and able to work in a team. I have the ability to learn quickly, strong research and information retrieval skills, and the ability to analyze and summarize data succinctly. While working on the project, I focused on the development of the main page, the product page, and the shopping cart page"
     },
     {
       "key": 0,
       "name": "Aliaksandr Andreichuk",
-      "photo": "https://avatars.githubusercontent.com/u/70761678?v=4",
+      "photo": "andreichuk",
       "gitHubLInk": "https://github.com/peregreenus",
       "teamRole": "Team Lead, Front-end developer",
-      "bio": "set up the ci/cd, git, create login, catalog page"
+      "skills": "HTML5, CSS3, JavaScript, Git, GitHub, React, TypeScript",
+      "bio": "I am interested in web development not only because it is a popular and promising area in IT, but also because programming, and in particular web development, is a combination of creativity and the exact sciences. This is the best best opportunity to build a career. In project I am set up working process, implemented the ci/cd. Focused on the development of the login page, catalog page"
     }
   ]
 }

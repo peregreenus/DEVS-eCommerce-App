@@ -16,6 +16,7 @@ export default function Team(members: Members) {
           gitHubLInk={member.gitHubLInk}
           photo={member.photo}
           teamRole={member.teamRole}
+          skills={member.skills}
         />
       ))}
     </div>
