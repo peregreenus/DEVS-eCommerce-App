@@ -1,0 +1,102 @@
+.team {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 70%;
+  align-items: baseline;
+}
+
+.teamMember {
+  display: grid;
+  column-gap: 1rem;
+  row-gap: 0.3rem;
+  justify-content: baseline;
+  width: 100%;
+  max-width: 1200px;
+  grid-template:
+    'photo name link'
+    'photo role role'
+    'photo skills skills'
+    'photo bio bio'/ 1fr 10fr;
+  border-bottom: 1px var(--accent-color) solid;
+  padding-bottom: 1rem;
+  h5 {
+    font-weight: 200;
+  }
+}
+
+.photoMember {
+  grid-area: photo;
+  width: 15rem;
+  height: 15rem;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+.skillsMember {
+  grid-area: skills;
+  font-size: 1.5rem;
+  span {
+    font-size: 1.4;
+    font-weight: 200;
+  }
+}
+
+.roleMember {
+  grid-area: role;
+}
+
+.memberName {
+  grid-area: name;
+  min-height: 3rem;
+  align-self: center;
+}
+.bioMember {
+  grid-area: bio;
+
+  font-style: italic;
+  font-weight: 200;
+  font-size: 1.8rem;
+}
+
+.gitHubLInk {
+  grid-area: link;
+  padding-top: 1.5rem;
+  height: 3rem;
+  align-self: center;
+}
+
+@media (max-width: 599px) {
+  .team {
+    max-width: 75%;
+  }
+}
+@media (max-width: 533px) {
+  .team {
+    max-width: 85%;
+  }
+}
+@media (max-width: 480px) {
+  .team {
+    max-width: 95%;
+    justify-content: center;
+  }
+  .teamMember {
+    column-gap: 0;
+    row-gap: 0.3rem;
+    grid-template:
+      'photo photo'
+      'name link'
+      'role role'
+      'skills skills'
+      'bio bio' / 10fr 1fr;
+  }
+  .gitHubLInk {
+    padding-top: 0;
+  }
+  .photoMember {
+    justify-self: center;
+    width: 25rem;
+    height: 25rem;
+  }
+}

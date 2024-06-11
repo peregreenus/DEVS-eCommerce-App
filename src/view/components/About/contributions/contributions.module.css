@@ -1,0 +1,25 @@
+.contributions {
+  width: 70%;
+  max-width: 1200px;
+  padding-left: 1rem;
+
+  p {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 599px) {
+  .contributions {
+    width: 75%;
+  }
+}
+@media (max-width: 533px) {
+  .contributions {
+    width: 85%;
+  }
+}
+@media (max-width: 480px) {
+  .contributions {
+    width: 95%;
+  }
+}
