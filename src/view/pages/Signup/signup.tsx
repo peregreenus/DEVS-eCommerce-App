@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import React, { FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import FormSignup from '../../components/signup/signup-form';
 import Header from '../../components/common/header/header';
 import * as styles from './signup.module.css';
 import Footer from '../../components/common/footer/footer';
@@ -11,7 +12,6 @@ import ErrorSignupMessage, {
 } from '../../components/common/SignupMessage/ErrorSignupMessage';
 
 import AutoLoginProcess from '../../../data/utils/autoLoginProcess';
-import FormSignup from '../../components/signup/signup-form';
 
 const userPass = { pass: '' };
 
