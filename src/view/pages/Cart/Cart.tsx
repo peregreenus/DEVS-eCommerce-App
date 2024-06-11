@@ -65,13 +65,16 @@ function Cart({ state, setState }: MainProps) {
     }
   }
 
-  function clearCart() {
+  async function clearCart(): Promise<void> {
     if (cart) {
-      const productList: LineItem[] = [];
-      cart.lineItems.map((item: LineItem) => productList.push(item));
-      productList.map(async (item: LineItem) => {
-        await removeProduct(item);
+      const lineItemCount = cart.lineItems.length;
+      const cartPromises = Array.from({ length: lineItemCount }, () => getCart());
+      const carts: ICart[] = await Promise.all(cartPromises);
+      const removePromises = carts.map((cart) => {
+        const item: LineItem = cart.lineItems[0];
+        return removeProduct(item);
       });
+      await Promise.all(removePromises);
     }
   }
 
