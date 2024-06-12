@@ -39,7 +39,7 @@
 }
 
 .textContent {
-  width: 70%;
+  max-width: 70%;
   display: flex;
   flex-direction: column;
   align-items: baseline;
@@ -57,5 +57,19 @@
   text-indent: 3rem;
   margin-top: 1rem;
   font-size: 2.5rem;
-  max-width: 70%;
+}
+
+@media (max-width: 880px) {
+  .textContent {
+    max-width: 90%;
+    align-items: center;
+    text-align: center;
+    h1 {
+      font-size: 4rem;
+    }
+  }
+  .subtitle {
+    font-size: 2rem;
+    max-width: 100%;
+  }
 }

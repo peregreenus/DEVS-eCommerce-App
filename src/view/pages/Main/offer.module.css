@@ -2,7 +2,6 @@
   justify-self: center;
   display: flex;
   gap: 2rem;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   min-height: 40rem;
@@ -31,7 +30,7 @@
   object-fit: contain;
   text-align: center;
   img {
-    width: 40rem;
+    max-width: 70%;
     border-radius: 1rem;
     animation: fadeIn 5s infinite;
   }
@@ -48,5 +47,21 @@
 
   100% {
     opacity: 0;
+  }
+}
+
+@media (max-width: 880px) {
+  .offer {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  .textContent,
+  .imgContent {
+    width: auto;
+  }
+  .imgContent {
+    img {
+      max-width: 90%;
+    }
   }
 }
