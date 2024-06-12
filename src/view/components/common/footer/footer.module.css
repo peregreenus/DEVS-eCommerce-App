@@ -13,6 +13,10 @@
     text-decoration: none;
     color: black;
     transition: 0.4s all ease-in;
+    p {
+      word-break: normal;
+      overflow-wrap: anywhere;
+    }
   }
   a img:hover {
     width: 3.5rem;
