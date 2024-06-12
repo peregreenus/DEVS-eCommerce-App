@@ -135,7 +135,7 @@ function Cart({ state, setState }: MainProps) {
                   </li>
                 ))}
               </ul>
-              <div className={classes.bottonBtnsSect}>
+              <div className={classes.bottomBtnsSect}>
                 <div className={classes.total}>The total cost of the items in the basket</div>
                 <button type="button" className={classes.clearBtn} onClick={clearCart}>
                   Clear cart
