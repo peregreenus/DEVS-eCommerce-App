@@ -1,5 +1,52 @@
 .offer {
-  background-image: url('../../../assets/img/Default_Draw_the_rings_of_Saturn_in_space_0.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+  justify-self: center;
+  display: flex;
+  gap: 2rem;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-height: 40rem;
+  max-width: 80%;
+  border: var(--border-color) solid 1px;
+  border-radius: 2rem;
+  background-color: var(--gray-bg-color);
+  padding: 2rem;
+}
+.textContent {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.subtitle {
+  margin-top: 1rem;
+  font-size: 1.8rem;
+  align-self: baseline;
+  span {
+    font-weight: 500;
+  }
+}
+.imgContent {
+  width: 50%;
+  object-fit: contain;
+  text-align: center;
+  img {
+    width: 40rem;
+    border-radius: 1rem;
+    animation: fadeIn 5s infinite;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }

@@ -3,32 +3,47 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-
   flex-wrap: wrap;
-
-  .iconWrapper {
-    display: flex;
-    justify-content: left;
-    p {
-      margin-right: 2rem;
-    }
-    .twitterIcon {
-      background-image: url('../../../../assets/icon/icons8-twitterx.svg');
-    }
-    .facebookIcon {
-      background-image: url('../../../../assets/icon/icons8-facebook.svg');
-    }
-    .item {
-      width: 3rem;
-      height: 3rem;
-      background-size: cover;
-      opacity: 0.8;
-      transition: 0.4sec all ease-in;
-    }
-
-    .item:hover {
-      opacity: 1;
-      cursor: pointer;
-    }
+}
+.footerItem {
+  display: flex;
+  flex-direction: column;
+  a {
+    margin-right: 25px;
+    text-decoration: none;
+    color: black;
+    transition: 0.4s all ease-in;
   }
+  a img:hover {
+    width: 3.5rem;
+  }
+
+  a:hover {
+    color: var(--accent-color);
+  }
+}
+.iconWrapper {
+  display: flex;
+  justify-content: left;
+  p {
+    margin-right: 2rem;
+  }
+}
+.twitterIcon {
+  background-image: url('../../../../assets/icon/icons8-twitterx.svg');
+}
+.facebookIcon {
+  background-image: url('../../../../assets/icon/icons8-facebook.svg');
+}
+.item {
+  width: 3rem;
+  height: 3rem;
+  background-size: cover;
+  opacity: 0.8;
+  transition: 0.4sec all ease-in;
+}
+
+.item:hover {
+  opacity: 1;
+  cursor: pointer;
 }

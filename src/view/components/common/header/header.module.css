@@ -1,16 +1,14 @@
 .header {
   position: relative;
-  padding: 1rem;
+  padding: 1rem 3rem;
   display: flex;
   justify-content: space-between;
   font-size: 1.6rem;
-
   .logo {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 2rem;
-    background-image: url('../../../../assets/img/Default_Draw_logo_for_company_Galactic_Exclusive_0.png');
-    background-size: cover;
+    width: 15rem;
+    object-fit: cover;
+    /* background-image: url('../../../../assets/img/Default_Draw_logo_for_company_Galactic_Exclusive_0.png');
+    background-size: cover; */
     z-index: 2000;
     transition: 0.4s all ease-in;
   }

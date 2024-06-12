@@ -2,34 +2,60 @@
   background-image: url('../../../assets/img/Default_draw_a_picture_about_Welcome_to_Galactic_Exclusive_yo_1.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  color: var(--light-text-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
 
-  .wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-  }
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
 
-  .myBtn {
-    font-size: 1.5rem;
-    padding: 5px 15px;
-    color: teal;
-    background: transparent;
-    border: 1px solid teal;
-    cursor: pointer;
-    border: none;
-    border-radius: 1rem;
-    width: 15rem;
-    padding: 1rem;
-    background-color: rgba(255, 255, 255, 0.5);
-    transition: 0.4s all ease-in;
-  }
+.catalogButton {
+  font-size: 2rem;
+  color: var(--accent-color);
+  background: transparent;
+  border: 1px solid var(--accent-color);
+  cursor: pointer;
+  border: none;
+  border-radius: 1rem;
+  min-width: 15rem;
+  padding: 1rem 3rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: 0.4s all ease-in;
+  margin-top: 5rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
 
-  .btnCenter {
-    margin-top: 5rem;
-  }
+.catalogButton:hover {
+  background-color: rgb(255, 255, 255);
+}
 
-  .myBtn:hover {
-    background-color: rgb(255, 255, 255);
+.textContent {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+  h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 5rem;
   }
+}
+.subtitle {
+  text-indent: 3rem;
+  margin-top: 1rem;
+  font-size: 2.5rem;
+  max-width: 70%;
 }

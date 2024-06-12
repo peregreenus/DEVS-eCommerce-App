@@ -1,28 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import * as classes from './offer.module.css';
-import * as classesMain from './main.module.css';
+import islandPic from '../../../assets/img/island-1.jpg';
+import corporationPic from '../../../assets/img/corp-1.jpg';
+import massMediaPic from '../../../assets/img/mass-1.jpg';
+
+const imageArray = [islandPic, corporationPic, massMediaPic];
 
 function Offer() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      // Use a functional state update to correctly increment the count
+      setCount((prev) => prev + 1);
+    }, 5000);
+    return () => clearInterval(timerId);
+  }, []);
+  const image = imageArray[count % imageArray.length];
   return (
-    <section className={`${classes.offer} ${classesMain.mainSection}`}>
-      <div className={classesMain.textContent}>
-        <p className={classesMain.title}>We offer</p>
-        <p className={classesMain.subtitle}>
-          Islands: Your dream of a private paradise is now a reality! Choose from our selection of
-          premium islands and immerse yourself in luxury and privacy.
+    <section className={classes.offer}>
+      <div className={classes.textContent}>
+        <h3>We offer</h3>
+        <p className={classes.subtitle}>
+          <span>Islands:</span> Your dream of a private paradise is now a reality! Choose from our
+          selection of premium islands and immerse yourself in luxury and privacy.
         </p>
-        <p className={classesMain.subtitle}>
-          Bridges: Connect your worlds with others by selecting our exclusive bridges that add
-          luxury and style to your real estate.
+        <p className={classes.subtitle}>
+          <span>Corporation:</span> Change the world by purchasing a corporation. You can destroy it
+          or take over the world with it.
         </p>
-        <p className={classesMain.subtitle}>
-          Asteroids: Want your own cosmic land? On our website, you&apos;ll find the best asteroids
-          to create your own space empire.
+        <p className={classes.subtitle}>
+          <span>Mass-Media:</span> Influence people’s minds through your own media. Money will flow
+          in your pocket from politicians and corporations
         </p>
-        <p className={classesMain.subtitle}>
-          Moon Estates: Discover the most prestigious estates on the Moon, where you can build your
-          own cosmic residence and enjoy panoramic views of Earth.
-        </p>
+      </div>
+      <div className={classes.imgContent}>
+        <img src={image} alt="beautiful island" />
       </div>
     </section>
   );
