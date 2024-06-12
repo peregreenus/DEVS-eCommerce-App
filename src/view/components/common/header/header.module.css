@@ -1,5 +1,6 @@
 .header {
   position: relative;
+  width: 100%;
   padding: 1rem 3rem;
   display: flex;
   justify-content: space-between;
@@ -7,8 +8,6 @@
   .logo {
     width: 15rem;
     object-fit: cover;
-    /* background-image: url('../../../../assets/img/Default_Draw_logo_for_company_Galactic_Exclusive_0.png');
-    background-size: cover; */
     z-index: 2000;
     transition: 0.4s all ease-in;
   }

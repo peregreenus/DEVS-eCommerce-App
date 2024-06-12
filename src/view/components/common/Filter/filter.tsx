@@ -26,10 +26,10 @@ function Filter({ price, setPrice }: SearchPriceFilter) {
 
   return (
     <div className={classes.filter}>
-      <sub className={classes.caption}>Filter</sub>
+      <sub className={classes.caption}>filters</sub>
       <div className={classes.wrapper}>
-        <div>
-          <sub className={classes.label}>Price from</sub>
+        <div className={classes.inputContainer}>
+          <sub className={classes.label}>from</sub>
           <input
             className={classes.field}
             type="text"
@@ -38,7 +38,7 @@ function Filter({ price, setPrice }: SearchPriceFilter) {
             onChange={handleMinPriceChange}
           />
         </div>
-        <div>
+        <div className={classes.inputContainer}>
           <sub className={classes.label}>to</sub>
           <input
             className={classes.field}
@@ -48,13 +48,14 @@ function Filter({ price, setPrice }: SearchPriceFilter) {
             onChange={handleMaxPriceChange}
           />
         </div>
-
-        <button type="button" className={classes.btn} onClick={() => applyFilter()}>
-          Apply
-        </button>
-        <button type="button" className={classes.btn} onClick={() => resetFilter()}>
-          Reset
-        </button>
+        <div className={classes.buttonContainer}>
+          <button type="button" className={classes.btn} onClick={() => applyFilter()}>
+            Apply
+          </button>
+          <button type="button" className={classes.btn} onClick={() => resetFilter()}>
+            Reset
+          </button>
+        </div>
       </div>
     </div>
   );

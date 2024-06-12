@@ -16,19 +16,20 @@ export default function About({ state, setState }: MainProps) {
 
   console.log(data);
   return data ? (
-    <div className={styles.about}>
+    <>
       <Header state={state} setState={setState} />
-      {data && (
-        <div className={styles.aboutPage}>
-          <h2>About us</h2>
-          <Team members={data.members} />
-          <Contributions />
-          <Specials />
-        </div>
-      )}
-
+      <div className={styles.about}>
+        {data && (
+          <div className={styles.aboutPage}>
+            <h2>About us</h2>
+            <Team members={data.members} />
+            <Contributions />
+            <Specials />
+          </div>
+        )}
+      </div>
       <Footer />
-    </div>
+    </>
   ) : (
     <>
       <Header state={state} setState={setState} />
