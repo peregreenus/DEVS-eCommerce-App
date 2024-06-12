@@ -83,7 +83,8 @@ function LoginForm({ state, setState }: MainProps) {
         </div>
       ) : (
         <>
-          {inputs}
+          <div className={classes.inputBlock}>{inputs}</div>
+
           <button type="submit" disabled={isDisabled}>
             Login
           </button>
