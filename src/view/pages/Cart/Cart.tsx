@@ -15,6 +15,7 @@ import MinusIcon from '../../components/common/icons/minus';
 import AddToCart from '../../../data/api/Cart/AddToCart';
 import getProduct from '../../../data/api/getProduct';
 import RemoveFromCart from '../../../data/api/Cart/RemoveFromCart';
+import DeleteIcon from '../../components/common/icons/delete';
 
 function Cart({ state, setState }: MainProps) {
   const [cart, setCart] = useState<ICart | null>(null);
@@ -64,6 +65,19 @@ function Cart({ state, setState }: MainProps) {
     }
   }
 
+  async function clearCart(): Promise<void> {
+    if (cart) {
+      const lineItemCount = cart.lineItems.length;
+      const cartPromises = Array.from({ length: lineItemCount }, () => getCart());
+      const carts: ICart[] = await Promise.all(cartPromises);
+      const removePromises = carts.map((cart) => {
+        const item: LineItem = cart.lineItems[0];
+        return removeProduct(item);
+      });
+      await Promise.all(removePromises);
+    }
+  }
+
   return (
     <>
       <Header state={state} setState={setState} />
@@ -75,7 +89,7 @@ function Cart({ state, setState }: MainProps) {
               <ul>
                 {cart.lineItems.map((item: LineItem) => (
                   <li key={item.id}>
-                    <div>
+                    <div className={`${classes.cell} ${classes.cell}`}>
                       <a href={`/catalog/product/${item.productId}`}>
                         <img
                           className={classes.img}
@@ -84,43 +98,47 @@ function Cart({ state, setState }: MainProps) {
                         />
                       </a>
                     </div>
-                    <div className={classes.nameWrapper}>{item.name.en}</div>
-                    <div className={classes.counterWrapper}>
-                      <button
-                        className={classes.btnQuantity}
-                        type="button"
-                        onClick={() => decProduct(item)}>
-                        <MinusIcon />
-                      </button>
-                      <span className={classes.labelQuantity}>{item.quantity}</span>
-                      <button
-                        className={classes.btnQuantity}
-                        type="button"
-                        onClick={() => incProduct(item)}>
-                        <PlusIcon />
-                      </button>
-                    </div>
-                    <div className={classes.priceWrapper}>
+                    <div className={`${classes.cell}`}>{item.name.en}</div>
+
+                    <div className={`${classes.priceWrapper} ${classes.cell}`}>
                       {item.variant.prices[0].discounted
                         ? formatPrice(item.variant.prices[0].discounted.value.centAmount)
                         : formatPrice(item.variant.prices[0].value.centAmount)}
                     </div>
-                    <div className={classes.priceWrapper}>
+                    <div className={`${classes.priceWrapper} ${classes.cell}`}>
                       Total:&#32;
                       {formatPrice(item.totalPrice.centAmount)}
                     </div>
-                    <button
-                      className={classes.removeBtn}
-                      type="button"
-                      onClick={() => removeProduct(item)}>
-                      Remove
-                    </button>
+                    <div className={`${classes.cellWrapper}`}>
+                      <div className={`${classes.counterWrapper} ${classes.cell}`}>
+                        <button
+                          className={classes.btnQuantity}
+                          type="button"
+                          onClick={() => decProduct(item)}>
+                          <MinusIcon width="1.5rem" height="1.5rem" />
+                        </button>
+                        <span className={classes.labelQuantity}>{item.quantity}</span>
+                        <button
+                          className={classes.btnQuantity}
+                          type="button"
+                          onClick={() => incProduct(item)}>
+                          <PlusIcon width="1.5rem" height="1.5rem" />
+                        </button>
+                      </div>
+                      <button
+                        className={classes.removeBtn}
+                        type="button"
+                        onClick={() => removeProduct(item)}>
+                        <DeleteIcon width="2rem" height="2rem" />
+                      </button>
+                    </div>
                   </li>
                 ))}
               </ul>
-              <div className={classes.bottonBtnsSect}>
-                <button type="button" className={classes.clearBtn}>
-                  Clear
+              <div className={classes.bottomBtnsSect}>
+                <div className={classes.total}>The total cost of the items in the basket</div>
+                <button type="button" className={classes.clearBtn} onClick={clearCart}>
+                  Clear cart
                 </button>
                 <button type="button" className={classes.clearBtn} onClick={navigateCatalog}>
                   Continue shopping
