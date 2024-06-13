@@ -1,6 +1,7 @@
 .cart {
   position: absolute;
-  width: 75%;
+  width: 95%;
+  max-width: 900px;
   height: 75%;
   top: 50%;
   left: 50%;
@@ -19,20 +20,35 @@
     justify-content: space-between;
     height: 90%;
     align-items: center;
+    overflow-x: hidden;
+    overflow-y: auto;
 
     ul {
       padding: 0;
       margin: 2rem 0;
+      /* background-color: #7bdf1d; */
 
       li {
+        font-size: 1.5rem;
         list-style: none;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 2fr auto;
+        /* display: grid;
+        grid-template-columns: repeat(6, 1fr); */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
         align-items: center;
         gap: 1rem;
         padding: 0.5rem 0;
+        padding: 1rem;
         border-bottom: 1px solid #ccc;
 
+        .cell {
+          padding: 0.5rem;
+          text-align: center;
+        }
+        .cellWrapper {
+          display: flex;
+        }
         .imgWrapper {
           display: flex;
           justify-content: center;
@@ -60,7 +76,6 @@
           }
           .labelQuantity {
             width: 3rem;
-            height: 3rem;
             margin-left: 1rem;
             margin-right: 1rem;
             justify-self: center;
@@ -68,16 +83,16 @@
           }
         }
 
-        .removeBtn {
+        .removeBtn,
+        .btnQuantity {
           justify-self: center;
-          background-color: #f44336;
-          color: white;
           border: none;
           padding: 0.5rem 1rem;
           border-radius: 0.25rem;
           cursor: pointer;
+          background: #fff;
         }
-        .removeBtn:hover {
+        .removeBtn:active {
           background-color: #d32f2f;
         }
       }
@@ -122,8 +137,9 @@
         background-color: rgb(12, 126, 31);
       }
     }
-    .bottonBtnsSect {
+    .bottomBtnsSect {
       display: flex;
+      flex-direction: column;
       gap: 2rem;
     }
   }
