@@ -24,7 +24,6 @@ function CardContaines({ products, goToProduct }: CardContainesProps) {
       ) : (
         <div style={{ textAlign: 'center' }}>No product found</div>
       )}
-      {}
     </div>
   );
 }
