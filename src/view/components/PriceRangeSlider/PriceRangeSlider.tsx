@@ -33,54 +33,26 @@ function PriceRangeSlider({ step, realMin, realMax, values, setValues }: PriceRa
         renderTrack={({ props, children }) => (
           <div
             {...props}
+            className={classes.track}
             style={{
               ...props.style,
-              height: '6px',
-              width: '100%',
               background: getTrackBackground({
                 values,
                 colors: ['#ccc', 'var(--accent-color)', '#ccc'],
                 min,
                 max
-              }),
-              borderRadius: '4px'
+              })
             }}>
             {children}
           </div>
         )}
         renderThumb={({ props }) => (
-          <div
-            {...props}
-            style={{
-              ...props.style,
-              height: '24px',
-              width: '24px',
-              borderRadius: '50%',
-              backgroundColor: '#FFF',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              boxShadow: '0px 2px 6px #AAA'
-            }}>
-            <div
-              style={{
-                height: '16px',
-                width: '5px',
-                backgroundColor: 'var(--accent-color)'
-              }}
-            />
+          <div {...props} className={classes.thumb}>
+            <div className={classes.thumbInner} />
           </div>
         )}
       />
-      <output
-        style={{
-          marginTop: '12px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          width: '100%',
-          fontSize: '1.5rem',
-          fontFamily: 'monospace'
-        }}>
+      <output className={classes.output}>
         <div>${Math.floor(procentToValue(values[0], realMin, realMax) / 100)}</div>
         <div>${Math.floor(procentToValue(values[1], realMin, realMax) / 100)}</div>
       </output>

@@ -11,11 +11,11 @@ import ErrorSignupMessage, {
 } from '../../components/common/SignupMessage/ErrorSignupMessage';
 
 import AutoLoginProcess from '../../../data/utils/autoLoginProcess';
-import FormSignup from '../../components/signup/signup-form';
+import FormSignup from '../../components/Signup/signup-form';
 
 const userPass = { pass: '' };
 
-export default function Singup({ state, setState }: MainProps) {
+export default function Signup({ state, setState }: MainProps) {
   const [showSignupState, setShowSignupState] = useState(false);
   const navigate = useNavigate();
 
