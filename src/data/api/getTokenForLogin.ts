@@ -36,7 +36,25 @@ async function getTokenForLogin(
     localStorage.removeItem('bearerAnonToken');
     console.log('bearerToken:', bearerToken);
     console.log('refreshToken:', refreshToken);
-    createCart(tokenData.access_token);
+
+    // Fetch existing cart
+    const cartUrl = `${CTP.API_URL}${CTP.PROJECT_KEY}/me/active-cart`;
+    const cartResponse = await fetch(cartUrl, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${bearerToken}`
+      }
+    });
+
+    if (cartResponse.ok) {
+      const cartData = await cartResponse.json();
+      console.log('Existing cart:', cartData);
+    } else {
+      // If no active cart exists, create a new one
+      console.log('No active cart found, creating a new one.');
+      await createCart(tokenData.access_token);
+    }
+
     setState((prevState) => ({ ...prevState, userLoggedIn: true, showMsg: false }));
 
     return bearerToken;

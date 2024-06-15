@@ -16,13 +16,19 @@ import FetchCategories from './FetchCategories';
 import { ProductProvider, useProductContext } from './ProductContext';
 import FetchProducts from './FetchProducts';
 
+const MAXPRICE = 2000000000000;
+
 const CatalogContent: React.FC<MainProps> = ({ state, setState }) => {
   const { products } = useProductContext();
   const [loading, setLoading] = useState<boolean>(true);
   const [sorting, setSorting] = useState<string>('');
   const [price, setPrice] = useState<AppFilter>({
-    minPrice: 0,
-    maxPrice: 100000000000000
+    min: 0,
+    max: MAXPRICE
+  });
+  const [limit] = useState<AppFilter>({
+    min: 0,
+    max: MAXPRICE
   });
   const [categoryId, setCategoryId] = useState<string>('');
   const [categories, setCategories] = useState<ICategory[]>([]);
@@ -61,7 +67,7 @@ const CatalogContent: React.FC<MainProps> = ({ state, setState }) => {
                 setCategoryId={setCategoryId}
                 categoryId={categoryId}
               />
-              <Filter price={price} setPrice={setPrice} />
+              <Filter price={price} setPrice={setPrice} limit={limit} />
             </aside>
             <div className={classes.catalog}>
               <SortBar value={sorting} onChange={(e) => setSorting(e.target.value)} />

@@ -1,27 +1,24 @@
-import React, { ChangeEvent, useState } from 'react';
+/* eslint-disable no-console */
+import React, { useState } from 'react';
 import * as classes from './filter.module.css';
 import { SearchPriceFilter } from '../../../../data/types/interfaces/SearchPriceFilter';
+import PriceRangeSlider from '../../PriceRangeSlider/PriceRangeSlider';
+import { procentToValue } from '../../../../data/utils/priceRangeConv';
 
-function Filter({ price, setPrice }: SearchPriceFilter) {
-  const [minVal, setMinValue] = useState(price.minPrice / 100);
-  const [maxVal, setMaxValue] = useState(price.maxPrice / 100);
-
-  const handleMinPriceChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const newMinPrice = event.currentTarget.value;
-    setMinValue(+newMinPrice);
-  };
-
-  const handleMaxPriceChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const newMaxPrice = event.currentTarget.value;
-    setMaxValue(+newMaxPrice);
-  };
+function Filter({ price, limit, setPrice }: SearchPriceFilter) {
+  const [values, setValues] = useState([0, 100]);
 
   function applyFilter(): void {
-    setPrice({ minPrice: minVal * 100, maxPrice: maxVal * 100 });
+    setPrice({
+      min: procentToValue(values[0], limit.min, limit.max),
+      max: procentToValue(values[1], limit.min, limit.max)
+    });
+    console.log('price', price);
   }
 
   function resetFilter(): void {
-    throw new Error('Function not implemented.');
+    setPrice({ min: limit.min, max: limit.max });
+    setValues([0, 100]);
   }
 
   return (
@@ -29,23 +26,12 @@ function Filter({ price, setPrice }: SearchPriceFilter) {
       <sub className={classes.caption}>filters</sub>
       <div className={classes.wrapper}>
         <div className={classes.inputContainer}>
-          <sub className={classes.label}>from</sub>
-          <input
-            className={classes.field}
-            type="text"
-            name="minValue"
-            value={minVal}
-            onChange={handleMinPriceChange}
-          />
-        </div>
-        <div className={classes.inputContainer}>
-          <sub className={classes.label}>to</sub>
-          <input
-            className={classes.field}
-            type="text"
-            name="maxVal"
-            value={maxVal}
-            onChange={handleMaxPriceChange}
+          <PriceRangeSlider
+            realMin={limit.min}
+            realMax={limit.max}
+            step={1}
+            values={values}
+            setValues={setValues}
           />
         </div>
         <div className={classes.buttonContainer}>

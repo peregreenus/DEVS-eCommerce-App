@@ -87,6 +87,10 @@
   width: 98%;
   max-height: 10rem;
 }
+.sliderImg:hover,
+.sliderImg:focus {
+  cursor: pointer;
+}
 
 .active {
   border-top: 2px solid var(--accent-color);

@@ -6,7 +6,7 @@ import { MainProps } from '../../../data/types/main-props';
 import getProduct from '../../../data/api/getProduct';
 import Header from '../../components/common/header/header';
 import { IProduct } from '../../../data/types/interfaces/product';
-import PreviewImageComponent from './previewImageComponent';
+import PreviewImageComponent from './ImageComponent';
 import ArrowRightIcon from '../../components/common/icons/ArrowRightIcon';
 import ArrowLeftIcon from '../../components/common/icons/ArrowLeftIcon';
 import Loader from '../../components/Loader/Loader';

@@ -11,15 +11,19 @@ interface CardContainesProps {
 function CardContaines({ products, goToProduct }: CardContainesProps) {
   return (
     <div className={classes.cardContainer}>
-      {products.map((product: IProduct) => {
-        return (
-          <ProductCard
-            key={product.id}
-            product={product}
-            goToProduct={() => goToProduct(product.id)}
-          />
-        );
-      })}
+      {products.length > 0 ? (
+        products.map((product: IProduct) => {
+          return (
+            <ProductCard
+              key={product.id}
+              product={product}
+              goToProduct={() => goToProduct(product.id)}
+            />
+          );
+        })
+      ) : (
+        <div style={{ textAlign: 'center' }}>No product found</div>
+      )}
     </div>
   );
 }
