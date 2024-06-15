@@ -16,7 +16,7 @@ function PreviewImageComponent({ index, imgUrl, isSelected, onClick }: ImageProp
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
-      className={`${classes.imgContainer} ${isSelected ? classes.active : ''}`}
+      className={`${classes.sliderImgContainer} ${isSelected ? classes.active : ''}`}
       onClick={handleClick}>
       <img className={classes.sliderImg} src={imgUrl} alt="product" />
     </div>

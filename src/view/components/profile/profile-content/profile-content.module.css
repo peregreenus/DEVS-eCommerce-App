@@ -1,13 +1,11 @@
 .profileTabContent {
-  border: 1px var(--border-color) solid;
-  border-radius: 0.2rem;
   margin: 1.5rem;
 }
 
 .profileContent {
   display: flex;
   flex-wrap: wrap;
-  min-height: 4rem;
+  min-height: 5rem;
 }
 
 .fieldName {
@@ -50,9 +48,9 @@
   width: 100%;
   border: 1px var(--border-color) solid;
   font-size: 1.8rem;
-  padding: 0.5rem 0.8rem;
-  height: 3rem;
-  border-radius: 0.2rem;
+  padding: 0.5rem 1.6rem;
+  height: 4rem;
+  border-radius: 1rem;
   background-color: var(--default-bg-color);
   color: var(--primary-text-color);
   border-color: var(--border-color);

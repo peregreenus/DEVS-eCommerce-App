@@ -23,22 +23,25 @@ function Filter({ price, limit, setPrice }: SearchPriceFilter) {
 
   return (
     <div className={classes.filter}>
-      <sub className={classes.caption}>Filter</sub>
+      <sub className={classes.caption}>filters</sub>
       <div className={classes.wrapper}>
-        <PriceRangeSlider
-          realMin={limit.min}
-          realMax={limit.max}
-          step={1}
-          values={values}
-          setValues={setValues}
-        />
-
-        <button type="button" className={classes.btn} onClick={() => applyFilter()}>
-          Apply
-        </button>
-        <button type="button" className={classes.btn} onClick={() => resetFilter()}>
-          Reset
-        </button>
+        <div className={classes.inputContainer}>
+          <PriceRangeSlider
+            realMin={limit.min}
+            realMax={limit.max}
+            step={1}
+            values={values}
+            setValues={setValues}
+          />
+        </div>
+        <div className={classes.buttonContainer}>
+          <button type="button" className={classes.btn} onClick={() => applyFilter()}>
+            Apply
+          </button>
+          <button type="button" className={classes.btn} onClick={() => resetFilter()}>
+            Reset
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -2,8 +2,8 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  gap: 1rem;
-  max-width: 70%;
+  gap: 2rem;
+  width: 70%;
   align-items: baseline;
 }
 
@@ -13,14 +13,16 @@
   row-gap: 0.3rem;
   justify-content: baseline;
   width: 100%;
-  max-width: 1200px;
   grid-template:
     'photo name link'
     'photo role role'
     'photo skills skills'
     'photo bio bio'/ 1fr 10fr;
-  border-bottom: 1px var(--accent-color) solid;
-  padding-bottom: 1rem;
+  border: 1px var(--border-color) solid;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  background-color: var(--gray-bg-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   h5 {
     font-weight: 200;
   }
@@ -30,7 +32,7 @@
   grid-area: photo;
   width: 15rem;
   height: 15rem;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   object-fit: cover;
 }
 .skillsMember {
@@ -65,20 +67,24 @@
   height: 3rem;
   align-self: center;
 }
+.gitHubLInk:hover,
+.gitHubLInk:focus {
+  transform: scale(1.1);
+}
 
 @media (max-width: 599px) {
   .team {
-    max-width: 75%;
+    width: 75%;
   }
 }
 @media (max-width: 533px) {
   .team {
-    max-width: 85%;
+    width: 85%;
   }
 }
 @media (max-width: 480px) {
   .team {
-    max-width: 95%;
+    width: 95%;
     justify-content: center;
   }
   .teamMember {

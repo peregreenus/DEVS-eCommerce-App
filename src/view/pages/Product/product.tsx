@@ -13,7 +13,6 @@ import Loader from '../../components/Loader/Loader';
 import Button from '../../components/common/Button/Button';
 import noImage from '../../../assets/img/no-image.png';
 import Notfound from '../NotFound/not-found';
-import PreviewImages from './previewImages';
 import ProductModal from '../../components/ProductModal/ProductModal';
 import PriceContainer from '../../components/PriceContainer/PriceContainer';
 import * as classes from './product.module.css';
@@ -22,6 +21,7 @@ import AddToCart from '../../../data/api/Cart/AddToCart';
 import { getLSCart } from '../../../data/utils/getLS';
 import RemoveFromCart from '../../../data/api/Cart/RemoveFromCart';
 import getCart from '../../../data/api/Cart/GetCart';
+import RibbonImages from './ribbonImages';
 
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
@@ -123,19 +123,19 @@ function Product({ state, setState }: MainProps) {
             {isImage ? (
               <div className={classes.slider}>
                 {leftVisible ? (
-                  <Button type="button" className={classes.btn} onClick={() => slideLeft()}>
+                  <Button type="button" className={classes.sliderBtn} onClick={() => slideLeft()}>
                     <ArrowLeftIcon width="6rem" height="6rem" />
                   </Button>
                 ) : (
                   <Button
                     type="button"
-                    className={`${classes.btn} ${classes.btnDisabled}`}
+                    className={`${classes.sliderBtn} ${classes.sliderBtnDisabled}`}
                     disabled>
                     <ArrowLeftIcon width="6rem" height="6rem" fill="gray" />
                   </Button>
                 )}
 
-                <div className={classes.prevWrapper}>
+                <div className={classes.sliderWrapper}>
                   {product.masterVariant.images.map((img, index) => (
                     <PreviewImageComponent
                       key={img.url}
@@ -147,40 +147,44 @@ function Product({ state, setState }: MainProps) {
                   ))}
                 </div>
                 {rightVisible ? (
-                  <Button type="button" className={classes.btn} onClick={() => slideRight()}>
+                  <Button type="button" className={classes.sliderBtn} onClick={() => slideRight()}>
                     <ArrowRightIcon width="6rem" height="6rem" />
                   </Button>
                 ) : (
                   <Button
                     type="button"
-                    className={`${classes.btn} ${classes.btnDisabled}`}
+                    className={`${classes.sliderBtn} ${classes.sliderBtnDisabled}`}
                     disabled>
                     <ArrowRightIcon width="6rem" height="6rem" fill="gray" />
                   </Button>
                 )}
               </div>
             ) : null}
-
-            {isImage ? (
-              <PreviewImages
-                numImage={numImage}
-                product={product}
-                setModal={() => setModal(true)}
-              />
-            ) : (
-              <div className={classes.preview}>
+            <div className={classes.preview}>
+              {isImage ? (
+                <RibbonImages
+                  numImage={numImage}
+                  imgCount={imgCount}
+                  product={product}
+                  setModal={() => setModal(true)}
+                />
+              ) : (
                 <img className={classes.previewNoimage} src={noImage} alt="no aviable" />
-              </div>
-            )}
+              )}
+            </div>
           </div>
-          <PriceContainer
-            discounted={product.masterVariant.prices[0].discounted}
-            value={product.masterVariant.prices[0].value}
-            inCart={inCart}
-            onClick={() => addToCart()}
-          />
+          <div className={classes.priceContainer}>
+            <PriceContainer
+              discounted={product.masterVariant.prices[0].discounted}
+              value={product.masterVariant.prices[0].value}
+              inCart={inCart}
+              onClick={() => addToCart()}
+            />
+          </div>
         </div>
-        <Description htmlContent={product.description.en} />
+        <div className={classes.wrapperDescription}>
+          <Description htmlContent={product.description.en} />
+        </div>
       </section>
       {isImage ? (
         <ProductModal

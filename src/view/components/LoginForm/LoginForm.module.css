@@ -1,16 +1,14 @@
 .loginForm {
   display: flex;
   flex-direction: column;
-  width: 20%;
-  min-width: 30rem;
-  padding: 20px;
+  max-width: 30rem;
   overflow: hidden;
 }
 
 .loginForm label {
   font-size: 1.4rem;
   font-weight: bold;
-  color: var(--light-text-color);
+  color: var(--primary-text-color);
 }
 
 .loginForm label:has(input[type='checkbox']) {
@@ -25,6 +23,15 @@
   opacity: 0.5;
 }
 
+.inputBlock {
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  background-color: var(--gray-bg-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin: 1rem;
+}
+
 .loginForm input[type='checkbox']:checked {
   opacity: 1;
 }
@@ -35,20 +42,22 @@
 }
 
 .loginForm button {
+  margin-top: 2rem;
   padding: 0.4rem 0.6rem;
   text-transform: uppercase;
   cursor: pointer;
-  border-radius: 3px;
-  border: 0;
-  background-color: #5982f5;
-  color: #fff;
+  border-radius: 1rem;
+  background-color: var(--primary-text-color);
+  color: var(--light-text-color);
+  width: 20rem;
+  height: 4rem;
+  align-self: center;
 }
 
 .loginForm button:disabled {
-  color: #0000009a;
-  border: 1px solid #0000009a;
-  background-color: transparent;
-  cursor: default;
+  cursor: not-allowed;
+  background-color: var(--gray-bg-color);
+  color: rgba(220, 220, 220, 0.433);
 }
 
 .failMessage {
@@ -65,4 +74,19 @@
 .failMessageTitle {
   color: #900;
   font-size: 2rem;
+}
+
+@media (max-width: 326px) {
+  .inputBlock {
+    padding: 0.5rem 0;
+  }
+  .loginForm {
+    text-align: center;
+  }
+}
+
+@media (max-width: 241px) {
+  .inputBlock {
+    margin: 0;
+  }
 }

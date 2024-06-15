@@ -39,7 +39,7 @@ function PriceRangeSlider({ step, realMin, realMax, values, setValues }: PriceRa
               width: '100%',
               background: getTrackBackground({
                 values,
-                colors: ['#ccc', '#548BF4', '#ccc'],
+                colors: ['#ccc', 'var(--accent-color)', '#ccc'],
                 min,
                 max
               }),
@@ -66,7 +66,7 @@ function PriceRangeSlider({ step, realMin, realMax, values, setValues }: PriceRa
               style={{
                 height: '16px',
                 width: '5px',
-                backgroundColor: '#548BF4'
+                backgroundColor: 'var(--accent-color)'
               }}
             />
           </div>
@@ -78,7 +78,7 @@ function PriceRangeSlider({ step, realMin, realMax, values, setValues }: PriceRa
           display: 'flex',
           justifyContent: 'space-between',
           width: '100%',
-          fontSize: '1.2rem',
+          fontSize: '1.5rem',
           fontFamily: 'monospace'
         }}>
         <div>${Math.floor(procentToValue(values[0], realMin, realMax) / 100)}</div>

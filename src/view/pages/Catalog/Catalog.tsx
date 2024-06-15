@@ -39,39 +39,45 @@ const CatalogContent: React.FC<MainProps> = ({ state, setState }) => {
   };
 
   return (
-    <div className={classes.catalogWrapper}>
-      <FetchCategories
-        state={state}
-        setState={setState}
-        setCategories={setCategories}
-        setLoading={setLoading}
-      />
-      <FetchProducts
-        state={state}
-        setState={setState}
-        sorting={sorting}
-        price={price}
-        categoryId={categoryId}
-      />
+    <>
       <Header state={state} setState={setState} />
-      {loading ? (
-        <Loader />
-      ) : (
-        <div className={classes.catalog}>
-          <h2>Catalog</h2>
-          <span>found {products?.length} products</span>
-          <Categories
-            categories={categories}
-            setCategoryId={setCategoryId}
-            categoryId={categoryId}
-          />
-          <Filter price={price} setPrice={setPrice} limit={limit} />
-          <SortBar value={sorting} onChange={(e) => setSorting(e.target.value)} />
-          {products ? <CardContainer products={products} goToProduct={goToProduct} /> : null}
-        </div>
-      )}
+      <div className={classes.catalogPage}>
+        <h2>Catalog</h2>
+        <FetchCategories
+          state={state}
+          setState={setState}
+          setCategories={setCategories}
+          setLoading={setLoading}
+        />
+        <FetchProducts
+          state={state}
+          setState={setState}
+          sorting={sorting}
+          price={price}
+          categoryId={categoryId}
+        />
+
+        {loading ? (
+          <Loader />
+        ) : (
+          <div className={classes.wrapper}>
+            <aside className={classes.sidebarMenu}>
+              <Categories
+                categories={categories}
+                setCategoryId={setCategoryId}
+                categoryId={categoryId}
+              />
+              <Filter price={price} setPrice={setPrice} limit={limit} />
+            </aside>
+            <div className={classes.catalog}>
+              <SortBar value={sorting} onChange={(e) => setSorting(e.target.value)} />
+              {products ? <CardContainer products={products} goToProduct={goToProduct} /> : null}
+            </div>
+          </div>
+        )}
+      </div>
       <Footer />
-    </div>
+    </>
   );
 };
 

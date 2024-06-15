@@ -1,17 +1,14 @@
 .loginPage {
   display: flex;
-  height: 100vh;
+  min-height: 85vh;
   flex-direction: column;
   align-items: center;
-  padding-top: calc(1vw + 100px);
-  background: url(../../../assets/img/Default_draw_a_picture_about_exotic_islands_Place_the_island_o_0.jpg)
-    no-repeat;
-  background-size: cover;
+  padding-top: 3rem;
 }
 
 .loginPage h2 {
   margin-bottom: 2rem;
-  color: var(--light-text-color);
+  color: var(--primary-text-color);
 }
 
 .linkContainer {
@@ -21,11 +18,13 @@
 
 .linkContainer p {
   font-size: 1.2rem;
-  color: var(--light-text-color);
+  color: var(--primary-text-color);
 }
 
 .link {
+  margin: 0 1rem;
   font-size: 1.6rem;
-  color: rgb(34, 61, 185);
+  color: var(--accent-color);
   align-self: center;
+  text-decoration: none;
 }

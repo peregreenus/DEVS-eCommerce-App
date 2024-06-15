@@ -1,10 +1,17 @@
 .contributions {
   width: 70%;
-  max-width: 1200px;
-  padding-left: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: baseline;
 
   p {
-    margin-top: 1rem;
+    border: 1px var(--border-color) solid;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    background-color: var(--gray-bg-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
 }
 

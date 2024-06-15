@@ -4,7 +4,7 @@ import Country from '../types/country';
 import { Customer, CustomerResponse } from '../types/interfaces/customer.interface';
 import CTP from '../types/ctp';
 import { RegistrationFieldsType } from '../types/registration-type';
-import { customerAddressesOption } from '../../view/components/Signup/signup-form';
+import { customerAddressesOption } from '../../view/components/signup/signup-form';
 
 export default async function CustomerSignup(formCustomer: string): Promise<CustomerResponse> {
   const newCustomer: RegistrationFieldsType = JSON.parse(formCustomer);
