@@ -16,17 +16,19 @@ import FetchCategories from './FetchCategories';
 import { ProductProvider, useProductContext } from './ProductContext';
 import FetchProducts from './FetchProducts';
 
+const MAXPRICE = 2000000000000;
+
 const CatalogContent: React.FC<MainProps> = ({ state, setState }) => {
   const { products } = useProductContext();
   const [loading, setLoading] = useState<boolean>(true);
   const [sorting, setSorting] = useState<string>('');
   const [price, setPrice] = useState<AppFilter>({
     min: 0,
-    max: 10000000000000
+    max: MAXPRICE
   });
   const [limit] = useState<AppFilter>({
     min: 0,
-    max: 10000000000000
+    max: MAXPRICE
   });
   const [categoryId, setCategoryId] = useState<string>('');
   const [categories, setCategories] = useState<ICategory[]>([]);

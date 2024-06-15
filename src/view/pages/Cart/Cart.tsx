@@ -78,6 +78,17 @@ function Cart({ state, setState }: MainProps) {
     }
   }
 
+  // eslint-disable-next-line prefer-const
+
+  function totalInCart(lineItems: LineItem[]): number {
+    return lineItems.reduce((sum, item) => {
+      const discountedAmount = item.variant.prices[0].discounted
+        ? item.variant.prices[0].discounted.value.centAmount
+        : item.variant.prices[0].value.centAmount;
+      return sum + discountedAmount;
+    }, 0);
+  }
+
   return (
     <>
       <Header state={state} setState={setState} />
@@ -136,7 +147,10 @@ function Cart({ state, setState }: MainProps) {
                 ))}
               </ul>
               <div className={classes.bottomBtnsSect}>
-                <div className={classes.total}>The total cost of the items in the basket</div>
+                <div className={classes.total}>
+                  The total cost of the items in the basket{' '}
+                  {formatPrice(totalInCart(cart.lineItems))}
+                </div>
                 <button type="button" className={classes.clearBtn} onClick={clearCart}>
                   Clear cart
                 </button>
