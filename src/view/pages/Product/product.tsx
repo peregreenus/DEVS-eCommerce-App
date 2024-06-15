@@ -182,7 +182,9 @@ function Product({ state, setState }: MainProps) {
             />
           </div>
         </div>
-        <Description htmlContent={product.description.en} />
+        <div className={classes.wrapperDescription}>
+          <Description htmlContent={product.description.en} />
+        </div>
       </section>
       {isImage ? (
         <ProductModal

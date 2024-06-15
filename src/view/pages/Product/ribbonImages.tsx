@@ -20,17 +20,18 @@ export default function RibbonImages({ imgCount, numImage, product, setModal }: 
         style={{ marginLeft: `${-Math.floor((100 / imgCount) * numImage)}%` }}>
         {product.masterVariant.images.map((img) => (
           <div className={classes.ribbonImgContainer} key={img.url}>
-            <img
-              src={img.url}
-              className={classes.ribbonImg}
-              onKeyDown={() => setModal(true)}
-              onClick={() => setModal(true)}
-              alt={img.label}
-              // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
-              role="button"
-              tabIndex={0}
-              aria-label="Toggle modal"
-            />
+            <div className={classes.ribbonImg}>
+              <img
+                src={img.url}
+                onKeyDown={() => setModal(true)}
+                onClick={() => setModal(true)}
+                alt={img.label}
+                // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
+                role="button"
+                tabIndex={0}
+                aria-label="Toggle modal"
+              />
+            </div>
           </div>
         ))}
       </div>
