@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/no-danger */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -5,6 +6,8 @@ import React from 'react';
 import { ProductCardProps } from '../../../data/types/interfaces/productCardProps';
 import * as classes from './ProductCard.module.css';
 import formatPrice from '../../../data/utils/formatPrice';
+import Button from '../common/Button/Button';
+// import AddToCart from '../../../data/api/Cart/AddToCart';
 
 function ProductCard({ product, goToProduct }: ProductCardProps) {
   const discountedPrice = product.masterVariant.prices[0].discounted?.value.centAmount;
@@ -22,7 +25,7 @@ function ProductCard({ product, goToProduct }: ProductCardProps) {
       <div
         className={classes.cardDesc}
         dangerouslySetInnerHTML={{
-          __html: product.description.en.split(';').join(', ')
+          __html: product.description.en
         }}
       />
       <span
@@ -38,6 +41,8 @@ function ProductCard({ product, goToProduct }: ProductCardProps) {
       ) : (
         ''
       )}
+      <Button className={classes.cardBtn} onClick={() => console.log()} />
+      {/* <button className={classes.cardBtn} type="button" aria-label="Add To Cart" disabled /> */}
     </div>
   );
 }
