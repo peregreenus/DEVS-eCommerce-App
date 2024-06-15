@@ -7,7 +7,7 @@ import { getLSToken, getLSAnonToken } from '../utils/getLS';
 
 async function getProducts(
   sortingType: string,
-  { minPrice, maxPrice }: AppFilter,
+  { min, max }: AppFilter,
   categoryId: string,
   { state }: MainProps
 ): Promise<IProduct[] | null> {
@@ -18,13 +18,13 @@ async function getProducts(
   console.log(`token => ${BEARER_TOKEN}`, state);
 
   const params = new URLSearchParams();
-  params.append('filter', `variants.price.centAmount:range (${minPrice} to ${maxPrice})`);
+  params.append('filter', `variants.price.centAmount:range (${min} to ${max})`);
   const paramsCat = new URLSearchParams();
   paramsCat.append('filter', `categories.id:"${categoryId}"`);
 
   if (sortingType) params.append('sort', `${sortingType}`);
 
-  console.log(`variants.scopedPrice.currentValue.centAmount:range (${minPrice} to ${maxPrice})`);
+  console.log(`variants.scopedPrice.currentValue.centAmount:range (${min} to ${max})`);
 
   const headers = new Headers({
     Authorization: `Bearer ${BEARER_TOKEN}`

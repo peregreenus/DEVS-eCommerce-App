@@ -16,6 +16,8 @@ import AddToCart from '../../../data/api/Cart/AddToCart';
 import getProduct from '../../../data/api/getProduct';
 import RemoveFromCart from '../../../data/api/Cart/RemoveFromCart';
 import DeleteIcon from '../../components/common/icons/delete';
+import Modal from '../../components/common/modal/modal';
+import Button from '../../components/common/Button/Button';
 
 function Cart({ state, setState }: MainProps) {
   const [cart, setCart] = useState<ICart | null>(null);
@@ -78,6 +80,24 @@ function Cart({ state, setState }: MainProps) {
     }
   }
 
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleClearCartClick = () => {
+    setModalVisible(true);
+  };
+
+  const handleConfirmClearCart = async () => {
+    await clearCart();
+    setModalVisible(false);
+  };
+
+  function totalInCart(lineItems: LineItem[]): number {
+    return lineItems.reduce((sum, item) => {
+      const discountedAmount = item.totalPrice.centAmount;
+      return sum + discountedAmount;
+    }, 0);
+  }
+
   return (
     <>
       <Header state={state} setState={setState} />
@@ -136,14 +156,31 @@ function Cart({ state, setState }: MainProps) {
                 ))}
               </ul>
               <div className={classes.bottomBtnsSect}>
-                <div className={classes.total}>The total cost of the items in the basket</div>
-                <button type="button" className={classes.clearBtn} onClick={clearCart}>
+                <div className={classes.total}>
+                  The total cost of the items in the basket{' '}
+                  {formatPrice(totalInCart(cart.lineItems))}
+                </div>
+                <button
+                  type="button"
+                  className={`${classes.clearBtn}`}
+                  onClick={handleClearCartClick}>
                   Clear cart
                 </button>
-                <button type="button" className={classes.clearBtn} onClick={navigateCatalog}>
+                <button type="button" className={`${classes.clearBtn}`} onClick={navigateCatalog}>
                   Continue shopping
                 </button>
               </div>
+              <Modal visible={modalVisible} setVisible={setModalVisible}>
+                <div className={classes.confirm}>
+                  <p style={{ margin: '2rem 0' }}>Are you sure you want to clear the cart?</p>
+                  <Button className="btn btnYes" onClick={handleConfirmClearCart}>
+                    Yes
+                  </Button>
+                  <Button className="btn btnNo" onClick={() => setModalVisible(false)}>
+                    No
+                  </Button>
+                </div>
+              </Modal>
             </>
           ) : (
             <div className={classes.noProduct}>

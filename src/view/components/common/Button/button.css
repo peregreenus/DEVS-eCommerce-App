@@ -1,4 +1,4 @@
-.myBtn {
+.btn {
   padding: 5px 15px;
   color: teal;
   font-size: 14px;
@@ -17,6 +17,26 @@
   margin-top: 5rem;
 }
 
-.myBtn:hover {
+.btn:hover {
   background-color: rgb(255, 255, 255);
+}
+
+.btnYes {
+  margin-top: 1rem;
+  background-color: rgb(241, 98, 98);
+  margin-right: 2rem;
+}
+
+.btnNo {
+  margin-top: 1rem;
+  background-color: rgb(110, 241, 98);
+}
+.btnYes:hover {
+  background-color: rgb(150, 11, 11);
+  color: white;
+}
+
+.btnNo:hover {
+  background-color: rgb(13, 92, 6);
+  color: white;
 }
