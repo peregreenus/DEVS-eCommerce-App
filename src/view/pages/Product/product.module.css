@@ -1,98 +1,106 @@
 .product {
   display: flex;
   flex-direction: column;
-  min-width: 75vw;
-  min-height: 95%;
-  justify-content: center;
+  min-height: 85vw;
   align-items: center;
   user-select: none;
-  -webkit-user-select: none;
-  /* Safari */
-  -moz-user-select: none;
-  /* Firefox */
-  -ms-user-select: none;
-  /* IE/Edge */
+}
+.wrapper {
+  width: 95%;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: nowrap;
+  margin-top: 2rem;
+  padding: 2rem;
+  height: 100%;
+}
 
-  .wrapper {
-    width: 95%;
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    flex-wrap: nowrap;
-    margin-top: 3rem;
-    padding: 2rem;
-    height: 65vh;
+.card {
+  width: 75%;
+  display: grid;
+  justify-content: center;
+  grid-template:
+    'slider' 1fr
+    'preview' 7fr / 100%;
+  gap: 2rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.priceContainer {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
 
-    .card {
-      width: 75vw;
-      display: flex;
-      flex-direction: column;
-      gap: 1vw;
-      padding: 1rem;
-      border: 1px solid black;
-      border-radius: 0.5rem;
+.slider {
+  grid-area: 'slider';
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+}
 
-      .slider {
-        display: flex;
-        flex-wrap: nowrap;
-        width: 85%;
-        height: 10%;
-        margin: 0 auto;
-        align-items: center;
+.sliderBtn {
+  border: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease-in-out;
+}
 
-        .btn {
-          border: none;
-          border-radius: 50%;
-          background-color: rgba(255, 255, 255, 0.1);
-          transition: all 0.4s ease-in-out;
-        }
+.sliderBtn:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.8);
+}
 
-        .btn:hover {
-          cursor: pointer;
-          background-color: rgba(255, 255, 255, 0.8);
-        }
+.sliderBtnDisabled:hover {
+  cursor: default;
+}
 
-        .btnDisabled:hover {
-          cursor: default;
-        }
+.sliderWrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  justify-content: center;
+  gap: 1rem;
+}
+.sliderImgContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.3rem;
+  border-top: 2px solid transparent;
+}
 
-        .prevWrapper {
-          display: flex;
-          flex-wrap: nowrap;
-          overflow: hidden;
-          align-items: center;
-          justify-content: center;
-          align-items: stretch;
-          gap: 1rem;
-          height: 100%;
-          .imgContainer {
-          }
+.sliderImg {
+  width: 98%;
+  max-height: 10rem;
+}
 
-          .sliderImg {
-            width: auto;
-            height: 100%;
-          }
+.active {
+  border-top: 2px solid var(--accent-color);
+}
 
-          .active {
-            border: 1px solid rgb(0, 0, 0);
-          }
-        }
-      }
-    }
-  }
+.preview {
+  grid-area: 'preview';
+  width: 100%;
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
-  .product {
-    .wrapper {
-      display: flex;
-      flex-direction: column;
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+  }
 
-      .card {
-        max-width: unset;
-        width: 100%;
-        padding-left: 5rem;
-      }
-    }
+  .card {
+    max-width: unset;
+    width: 100%;
   }
 }

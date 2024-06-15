@@ -1,0 +1,37 @@
+.ribbonContainer {
+  display: flex;
+  height: 100%;
+  min-width: 100%;
+  align-items: center;
+  user-select: none;
+}
+.ribbon {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+.ribbonImgContainer {
+  height: auto;
+  width: 100%;
+  display: flex;
+}
+.ribbonImgContainer:last-child {
+  margin-right: 2.5rem;
+}
+/* .ribbonImgContainer:first-child {
+  margin-left: 2.5rem;
+} */
+.ribbonImg {
+  max-height: auto;
+  padding: 0 5rem;
+  width: 100%;
+  object-fit: contain;
+}
+.previewNoimage {
+  width: 75%;
+}
+.ribbonImg:hover {
+  cursor: pointer;
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+}

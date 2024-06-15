@@ -1,24 +1,28 @@
+/* eslint-disable no-console */
 /* eslint-disable array-callback-return */
 import React from 'react';
-import * as classes from './previewImages.module.css';
+import * as classes from './ribbonImages.module.css';
 import { IProduct } from '../../../data/types/interfaces/product';
 
 interface ImageProps {
+  imgCount: number;
   numImage: number;
   product: IProduct;
   setModal: (f: boolean) => void;
 }
 
-function PreviewImages({ numImage, product, setModal }: ImageProps) {
+export default function RibbonImages({ imgCount, numImage, product, setModal }: ImageProps) {
+  console.log(-Math.floor(100 * numImage));
   return (
-    // eslint-disable-next-line react/jsx-no-comment-textnodes
-    <div className={classes.previewBottom}>
-      <div className={classes.lenta} style={{ left: `${-Math.floor(numImage * 85)}vw ` }}>
+    <div className={classes.ribbonContainer} style={{ minWidth: `${imgCount * 100}% ` }}>
+      <div
+        className={classes.ribbon}
+        style={{ marginLeft: `${-Math.floor((100 / imgCount) * numImage)}%` }}>
         {product.masterVariant.images.map((img) => (
-          <div className={classes.imgContainer} key={img.url}>
+          <div className={classes.ribbonImgContainer} key={img.url}>
             <img
-              className={classes.previewImg}
               src={img.url}
+              className={classes.ribbonImg}
               onKeyDown={() => setModal(true)}
               onClick={() => setModal(true)}
               alt={img.label}
@@ -34,4 +38,4 @@ function PreviewImages({ numImage, product, setModal }: ImageProps) {
   );
 }
 
-export default PreviewImages;
+// left: `${-Math.floor(100 / (numImage + 1))}%} `,
