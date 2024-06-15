@@ -82,9 +82,7 @@ function Cart({ state, setState }: MainProps) {
 
   function totalInCart(lineItems: LineItem[]): number {
     return lineItems.reduce((sum, item) => {
-      const discountedAmount = item.variant.prices[0].discounted
-        ? item.variant.prices[0].discounted.value.centAmount
-        : item.variant.prices[0].value.centAmount;
+      const discountedAmount = item.totalPrice.centAmount;
       return sum + discountedAmount;
     }, 0);
   }
