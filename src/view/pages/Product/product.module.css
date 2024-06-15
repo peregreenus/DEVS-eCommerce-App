@@ -1,7 +1,7 @@
 .product {
   display: flex;
   flex-direction: column;
-  min-width: 75vw;
+  /* min-width: 75vw; */
   min-height: 95%;
   justify-content: center;
   align-items: center;

@@ -1,34 +1,28 @@
+/* eslint-disable no-console */
 import CTP from '../types/ctp';
-import { IProductAll } from '../types/interfaces/productall';
-import { getLSAnonToken, getLSToken } from '../utils/getLS';
+import { IProduct } from '../types/interfaces/product';
+import { getLSToken, getLSAnonToken } from '../utils/getLS';
 
-export async function getProductAll(): Promise<IProductAll | null> {
-  const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/product-projections`;
+async function getProductsAll(): Promise<IProduct[] | null> {
+  // const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/product-projections?limit=42`;
+  const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/product-projections/search`;
   const token = getLSToken();
-  const BEARER_TOKEN = token ? getLSToken() : getLSAnonToken();
-
-  // eslint-disable-next-line no-console
-  console.log('BEARER_TOKEN=>', BEARER_TOKEN);
+  const BEARER_TOKEN = token || getLSAnonToken();
 
   const headers = new Headers({
     Authorization: `Bearer ${BEARER_TOKEN}`
   });
 
-  let data: IProductAll | null = null;
+  const fullUrl = `${url}?limit=10000`;
 
   try {
-    const response = await fetch(url, { headers });
-
-    if (!response.ok) {
-      throw new Error(`Network response was not ok: ${response.statusText}`);
-    }
-    data = await response.json();
-    // eslint-disable-next-line no-console
-    console.log(data);
+    const response = await fetch(fullUrl, { method: 'GET', headers });
+    const productsData = await response.json();
+    return productsData.results;
   } catch (error) {
-    console.error('Error fetching product:', error);
+    console.error(error);
+    return null;
   }
-  return data;
 }
 
-export default getProductAll;
+export default getProductsAll;
