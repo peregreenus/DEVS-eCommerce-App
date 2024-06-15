@@ -81,8 +81,8 @@ function PriceRangeSlider({ step, realMin, realMax, values, setValues }: PriceRa
           fontSize: '1.2rem',
           fontFamily: 'monospace'
         }}>
-        <div>${procentToValue(values[0], realMin, realMax)}</div>
-        <div>${procentToValue(values[1], realMin, realMax)}</div>
+        <div>${Math.floor(procentToValue(values[0], realMin, realMax) / 100)}</div>
+        <div>${Math.floor(procentToValue(values[1], realMin, realMax) / 100)}</div>
       </output>
     </div>
   );
