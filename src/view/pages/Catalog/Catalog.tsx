@@ -39,7 +39,7 @@ const CatalogContent: React.FC<MainProps> = ({ state, setState }) => {
   };
 
   return (
-    <>
+    <div className={classes.catalogWrapper}>
       <FetchCategories
         state={state}
         setState={setState}
@@ -71,7 +71,7 @@ const CatalogContent: React.FC<MainProps> = ({ state, setState }) => {
         </div>
       )}
       <Footer />
-    </>
+    </div>
   );
 };
 
