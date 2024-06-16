@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable no-console */
@@ -18,6 +20,7 @@ import RemoveFromCart from '../../../data/api/Cart/RemoveFromCart';
 import DeleteIcon from '../../components/common/icons/delete';
 import Modal from '../../components/common/modal/modal';
 import Button from '../../components/common/Button/Button';
+import InputLabelButton from '../../components/common/input/input';
 
 function Cart({ state, setState }: MainProps) {
   const [cart, setCart] = useState<ICart | null>(null);
@@ -98,6 +101,10 @@ function Cart({ state, setState }: MainProps) {
     }, 0);
   }
 
+  function handleInputPromo(value: string): void {
+    console.log('promo', value);
+  }
+
   return (
     <>
       <Header state={state} setState={setState} />
@@ -155,6 +162,10 @@ function Cart({ state, setState }: MainProps) {
                   </li>
                 ))}
               </ul>
+              <InputLabelButton
+                label="Promo:"
+                onClick={(value: string) => handleInputPromo(value)}
+              />
               <div className={classes.bottomBtnsSect}>
                 <div className={classes.total}>
                   The total cost of the items in the basket{' '}
