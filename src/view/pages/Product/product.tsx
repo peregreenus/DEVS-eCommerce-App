@@ -18,10 +18,9 @@ import PriceContainer from '../../components/PriceContainer/PriceContainer';
 import * as classes from './product.module.css';
 import Description from '../../components/Description/Description';
 import AddToCart from '../../../data/api/Cart/AddToCart';
-import { getLSCart } from '../../../data/utils/getLS';
 import RemoveFromCart from '../../../data/api/Cart/RemoveFromCart';
-import getCart from '../../../data/api/Cart/GetCart';
 import RibbonImages from './ribbonImages';
+import productInCart from '../../../data/utils/productInCart';
 
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
@@ -33,40 +32,25 @@ function Product({ state, setState }: MainProps) {
   const [numImage, setNumImage] = useState<number>(0);
   const [modal, setModal] = useState(false);
   const [inCart, setInCart] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  interface lineItemProp {
-    id: string;
-    productId: string;
-  }
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-shadow
-    async function productInCart(product: IProduct | null) {
-      if (!product) return false;
-      const cartId: string | null = getLSCart();
-      if (cartId) {
-        const cart = await getCart();
-        if (cart.lineItems.some((item: lineItemProp) => item.productId === product.id)) {
-          return true;
-        }
-      }
-      return false;
-    }
-
     async function fetchProduct() {
       setLoading(true);
       const fetchedProduct = await getProduct(id, {
         state,
         setState
       });
+
       setProduct(fetchedProduct);
       setLoading(false);
+
       if (fetchedProduct && fetchedProduct.masterVariant.images.length > 0) {
         setNumImage(0);
       }
       console.log('product=>', fetchedProduct);
       setInCart(await productInCart(fetchedProduct));
     }
+
     fetchProduct();
   }, [id, state, setState]);
 
@@ -98,8 +82,6 @@ function Product({ state, setState }: MainProps) {
       selectImage(numImage + 1);
     }
   }
-
-  // eslint-disable-next-line @typescript-eslint/naming-convention
 
   const addToCart = async () => {
     if (!inCart) {
