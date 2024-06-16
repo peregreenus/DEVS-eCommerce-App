@@ -1,6 +1,7 @@
 .wrapper {
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
+  align-items: stretch;
   .btn {
     padding: 5px 15px;
     color: var(--light-text-color);

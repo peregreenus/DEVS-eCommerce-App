@@ -171,15 +171,17 @@ function Cart({ state, setState }: MainProps) {
                   The total cost of the items in the basket{' '}
                   {formatPrice(totalInCart(cart.lineItems))}
                 </div>
-                <button
-                  type="button"
-                  className={`${classes.clearBtn}`}
-                  onClick={handleClearCartClick}>
-                  Clear cart
-                </button>
-                <button type="button" className={`${classes.clearBtn}`} onClick={navigateCatalog}>
-                  Continue shopping
-                </button>
+                <div className={classes.buttonWrapper}>
+                  <button
+                    type="button"
+                    className={`${classes.btn} ${classes.clearBtn}`}
+                    onClick={handleClearCartClick}>
+                    Clear cart
+                  </button>
+                  <button type="button" className={`${classes.btn}`} onClick={navigateCatalog}>
+                    Continue shopping
+                  </button>
+                </div>
               </div>
               <Modal visible={modalVisible} setVisible={setModalVisible}>
                 <div className={classes.confirm}>
