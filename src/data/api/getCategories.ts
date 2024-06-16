@@ -4,7 +4,7 @@ import { ICategory } from '../types/interfaces/category';
 import { MainProps } from '../types/main-props';
 import { getLSAnonToken, getLSToken } from '../utils/getLS';
 import getAnonToken from './getToken';
-import refreshToken from './refreshToken';
+// import refreshToken from './refreshToken';
 
 async function getCategories({ state }: MainProps): Promise<ICategory[] | null> {
   const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/categories`;
@@ -21,11 +21,12 @@ async function getCategories({ state }: MainProps): Promise<ICategory[] | null> 
 
   try {
     const response = await fetch(`${url}?limit=100`, { method: 'GET', headers });
-    if (!response.ok && response.status === 401) {
-      // await getAnonToken();
-      if (BEARER_TOKEN) {
-        await refreshToken(BEARER_TOKEN);
-      }
+    if (!response.ok) {
+      await getAnonToken();
+      // if (BEARER_TOKEN) {
+      //   console.log('refresh token');
+      //   await refreshToken(BEARER_TOKEN);
+      // }
     }
     const data = await response.json();
     console.log('getCategories', data);
