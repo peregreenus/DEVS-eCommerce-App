@@ -1,7 +1,45 @@
 .priceRangeSlider {
-  width: 300px;
+  width: 90%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   margin: 2rem;
+}
+
+.track {
+  height: 6px;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.thumb {
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 2px 6px #aaa;
+}
+
+.thumbInner {
+  height: 16px;
+  width: 5px;
+  background-color: var(--accent-color);
+}
+
+.output {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 1.5rem;
+  font-family: monospace;
+}
+
+@media (max-width: 1100px) {
+  .priceRangeSlider {
+    width: 500px;
+  }
 }

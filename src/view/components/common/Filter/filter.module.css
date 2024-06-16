@@ -8,9 +8,9 @@
 .caption {
   position: absolute;
   font-size: 1.3rem;
-  background: #fff;
+  background: rgb(251, 251, 251);
   top: -1rem;
-  left: 2rem;
+  left: 1rem;
   padding: 0 1rem;
 }
 .wrapper {

@@ -8,6 +8,8 @@
   background-color: rgba(238, 225, 46, 0.8);
   align-items: center;
   transition: 0.4s all ease-in;
+  z-index: 500;
+
 }
 .wrapper {
   font-size: 1.2rem;
