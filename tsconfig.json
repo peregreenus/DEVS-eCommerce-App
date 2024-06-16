@@ -19,7 +19,8 @@
       {
         "name": "typescript-plugin-css-modules"
       }
-    ]
+    ],
+    "types": ["jest", "@testing-library/jest-dom"]
   },
   "include": ["**/*.ts", "**/*.tsx", "customTemplate.js"],
   "exclude": ["./node_modules", "./dist", "webpack.config.ts"]
