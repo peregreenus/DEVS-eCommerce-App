@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  gap: 1rem;
+  .btn {
+    padding: 5px 15px;
+    color: var(--light-text-color);
+    cursor: pointer;
+    border: none;
+    border-radius: 1rem;
+    padding: 1rem;
+    background-color: var(--body-text-color);
+    transition: 0.4s all ease-in;
+  }
+
+  .btn:hover {
+    background-color: rgb(136, 214, 33, 1);
+  }
+
+}
