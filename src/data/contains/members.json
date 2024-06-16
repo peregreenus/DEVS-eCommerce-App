@@ -11,7 +11,7 @@
     },
     {
       "key": 1,
-      "name": "Oleksandr Zelenskyi",
+      "name": "Oleksandr Zelenskiy",
       "photo": "zelenskiy",
       "gitHubLInk": "https://github.com/Zelenskiy",
       "teamRole": "Front-end developer",
@@ -24,8 +24,8 @@
       "photo": "andreichuk",
       "gitHubLInk": "https://github.com/peregreenus",
       "teamRole": "Team Lead, Front-end developer",
-      "skills": "HTML5, CSS3, JavaScript, Git, GitHub, React, TypeScript",
-      "bio": "I am interested in web development not only because it is a popular and promising area in IT, but also because programming, and in particular web development, is a combination of creativity and the exact sciences. This is the best best opportunity to build a career. In project I am set up working process, implemented the ci/cd. Focused on the development of the login page, catalog page"
+      "skills": "HTML5, CSS3, JavaScript, Git, GitHub, basic React, TypeScript",
+      "bio": "I am interested in web development not only because it is a popular and promising area in IT, but also because programming, and in particular web development, is a combination of creativity and the exact sciences. This is the best opportunity to build a career. In project I am set up working process, implemented the ci/cd. Focused on the development of the login page, catalog page"
     }
   ]
 }
