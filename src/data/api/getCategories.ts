@@ -3,6 +3,7 @@ import CTP from '../types/ctp';
 import { ICategory } from '../types/interfaces/category';
 import { MainProps } from '../types/main-props';
 import { getLSAnonToken, getLSToken } from '../utils/getLS';
+import getAnonToken from './getToken';
 
 async function getCategories({ state }: MainProps): Promise<ICategory[] | null> {
   const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/categories`;
@@ -16,8 +17,8 @@ async function getCategories({ state }: MainProps): Promise<ICategory[] | null> 
 
   try {
     const response = await fetch(`${url}?limit=100`, { method: 'GET', headers });
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
+    if (!response.ok && response.status === 401) {
+      await getAnonToken();
     }
     const data = await response.json();
     console.log('getCategories', data);
