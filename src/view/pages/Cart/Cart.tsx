@@ -64,11 +64,17 @@ function Cart({ state, setState }: MainProps) {
   }
 
   async function removeProduct(lineItem: LineItem): Promise<void> {
-    const product = await getProduct(lineItem.productId, { state, setState });
-    if (product) {
-      await RemoveFromCart(product, lineItem.quantity);
-      const updatedCart = await getCart();
-      setCart(updatedCart);
+    try {
+      const product = await getProduct(lineItem.productId, { state, setState });
+      if (product) {
+        await RemoveFromCart(product, lineItem.quantity);
+        const updatedCart = await getCart();
+        setCart(updatedCart);
+      } else {
+        console.error(`Product with ID ${lineItem.productId} not found.`);
+      }
+    } catch (error) {
+      console.error('Error removing product:', error);
     }
   }
 
@@ -78,7 +84,6 @@ function Cart({ state, setState }: MainProps) {
       for (const item of lineItems) {
         try {
           await removeProduct(item);
-          // Оновлення кошика після успішного видалення елемента
           setCart(await getCart());
         } catch (error) {
           console.error('Error removing item from cart:', error);
