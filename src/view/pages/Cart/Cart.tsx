@@ -1,3 +1,5 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/control-has-associated-label */
@@ -72,14 +74,17 @@ function Cart({ state, setState }: MainProps) {
 
   async function clearCart(): Promise<void> {
     if (cart) {
-      const lineItemCount = cart.lineItems.length;
-      const cartPromises = Array.from({ length: lineItemCount }, () => getCart());
-      const carts: ICart[] = await Promise.all(cartPromises);
-      const removePromises = carts.map((cart) => {
-        const item: LineItem = cart.lineItems[0];
-        return removeProduct(item);
-      });
-      await Promise.all(removePromises);
+      const lineItems = [...cart.lineItems];
+      for (const item of lineItems) {
+        try {
+          await removeProduct(item);
+          // Оновлення кошика після успішного видалення елемента
+          setCart(await getCart());
+        } catch (error) {
+          console.error('Error removing item from cart:', error);
+          throw new Error('Failed to remove item from cart');
+        }
+      }
     }
   }
 
@@ -200,7 +205,7 @@ function Cart({ state, setState }: MainProps) {
               <img className={classes.imgEmpty} src={cartIcon} alt="" />
               <h3>No products in the cart</h3>
               <p>But it&#39;s never too late to fix it :&#41;</p>
-              <button className={classes.welcomeBtn} type="button" onClick={navigateCatalog}>
+              <button className={classes.btn} type="button" onClick={navigateCatalog}>
                 Welcome do it!
               </button>
             </div>

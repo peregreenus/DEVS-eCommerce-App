@@ -124,18 +124,19 @@
         height: 55rem;
         max-height: 50vh;
       }
-      .welcomeBtn {
-        justify-self: center;
-        background-color: #7bdf1d;
-        color: white;
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 0.25rem;
+      .btn {
+        padding: 5px 15px;
+        color: var(--light-text-color);
         cursor: pointer;
-        transition: 0.3s all ease-in-out;
+        border: none;
+        border-radius: 1rem;
+        padding: 1rem;
+        background-color: var(--body-text-color);
+        transition: 0.4s all ease-in;
       }
-      .welcomeBtn:hover {
-        background-color: rgb(12, 126, 31);
+
+      .btn:hover {
+        background-color: rgb(136, 214, 33, 1);
       }
     }
     .bottomBtnsSect {
