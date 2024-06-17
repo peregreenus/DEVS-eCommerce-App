@@ -83,7 +83,16 @@ export interface LineItem {
   taxedPricePortions: string[];
 }
 
+interface TotalPrice {
+  type: string;
+  currencyCode: string;
+  centAmount: number;
+  fractionDigits: number;
+}
+
 export interface ICart {
   id: string;
+  version: number;
   lineItems: LineItem[];
+  totalPrice: TotalPrice;
 }

@@ -1,3 +1,7 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable no-console */
@@ -18,6 +22,8 @@ import RemoveFromCart from '../../../data/api/Cart/RemoveFromCart';
 import DeleteIcon from '../../components/common/icons/delete';
 import Modal from '../../components/common/modal/modal';
 import Button from '../../components/common/Button/Button';
+import InputLabelButton from '../../components/common/input/input';
+import applyPromo from '../../../data/api/Cart/applyPromo';
 
 function Cart({ state, setState }: MainProps) {
   const [cart, setCart] = useState<ICart | null>(null);
@@ -59,24 +65,32 @@ function Cart({ state, setState }: MainProps) {
   }
 
   async function removeProduct(lineItem: LineItem): Promise<void> {
-    const product = await getProduct(lineItem.productId, { state, setState });
-    if (product) {
-      await RemoveFromCart(product, lineItem.quantity);
-      const updatedCart = await getCart();
-      setCart(updatedCart);
+    try {
+      const product = await getProduct(lineItem.productId, { state, setState });
+      if (product) {
+        await RemoveFromCart(product, lineItem.quantity);
+        const updatedCart = await getCart();
+        setCart(updatedCart);
+      } else {
+        console.error(`Product with ID ${lineItem.productId} not found.`);
+      }
+    } catch (error) {
+      console.error('Error removing product:', error);
     }
   }
 
   async function clearCart(): Promise<void> {
     if (cart) {
-      const lineItemCount = cart.lineItems.length;
-      const cartPromises = Array.from({ length: lineItemCount }, () => getCart());
-      const carts: ICart[] = await Promise.all(cartPromises);
-      const removePromises = carts.map((cart) => {
-        const item: LineItem = cart.lineItems[0];
-        return removeProduct(item);
-      });
-      await Promise.all(removePromises);
+      const lineItems = [...cart.lineItems];
+      for (const item of lineItems) {
+        try {
+          await removeProduct(item);
+          setCart(await getCart());
+        } catch (error) {
+          console.error('Error removing item from cart:', error);
+          throw new Error('Failed to remove item from cart');
+        }
+      }
     }
   }
 
@@ -96,6 +110,16 @@ function Cart({ state, setState }: MainProps) {
       const discountedAmount = item.totalPrice.centAmount;
       return sum + discountedAmount;
     }, 0);
+  }
+  async function handleInputPromo(promo: string): Promise<void> {
+    if (cart) {
+      const responseData: ICart = await applyPromo(cart.id, cart.version, promo);
+      setCart(responseData);
+    }
+  }
+
+  function handleToOrder(): void {
+    throw new Error('Function not implemented.');
   }
 
   return (
@@ -155,20 +179,35 @@ function Cart({ state, setState }: MainProps) {
                   </li>
                 ))}
               </ul>
+              <InputLabelButton
+                label="Promo:"
+                onClick={(value: string) => handleInputPromo(value)}
+              />
               <div className={classes.bottomBtnsSect}>
                 <div className={classes.total}>
                   The total cost of the items in the basket{' '}
                   {formatPrice(totalInCart(cart.lineItems))}
                 </div>
-                <button
-                  type="button"
-                  className={`${classes.clearBtn}`}
-                  onClick={handleClearCartClick}>
-                  Clear cart
-                </button>
-                <button type="button" className={`${classes.clearBtn}`} onClick={navigateCatalog}>
-                  Continue shopping
-                </button>
+                <div className={classes.total}>
+                  Due after using the promo code {formatPrice(cart.totalPrice.centAmount)}
+                </div>
+                <div className={classes.buttonWrapper}>
+                  <button
+                    type="button"
+                    className={`${classes.btn} ${classes.orderBtn}`}
+                    onClick={handleToOrder}>
+                    To order
+                  </button>
+                  <button
+                    type="button"
+                    className={`${classes.btn} ${classes.clearBtn}`}
+                    onClick={handleClearCartClick}>
+                    Clear cart
+                  </button>
+                  <button type="button" className={`${classes.btn}`} onClick={navigateCatalog}>
+                    Continue shopping
+                  </button>
+                </div>
               </div>
               <Modal visible={modalVisible} setVisible={setModalVisible}>
                 <div className={classes.confirm}>
@@ -187,7 +226,7 @@ function Cart({ state, setState }: MainProps) {
               <img className={classes.imgEmpty} src={cartIcon} alt="" />
               <h3>No products in the cart</h3>
               <p>But it&#39;s never too late to fix it :&#41;</p>
-              <button className={classes.welcomeBtn} type="button" onClick={navigateCatalog}>
+              <button className={classes.btn} type="button" onClick={navigateCatalog}>
                 Welcome do it!
               </button>
             </div>

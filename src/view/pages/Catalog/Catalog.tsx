@@ -56,7 +56,6 @@ const CatalogContent: React.FC<MainProps> = ({ state, setState }) => {
           price={price}
           categoryId={categoryId}
         />
-
         {loading ? (
           <Loader />
         ) : (

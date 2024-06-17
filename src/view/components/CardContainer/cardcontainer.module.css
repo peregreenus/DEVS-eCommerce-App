@@ -5,6 +5,13 @@
   gap: 2rem;
   padding: 2rem 1rem;
   width: 100%;
+
+  .noProduct {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 623px) {

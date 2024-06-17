@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
@@ -6,6 +5,7 @@ import React from 'react';
 import { Range, getTrackBackground } from 'react-range';
 import * as classes from './price-range-slider.module.css';
 import { procentToValue } from '../../../data/utils/priceRangeConv';
+import formatNumber from '../../../data/utils/formatNumber';
 
 interface PriceRangeSliderProps {
   realMin: number;
@@ -15,7 +15,13 @@ interface PriceRangeSliderProps {
   setValues: (values: number[]) => void;
 }
 
-function PriceRangeSlider({ step, realMin, realMax, values, setValues }: PriceRangeSliderProps) {
+function PriceRangeSlider({
+  step = 1,
+  realMin,
+  realMax,
+  values,
+  setValues
+}: PriceRangeSliderProps) {
   const min: number = 0;
   const max: number = 100;
   const handleChange = (value: number[]) => {
@@ -53,8 +59,8 @@ function PriceRangeSlider({ step, realMin, realMax, values, setValues }: PriceRa
         )}
       />
       <output className={classes.output}>
-        <div>${Math.floor(procentToValue(values[0], realMin, realMax) / 100)}</div>
-        <div>${Math.floor(procentToValue(values[1], realMin, realMax) / 100)}</div>
+        <div>${formatNumber(Math.floor(procentToValue(values[0], realMin, realMax) / 100))}</div>
+        <div>${formatNumber(Math.floor(procentToValue(values[1], realMin, realMax) / 100))}</div>
       </output>
     </div>
   );

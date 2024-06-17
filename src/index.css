@@ -30,3 +30,8 @@ body {
   width: 100%;
   max-width: 1920px;
 }
+
+input[type='text']:focus {
+  border: none;
+  outline: none;
+}

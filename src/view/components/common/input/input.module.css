@@ -1,0 +1,31 @@
+.wrapper {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+
+  .input {
+    padding: 1rem;
+    font-size: 2rem;
+    border: none;
+    border-radius: 1rem;
+    background-color: var(--gray-bg-color);
+  }
+  .input:focus {
+    border: none;
+  }
+
+  .btn {
+    padding: 5px 15px;
+    color: var(--light-text-color);
+    cursor: pointer;
+    border: none;
+    border-radius: 1rem;
+    padding: 1rem;
+    background-color: var(--body-text-color);
+    transition: 0.4s all ease-in;
+  }
+
+  .btn:hover {
+    background-color: rgb(136, 214, 33, 1);
+  }
+}
