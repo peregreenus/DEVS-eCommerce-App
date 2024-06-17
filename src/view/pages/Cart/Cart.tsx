@@ -23,6 +23,7 @@ import DeleteIcon from '../../components/common/icons/delete';
 import Modal from '../../components/common/modal/modal';
 import Button from '../../components/common/Button/Button';
 import InputLabelButton from '../../components/common/input/input';
+import getDiscountCodes from '../../../data/api/getDiscountСodes';
 
 function Cart({ state, setState }: MainProps) {
   const [cart, setCart] = useState<ICart | null>(null);
@@ -111,8 +112,12 @@ function Cart({ state, setState }: MainProps) {
     }, 0);
   }
 
-  function handleInputPromo(value: string): void {
-    console.log('promo', value);
+  async function handleInputPromo(value: string): Promise<void> {
+    const promoObjects = await getDiscountCodes();
+    if (promoObjects) {
+      const promoObject = promoObjects.results.find((item) => item.code === value);
+      console.log(promoObject);
+    }
   }
 
   function handleToOrder(): void {

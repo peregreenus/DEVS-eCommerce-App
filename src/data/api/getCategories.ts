@@ -23,6 +23,7 @@ async function getCategories({ state }: MainProps): Promise<ICategory[] | null> 
     const response = await fetch(`${url}?limit=100`, { method: 'GET', headers });
     if (!response.ok) {
       await getAnonToken();
+      window.location.reload();
       // if (BEARER_TOKEN) {
       //   console.log('refresh token');
       //   await refreshToken(BEARER_TOKEN);

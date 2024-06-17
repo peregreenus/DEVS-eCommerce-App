@@ -2,7 +2,6 @@
   display: flex;
   gap: 2rem;
   align-items: center;
-  
 
   .input {
     padding: 1rem;
@@ -14,7 +13,7 @@
   .input:focus {
     border: none;
   }
-  
+
   .btn {
     padding: 5px 15px;
     color: var(--light-text-color);

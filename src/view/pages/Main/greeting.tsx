@@ -1,16 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MyButton from '../../components/common/Button/Button';
 import * as classes from './greeting.module.css';
+import getDiscountCodes from '../../../data/api/getDiscountСodes';
+import { PromoRequest } from '../../../data/types/interfaces/PromoRequest';
 
 function Greeting() {
   const navigate = useNavigate();
+  const [promo, setPromo] = useState<string>('');
+
+  useEffect(() => {
+    async function fetchPromo() {
+      const promoRequest: PromoRequest | null = await getDiscountCodes();
+      if (promoRequest && promoRequest.results.length > 0) {
+        setPromo(promoRequest.results[0].code);
+      }
+    }
+    fetchPromo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const goToPage = (path: string) => {
     navigate(path);
   };
 
   const buttons = [{ path: '/catalog', label: 'Explore our offers' }];
+
+  const handlePromoCopy = () => {
+    if (promo) {
+      navigator.clipboard
+        .writeText(promo)
+        .then(() => {
+          // eslint-disable-next-line no-console
+          console.log('Promo code copied to clipboard!');
+        })
+        .catch((err) => {
+          console.error('Failed to copy promo code: ', err);
+        });
+    }
+  };
 
   return (
     <section className={classes.greeting}>
@@ -34,7 +62,9 @@ function Greeting() {
         </div>
         <div className={classes.promo}>
           <span className={classes.label}>Get promo code: </span>
-          <span className={classes.value}>HGEERVB70JJF801J3FD0U</span>
+          <button type="button" className={classes.value} onClick={handlePromoCopy}>
+            {promo}
+          </button>
         </div>
       </div>
     </section>
