@@ -10,9 +10,11 @@ async function getCategories({ state }: MainProps): Promise<ICategory[] | null> 
   const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/categories`;
   const token = getLSToken();
   const BEARER_TOKEN = token ? getLSToken() : getLSAnonToken();
+
   if (!BEARER_TOKEN) {
     await getAnonToken();
   }
+
   console.log(`token => ${BEARER_TOKEN}`, state);
   const headers = new Headers({
     'Content-Type': 'application/json',
