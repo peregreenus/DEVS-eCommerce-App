@@ -29,7 +29,7 @@ function Filter({ price, limit, setPrice }: SearchPriceFilter) {
           <PriceRangeSlider
             realMin={limit.min}
             realMax={limit.max}
-            step={1}
+            step={0.01}
             values={values}
             setValues={setValues}
           />

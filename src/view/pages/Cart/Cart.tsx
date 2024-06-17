@@ -115,6 +115,10 @@ function Cart({ state, setState }: MainProps) {
     console.log('promo', value);
   }
 
+  function handleToOrder(): void {
+    throw new Error('Function not implemented.');
+  }
+
   return (
     <>
       <Header state={state} setState={setState} />
@@ -182,6 +186,12 @@ function Cart({ state, setState }: MainProps) {
                   {formatPrice(totalInCart(cart.lineItems))}
                 </div>
                 <div className={classes.buttonWrapper}>
+                  <button
+                    type="button"
+                    className={`${classes.btn} ${classes.orderBtn}`}
+                    onClick={handleToOrder}>
+                    To order
+                  </button>
                   <button
                     type="button"
                     className={`${classes.btn} ${classes.clearBtn}`}

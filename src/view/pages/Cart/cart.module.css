@@ -166,6 +166,9 @@
         .clearBtn:hover {
           background-color: rgb(241, 13, 13);
         }
+        .orderBtn:hover {
+          background-color: rgb(21, 115, 238);
+        }
       }
     }
   }

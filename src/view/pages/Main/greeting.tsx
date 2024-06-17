@@ -32,6 +32,10 @@ function Greeting() {
             </MyButton>
           ))}
         </div>
+        <div className={classes.promo}>
+          <span className={classes.label}>Get promo code: </span>
+          <span className={classes.value}>HGEERVB70JJF801J3FD0U</span>
+        </div>
       </div>
     </section>
   );
