@@ -23,7 +23,7 @@ import DeleteIcon from '../../components/common/icons/delete';
 import Modal from '../../components/common/modal/modal';
 import Button from '../../components/common/Button/Button';
 import InputLabelButton from '../../components/common/input/input';
-import getDiscountCodes from '../../../data/api/getDiscountСodes';
+import applyPromo from '../../../data/api/Cart/applyPromo';
 
 function Cart({ state, setState }: MainProps) {
   const [cart, setCart] = useState<ICart | null>(null);
@@ -111,12 +111,10 @@ function Cart({ state, setState }: MainProps) {
       return sum + discountedAmount;
     }, 0);
   }
-
-  async function handleInputPromo(value: string): Promise<void> {
-    const promoObjects = await getDiscountCodes();
-    if (promoObjects) {
-      const promoObject = promoObjects.results.find((item) => item.code === value);
-      console.log(promoObject);
+  async function handleInputPromo(promo: string): Promise<void> {
+    if (cart) {
+      const responseData: ICart = await applyPromo(cart.id, cart.version, promo);
+      setCart(responseData);
     }
   }
 
@@ -189,6 +187,9 @@ function Cart({ state, setState }: MainProps) {
                 <div className={classes.total}>
                   The total cost of the items in the basket{' '}
                   {formatPrice(totalInCart(cart.lineItems))}
+                </div>
+                <div className={classes.total}>
+                  Due after using the promo code {formatPrice(cart.totalPrice.centAmount)}
                 </div>
                 <div className={classes.buttonWrapper}>
                   <button

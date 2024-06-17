@@ -16,7 +16,8 @@ async function logInCustomer(
     anonymousCart: {
       id: `${cartId}`,
       typeId: 'cart'
-    }
+    },
+    anonymousCartSignInMode: 'MergeWithExistingCustomerCart'
   };
 
   try {
