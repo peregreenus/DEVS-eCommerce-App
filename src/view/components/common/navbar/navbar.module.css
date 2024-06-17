@@ -8,27 +8,25 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-}
+  a {
+    margin-right: 25px;
+    text-decoration: none;
+    color: black;
+    transition: 0.4s all ease-in;
+  }
+  a img:hover {
+    width: 3.5rem;
+  }
 
-a {
-  margin-right: 25px;
-  text-decoration: none;
-  color: black;
-  transition: 0.4s all ease-in;
+  a:hover {
+    color: rgb(83, 139, 126);
+  }
 }
 
 .basketImg {
   position: absolute;
   width: 3rem;
   transition: 0.4s all ease-in;
-}
-
-a img:hover {
-  width: 3.5rem;
-}
-
-a:hover {
-  color: rgb(83, 139, 126);
 }
 
 .burger {
@@ -60,7 +58,7 @@ a:hover {
     width: 100%;
     background-color: white;
     position: absolute;
-    top: 5.5rem;
+    top: 6.5rem;
     left: 0;
     padding: 10px 0 25px 0;
     max-height: 0;
@@ -71,6 +69,14 @@ a:hover {
     transition:
       max-height 0.4s ease-in-out,
       opacity 0.4s ease-in-out;
+    a {
+      margin: 10px 0;
+    }
+
+    a:last-child {
+      margin-left: 0;
+      margin-right: 0;
+    }
   }
 
   .menu.show {
@@ -81,15 +87,6 @@ a:hover {
   .burger {
     display: flex;
     z-index: 700;
-  }
-
-  a {
-    margin: 10px 0;
-  }
-
-  a:last-child {
-    margin-left: 0;
-    margin-right: 0;
   }
 
   .shadow {

@@ -2,19 +2,37 @@
   margin: 2rem;
   list-style: none;
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: baseline;
   gap: 2rem;
-
-  .button {
-    border: none;
-    border-radius: 1rem;
-    padding: 0.5rem 1rem;
-    color: gray;
-    cursor: pointer;
+  li {
+    text-align: left;
   }
+}
 
-  .active {
-    cursor: default;
-    color: black;
-    font-weight: 600;
+.button {
+  border: none;
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  color: gray;
+  cursor: pointer;
+}
+
+.button:hover,
+.button:focus {
+  background-color: var(--accent-color);
+  color: black;
+}
+.active {
+  cursor: default;
+  color: black;
+  font-weight: 600;
+}
+
+@media (max-width: 1100px) {
+  .list {
+    flex-direction: row;
+    justify-content: center;
   }
 }

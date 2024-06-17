@@ -16,13 +16,13 @@ export default function EditingProfileContent({
   const textb = '';
   return (
     <div className={styles.editInfoContainer}>
-      <form onSubmit={onSubmit} className={styles.infoForm}>
+      <form onSubmit={onSubmit} className={styles.formEditInfo}>
         <input
           type={type}
           name={name}
           value={value}
           onChange={onChange}
-          className={styles.inputAddressField}
+          className={styles.inputInfoField}
         />
         <button type="submit" className={styles.controlProfileButton} disabled={!!error}>
           <SaveMarkIcon width="1.5rem" height="1.5rem" fill={error ? 'grey' : 'green'} />

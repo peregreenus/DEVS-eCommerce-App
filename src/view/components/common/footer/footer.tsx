@@ -8,7 +8,7 @@ function Footer() {
       <div className={classes.footerItem}>
         © 2024 &quot;Galactic Exclusive&quot;. All rights reserved.
       </div>
-      <div>
+      <div className={classes.footerItem}>
         <p>Contact Information:</p>
         <Link to="tel:+90000000">
           <p>Phone: +1 (800) 123-4567</p>
@@ -22,15 +22,16 @@ function Footer() {
           <p>Galactic City, GC 00000</p>
         </Link>
       </div>
-      <div className={`${classes.footerItem} ${classes.iconWrapper}`}>
+      <div className={classes.footerItem}>
         <p>Follow us on social media:</p>
-
-        <Link to="https://x.com/">
-          <div className={`${classes.item} ${classes.twitterIcon}`} />
-        </Link>
-        <Link to="https://www.facebook.com/">
-          <div className={`${classes.item} ${classes.facebookIcon}`} />
-        </Link>
+        <div className={classes.iconWrapper}>
+          <Link to="https://x.com/">
+            <div className={`${classes.item} ${classes.twitterIcon}`} />
+          </Link>
+          <Link to="https://www.facebook.com/">
+            <div className={`${classes.item} ${classes.facebookIcon}`} />
+          </Link>
+        </div>
       </div>
     </footer>
   );

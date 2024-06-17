@@ -3,44 +3,42 @@
   padding: 0.5rem;
   display: flex;
   width: 100%;
+  max-width: 1920px;
   height: 3rem;
   background-color: rgba(238, 225, 46, 0.8);
   align-items: center;
   transition: 0.4s all ease-in;
-
-  .wrapper {
-    font-size: 1.2rem;
-    text-align: center;
-
-    a {
-      margin-left: 2rem;
-      text-decoration: none;
-      color: var(--primary-text-color);
-      transition: 0.4s all ease-in;
-    }
-
-    a:hover {
-      font-weight: 600;
-    }
-  }
-  .button {
-    position: absolute;
-    background-image: url('../../../../assets/icon/cross.svg');
-    background-size: cover;
-    width: 2rem;
-    height: 2rem;
-    border: none;
-    right: 1rem;
-    z-index: 700;
+  z-index: 500;
+}
+.wrapper {
+  font-size: 1.2rem;
+  a {
+    padding-left: 2rem;
+    text-decoration: none;
+    color: var(--primary-text-color);
     transition: 0.4s all ease-in;
   }
 
-  .button:hover {
-    width: 2.2rem;
-    height: 2.2rem;
+  a:hover {
+    font-weight: 600;
   }
 }
+.button {
+  position: absolute;
+  background-image: url('../../../../assets/icon/cross.svg');
+  background-size: cover;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  right: 1rem;
+  z-index: 700;
+  transition: 0.4s all ease-in;
+}
 
+.button:hover {
+  width: 2.2rem;
+  height: 2.2rem;
+}
 .hide {
   height: 0;
   padding: 0;

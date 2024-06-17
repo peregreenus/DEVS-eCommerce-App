@@ -1,22 +1,26 @@
 /* eslint-disable react/jsx-no-bind */
-
+/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MainProps } from '../../../data/types/main-props';
 import getProduct from '../../../data/api/getProduct';
-import * as classes from './product.module.css';
 import Header from '../../components/common/header/header';
 import { IProduct } from '../../../data/types/interfaces/product';
 import PreviewImageComponent from './ImageComponent';
-import ArrowRightIcon from '../../components/common/other/ArrowRightIcon';
-import ArrowLeftIcon from '../../components/common/other/ArrowLeftIcon';
+import ArrowRightIcon from '../../components/common/icons/ArrowRightIcon';
+import ArrowLeftIcon from '../../components/common/icons/ArrowLeftIcon';
 import Loader from '../../components/Loader/Loader';
 import Button from '../../components/common/Button/Button';
-import PriceContainer from './priceContainer';
 import noImage from '../../../assets/img/no-image.png';
-import ProductModal from './productModal';
 import Notfound from '../NotFound/not-found';
-import PreviewImages from './previewImages';
+import ProductModal from '../../components/ProductModal/ProductModal';
+import PriceContainer from '../../components/PriceContainer/PriceContainer';
+import * as classes from './product.module.css';
+import Description from '../../components/Description/Description';
+import AddToCart from '../../../data/api/Cart/AddToCart';
+import RemoveFromCart from '../../../data/api/Cart/RemoveFromCart';
+import RibbonImages from './ribbonImages';
+import productInCart from '../../../data/utils/productInCart';
 
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
@@ -27,7 +31,7 @@ function Product({ state, setState }: MainProps) {
 
   const [numImage, setNumImage] = useState<number>(0);
   const [modal, setModal] = useState(false);
-  const [showFullDescription, setShowFullDescription] = useState(false);
+  const [inCart, setInCart] = useState(false);
 
   useEffect(() => {
     async function fetchProduct() {
@@ -36,17 +40,18 @@ function Product({ state, setState }: MainProps) {
         state,
         setState
       });
+
       setProduct(fetchedProduct);
       setLoading(false);
+
       if (fetchedProduct && fetchedProduct.masterVariant.images.length > 0) {
         setNumImage(0);
       }
-      // eslint-disable-next-line no-console
       console.log('product=>', fetchedProduct);
+      setInCart(await productInCart(fetchedProduct));
     }
 
     fetchProduct();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, state, setState]);
 
   if (loading) {
@@ -78,13 +83,16 @@ function Product({ state, setState }: MainProps) {
     }
   }
 
-  const toggleDescription = () => {
-    setShowFullDescription((prev) => !prev);
-  };
+  const addToCart = async () => {
+    if (!inCart) {
+      await AddToCart(product);
 
-  const addToCart = () => {
-    // eslint-disable-next-line no-console
-    console.log('add to cart');
+      setInCart(true);
+    } else {
+      await RemoveFromCart(product);
+
+      setInCart(false);
+    }
   };
 
   return (
@@ -97,19 +105,19 @@ function Product({ state, setState }: MainProps) {
             {isImage ? (
               <div className={classes.slider}>
                 {leftVisible ? (
-                  <Button type="button" className={classes.btn} onClick={() => slideLeft()}>
+                  <Button type="button" className={classes.sliderBtn} onClick={() => slideLeft()}>
                     <ArrowLeftIcon width="6rem" height="6rem" />
                   </Button>
                 ) : (
                   <Button
                     type="button"
-                    className={`${classes.btn} ${classes.btnDisabled}`}
+                    className={`${classes.sliderBtn} ${classes.sliderBtnDisabled}`}
                     disabled>
                     <ArrowLeftIcon width="6rem" height="6rem" fill="gray" />
                   </Button>
                 )}
 
-                <div className={classes.prevWrapper}>
+                <div className={classes.sliderWrapper}>
                   {product.masterVariant.images.map((img, index) => (
                     <PreviewImageComponent
                       key={img.url}
@@ -121,47 +129,43 @@ function Product({ state, setState }: MainProps) {
                   ))}
                 </div>
                 {rightVisible ? (
-                  <Button type="button" className={classes.btn} onClick={() => slideRight()}>
+                  <Button type="button" className={classes.sliderBtn} onClick={() => slideRight()}>
                     <ArrowRightIcon width="6rem" height="6rem" />
                   </Button>
                 ) : (
                   <Button
                     type="button"
-                    className={`${classes.btn} ${classes.btnDisabled}`}
+                    className={`${classes.sliderBtn} ${classes.sliderBtnDisabled}`}
                     disabled>
                     <ArrowRightIcon width="6rem" height="6rem" fill="gray" />
                   </Button>
                 )}
               </div>
             ) : null}
-
-            {isImage ? (
-              <PreviewImages
-                numImage={numImage}
-                product={product}
-                setModal={() => setModal(true)}
-              />
-            ) : (
-              <div className={classes.preview}>
+            <div className={classes.preview}>
+              {isImage ? (
+                <RibbonImages
+                  numImage={numImage}
+                  imgCount={imgCount}
+                  product={product}
+                  setModal={() => setModal(true)}
+                />
+              ) : (
                 <img className={classes.previewNoimage} src={noImage} alt="no aviable" />
-              </div>
-            )}
+              )}
+            </div>
           </div>
-          <PriceContainer
-            discounted={product.masterVariant.prices[0].discounted}
-            value={product.masterVariant.prices[0].value}
-            onClick={() => addToCart()}
-          />
+          <div className={classes.priceContainer}>
+            <PriceContainer
+              discounted={product.masterVariant.prices[0].discounted}
+              value={product.masterVariant.prices[0].value}
+              inCart={inCart}
+              onClick={() => addToCart()}
+            />
+          </div>
         </div>
         <div className={classes.wrapperDescription}>
-          <div
-            className={`${classes.description} ${showFullDescription ? classes.show : classes.hide}`}
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{ __html: product.description.en }}
-          />
-          <button onClick={toggleDescription} className={classes.readMoreBtn} type="button">
-            {showFullDescription ? 'Read less...' : 'Read more...'}
-          </button>
+          <Description htmlContent={product.description.en} />
         </div>
       </section>
       {isImage ? (

@@ -37,7 +37,7 @@ export default function Profile({ state, setState }: MainProps) {
     <>
       <Header state={state} setState={setState} />
       <div className={styles.profilePage}>
-        <h3>Profile</h3>
+        <h2>Profile</h2>
         <div className={styles.container}>
           <div className={styles.menu}>
             <button

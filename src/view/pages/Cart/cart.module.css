@@ -1,0 +1,216 @@
+.cart {
+  position: absolute;
+  width: 95%;
+  max-width: 900px;
+  height: 75%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 2rem;
+
+  h2 {
+    text-align: center;
+  }
+
+  .cartWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90%;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    ul {
+      padding: 0;
+      margin: 2rem 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+
+      li {
+        font-size: 1.5rem;
+        list-style: none;
+        /* display: grid;
+        grid-template-columns: repeat(6, 1fr); */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.5rem 0;
+        padding: 1rem;
+        border-bottom: 1px solid #ccc;
+
+        .cell {
+          padding: 0.5rem;
+          text-align: center;
+        }
+        .cellWrapper {
+          display: flex;
+        }
+        .imgWrapper {
+          display: flex;
+          justify-content: center;
+        }
+
+        .img {
+          width: 5rem;
+        }
+
+        .nameWrapper,
+        .counterWrapper,
+        .priceWrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .btnQuantity {
+            width: 3rem;
+            height: 2rem;
+            border: none;
+            background-color: rgba(255, 255, 255, 9);
+            cursor: pointer;
+          }
+          .btnQuantity:active {
+            box-shadow: #ccc 2px 2px 2px;
+          }
+          .labelQuantity {
+            width: 3rem;
+            margin-left: 1rem;
+            margin-right: 1rem;
+            justify-self: center;
+            text-align: center;
+          }
+        }
+
+        .removeBtn,
+        .btnQuantity {
+          justify-self: center;
+          border: none;
+          padding: 0.5rem 1rem;
+          border-radius: 0.25rem;
+          cursor: pointer;
+          background: #fff;
+        }
+        .removeBtn:hover {
+          stroke: red;
+        }
+      }
+
+      li:last-child {
+        border-bottom: none;
+      }
+    }
+
+    .clearBtn {
+      justify-self: center;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      cursor: pointer;
+    }
+    .clearBtn:hover {
+      background-color: #d32f2f;
+    }
+    .noProduct {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      text-align: center;
+      .imgEmpty {
+        height: 55rem;
+        max-height: 50vh;
+      }
+      .btn {
+        padding: 5px 15px;
+        color: var(--light-text-color);
+        cursor: pointer;
+        border: none;
+        border-radius: 1rem;
+        padding: 1rem;
+        background-color: var(--body-text-color);
+        transition: 0.4s all ease-in;
+      }
+
+      .btn:hover {
+        background-color: rgb(136, 214, 33, 1);
+      }
+    }
+    .bottomBtnsSect {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+
+      .buttonWrapper {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+
+        .btn {
+          padding: 5px 15px;
+          color: var(--light-text-color);
+          cursor: pointer;
+          border: none;
+          border-radius: 1rem;
+          padding: 1rem;
+          background-color: var(--body-text-color);
+          transition: 0.4s all ease-in;
+        }
+
+        .btn:hover {
+          background-color: rgb(136, 214, 33, 1);
+        }
+        .clearBtn:hover {
+          background-color: rgb(241, 13, 13);
+        }
+        .orderBtn:hover {
+          background-color: rgb(21, 115, 238);
+        }
+      }
+    }
+  }
+
+  .confirm {
+    padding: 0 1rem;
+
+    .btn {
+      padding: 5px 15px;
+      color: teal;
+      font-size: 14px;
+      background: transparent;
+      border: 1px solid teal;
+      cursor: pointer;
+      border: none;
+      border-radius: 1rem;
+      width: 15rem;
+      padding: 1rem;
+      background-color: rgba(255, 255, 255, 0.5);
+      transition: 0.4s all ease-in;
+    }
+
+    .btn:hover {
+      background-color: rgb(255, 255, 255);
+    }
+
+    .btnYes {
+      background-color: rgb(241, 98, 98);
+      margin-right: 2rem;
+    }
+
+    .btnNo {
+      background-color: rgb(110, 241, 98);
+    }
+    .btnYes:hover {
+      background-color: rgb(150, 11, 11);
+      color: white;
+    }
+
+    .btnNo:hover {
+      background-color: rgb(13, 92, 6);
+      color: white;
+    }
+  }
+}
