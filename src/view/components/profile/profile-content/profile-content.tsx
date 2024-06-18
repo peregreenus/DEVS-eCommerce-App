@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { CustomerProfileResponse } from '../../../../data/types/interfaces/customer.interface';
 import * as styles from './profile-content.module.css';

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Country from '../../types/country';
 import CTP from '../../types/ctp';
 import { Customer, CustomerAddresses } from '../../types/interfaces/customer.interface';
@@ -31,6 +32,7 @@ export default async function setCustomerAddress(dataString: string, idAddress: 
   if (idAddress !== 'new' && data.actions) {
     data.actions[0].addressId = idAddress;
   }
+  console.log(data);
   return fetch(url, {
     method: 'POST',
     headers: {

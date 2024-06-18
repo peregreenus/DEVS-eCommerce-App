@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import CTP from '../types/ctp';
 import { ErrorProps } from '../types/errorProps';
 import { MainProps } from '../types/main-props';
@@ -26,11 +28,14 @@ async function getTokenForLogin(
     });
 
     const tokenData = await response.json();
+    // eslint-disable-next-line no-alert
     if (!response.ok) return tokenData;
 
-    const { access_token: bearerToken } = tokenData;
+    const { access_token: bearerToken, refresh_token: refreshToken } = tokenData;
     localStorage.setItem('bearerToken', bearerToken);
     localStorage.removeItem('bearerAnonToken');
+    console.log('bearerToken:', bearerToken);
+    console.log('refreshToken:', refreshToken);
 
     // Fetch existing cart
     const cartUrl = `${CTP.API_URL}${CTP.PROJECT_KEY}/me/active-cart`;
@@ -41,7 +46,12 @@ async function getTokenForLogin(
       }
     });
 
-    if (!cartResponse.ok) {
+    if (cartResponse.ok) {
+      const cartData = await cartResponse.json();
+      console.log('Existing cart:', cartData);
+    } else {
+      // If no active cart exists, create a new one
+      console.log('No active cart found, creating a new one.');
       await createCart(tokenData.access_token);
     }
 

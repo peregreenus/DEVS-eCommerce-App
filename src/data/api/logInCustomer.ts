@@ -1,6 +1,7 @@
 import CTP from '../types/ctp';
 import { MainProps } from '../types/main-props';
 
+/* eslint-disable no-console */
 async function logInCustomer(
   email: FormDataEntryValue,
   password: FormDataEntryValue,
@@ -30,6 +31,7 @@ async function logInCustomer(
     });
 
     const customer = await response.json();
+    console.log('Customer:', customer);
     localStorage.setItem('cart', customer.cart.id);
     setState((prevState) => ({ ...prevState, userLoggedIn: true, showMsg: false }));
 

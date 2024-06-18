@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable @typescript-eslint/no-shadow */
-
+/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/common/header/header';
@@ -24,32 +24,29 @@ import Modal from '../../components/common/modal/modal';
 import Button from '../../components/common/Button/Button';
 import InputLabelButton from '../../components/common/input/input';
 import applyPromo from '../../../data/api/Cart/applyPromo';
-import Loader from '../../components/Loader/Loader';
 
 function Cart({ state, setState }: MainProps) {
   const [cart, setCart] = useState<ICart | null>(null);
   const navigate = useNavigate();
-  const [discPrice, setDiscPrice] = useState(false);
-  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     async function fetchCart() {
-      setLoading(true);
       const fetchedCart: ICart = await getCart();
       if (fetchedCart) {
         setCart(fetchedCart);
       }
-      setLoading(false);
     }
     fetchCart();
   }, []);
+
+  console.log(cart);
 
   function navigateCatalog(): void {
     navigate('/catalog');
   }
 
   async function incProduct(lineItem: LineItem): Promise<void> {
-    const product = await getProduct(lineItem.productId);
+    const product = await getProduct(lineItem.productId, { state, setState });
     if (product) {
       await AddToCart(product, 1);
       const updatedCart = await getCart();
@@ -59,7 +56,7 @@ function Cart({ state, setState }: MainProps) {
 
   async function decProduct(lineItem: LineItem): Promise<void> {
     if (lineItem.quantity <= 1) return;
-    const product = await getProduct(lineItem.productId);
+    const product = await getProduct(lineItem.productId, { state, setState });
     if (product) {
       await RemoveFromCart(product, 1);
       const updatedCart = await getCart();
@@ -69,7 +66,7 @@ function Cart({ state, setState }: MainProps) {
 
   async function removeProduct(lineItem: LineItem): Promise<void> {
     try {
-      const product = await getProduct(lineItem.productId);
+      const product = await getProduct(lineItem.productId, { state, setState });
       if (product) {
         await RemoveFromCart(product, lineItem.quantity);
         const updatedCart = await getCart();
@@ -118,7 +115,6 @@ function Cart({ state, setState }: MainProps) {
     if (cart) {
       const responseData: ICart = await applyPromo(cart.id, cart.version, promo);
       setCart(responseData);
-      setDiscPrice(true);
     }
   }
 
@@ -129,120 +125,114 @@ function Cart({ state, setState }: MainProps) {
   return (
     <>
       <Header state={state} setState={setState} />
-      {loading ? (
-        <Loader />
-      ) : (
-        <section className={classes.cart}>
-          <h2>Cart</h2>
-          <div className={classes.cartWrapper}>
-            {cart && cart.lineItems && cart.lineItems.length > 0 ? (
-              <>
-                <ul>
-                  {cart.lineItems.map((item: LineItem) => (
-                    <li key={item.id}>
-                      <div className={`${classes.cell} ${classes.cell}`}>
-                        <a href={`/catalog/product/${item.productId}`}>
-                          <img
-                            className={classes.img}
-                            src={item.variant.images[0].url}
-                            alt={item.name.en}
-                          />
-                        </a>
-                      </div>
-                      <div className={`${classes.cell}`}>{item.name.en}</div>
+      <section className={classes.cart}>
+        <h2>Cart</h2>
+        <div className={classes.cartWrapper}>
+          {cart && cart.lineItems && cart.lineItems.length > 0 ? (
+            <>
+              <ul>
+                {cart.lineItems.map((item: LineItem) => (
+                  <li key={item.id}>
+                    <div className={`${classes.cell} ${classes.cell}`}>
+                      <a href={`/catalog/product/${item.productId}`}>
+                        <img
+                          className={classes.img}
+                          src={item.variant.images[0].url}
+                          alt={item.name.en}
+                        />
+                      </a>
+                    </div>
+                    <div className={`${classes.cell}`}>{item.name.en}</div>
 
-                      <div className={`${classes.priceWrapper} ${classes.cell}`}>
-                        {item.variant.prices[0].discounted
-                          ? formatPrice(item.variant.prices[0].discounted.value.centAmount)
-                          : formatPrice(item.variant.prices[0].value.centAmount)}
-                      </div>
-                      <div className={`${classes.priceWrapper} ${classes.cell}`}>
-                        Total:&#32;
-                        {formatPrice(item.totalPrice.centAmount)}
-                      </div>
-                      <div className={`${classes.cellWrapper}`}>
-                        <div className={`${classes.counterWrapper} ${classes.cell}`}>
-                          <button
-                            className={classes.btnQuantity}
-                            type="button"
-                            onClick={() => decProduct(item)}>
-                            <MinusIcon width="1.5rem" height="1.5rem" />
-                          </button>
-                          <span className={classes.labelQuantity}>{item.quantity}</span>
-                          <button
-                            className={classes.btnQuantity}
-                            type="button"
-                            onClick={() => incProduct(item)}>
-                            <PlusIcon width="1.5rem" height="1.5rem" />
-                          </button>
-                        </div>
+                    <div className={`${classes.priceWrapper} ${classes.cell}`}>
+                      {item.variant.prices[0].discounted
+                        ? formatPrice(item.variant.prices[0].discounted.value.centAmount)
+                        : formatPrice(item.variant.prices[0].value.centAmount)}
+                    </div>
+                    <div className={`${classes.priceWrapper} ${classes.cell}`}>
+                      Total:&#32;
+                      {formatPrice(item.totalPrice.centAmount)}
+                    </div>
+                    <div className={`${classes.cellWrapper}`}>
+                      <div className={`${classes.counterWrapper} ${classes.cell}`}>
                         <button
-                          className={classes.removeBtn}
+                          className={classes.btnQuantity}
                           type="button"
-                          onClick={() => removeProduct(item)}>
-                          <DeleteIcon width="2rem" height="2rem" />
+                          onClick={() => decProduct(item)}>
+                          <MinusIcon width="1.5rem" height="1.5rem" />
+                        </button>
+                        <span className={classes.labelQuantity}>{item.quantity}</span>
+                        <button
+                          className={classes.btnQuantity}
+                          type="button"
+                          onClick={() => incProduct(item)}>
+                          <PlusIcon width="1.5rem" height="1.5rem" />
                         </button>
                       </div>
-                    </li>
-                  ))}
-                </ul>
-                <InputLabelButton
-                  label="Promo:"
-                  onClick={(value: string) => handleInputPromo(value)}
-                />
-                <div className={classes.bottomBtnsSect}>
-                  <div className={classes.total}>
-                    The total cost of the items in the basket{' '}
-                    {formatPrice(totalInCart(cart.lineItems))}
-                  </div>
-                  {discPrice ? (
-                    <div className={classes.total}>
-                      Due after using the promo code {formatPrice(cart.totalPrice.centAmount)}
+                      <button
+                        className={classes.removeBtn}
+                        type="button"
+                        onClick={() => removeProduct(item)}>
+                        <DeleteIcon width="2rem" height="2rem" />
+                      </button>
                     </div>
-                  ) : null}
-                  <div className={classes.buttonWrapper}>
-                    <button
-                      type="button"
-                      className={`${classes.btn} ${classes.orderBtn}`}
-                      onClick={handleToOrder}>
-                      To order
-                    </button>
-                    <button
-                      type="button"
-                      className={`${classes.btn} ${classes.clearBtn}`}
-                      onClick={handleClearCartClick}>
-                      Clear cart
-                    </button>
-                    <button type="button" className={`${classes.btn}`} onClick={navigateCatalog}>
-                      Continue shopping
-                    </button>
-                  </div>
+                  </li>
+                ))}
+              </ul>
+              <InputLabelButton
+                label="Promo:"
+                onClick={(value: string) => handleInputPromo(value)}
+              />
+              <div className={classes.bottomBtnsSect}>
+                <div className={classes.total}>
+                  The total cost of the items in the basket{' '}
+                  {formatPrice(totalInCart(cart.lineItems))}
                 </div>
-                <Modal visible={modalVisible} setVisible={setModalVisible}>
-                  <div className={classes.confirm}>
-                    <p style={{ margin: '2rem 0' }}>Are you sure you want to clear the cart?</p>
-                    <Button className="btn btnYes" onClick={handleConfirmClearCart}>
-                      Yes
-                    </Button>
-                    <Button className="btn btnNo" onClick={() => setModalVisible(false)}>
-                      No
-                    </Button>
-                  </div>
-                </Modal>
-              </>
-            ) : (
-              <div className={classes.noProduct}>
-                <img className={classes.imgEmpty} src={cartIcon} alt="" />
-                <h3>No products in the cart</h3>
-                <p>But it&#39;s never too late to fix it :&#41;</p>
-                <button className={classes.btn} type="button" onClick={navigateCatalog}>
-                  Welcome do it!
-                </button>
+                <div className={classes.total}>
+                  Due after using the promo code {formatPrice(cart.totalPrice.centAmount)}
+                </div>
+                <div className={classes.buttonWrapper}>
+                  <button
+                    type="button"
+                    className={`${classes.btn} ${classes.orderBtn}`}
+                    onClick={handleToOrder}>
+                    To order
+                  </button>
+                  <button
+                    type="button"
+                    className={`${classes.btn} ${classes.clearBtn}`}
+                    onClick={handleClearCartClick}>
+                    Clear cart
+                  </button>
+                  <button type="button" className={`${classes.btn}`} onClick={navigateCatalog}>
+                    Continue shopping
+                  </button>
+                </div>
               </div>
-            )}
-          </div>
-        </section>
-      )}
+              <Modal visible={modalVisible} setVisible={setModalVisible}>
+                <div className={classes.confirm}>
+                  <p style={{ margin: '2rem 0' }}>Are you sure you want to clear the cart?</p>
+                  <Button className="btn btnYes" onClick={handleConfirmClearCart}>
+                    Yes
+                  </Button>
+                  <Button className="btn btnNo" onClick={() => setModalVisible(false)}>
+                    No
+                  </Button>
+                </div>
+              </Modal>
+            </>
+          ) : (
+            <div className={classes.noProduct}>
+              <img className={classes.imgEmpty} src={cartIcon} alt="" />
+              <h3>No products in the cart</h3>
+              <p>But it&#39;s never too late to fix it :&#41;</p>
+              <button className={classes.btn} type="button" onClick={navigateCatalog}>
+                Welcome do it!
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
     </>
   );
 }

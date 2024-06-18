@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../components/common/header/header';

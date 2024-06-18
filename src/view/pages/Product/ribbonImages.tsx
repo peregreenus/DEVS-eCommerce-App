@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable array-callback-return */
 import React from 'react';
 import * as classes from './ribbonImages.module.css';
@@ -11,6 +12,7 @@ interface ImageProps {
 }
 
 export default function RibbonImages({ imgCount, numImage, product, setModal }: ImageProps) {
+  console.log(-Math.floor(100 * numImage));
   return (
     <div className={classes.ribbonContainer} style={{ minWidth: `${imgCount * 100}% ` }}>
       <div

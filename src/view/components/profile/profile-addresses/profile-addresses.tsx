@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import {
   CustomerAddresses,
@@ -59,6 +60,7 @@ function AddressesTabContent({
     });
   }
   function modalShow(key: string, country: string) {
+    console.log(key);
     if (country) {
       checkingCountry.address =
         Object.values(Country)[Object.keys(Country).indexOf(country as Country)];
@@ -67,6 +69,7 @@ function AddressesTabContent({
       setNew(true);
     }
     toggleVisible(key);
+    console.log(isVisible);
   }
 
   function setDefault(e: ChangeEvent<HTMLInputElement>, typeAddress: string) {
@@ -97,6 +100,7 @@ function AddressesTabContent({
   ) => {
     e.preventDefault();
     const addressDetails = new FormData(e.currentTarget);
+    console.log(Object.fromEntries(addressDetails.entries()));
     const updateAddress = JSON.stringify(Object.fromEntries(addressDetails.entries()));
     await setCustomerAddress(updateAddress, idAddress)
       .then((response) => {
@@ -110,6 +114,7 @@ function AddressesTabContent({
       });
   };
   async function deleteAddress(id: string) {
+    console.log(id);
     await removeAddress(id).then((response) => {
       setLSVersionProfileCustomer(response.version);
       setUpdate((prev) => !prev);

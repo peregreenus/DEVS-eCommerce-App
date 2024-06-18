@@ -20,7 +20,7 @@ export default function InputField({
       {label}
       <input
         type={type}
-        // id={label}
+        id={label}
         value={value}
         name={name}
         placeholder={placeholder}

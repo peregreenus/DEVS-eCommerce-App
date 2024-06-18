@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useEffect, useRef, useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormInput from '../FormInput/FormInput';

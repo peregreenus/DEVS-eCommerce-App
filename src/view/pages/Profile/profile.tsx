@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { MainProps } from '../../../data/types/main-props';
 import Header from '../../components/common/header/header';

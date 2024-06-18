@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-no-bind */
+/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MainProps } from '../../../data/types/main-props';
@@ -35,13 +36,18 @@ function Product({ state, setState }: MainProps) {
   useEffect(() => {
     async function fetchProduct() {
       setLoading(true);
-      const fetchedProduct = await getProduct(id);
+      const fetchedProduct = await getProduct(id, {
+        state,
+        setState
+      });
 
       setProduct(fetchedProduct);
       setLoading(false);
+
       if (fetchedProduct && fetchedProduct.masterVariant.images.length > 0) {
         setNumImage(0);
       }
+      console.log('product=>', fetchedProduct);
       setInCart(await productInCart(fetchedProduct));
     }
 

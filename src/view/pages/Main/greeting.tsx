@@ -28,7 +28,15 @@ function Greeting() {
 
   const handlePromoCopy = () => {
     if (promo) {
-      navigator.clipboard.writeText(promo);
+      navigator.clipboard
+        .writeText(promo)
+        .then(() => {
+          // eslint-disable-next-line no-console
+          console.log('Promo code copied to clipboard!');
+        })
+        .catch((err) => {
+          console.error('Failed to copy promo code: ', err);
+        });
     }
   };
 

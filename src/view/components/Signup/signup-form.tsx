@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { RegistrationFieldsType } from '../../../data/types/registration-type';
@@ -108,6 +109,7 @@ function FormSignup(props: IFormProps) {
         if (!defShipping) {
           customerAddressesOption.defaultShipping = 2;
         } else delete customerAddressesOption.defaultShipping;
+        console.log(customerAddressesOption);
         break;
       case 'defaultBilling':
         setDefBilling((prev) => !prev);
@@ -119,6 +121,7 @@ function FormSignup(props: IFormProps) {
             customerAddressesOption.defaultShipping = customerAddressesOption.defaultBilling;
           }
         }
+        console.log(customerAddressesOption);
         break;
       default:
         setShippingToo((prev) => !prev);
@@ -145,6 +148,7 @@ function FormSignup(props: IFormProps) {
           setErrors({ ...validationErrors });
           setErrorCountry({ ...currentErrorCountry });
         }
+        console.log(customerAddressesOption);
         break;
     }
   }

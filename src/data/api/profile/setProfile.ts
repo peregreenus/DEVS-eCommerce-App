@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import CTP from '../../types/ctp';
 import { Customer } from '../../types/interfaces/customer.interface';
 import { getLSToken, getLSVersionProfileCustomer } from '../../utils/getLS';
@@ -30,6 +31,7 @@ export default async function setCustomerInfo(dataString: string) {
       break;
     case dataString.includes('dateOfBirth'):
       actionType = 'setDateOfBirth';
+      console.log(updateInfo.dateOfBirth);
       actionData = `${updateInfo.dateOfBirth}`;
       fieldName = 'dateOfBirth';
       break;

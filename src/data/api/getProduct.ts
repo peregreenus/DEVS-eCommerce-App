@@ -1,11 +1,22 @@
 import CTP from '../types/ctp';
 import { IProduct } from '../types/interfaces/product';
+// import { ProductProjectionsData } from '../types/interfaces/ProductProjectionsData';
+import { MainProps } from '../types/main-props';
 import { getLSAnonToken, getLSToken } from '../utils/getLS';
 
-async function getProduct(productId: string | undefined): Promise<IProduct | null> {
+async function getProduct(
+  productId: string | undefined,
+  { state }: MainProps
+): Promise<IProduct | null> {
   const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/product-projections/${productId}`;
+  // eslint-disable-next-line no-console
+  console.log(state);
   const token = getLSToken();
   const BEARER_TOKEN = token ? getLSToken() : getLSAnonToken();
+
+  // eslint-disable-next-line no-console
+  console.log('BEARER_TOKEN=>', BEARER_TOKEN);
+
   const headers = new Headers({
     Authorization: `Bearer ${BEARER_TOKEN}`
   });
