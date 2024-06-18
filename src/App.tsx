@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from './view/pages/Main/main';
@@ -11,7 +10,6 @@ import Logout from './view/pages/Logout/logout';
 import Profile from './view/pages/Profile/profile';
 import Catalog from './view/pages/Catalog/Catalog';
 import About from './view/pages/About/about';
-// import ProductRand from './view/pages/Product/productrand';
 import Product from './view/pages/Product/product';
 import Cart from './view/pages/Cart/Cart';
 

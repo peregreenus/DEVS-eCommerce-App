@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 import { MainProps } from '../../../data/types/main-props';
 import Footer from '../../components/common/footer/footer';
@@ -13,8 +12,6 @@ import Specials from '../../components/About/specials/specials';
 
 export default function About({ state, setState }: MainProps) {
   const data: Members = membersJson;
-
-  console.log(data);
   return data ? (
     <>
       <Header state={state} setState={setState} />

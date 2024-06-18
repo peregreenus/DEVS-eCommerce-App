@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import * as styles from './profile-addresses.module.css';
 import { CustomerAddresses } from '../../../../data/types/interfaces/customer.interface';
@@ -36,7 +35,6 @@ export default function EditingAddresses({
 
   const [newAddressData, setAddressData] = useState<CustomerAddresses>(addressData);
   const [selectedCountry, setSelectedCountry] = useState(currentSelectCountry);
-  console.log(`current country : ${selectedCountry}`);
   const [errors, setErrors] = useState<{ [key: string]: string }>(validationErrors);
   const [isValid, setFormValid] = useState(false);
 
@@ -45,7 +43,6 @@ export default function EditingAddresses({
   const idAddress = idArray[1];
   const textb = '';
   useEffect(() => {
-    console.log(errors);
     if (Object.values(errors).every((str) => str === '')) {
       setFormValid(true);
     } else {
@@ -71,8 +68,6 @@ export default function EditingAddresses({
     const { name, value } = e.target;
     checkingCountry.address = value;
     setSelectedCountry(value);
-    console.log(`select country: ${value}`);
-    console.log(`checking country: ${checkingCountry.address}`);
     newAddressData.postalCode = '';
     validationErrors.postalCode = 'should not be a empty!';
     validationErrors.country = '';

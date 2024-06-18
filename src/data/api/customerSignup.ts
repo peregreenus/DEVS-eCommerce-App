@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import Country from '../types/country';
 import { Customer, CustomerResponse } from '../types/interfaces/customer.interface';
 import CTP from '../types/ctp';
@@ -63,7 +61,7 @@ export default async function CustomerSignup(formCustomer: string): Promise<Cust
   if (customerAddressesOption.defaultBilling) {
     data.defaultBillingAddress = customerAddressesOption.defaultBilling - 1;
   }
-  console.log(data);
+
   return fetch(url, {
     method: 'POST',
     headers: {
@@ -73,7 +71,6 @@ export default async function CustomerSignup(formCustomer: string): Promise<Cust
     body: JSON.stringify(data)
   })
     .then((response) => {
-      console.log(response);
       return response.json();
     })
     .catch((err) => console.error(err));

@@ -30,8 +30,7 @@ async function applyPromo(cartId: string, cartVersion: number, promo: string) {
     }
 
     const result = await response.json();
-    // eslint-disable-next-line no-console
-    console.log('Discount code updated successfully:', result);
+
     return result;
   } catch (error) {
     console.error('Failed to update discount code:', error);

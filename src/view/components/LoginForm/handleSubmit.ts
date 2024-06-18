@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { FormEvent } from 'react';
 import getTokenForLogin from '../../../data/api/getTokenForLogin';
 import logInCustomer from '../../../data/api/logInCustomer';
