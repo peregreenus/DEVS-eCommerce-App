@@ -35,7 +35,7 @@ function Cart({ state, setState }: MainProps) {
   useEffect(() => {
     async function fetchCart() {
       setLoading(true);
-      const fetchedCart: ICart = await getCart();
+      const fetchedCart: ICart = await getCart(true);
       if (fetchedCart) {
         setCart(fetchedCart);
       }
@@ -52,7 +52,7 @@ function Cart({ state, setState }: MainProps) {
     const product = await getProduct(lineItem.productId);
     if (product) {
       await AddToCart(product, 1);
-      const updatedCart = await getCart();
+      const updatedCart = await getCart(true);
       setCart(updatedCart);
     }
   }
@@ -62,7 +62,7 @@ function Cart({ state, setState }: MainProps) {
     const product = await getProduct(lineItem.productId);
     if (product) {
       await RemoveFromCart(product, 1);
-      const updatedCart = await getCart();
+      const updatedCart = await getCart(true);
       setCart(updatedCart);
     }
   }
@@ -72,7 +72,7 @@ function Cart({ state, setState }: MainProps) {
       const product = await getProduct(lineItem.productId);
       if (product) {
         await RemoveFromCart(product, lineItem.quantity);
-        const updatedCart = await getCart();
+        const updatedCart = await getCart(true);
         setCart(updatedCart);
       } else {
         console.error(`Product with ID ${lineItem.productId} not found.`);
@@ -88,7 +88,7 @@ function Cart({ state, setState }: MainProps) {
       for (const item of lineItems) {
         try {
           await removeProduct(item);
-          setCart(await getCart());
+          setCart(await getCart(true));
         } catch (error) {
           console.error('Error removing item from cart:', error);
           throw new Error('Failed to remove item from cart');

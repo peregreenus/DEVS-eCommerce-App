@@ -2,10 +2,23 @@ import React, { useState, KeyboardEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { MainProps } from '../../../../data/types/main-props';
 import * as classes from './navbar.module.css';
+import ShoppingCartIcon from '../icons/shoppingCart';
+
+import getCart from '../../../../data/api/Cart/GetCart';
+import { ICart } from '../../../../data/types/interfaces/ICart';
 
 function Navbar({ state }: MainProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [countInCart, setCountInCart] = useState<number>(0);
 
+  async function fetchCart() {
+    const fetchedCart: ICart = await getCart();
+    if (fetchedCart) {
+      setCountInCart(fetchedCart.lineItems.length);
+    }
+  }
+
+  fetchCart();
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -61,7 +74,7 @@ function Navbar({ state }: MainProps) {
           </>
         )}
         <Link to="/cart" onClick={toggleMenu}>
-          Cart
+          <ShoppingCartIcon count={countInCart} />
         </Link>
       </div>
       {isOpen ? (

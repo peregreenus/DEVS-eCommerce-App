@@ -70,7 +70,9 @@ const CatalogContent: React.FC<MainProps> = ({ state, setState }) => {
             </aside>
             <div className={classes.catalog}>
               <SortBar value={sorting} onChange={(e) => setSorting(e.target.value)} />
-              {products ? <CardContainer products={products} goToProduct={goToProduct} /> : null}
+              {products ? (
+                <CardContainer setState={setState} products={products} goToProduct={goToProduct} />
+              ) : null}
             </div>
           </div>
         )}
