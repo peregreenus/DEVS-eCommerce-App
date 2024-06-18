@@ -17,7 +17,7 @@ export default function InputField({
 }: InputProps) {
   return (
     <label htmlFor={name} className={styles.label}>
-      <p>{label}</p>
+      {label}
       <input
         type={type}
         // id={label}

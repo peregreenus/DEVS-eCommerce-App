@@ -1,17 +1,17 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { RegistrationFieldsType } from '../../../data/types/registration-type';
-
+import InputField from './signup-form-input';
 import * as styles from './signup-form.module.css';
+import AddressForm from './address-form';
 import { validationField } from '../../../data/utils/validate-form';
-import { CustomerAddressesOptionsProps } from '../../../data/types/signup-props';
 import {
   errorInitialState,
   initialErrorCountry,
   initialState,
   initialStateCountry
 } from './initial-state';
-import InputField from './signup-form-input';
-import AddressForm from './address-form';
+import { CustomerAddressesOptionsProps } from '../../../data/types/signup-props';
 
 interface IFormProps {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -192,9 +192,12 @@ function FormSignup(props: IFormProps) {
     }
   };
   return (
-    <form className={styles.form} onSubmit={onSubmit}>
-      <div className={styles.nameBlock}>
-        <sub className={styles.headerBlock}>personal information</sub>
+    <div className={styles.container}>
+      <h2>Register</h2>
+      <p className={styles.link}>
+        OR if you already have an account<Link to="/login">Login</Link>
+      </p>
+      <form className={styles.form} onSubmit={onSubmit}>
         <InputField
           label="Email"
           type="email"
@@ -249,93 +252,89 @@ function FormSignup(props: IFormProps) {
           error={errors.dateOfBirth}
           disabled={false}
         />
-      </div>
-
-      <div className={`${styles.addressForm} `}>
-        <sub className={styles.headerBlock}>billing address</sub>
-        <div className={styles.controlAddressForm}>
-          <div className={styles.checkBoxForm}>
-            <input
-              type="checkbox"
-              name="defaultBilling"
-              checked={defBilling}
-              onChange={handleChecked}
-            />
-            <p>default billing address</p>
+        <div className={`${styles.addressForm} `}>
+          <p className={styles.addressFormName}>billing address</p>
+          <div className={styles.controlAddressForm}>
+            <div className={styles.checkBoxForm}>
+              <input
+                type="checkbox"
+                name="defaultBilling"
+                checked={defBilling}
+                onChange={handleChecked}
+              />
+              <p>default billing address</p>
+            </div>
+            <div className={styles.checkBoxForm}>
+              <input
+                type="checkbox"
+                name="alsoShipping"
+                checked={shippingToo}
+                onChange={handleChecked}
+              />
+              <p>also shipping address too</p>
+            </div>
           </div>
-          <div className={styles.checkBoxForm}>
-            <input
-              type="checkbox"
-              name="alsoShipping"
-              checked={shippingToo}
-              onChange={handleChecked}
-            />
-            <p>also shipping address too</p>
-          </div>
+          <AddressForm
+            setName="Billing"
+            selectedCountry={selectedCountry.countryBilling}
+            setSelectedCountry={setSelectedCountry}
+            setErrors={setErrors}
+            validationErrors={validationErrors}
+            setNewCustomer={setNewCustomer}
+            countryError={errorCountry.countryBilling}
+            currentErrorCountry={currentErrorCountry}
+            setCountryError={setErrorCountry}
+            newCustomer={newCustomer}
+            cityError={errors.cityBilling}
+            streetError={errors.streetBilling}
+            postalCodeError={errors.postalCodeBilling}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+            onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
+            cityWrong={cityBillingWrong}
+            postalCodeWrong={postalCodeBillingWrong}
+            streetWrong={streetBillingWrong}
+            valuePostalCode={newCustomer.postalCodeBilling}
+            valueCity={newCustomer.cityBilling}
+            valueStreet={newCustomer.streetBilling}
+          />
         </div>
-        <AddressForm
-          setName="Billing"
-          selectedCountry={selectedCountry.countryBilling}
-          setSelectedCountry={setSelectedCountry}
-          setErrors={setErrors}
-          validationErrors={validationErrors}
-          setNewCustomer={setNewCustomer}
-          countryError={errorCountry.countryBilling}
-          currentErrorCountry={currentErrorCountry}
-          setCountryError={setErrorCountry}
-          newCustomer={newCustomer}
-          cityError={errors.cityBilling}
-          streetError={errors.streetBilling}
-          postalCodeError={errors.postalCodeBilling}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
-          onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-          cityWrong={cityBillingWrong}
-          postalCodeWrong={postalCodeBillingWrong}
-          streetWrong={streetBillingWrong}
-          valuePostalCode={newCustomer.postalCodeBilling}
-          valueCity={newCustomer.cityBilling}
-          valueStreet={newCustomer.streetBilling}
-        />
-      </div>
-      <div className={`${styles.addressForm} ${disableAddress ? styles.disableAddress : ''}`}>
-        <sub className={styles.headerBlock}>shipping address</sub>
-        <div className={styles.controlAddressForm}>
-          <div className={styles.checkBoxForm}>
-            <input
-              type="checkbox"
-              name="defaultShipping"
-              checked={defShipping}
-              onChange={handleChecked}
-            />
-            <p>default shipping address</p>
+        <div className={`${styles.addressForm} ${disableAddress ? styles.disableAddress : ''}`}>
+          <div className={styles.addressFormName}>shipping address</div>
+          <div className={styles.controlAddressForm}>
+            <div className={styles.checkBoxForm}>
+              <input
+                type="checkbox"
+                name="defaultShipping"
+                checked={defShipping}
+                onChange={handleChecked}
+              />
+              <p>default shipping address</p>
+            </div>
           </div>
+          <AddressForm
+            setName="Shipping"
+            selectedCountry={selectedCountry.countryShipping}
+            setSelectedCountry={setSelectedCountry}
+            setErrors={setErrors}
+            validationErrors={validationErrors}
+            currentErrorCountry={currentErrorCountry}
+            setNewCustomer={setNewCustomer}
+            countryError={errorCountry.countryShipping}
+            setCountryError={setErrorCountry}
+            newCustomer={newCustomer}
+            cityError={errors.cityShipping}
+            streetError={errors.streetShipping}
+            postalCodeError={errors.postalCodeShipping}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+            onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
+            cityWrong={cityShippingWrong}
+            postalCodeWrong={postalCodeShippingWrong}
+            streetWrong={streetShippingWrong}
+            valuePostalCode={newCustomer.postalCodeShipping ? newCustomer.postalCodeShipping : ''}
+            valueCity={newCustomer.cityShipping ? newCustomer.cityShipping : ''}
+            valueStreet={newCustomer.streetShipping ? newCustomer.streetShipping : ''}
+          />
         </div>
-        <AddressForm
-          setName="Shipping"
-          selectedCountry={selectedCountry.countryShipping}
-          setSelectedCountry={setSelectedCountry}
-          setErrors={setErrors}
-          validationErrors={validationErrors}
-          currentErrorCountry={currentErrorCountry}
-          setNewCustomer={setNewCustomer}
-          countryError={errorCountry.countryShipping}
-          setCountryError={setErrorCountry}
-          newCustomer={newCustomer}
-          cityError={errors.cityShipping}
-          streetError={errors.streetShipping}
-          postalCodeError={errors.postalCodeShipping}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
-          onBlur={(e: ChangeEvent<HTMLInputElement>) => handlerBlur(e)}
-          cityWrong={cityShippingWrong}
-          postalCodeWrong={postalCodeShippingWrong}
-          streetWrong={streetShippingWrong}
-          valuePostalCode={newCustomer.postalCodeShipping ? newCustomer.postalCodeShipping : ''}
-          valueCity={newCustomer.cityShipping ? newCustomer.cityShipping : ''}
-          valueStreet={newCustomer.streetShipping ? newCustomer.streetShipping : ''}
-        />
-      </div>
-      <div className={styles.passwordBlock}>
-        <sub className={styles.headerBlock}>password</sub>
         <div className={styles.block}>
           <InputField
             label="Password"
@@ -364,11 +363,11 @@ function FormSignup(props: IFormProps) {
             disabled={false}
           />
         </div>
-      </div>
-      <button disabled={!formValid} type="submit" className={styles.button}>
-        Signup
-      </button>
-    </form>
+        <button disabled={!formValid} type="submit" className={styles.button}>
+          Signup
+        </button>
+      </form>
+    </div>
   );
 }
 
