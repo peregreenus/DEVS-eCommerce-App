@@ -17,15 +17,17 @@ function Navbar({ state }: MainProps) {
     }
   }
   useEffect(() => {
-    // async function fetchCart() {
-    //   const fetchedCart: ICart = await getCart(false);
-    //   if (fetchedCart) {
-    //     setCountInCart(fetchedCart.totalLineItemQuantity);
-    //   }
-    // }
     fetchCart();
-  }, [state.changesInCart]);
-  // fetchCart();
+  }, [state]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      fetchCart();
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
