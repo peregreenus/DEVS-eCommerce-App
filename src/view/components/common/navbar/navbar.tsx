@@ -10,17 +10,22 @@ import { ICart } from '../../../../data/types/interfaces/ICart';
 function Navbar({ state }: MainProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [countInCart, setCountInCart] = useState<number>(0);
-
-  useEffect(() => {
-    async function fetchCart() {
-      const fetchedCart: ICart = await getCart(false);
-      if (fetchedCart) {
-        setCountInCart(fetchedCart.lineItems.length);
-      }
+  async function fetchCart() {
+    const fetchedCart: ICart = await getCart(false);
+    if (fetchedCart) {
+      setCountInCart(fetchedCart.totalLineItemQuantity);
     }
+  }
+  useEffect(() => {
+    // async function fetchCart() {
+    //   const fetchedCart: ICart = await getCart(false);
+    //   if (fetchedCart) {
+    //     setCountInCart(fetchedCart.totalLineItemQuantity);
+    //   }
+    // }
     fetchCart();
   }, [state.changesInCart]);
-
+  // fetchCart();
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
