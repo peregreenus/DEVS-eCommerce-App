@@ -35,14 +35,10 @@ function Product({ state, setState }: MainProps) {
   useEffect(() => {
     async function fetchProduct() {
       setLoading(true);
-      const fetchedProduct = await getProduct(id, {
-        state,
-        setState
-      });
+      const fetchedProduct = await getProduct(id);
 
       setProduct(fetchedProduct);
       setLoading(false);
-
       if (fetchedProduct && fetchedProduct.masterVariant.images.length > 0) {
         setNumImage(0);
       }
