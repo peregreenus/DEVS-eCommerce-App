@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as styles from './profile-password.module.css';

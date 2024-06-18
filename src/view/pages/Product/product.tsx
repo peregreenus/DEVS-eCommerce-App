@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-no-bind */
-/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MainProps } from '../../../data/types/main-props';
@@ -47,7 +46,6 @@ function Product({ state, setState }: MainProps) {
       if (fetchedProduct && fetchedProduct.masterVariant.images.length > 0) {
         setNumImage(0);
       }
-      console.log('product=>', fetchedProduct);
       setInCart(await productInCart(fetchedProduct));
     }
 

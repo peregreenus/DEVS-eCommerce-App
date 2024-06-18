@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 const checkingCountry = {
   billing: '',
   shipping: '',
@@ -139,7 +137,6 @@ function validationField(fieldName: string, fieldValue: string): string {
   }
   if (fieldName === 'postalCode') {
     let requirements: RegExp;
-    console.log(`logging address: ${checkingCountry.address}`);
     switch (checkingCountry.address) {
       case 'United States':
         requirements = /(^\d{5}$)|(^\d{5}-\d{4}$)/;

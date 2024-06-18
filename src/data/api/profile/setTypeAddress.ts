@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import CTP from '../../types/ctp';
 import { Customer } from '../../types/interfaces/customer.interface';
 import { getLSToken, getLSVersionProfileCustomer } from '../../utils/getLS';

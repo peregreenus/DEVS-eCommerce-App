@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable no-console */
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/common/header/header';
@@ -28,6 +28,7 @@ import applyPromo from '../../../data/api/Cart/applyPromo';
 function Cart({ state, setState }: MainProps) {
   const [cart, setCart] = useState<ICart | null>(null);
   const navigate = useNavigate();
+  const [discPrice, setDiscPrice] = useState(false);
 
   useEffect(() => {
     async function fetchCart() {
@@ -38,8 +39,6 @@ function Cart({ state, setState }: MainProps) {
     }
     fetchCart();
   }, []);
-
-  console.log(cart);
 
   function navigateCatalog(): void {
     navigate('/catalog');
@@ -115,6 +114,7 @@ function Cart({ state, setState }: MainProps) {
     if (cart) {
       const responseData: ICart = await applyPromo(cart.id, cart.version, promo);
       setCart(responseData);
+      setDiscPrice(true);
     }
   }
 
@@ -188,9 +188,11 @@ function Cart({ state, setState }: MainProps) {
                   The total cost of the items in the basket{' '}
                   {formatPrice(totalInCart(cart.lineItems))}
                 </div>
-                <div className={classes.total}>
-                  Due after using the promo code {formatPrice(cart.totalPrice.centAmount)}
-                </div>
+                {discPrice ? (
+                  <div className={classes.total}>
+                    Due after using the promo code {formatPrice(cart.totalPrice.centAmount)}
+                  </div>
+                ) : null}
                 <div className={classes.buttonWrapper}>
                   <button
                     type="button"

@@ -28,7 +28,6 @@ async function getTokenForLogin(
     });
 
     const tokenData = await response.json();
-    // eslint-disable-next-line no-alert
     if (!response.ok) return tokenData;
 
     const { access_token: bearerToken, refresh_token: refreshToken } = tokenData;

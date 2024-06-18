@@ -11,7 +11,7 @@ interface FetchCategoriesProps extends MainProps {
 function FetchCategories({ state, setState, setCategories, setLoading }: FetchCategoriesProps) {
   useEffect(() => {
     async function fetchCategories() {
-      const fetchedCategories = await getCategories({ state, setState });
+      const fetchedCategories = await getCategories();
       if (fetchedCategories) {
         setCategories(fetchedCategories);
         setLoading(false);
