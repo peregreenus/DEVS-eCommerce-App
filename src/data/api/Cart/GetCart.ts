@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import CTP from '../../types/ctp';
 import { ICart } from '../../types/interfaces/ICart';
 import { getLSAnonToken, getLSToken } from '../../utils/getLS';
@@ -14,10 +15,12 @@ async function getCart(force = false) {
     };
 
     try {
+      console.log('getCard start');
       const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/me/active-cart`;
       const response = await fetch(url, { method: 'GET', headers });
       const cartResponse = await response.json();
       cachedCart = cartResponse;
+      console.log('getCard finish');
       return cartResponse;
     } catch (error) {
       return null;

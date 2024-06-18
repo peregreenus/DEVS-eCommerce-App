@@ -12,6 +12,8 @@ function Modal({ children, visible, setVisible }: ModalProps) {
   const rootClasses = [cl.modal];
   if (visible) {
     rootClasses.push(cl.active);
+    // eslint-disable-next-line no-console
+    console.log('--------------');
   }
 
   return (

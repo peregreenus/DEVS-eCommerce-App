@@ -1,4 +1,4 @@
-import React, { useState, KeyboardEvent } from 'react';
+import React, { useState, KeyboardEvent, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MainProps } from '../../../../data/types/main-props';
 import * as classes from './navbar.module.css';
@@ -11,14 +11,16 @@ function Navbar({ state }: MainProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [countInCart, setCountInCart] = useState<number>(0);
 
-  async function fetchCart() {
-    const fetchedCart: ICart = await getCart();
-    if (fetchedCart) {
-      setCountInCart(fetchedCart.lineItems.length);
+  useEffect(() => {
+    async function fetchCart() {
+      const fetchedCart: ICart = await getCart(false);
+      if (fetchedCart) {
+        setCountInCart(fetchedCart.lineItems.length);
+      }
     }
-  }
+    fetchCart();
+  }, [state.changesInCart]);
 
-  fetchCart();
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };

@@ -21,7 +21,7 @@ function App() {
   const [state, setState] = useState<AppState>({
     showMsg: true,
     userLoggedIn: false,
-    changesInCart: false
+    changesInCart: 0
     // here we can add new parameters
   });
 

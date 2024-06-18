@@ -8,11 +8,11 @@ import { AppState } from '../../../data/types/main-props';
 interface CardContainesProps {
   products: IProduct[];
   goToProduct: (id: string) => void;
-  // eslint-disable-next-line react/no-unused-prop-types
+  state: AppState;
   setState: React.Dispatch<React.SetStateAction<AppState>>;
 }
 
-function CardContaines({ products, goToProduct, setState }: CardContainesProps) {
+function CardContaines({ products, goToProduct, state, setState }: CardContainesProps) {
   return (
     <div className={classes.cardContainer}>
       {products.length > 0 ? (
@@ -22,6 +22,7 @@ function CardContaines({ products, goToProduct, setState }: CardContainesProps) 
               key={product.id}
               product={product}
               goToProduct={() => goToProduct(product.id)}
+              state={state}
               setState={setState}
             />
           );

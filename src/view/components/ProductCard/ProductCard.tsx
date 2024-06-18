@@ -11,13 +11,11 @@ import AddToCart from '../../../data/api/Cart/AddToCart';
 
 function ProductCard({ product, goToProduct, setState }: ProductCardProps) {
   const discountedPrice = product.masterVariant.prices[0].discounted?.value.centAmount;
-
   const [inCart, setInCart] = useState<boolean>(false);
 
   useEffect(() => {
     const isInCart = async () => {
       setInCart(await productInCart(product));
-      setState((prevState) => ({ ...prevState, changesInCart: !prevState.changesInCart }));
     };
 
     isInCart();
@@ -59,6 +57,7 @@ function ProductCard({ product, goToProduct, setState }: ProductCardProps) {
         onClick={(e) => {
           e.stopPropagation();
           AddToCart(product);
+          setState((prevState) => ({ ...prevState, changesInCart: prevState.changesInCart + 1 }));
           setInCart(true);
         }}
       />

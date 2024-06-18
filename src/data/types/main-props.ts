@@ -1,7 +1,7 @@
 export interface AppState {
   showMsg: boolean;
   userLoggedIn: boolean;
-  changesInCart: boolean;
+  changesInCart: number;
   // here we can add new parameters
 }
 

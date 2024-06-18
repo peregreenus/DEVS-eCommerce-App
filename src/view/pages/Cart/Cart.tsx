@@ -88,7 +88,7 @@ function Cart({ state, setState }: MainProps) {
       for (const item of lineItems) {
         try {
           await removeProduct(item);
-          setCart(await getCart(true));
+          // setCart(await getCart(false));
         } catch (error) {
           console.error('Error removing item from cart:', error);
           throw new Error('Failed to remove item from cart');
@@ -100,6 +100,8 @@ function Cart({ state, setState }: MainProps) {
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleClearCartClick = () => {
+    // eslint-disable-next-line no-console
+    console.log(222);
     setModalVisible(true);
   };
 
