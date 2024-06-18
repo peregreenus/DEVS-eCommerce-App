@@ -6,8 +6,7 @@ let cachedCart: ICart | null = null;
 
 async function getCart(force = false) {
   if (!cachedCart || force) {
-    const token = getLSToken();
-    const BEARER_TOKEN = token ? getLSToken() : getLSAnonToken();
+    const BEARER_TOKEN = getLSToken() || getLSAnonToken();
     const headers = {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${BEARER_TOKEN}`

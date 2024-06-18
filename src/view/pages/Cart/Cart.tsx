@@ -100,8 +100,6 @@ function Cart({ state, setState }: MainProps) {
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleClearCartClick = () => {
-    // eslint-disable-next-line no-console
-    console.log(222);
     setModalVisible(true);
   };
 
