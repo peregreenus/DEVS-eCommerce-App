@@ -4,8 +4,7 @@ import { getLSToken, getLSAnonToken } from '../utils/getLS';
 
 async function getProductsAll(): Promise<IProduct[] | null> {
   const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/product-projections/search`;
-  const token = getLSToken();
-  const BEARER_TOKEN = token || getLSAnonToken();
+  const BEARER_TOKEN = getLSToken() || getLSAnonToken();
 
   const headers = new Headers({
     Authorization: `Bearer ${BEARER_TOKEN}`
