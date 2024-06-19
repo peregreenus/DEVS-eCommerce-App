@@ -8,16 +8,30 @@ interface FetchProductsProps extends MainProps {
   sorting: string;
   price: AppFilter;
   categoryId: string;
+  limit: number;
+  offset: number;
 }
 
-function FetchProducts({ sorting, price, categoryId, state }: FetchProductsProps) {
+function FetchProducts({
+  sorting,
+  price,
+  categoryId,
+  limit,
+  offset,
+  setState
+}: FetchProductsProps) {
   const { setProducts } = useProductContext();
+
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const fetchedProducts = await getProducts(sorting, price, categoryId);
+        const fetchedProducts = await getProducts(sorting, price, categoryId, limit, offset);
         if (fetchedProducts) {
-          setProducts(fetchedProducts);
+          setProducts(fetchedProducts.results);
+          setState((prevState) => ({
+            ...prevState,
+            productsAmount: fetchedProducts.total
+          }));
         }
       } catch (error) {
         console.error('Failed to fetch products:', error);
@@ -26,7 +40,7 @@ function FetchProducts({ sorting, price, categoryId, state }: FetchProductsProps
 
     fetchProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sorting, categoryId, state, price, setProducts]);
+  }, [sorting, categoryId, price, offset, setProducts]);
 
   return null;
 }

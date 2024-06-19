@@ -3,11 +3,21 @@ import { AppFilter } from '../types/interfaces/SearchPriceFilter';
 import { IProduct } from '../types/interfaces/product';
 import { getLSToken, getLSAnonToken } from '../utils/getLS';
 
+interface ProductResponse {
+  count: number;
+  limit: number;
+  offset: number;
+  results: IProduct[];
+  total: number;
+}
+
 async function getProducts(
   sortingType: string,
   { min, max }: AppFilter,
-  categoryId: string
-): Promise<IProduct[] | null> {
+  categoryId: string,
+  limit: number,
+  offset: number
+): Promise<ProductResponse | null> {
   const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/product-projections/search`;
   const token = getLSToken();
   const BEARER_TOKEN = token || getLSAnonToken();
@@ -25,13 +35,14 @@ async function getProducts(
 
   const fullUrl =
     categoryId === ''
-      ? `${url}?limit=42&${params.toString()}`
-      : `${url}?limit=42&${paramsCat.toString()}&${params.toString()}`;
+      ? `${url}?limit=${limit}&offset=${offset}&${params.toString()}`
+      : `${url}?limit=${limit}&offset=${offset}&${paramsCat.toString()}&${params.toString()}`;
 
   try {
     const response = await fetch(fullUrl, { method: 'GET', headers });
     const productsData = await response.json();
-    return productsData.results;
+
+    return productsData;
   } catch (error) {
     console.error(error);
     return null;
