@@ -4,7 +4,6 @@ import { IProduct } from '../types/interfaces/product';
 import { getLSToken, getLSAnonToken } from '../utils/getLS';
 
 async function getProductsAll(): Promise<IProduct[] | null> {
-  // const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/product-projections?limit=42`;
   const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/product-projections/search`;
   const token = getLSToken();
   const BEARER_TOKEN = token || getLSAnonToken();

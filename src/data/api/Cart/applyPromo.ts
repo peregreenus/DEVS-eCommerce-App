@@ -2,8 +2,7 @@ import CTP from '../../types/ctp';
 import { getLSAnonToken, getLSToken } from '../../utils/getLS';
 
 async function applyPromo(cartId: string, cartVersion: number, promo: string) {
-  const token = getLSToken();
-  const BEARER_TOKEN = token ? getLSToken() : getLSAnonToken();
+  const BEARER_TOKEN = getLSToken() || getLSAnonToken();
   const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/me/carts/${cartId}`;
   const data = {
     version: cartVersion,
@@ -30,8 +29,7 @@ async function applyPromo(cartId: string, cartVersion: number, promo: string) {
     }
 
     const result = await response.json();
-    // eslint-disable-next-line no-console
-    console.log('Discount code updated successfully:', result);
+
     return result;
   } catch (error) {
     console.error('Failed to update discount code:', error);

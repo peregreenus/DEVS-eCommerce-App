@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import CTP from '../../types/ctp';
 import { LineItem } from '../../types/interfaces/ICart';
 import { IProduct } from '../../types/interfaces/product';
@@ -7,12 +6,10 @@ import getCart from './GetCart';
 
 async function RemoveFromCart(product: IProduct, quantity = 1) {
   const BEARER_TOKEN = getLSToken() || getLSAnonToken();
-  const cart = await getCart();
+  const cart = await getCart(true);
   const lineItem: LineItem | undefined = cart.lineItems.find(
     (item: LineItem) => item.productId === product.id
   );
-  console.log('LineItem');
-  console.log(lineItem);
 
   if (lineItem) {
     const lineItemId = lineItem.id;

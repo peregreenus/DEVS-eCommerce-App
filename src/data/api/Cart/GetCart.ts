@@ -1,54 +1,32 @@
-/* eslint-disable no-console */
 import CTP from '../../types/ctp';
-import { getLSAnonToken, getLSAnonymousId, getLSToken } from '../../utils/getLS';
+import { ICart } from '../../types/interfaces/ICart';
+import { getLSAnonToken, getLSToken } from '../../utils/getLS';
 
-// interface LastModifiedBy {
-//   clientId: string;
-//   isPlatformClient: boolean;
-//   anonymousId: string;
-// }
+let cachedCart: ICart | null = null;
 
-// interface CreatedBy {
-//   clientId: string;
-//   isPlatformClient: boolean;
-//   anonymousId: string;
-// }
+async function getCart(force = false) {
+  if (!cachedCart || force) {
+    const BEARER_TOKEN = getLSToken() || getLSAnonToken();
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${BEARER_TOKEN}`
+    };
 
-// interface CartProps {
-//   type: string;
-//   id: string;
-//   version: number;
-//   versionModifiedAt: string;
-//   lastMessageSequenceNumber: number;
-//   createdAt: string;
-//   lastModifiedAt: string;
-//   lastModifiedBy: LastModifiedBy;
-//   createdBy: CreatedBy;
-//   anonymousId: string;
-// }
-
-async function getCart() {
-  const anonymousId = getLSAnonymousId();
-  console.log('anonymousId');
-  console.log(anonymousId);
-  const token = getLSToken();
-  const BEARER_TOKEN = token ? getLSToken() : getLSAnonToken();
-  const headers = {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${BEARER_TOKEN}`
-  };
-
-  try {
-    const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/me/active-cart`;
-    const response = await fetch(url, { method: 'GET', headers });
-    const cartResponse = await response.json();
-    console.log('cartResponse');
-    console.log(cartResponse);
-
-    return cartResponse;
-  } catch (error) {
-    return null;
+    try {
+      const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/me/active-cart`;
+      const response = await fetch(url, { method: 'GET', headers });
+      const cartResponse = await response.json();
+      if (cartResponse.statusCode >= 400) {
+        // eslint-disable-next-line no-console
+        console.log('rrrrrrrrrrrrrrrrrrrr');
+      }
+      cachedCart = cartResponse;
+      return cartResponse;
+    } catch (error) {
+      return null;
+    }
   }
+  return cachedCart;
 }
 
 export default getCart;

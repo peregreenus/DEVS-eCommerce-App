@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { useEffect } from 'react';
 import getProducts from '../../../data/api/getProducts';
 import { AppFilter } from '../../../data/types/interfaces/SearchPriceFilter';
@@ -11,12 +10,12 @@ interface FetchProductsProps extends MainProps {
   categoryId: string;
 }
 
-function FetchProducts({ sorting, price, categoryId, state, setState }: FetchProductsProps) {
+function FetchProducts({ sorting, price, categoryId, state }: FetchProductsProps) {
   const { setProducts } = useProductContext();
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const fetchedProducts = await getProducts(sorting, price, categoryId, { state, setState });
+        const fetchedProducts = await getProducts(sorting, price, categoryId);
         if (fetchedProducts) {
           setProducts(fetchedProducts);
         }

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 import React, { ChangeEvent } from 'react';
 import * as styles from './signup-form.module.css';
