@@ -20,7 +20,8 @@ function App() {
 
   const [state, setState] = useState<AppState>({
     showMsg: true,
-    userLoggedIn: false
+    userLoggedIn: false,
+    productsAmount: 42
     // here we can add new parameters
   });
 
