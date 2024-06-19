@@ -5,7 +5,7 @@ export interface AppState {
   userLoggedIn: boolean;
   productsAmount: number;
   changesInCart: number;
-  history: Set<IProductInfo>;
+  history: IProductInfo[];
   // here we can add new parameters
 }
 

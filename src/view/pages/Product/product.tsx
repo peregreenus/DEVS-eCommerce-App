@@ -19,6 +19,7 @@ import AddToCart from '../../../data/api/Cart/AddToCart';
 import RemoveFromCart from '../../../data/api/Cart/RemoveFromCart';
 import RibbonImages from './ribbonImages';
 import productInCart from '../../../data/utils/productInCart';
+import HistoryComponent from '../../components/common/History/history';
 
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
@@ -50,22 +51,30 @@ function Product({ state, setState }: MainProps) {
   useEffect(() => {
     if (product) {
       setState((prevState) => {
-        const newHistory = new Set(prevState.history);
-        newHistory.add({
+        const newHistory = [...prevState.history];
+        const newEntry = {
           id: product.id,
           name: product.name.en,
           image: product.masterVariant.images[0].url,
           date: new Date()
-        });
+        };
+        // Check if the product already exists in the history
+        const existingIndex = newHistory.findIndex((entry) => entry.id === product.id);
+        if (existingIndex !== -1) {
+          // Update the existing entry's date
+          newHistory[existingIndex].date = new Date();
+        } else {
+          // Add the new entry to history
+          newHistory.push(newEntry);
+        }
+        // Sort history by date
+        newHistory.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
         return {
           ...prevState,
           history: newHistory
         };
       });
-      // eslint-disable-next-line no-console
-      console.log(state.history);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product, setState]);
 
   if (loading) {
@@ -197,6 +206,7 @@ function Product({ state, setState }: MainProps) {
           numImage={numImage}
         />
       ) : null}
+      <HistoryComponent history={state.history} />
     </div>
   );
 }

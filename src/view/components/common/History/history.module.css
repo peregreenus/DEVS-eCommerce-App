@@ -1,0 +1,15 @@
+.ribbon {
+  display: flex;
+  gap: 2rem;
+  height: 10rem;
+  .imgBlock {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .img {
+      height: 90%;
+      width: auto;
+      display: block;
+    }
+  }
+}
