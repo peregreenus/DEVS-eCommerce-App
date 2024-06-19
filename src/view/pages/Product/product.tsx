@@ -45,7 +45,28 @@ function Product({ state, setState }: MainProps) {
     }
 
     fetchProduct();
-  }, [id, state, setState]);
+  }, [id]);
+
+  useEffect(() => {
+    if (product) {
+      setState((prevState) => {
+        const newHistory = new Set(prevState.history);
+        newHistory.add({
+          id: product.id,
+          name: product.name.en,
+          image: product.masterVariant.images[0].url,
+          date: new Date()
+        });
+        return {
+          ...prevState,
+          history: newHistory
+        };
+      });
+      // eslint-disable-next-line no-console
+      console.log(state.history);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product, setState]);
 
   if (loading) {
     return <Loader />;
@@ -82,7 +103,6 @@ function Product({ state, setState }: MainProps) {
       setInCart(true);
     } else {
       await RemoveFromCart(product);
-
       setInCart(false);
     }
   };

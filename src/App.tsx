@@ -12,6 +12,7 @@ import Catalog from './view/pages/Catalog/Catalog';
 import About from './view/pages/About/about';
 import Product from './view/pages/Product/product';
 import Cart from './view/pages/Cart/Cart';
+import { IProductInfo } from './data/types/interfaces/product';
 
 function App() {
   if (!(localStorage.getItem('bearerAnonToken') || localStorage.getItem('bearerToken'))) {
@@ -22,7 +23,8 @@ function App() {
     showMsg: true,
     userLoggedIn: false,
     productsAmount: 42,
-    changesInCart: 0
+    changesInCart: 0,
+    history: new Set<IProductInfo>()
     // here we can add new parameters
   });
 
