@@ -3,8 +3,7 @@ import { getLSAnonToken, getLSToken } from '../utils/getLS';
 
 async function updateDiscount() {
   const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/discount-codes`;
-  const token = getLSToken();
-  const BEARER_TOKEN = token ? getLSToken() : getLSAnonToken();
+  const BEARER_TOKEN = getLSToken() || getLSAnonToken();
 
   const data = {
     version: 1,

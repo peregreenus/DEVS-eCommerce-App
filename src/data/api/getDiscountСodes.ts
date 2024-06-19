@@ -4,8 +4,7 @@ import { getLSAnonToken, getLSToken } from '../utils/getLS';
 
 async function getDiscountCodes() {
   const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/discount-codes`;
-  const token = getLSToken();
-  const BEARER_TOKEN = token ? getLSToken() : getLSAnonToken();
+  const BEARER_TOKEN = getLSToken() || getLSAnonToken();
 
   const headers = new Headers({
     Authorization: `Bearer ${BEARER_TOKEN}`
