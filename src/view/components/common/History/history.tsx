@@ -13,17 +13,19 @@ function sortHistoryByDate(history: IProductInfo[]): IProductInfo[] {
 }
 
 function HistoryComponent({ history }: HistoryComponentProps) {
-  const sortedHistory = sortHistoryByDate(history);
+  const sortedHistory = sortHistoryByDate(history).slice(0);
   // eslint-disable-next-line no-console
   console.log(sortedHistory);
   return (
-    <div className={classes.ribbon}>
-      {sortedHistory.map((item) => (
-        <Link to={`/catalog/product/${item.id}`} className={classes.imgBlock} key={item.id}>
-          <div className={classes.title}>{item.name}</div>
-          <img className={classes.img} src={item.image} alt={item.name} />
-        </Link>
-      ))}
+    <div className={classes.container}>
+      <div className={classes.ribbon}>
+        {sortedHistory.map((item) => (
+          <Link to={`/catalog/product/${item.id}`} className={classes.imgBlock} key={item.id}>
+            <div className={classes.title}>{item.name}</div>
+            <img className={classes.img} src={item.image} alt={item.name} />
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

@@ -1,15 +1,27 @@
-.ribbon {
+.container {
+  width: 70vw;
   display: flex;
-  gap: 2rem;
-  height: 10rem;
-  .imgBlock {
-    height: 100%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin: 0 auto;
+  .ribbon {
     display: flex;
-    flex-direction: column;
-    .img {
-      height: 90%;
-      width: auto;
-      display: block;
+    gap: 2rem;
+    height: 10rem;
+    .imgBlock {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      .title {
+        font-size: 1.5rem;
+        text-decoration: none;
+      }
+      .img {
+        height: 90%;
+        width: auto;
+        display: block;
+      }
     }
   }
 }
