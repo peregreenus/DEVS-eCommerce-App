@@ -31,9 +31,9 @@
     'preview' 7fr;
   gap: 2rem;
   padding: 1.5rem;
-  border: 1px solid var(--border-color);
+  /* border: 1px solid var(--border-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  border-radius: 1rem;
+  border-radius: 1rem; */
 }
 .priceContainer {
   width: 40%;
