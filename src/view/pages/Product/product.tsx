@@ -15,7 +15,6 @@ import Notfound from '../NotFound/not-found';
 import ProductModal from '../../components/ProductModal/ProductModal';
 import PriceContainer from '../../components/PriceContainer/PriceContainer';
 import * as classes from './product.module.css';
-import Description from '../../components/Description/Description';
 import AddToCart from '../../../data/api/Cart/AddToCart';
 import RemoveFromCart from '../../../data/api/Cart/RemoveFromCart';
 import RibbonImages from './ribbonImages';
@@ -150,6 +149,8 @@ function Product({ state, setState }: MainProps) {
           </div>
           <div className={classes.priceContainer}>
             <PriceContainer
+              product={product}
+              htmlContent={product.description.en}
               discounted={product.masterVariant.prices[0].discounted}
               value={product.masterVariant.prices[0].value}
               inCart={inCart}
@@ -158,7 +159,7 @@ function Product({ state, setState }: MainProps) {
           </div>
         </div>
         <div className={classes.wrapperDescription}>
-          <Description htmlContent={product.description.en} />
+          {/* <Description htmlContent={product.description.en} /> */}
         </div>
       </section>
       {isImage ? (

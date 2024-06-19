@@ -1,24 +1,24 @@
 .wrapperDescription {
   display: flex;
   flex-direction: column;
-  padding: 1.5rem;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  border-radius: 1rem;
+  max-height: 80%;
+  
+  overflow: auto;
+
 
   .description {
     width: 100%;
     font-size: 1.5rem;
-    overflow: hidden;
+    /* overflow: hidden; */
     text-overflow: ellipsis;
   }
 
-  .description.hide {
+  /* .description.hide {
     display: -webkit-box;
-    -webkit-line-clamp: 5;
+    -webkit-line-clamp: 25;
     -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
+    overflow: hidden; 
+  } */
 
   .description.show {
     display: block;
