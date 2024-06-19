@@ -95,4 +95,6 @@ export interface ICart {
   version: number;
   lineItems: LineItem[];
   totalPrice: TotalPrice;
+  totalLineItemQuantity: number;
+  statusCode?: number;
 }

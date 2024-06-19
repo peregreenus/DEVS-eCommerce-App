@@ -2,8 +2,7 @@ import CTP from '../../types/ctp';
 import { getLSAnonToken, getLSToken } from '../../utils/getLS';
 
 async function applyPromo(cartId: string, cartVersion: number, promo: string) {
-  const token = getLSToken();
-  const BEARER_TOKEN = token ? getLSToken() : getLSAnonToken();
+  const BEARER_TOKEN = getLSToken() || getLSAnonToken();
   const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/me/carts/${cartId}`;
   const data = {
     version: cartVersion,

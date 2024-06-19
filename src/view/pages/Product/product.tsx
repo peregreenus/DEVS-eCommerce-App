@@ -80,7 +80,10 @@ function Product({ state, setState }: MainProps) {
   const addToCart = async () => {
     if (!inCart) {
       await AddToCart(product);
-
+      setState((prevState) => ({
+        ...prevState,
+        changesInCart: prevState.changesInCart + 1
+      }));
       setInCart(true);
     } else {
       await RemoveFromCart(product);

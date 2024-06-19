@@ -9,9 +9,8 @@ import productInCart from '../../../data/utils/productInCart';
 import Button from '../common/Button/Button';
 import AddToCart from '../../../data/api/Cart/AddToCart';
 
-function ProductCard({ product, goToProduct }: ProductCardProps) {
+function ProductCard({ product, goToProduct, setState }: ProductCardProps) {
   const discountedPrice = product.masterVariant.prices[0].discounted?.value.centAmount;
-
   const [inCart, setInCart] = useState<boolean>(false);
 
   useEffect(() => {
@@ -58,6 +57,7 @@ function ProductCard({ product, goToProduct }: ProductCardProps) {
         onClick={(e) => {
           e.stopPropagation();
           AddToCart(product);
+          setState((prevState) => ({ ...prevState, changesInCart: prevState.changesInCart + 1 }));
           setInCart(true);
         }}
       />

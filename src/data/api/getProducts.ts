@@ -19,8 +19,7 @@ async function getProducts(
   offset: number
 ): Promise<ProductResponse | null> {
   const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/product-projections/search`;
-  const token = getLSToken();
-  const BEARER_TOKEN = token || getLSAnonToken();
+  const BEARER_TOKEN = getLSToken() || getLSAnonToken();
 
   const params = new URLSearchParams();
   params.append('filter', `variants.price.centAmount:range (${min} to ${max})`);

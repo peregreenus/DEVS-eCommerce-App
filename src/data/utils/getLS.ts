@@ -44,6 +44,14 @@ export function getLSAnonToken() {
   return localStorage.getItem('bearerAnonToken');
 }
 
+export function removeLSAnonToken() {
+  localStorage.removeItem('bearerAnonToken');
+}
+
+export function removeLSToken() {
+  localStorage.removeItem('bearerAnonToken');
+}
+
 export function getLSToken() {
   return localStorage.getItem('bearerToken');
 }
@@ -54,6 +62,10 @@ export function getLSCustomer() {
 
 export function getLSCart() {
   return localStorage.getItem('cart');
+}
+
+export function removeLSCart() {
+  localStorage.removItem('cart');
 }
 
 export function getLSAnonymousId(): string {

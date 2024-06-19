@@ -22,6 +22,7 @@ function App() {
     showMsg: true,
     userLoggedIn: false,
     productsAmount: 42
+    changesInCart: 0
     // here we can add new parameters
   });
 

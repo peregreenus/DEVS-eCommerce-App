@@ -2,8 +2,7 @@ import CTP from '../../types/ctp';
 import { getLSAnonToken, getLSToken } from '../../utils/getLS';
 
 async function getCartById(cartId: string) {
-  const token = getLSToken();
-  const BEARER_TOKEN = token ? getLSToken() : getLSAnonToken();
+  const BEARER_TOKEN = getLSToken() || getLSAnonToken();
   const headers = {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${BEARER_TOKEN}`

@@ -82,7 +82,12 @@ const CatalogContent: React.FC<MainProps> = ({ state, setState }) => {
               <SortBar value={sorting} onChange={(e) => setSorting(e.target.value)} />
               {products ? (
                 <>
-                  <CardContainer products={products} goToProduct={goToProduct} />
+                  <CardContainer
+                    state={state}
+                    setState={setState}
+                    products={products}
+                    goToProduct={goToProduct}
+                  />
                   <PaginationBlock
                     activeId={activePaginationBtn}
                     itemsPerPage={ITEMS_PER_PAGE}
