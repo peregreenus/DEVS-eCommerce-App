@@ -1,5 +1,5 @@
 /* eslint-disable react/function-component-definition */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/common/header/header';
 import Footer from '../../components/common/footer/footer';
@@ -15,8 +15,10 @@ import CardContainer from '../../components/CardContainer/CardContainer';
 import FetchCategories from './FetchCategories';
 import { ProductProvider, useProductContext } from './ProductContext';
 import FetchProducts from './FetchProducts';
+import PaginationBlock from '../../components/PaginationBlock/PaginationBlock';
 
 const MAXPRICE = 2000000000000;
+const ITEMS_PER_PAGE = 10;
 
 const CatalogContent: React.FC<MainProps> = ({ state, setState }) => {
   const { products } = useProductContext();
@@ -32,11 +34,17 @@ const CatalogContent: React.FC<MainProps> = ({ state, setState }) => {
   });
   const [categoryId, setCategoryId] = useState<string>('');
   const [categories, setCategories] = useState<ICategory[]>([]);
+  const [offset, setOffset] = useState<number>(0);
+  const [activePaginationBtn, setActivePaginationBtn] = useState<number>(0);
 
   const navigate = useNavigate();
   const goToProduct = (id: string) => {
     navigate(`product/${id}`);
   };
+
+  useEffect(() => {
+    setOffset(0);
+  }, [categoryId]);
 
   return (
     <>
@@ -55,6 +63,8 @@ const CatalogContent: React.FC<MainProps> = ({ state, setState }) => {
           sorting={sorting}
           price={price}
           categoryId={categoryId}
+          limit={ITEMS_PER_PAGE}
+          offset={offset}
         />
         {loading ? (
           <Loader />
@@ -71,12 +81,23 @@ const CatalogContent: React.FC<MainProps> = ({ state, setState }) => {
             <div className={classes.catalog}>
               <SortBar value={sorting} onChange={(e) => setSorting(e.target.value)} />
               {products ? (
-                <CardContainer
-                  state={state}
-                  setState={setState}
-                  products={products}
-                  goToProduct={goToProduct}
-                />
+                <>
+                  <CardContainer
+                    state={state}
+                    setState={setState}
+                    products={products}
+                    goToProduct={goToProduct}
+                  />
+                  <PaginationBlock
+                    activeId={activePaginationBtn}
+                    itemsPerPage={ITEMS_PER_PAGE}
+                    onClickHandler={(e) => {
+                      setOffset(+e.currentTarget.id * ITEMS_PER_PAGE);
+                      setActivePaginationBtn(+e.currentTarget.id);
+                    }}
+                    state={state}
+                  />
+                </>
               ) : null}
             </div>
           </div>

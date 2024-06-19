@@ -1,0 +1,35 @@
+.paginationWrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(30px, 1fr));
+  align-content: center;
+  gap: 0.5rem;
+  padding: 0 1rem;
+  width: 50%;
+}
+
+.paginationBtn {
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  transition: all ease 0.5s;
+}
+
+.paginationBtn:disabled {
+  cursor: default;
+  box-shadow: 0 0 10px inset rgba(0, 0, 0, 0.2);
+}
+
+@media (hover: hover) {
+  .paginationBtn:not(:disabled):hover {
+    background-color: #beb9b9;
+  }
+}
+
+@media (max-width: 670px) {
+  .paginationWrapper {
+    width: 90%;
+  }
+}
