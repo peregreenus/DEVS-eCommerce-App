@@ -16,6 +16,10 @@ async function getCart(force = false) {
       const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/me/active-cart`;
       const response = await fetch(url, { method: 'GET', headers });
       const cartResponse = await response.json();
+      if (cartResponse.statusCode >= 400) {
+        // eslint-disable-next-line no-console
+        console.log('rrrrrrrrrrrrrrrrrrrr');
+      }
       cachedCart = cartResponse;
       return cartResponse;
     } catch (error) {
