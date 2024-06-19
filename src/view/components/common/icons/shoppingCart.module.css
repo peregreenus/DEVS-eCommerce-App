@@ -1,0 +1,16 @@
+.wrapper {
+  position: relative;
+  .count {
+    position: absolute;
+    bottom: 0.5rem;
+    right: -1rem;
+    border-radius: 50%;
+    background-color: lightgreen;
+    min-width: 1.2rem;
+    min-height: 1.2rem;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

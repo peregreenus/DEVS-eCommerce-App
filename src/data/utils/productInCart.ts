@@ -11,7 +11,7 @@ async function productInCart(product: IProduct | null) {
   if (!product) return false;
   const cartId: string | null = getLSCart();
   if (cartId) {
-    const cart = await getCart();
+    const cart = await getCart(false);
     if (cart.lineItems.some((item: LineItemProp) => item.productId === product.id)) {
       return true;
     }
