@@ -8,8 +8,7 @@ let cachedCategories: ICategory[] | null = null;
 async function getCategories(force = false): Promise<ICategory[] | null> {
   if (!cachedCategories || force) {
     const url = `${CTP.API_URL}${CTP.PROJECT_KEY}/categories`;
-    const token = getLSToken();
-    const BEARER_TOKEN = token ? getLSToken() : getLSAnonToken();
+    const BEARER_TOKEN = getLSToken() || getLSAnonToken();
 
     if (!BEARER_TOKEN) {
       await getAnonToken();
