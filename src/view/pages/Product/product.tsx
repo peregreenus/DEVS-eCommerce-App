@@ -20,6 +20,7 @@ import RemoveFromCart from '../../../data/api/Cart/RemoveFromCart';
 import RibbonImages from './ribbonImages';
 import productInCart from '../../../data/utils/productInCart';
 import HistoryComponent from '../../components/common/History/history';
+import Footer from '../../components/common/footer/footer';
 
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
@@ -117,7 +118,7 @@ function Product({ state, setState }: MainProps) {
   };
 
   return (
-    <div>
+    <div className={classes.pageWrapper}>
       <Header state={state} setState={setState} />
       <section className={classes.product}>
         <h2>{product.name.en}</h2>
@@ -207,6 +208,7 @@ function Product({ state, setState }: MainProps) {
         />
       ) : null}
       <HistoryComponent history={state.history} />
+      <Footer />
     </div>
   );
 }

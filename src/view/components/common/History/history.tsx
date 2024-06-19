@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { IProductInfo } from '../../../../data/types/interfaces/product';
 import * as classes from './history.module.css';
 
@@ -18,10 +19,10 @@ function HistoryComponent({ history }: HistoryComponentProps) {
   return (
     <div className={classes.ribbon}>
       {sortedHistory.map((item) => (
-        <div className={classes.imgBlock} key={item.id}>
+        <Link to={`/catalog/product/${item.id}`} className={classes.imgBlock} key={item.id}>
           <div className={classes.title}>{item.name}</div>
           <img className={classes.img} src={item.image} alt={item.name} />
-        </div>
+        </Link>
       ))}
     </div>
   );

@@ -4,6 +4,7 @@
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
+  margin-top: 2rem;
 }
 .footerItem {
   display: flex;
