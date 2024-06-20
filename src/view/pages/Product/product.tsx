@@ -15,11 +15,12 @@ import Notfound from '../NotFound/not-found';
 import ProductModal from '../../components/ProductModal/ProductModal';
 import PriceContainer from '../../components/PriceContainer/PriceContainer';
 import * as classes from './product.module.css';
-import Description from '../../components/Description/Description';
 import AddToCart from '../../../data/api/Cart/AddToCart';
 import RemoveFromCart from '../../../data/api/Cart/RemoveFromCart';
 import RibbonImages from './ribbonImages';
 import productInCart from '../../../data/utils/productInCart';
+import HistoryComponent from '../../components/common/History/history';
+import Footer from '../../components/common/footer/footer';
 
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
@@ -46,7 +47,33 @@ function Product({ state, setState }: MainProps) {
     }
 
     fetchProduct();
-  }, [id, state, setState]);
+  }, [id]);
+
+  useEffect(() => {
+    if (product) {
+      setState((prevState) => {
+        const newHistory = [...prevState.history];
+        const newEntry = {
+          id: product.id,
+          name: product.name.en,
+          image: product.masterVariant.images[0].url,
+          date: new Date(),
+          productData: product
+        };
+        const existingIndex = newHistory.findIndex((entry) => entry.id === product.id);
+        if (existingIndex !== -1) {
+          newHistory[existingIndex].date = new Date();
+        } else {
+          newHistory.push(newEntry);
+        }
+        newHistory.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        return {
+          ...prevState,
+          history: newHistory
+        };
+      });
+    }
+  }, [product, setState]);
 
   if (loading) {
     return <Loader />;
@@ -83,7 +110,6 @@ function Product({ state, setState }: MainProps) {
       setInCart(true);
     } else {
       await RemoveFromCart(product);
-
       setInCart(false);
     }
   };
@@ -150,15 +176,14 @@ function Product({ state, setState }: MainProps) {
           </div>
           <div className={classes.priceContainer}>
             <PriceContainer
+              product={product}
+              htmlContent={product.description.en}
               discounted={product.masterVariant.prices[0].discounted}
               value={product.masterVariant.prices[0].value}
               inCart={inCart}
               onClick={() => addToCart()}
             />
           </div>
-        </div>
-        <div className={classes.wrapperDescription}>
-          <Description htmlContent={product.description.en} />
         </div>
       </section>
       {isImage ? (
@@ -176,6 +201,9 @@ function Product({ state, setState }: MainProps) {
           numImage={numImage}
         />
       ) : null}
+      <HistoryComponent history={state.history} />
+
+      <Footer />
     </div>
   );
 }

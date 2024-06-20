@@ -4,6 +4,7 @@
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
+  margin-top: 2rem;
 }
 .footerItem {
   display: flex;
@@ -50,4 +51,10 @@
 .item:hover {
   opacity: 1;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .minimal {
+    display: none;
+  }
 }
