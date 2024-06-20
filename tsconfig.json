@@ -22,6 +22,6 @@
     ],
     "types": ["jest", "@testing-library/jest-dom"]
   },
-  "include": ["**/*.ts", "**/*.tsx", "customTemplate.js"],
+  "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["./node_modules", "./dist", "webpack.config.ts"]
 }
