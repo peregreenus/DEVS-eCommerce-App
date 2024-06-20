@@ -1,15 +1,32 @@
 .container {
-  width: 70%;
+  width: 90vw;
   display: flex;
   align-items: center;
-  justify-content: start;
-  overflow: hidden;
+  justify-content: space-between;
   margin: 0 auto;
   gap: 1rem;
+  flex-wrap: nowrap;
+  .item:first-child,
+  .item:last-child {
+    flex: 0 0 5rem;
+  }
+  .window {
+    width: 90%;
+    display: flex;
+    height: 15rem;
+    position: relative;
+    top: 0;
+    overflow: hidden;
+  }
+
   .ribbon {
     display: flex;
     gap: 2rem;
     height: 15rem;
+    position: absolute;
+    left: 0;
+    transition: all 0.4s ease-in-out;
+
     .imgBlock {
       display: flex;
       flex-direction: column;
@@ -18,7 +35,7 @@
       align-items: center;
       padding: 0.5rem;
       width: 15rem;
-      overflow: hidden;
+
       .title {
         font-size: 1.5rem;
         text-decoration: none;
@@ -32,6 +49,21 @@
         background-repeat: no-repeat;
         background-position: center center;
       }
+    }
+  }
+}
+@media (max-width: 380px) {
+  .container {
+    flex-wrap: wrap;
+    .item:nth-child(2) {
+      order: -1;
+      flex: 0 0 100%;
+      min-width: calc(100% - 4rem);
+    }
+    .item:first-child,
+    .item:last-child {
+      flex: 1 1 48%; /* Перший і останній елементи займають по 48% ширини */
+      order: 1; /* Переміщує ці елементи після другого */
     }
   }
 }
