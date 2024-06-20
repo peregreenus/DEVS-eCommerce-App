@@ -115,7 +115,7 @@ function Product({ state, setState }: MainProps) {
   };
 
   return (
-    <div className={classes.pageWrapper}>
+    <div>
       <Header state={state} setState={setState} />
       <section className={classes.product}>
         <h2>{product.name.en}</h2>

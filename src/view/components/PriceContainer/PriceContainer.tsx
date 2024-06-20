@@ -10,6 +10,9 @@ function PriceContainer({ product, discounted, value, inCart, onClick }: PriceCo
     <>
       <Description htmlContent={product.description.en} />
       <div className={classes.price}>
+        <Button className={`${classes.buyButton}`} onClick={onClick}>
+          {!inCart ? <>Add to cart</> : <>Remove from cart</>}
+        </Button>
         {discounted ? (
           <>
             <div className={classes.priceOld}>{formatPrice(value.centAmount)}</div>
@@ -18,9 +21,6 @@ function PriceContainer({ product, discounted, value, inCart, onClick }: PriceCo
         ) : (
           <div className={classes.priceNew}>{formatPrice(value.centAmount)}</div>
         )}
-        <Button className={`${classes.buyButton}`} onClick={onClick}>
-          {!inCart ? <>Add to cart</> : <>Remove from cart</>}
-        </Button>
       </div>
     </>
   );

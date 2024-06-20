@@ -7,11 +7,6 @@ interface DescriptionProps {
 
 function Description({ htmlContent }: DescriptionProps) {
   const [showFullDescription] = useState(true);
-
-  // const toggleDescription = () => {
-  //   setShowFullDescription((prev) => !prev);
-  // };
-
   return (
     <div className={classes.wrapperDescription}>
       <div
@@ -19,12 +14,6 @@ function Description({ htmlContent }: DescriptionProps) {
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: htmlContent }}
       />
-      {/* <button
-        onClick={toggleDescription}
-        className={`${classes.readMoreBtn} ${htmlContent.length < 500 ? classes.btnHide : ''}`}
-        type="button">
-        {showFullDescription ? 'Read less...' : 'Read more...'}
-      </button> */}
     </div>
   );
 }
