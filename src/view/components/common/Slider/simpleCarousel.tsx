@@ -17,8 +17,8 @@ export default function SimpleCarousel({ history, settings }: SimpleCarouselProp
         <div className={classes.imgBlock} key={item.id}>
           <Link to={`/catalog/product/${item.id}`}>
             <div className={classes.img} style={{ backgroundImage: `url('${item.image}')` }} />
-            <div className={classes.title}>{item.name}</div>
           </Link>
+          <div className={classes.title}>{item.name}</div>
         </div>
       ))}
     </Slider>

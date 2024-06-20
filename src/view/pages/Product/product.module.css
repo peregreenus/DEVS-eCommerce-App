@@ -20,8 +20,6 @@
   justify-content: space-between;
   flex-wrap: nowrap;
   padding: 2rem;
-  /* height: 80%; */
-  min-height: 80vh;
 }
 .wrapperDescription {
   width: 95%;
@@ -37,19 +35,13 @@
     'preview' 7fr;
   gap: 2rem;
   padding: 1.5rem;
-  /* border: 1px solid var(--border-color);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  border-radius: 1rem; */
 }
+
 .priceContainer {
   width: 40%;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid var(--border-color);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  border-radius: 1rem;
-  padding: 1.5rem; */
   flex-direction: column;
 }
 
