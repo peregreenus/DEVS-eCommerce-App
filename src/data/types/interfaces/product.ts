@@ -60,6 +60,14 @@ interface ProductType {
   id: string;
 }
 
+export interface IProductInfo {
+  id: string;
+  name: string;
+  image: string;
+  date: Date;
+  productData: IProduct;
+}
+
 export interface IProduct {
   id: string;
   version: number;
