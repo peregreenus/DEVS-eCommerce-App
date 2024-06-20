@@ -6,7 +6,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../components/common/header/header';
 import { MainProps } from '../../../data/types/main-props';
 import * as classes from './cart.module.css';
@@ -141,13 +141,13 @@ function Cart({ state, setState }: MainProps) {
                   {cart.lineItems.map((item: LineItem) => (
                     <li key={item.id}>
                       <div className={`${classes.cell} ${classes.cell}`}>
-                        <a href={`/catalog/product/${item.productId}`}>
+                        <Link to={`/catalog/product/${item.productId}`}>
                           <img
                             className={classes.img}
                             src={item.variant.images[0].url}
                             alt={item.name.en}
                           />
-                        </a>
+                        </Link>
                       </div>
                       <div className={`${classes.cell}`}>{item.name.en}</div>
 

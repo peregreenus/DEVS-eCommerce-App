@@ -22,7 +22,8 @@ function App() {
     showMsg: true,
     userLoggedIn: false,
     productsAmount: 42,
-    changesInCart: 0
+    changesInCart: 0,
+    history: []
     // here we can add new parameters
   });
 
