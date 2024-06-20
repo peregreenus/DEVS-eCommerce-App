@@ -2,6 +2,7 @@
 import React from 'react';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
+// eslint-disable-next-line no-restricted-globals
 import { IProductInfo } from '../../../../data/types/interfaces/product';
 import SimpleCarousel from '../Slider/simpleCarousel';
 import * as classes from './history.module.css';
@@ -15,9 +16,11 @@ function sortHistoryByDate(array: IProductInfo[]): IProductInfo[] {
   });
 }
 
-function calcSlidesToShow(length: number) {
-  if (length < 7) {
-    return length;
+function calcSlidesToShow() {
+  // eslint-disable-next-line no-restricted-globals
+  if (history.length < 7) {
+    // eslint-disable-next-line no-restricted-globals
+    return history.length;
   }
   return 7;
 }
@@ -27,23 +30,13 @@ const settings = {
   dots: true,
   infinite: false,
   speed: 500,
-  // eslint-disable-next-line no-restricted-globals
-  slidesToShow: calcSlidesToShow(history.length),
+  slidesToShow: calcSlidesToShow(),
   slidesToScroll: 1,
   responsive: [
     {
-      breakpoint: 800,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 2,
-        infinite: true,
-        dots: true
-      }
-    },
-    {
       breakpoint: 600,
       settings: {
-        slidesToShow: 2,
+        slidesToShow: Math.min(2, calcSlidesToShow()),
         slidesToScroll: 2,
         initialSlide: 2
       }
@@ -51,7 +44,7 @@ const settings = {
     {
       breakpoint: 480,
       settings: {
-        slidesToShow: 1,
+        slidesToShow: Math.min(1, calcSlidesToShow()),
         slidesToScroll: 1
       }
     }
@@ -61,7 +54,7 @@ const settings = {
 function HistoryComponent({ history }: HistoryComponentProps) {
   const sortedHistory = sortHistoryByDate(history);
   return (
-    <div style={{ padding: '1rem', width: '100%', margin: '0 auto' }}>
+    <div style={{ padding: '1rem', width: '90%', margin: '0 auto' }}>
       <h2 className={classes.title}>You were watching</h2>
       <SimpleCarousel history={sortedHistory} settings={settings} />
     </div>

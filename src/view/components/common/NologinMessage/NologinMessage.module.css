@@ -16,7 +16,6 @@
     padding-left: 2rem;
     text-decoration: none;
     color: var(--primary-text-color);
-    transition: 0.4s all ease-in;
   }
 
   a:hover {
@@ -32,7 +31,6 @@
   border: none;
   right: 1rem;
   z-index: 700;
-  transition: 0.4s all ease-in;
 }
 
 .button:hover {
