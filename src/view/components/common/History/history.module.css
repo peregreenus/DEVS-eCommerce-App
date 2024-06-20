@@ -1,27 +1,38 @@
 .container {
-  width: 70vw;
+  width: 70%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   overflow: hidden;
   margin: 0 auto;
+  gap: 1rem;
   .ribbon {
     display: flex;
     gap: 2rem;
-    height: 10rem;
+    height: 15rem;
     .imgBlock {
-      height: 100%;
       display: flex;
       flex-direction: column;
+      background: var(--gray-bg-color);
+      border-radius: 0.5rem;
+      align-items: center;
+      padding: 0.5rem;
+      width: 15rem;
+      overflow: hidden;
       .title {
         font-size: 1.5rem;
         text-decoration: none;
+        color: inherit;
       }
-      .img {
-        height: 90%;
-        width: auto;
-        display: block;
-      }
+        .img {
+          height: 10rem;
+          width: 10rem;
+          display: block;
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center center;
+        }
+      
     }
   }
 }

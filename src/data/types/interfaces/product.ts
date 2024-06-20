@@ -65,6 +65,7 @@ export interface IProductInfo {
   name: string;
   image: string;
   date: Date;
+  productData: IProduct;
 }
 
 export interface IProduct {

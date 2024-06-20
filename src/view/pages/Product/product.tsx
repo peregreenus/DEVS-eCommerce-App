@@ -57,7 +57,8 @@ function Product({ state, setState }: MainProps) {
           id: product.id,
           name: product.name.en,
           image: product.masterVariant.images[0].url,
-          date: new Date()
+          date: new Date(),
+          productData: product
         };
         // Check if the product already exists in the history
         const existingIndex = newHistory.findIndex((entry) => entry.id === product.id);
