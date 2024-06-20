@@ -17,8 +17,6 @@ function sortHistoryByDate(history: IProductInfo[]): IProductInfo[] {
 
 function HistoryComponent({ history }: HistoryComponentProps) {
   const sortedHistory = sortHistoryByDate(history).slice(0);
-  // eslint-disable-next-line no-console
-  console.log(sortedHistory);
   function slideLeft(): void {
     throw new Error('Function not implemented.');
   }

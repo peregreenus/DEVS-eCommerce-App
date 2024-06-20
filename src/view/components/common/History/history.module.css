@@ -24,15 +24,14 @@
         text-decoration: none;
         color: inherit;
       }
-        .img {
-          height: 10rem;
-          width: 10rem;
-          display: block;
-          background-size: contain;
-          background-repeat: no-repeat;
-          background-position: center center;
-        }
-      
+      .img {
+        height: 10rem;
+        width: 10rem;
+        display: block;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
     }
   }
 }
