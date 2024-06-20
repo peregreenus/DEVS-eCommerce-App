@@ -1,76 +1,50 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { IProductInfo } from '../../../../data/types/interfaces/product';
-import * as classes from './history.module.css';
-import Button from '../Button/Button';
-import ArrowLeftIcon from '../icons/ArrowLeftIcon';
-import ArrowRightIcon from '../icons/ArrowRightIcon';
+import SimpleCarousel from '../Slider/simpleCarousel';
 
 interface HistoryComponentProps {
   history: IProductInfo[];
 }
-function sortHistoryByDate(history: IProductInfo[]): IProductInfo[] {
-  return history.slice().sort((a, b) => {
+function sortHistoryByDate(array: IProductInfo[]): IProductInfo[] {
+  return array.slice().sort((a, b) => {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
 }
+function duplicateSingleElement(array: IProductInfo[]): IProductInfo[] {
+  if (array.length === 1) {
+    array.push(array[0], array[0]);
+  }
+  return array;
+}
+
+function removeDuplicatesIfMoreThanThree(array: IProductInfo[]): IProductInfo[] {
+  if (array.length > 3) {
+    return [...new Set(array)];
+  }
+  return array;
+}
+
+const settings = {
+  swipe: true,
+  arrows: true,
+  dots: true,
+  infinite: false,
+  speed: 500,
+  slidesToShow: 3,
+  slidesToScroll: 1
+};
 
 function HistoryComponent({ history }: HistoryComponentProps) {
-  const sortedHistory = sortHistoryByDate(history).slice(0);
-  const [leftRibbon, setLeftRibbon] = useState<number>(0);
-  function setPositionRibbon(value: number): void {
-    if (history.length === 1) {
-      setLeftRibbon(-500);
-    } else {
-      setLeftRibbon(value);
-    }
-  }
-
-  function slideLeft(): void {
-    if (leftRibbon > -history.length * (15 + 2)) {
-      setPositionRibbon(leftRibbon - 15);
-    }
-  }
-
-  function slideRight(): void {
-    if (leftRibbon < 15) {
-      setPositionRibbon(leftRibbon + 15);
-    }
-  }
+  const sortedHistory = sortHistoryByDate(history);
+  const duplicateHistory = duplicateSingleElement(sortedHistory);
+  const historyArr = removeDuplicatesIfMoreThanThree(duplicateHistory);
 
   return (
-    <div className={classes.container}>
-      <Button
-        type="button"
-        className={`${classes.sliderBtn} ${classes.item}`}
-        onClick={() => slideLeft()}>
-        <ArrowLeftIcon width="6rem" height="6rem" />
-      </Button>
-      <div className={`${classes.window} ${classes.item}`}>
-        <div
-          className={`${classes.ribbon}`}
-          style={
-            history.length < 3 || leftRibbon === 0
-              ? { left: '50%', transform: 'translateX(-50%)' }
-              : { left: `${leftRibbon}rem` }
-          }>
-          {sortedHistory.map((item) => (
-            <div className={classes.imgBlock} key={item.id}>
-              <Link to={`/catalog/product/${item.id}`}>
-                <div className={classes.img} style={{ backgroundImage: `url('${item.image}')` }} />
-              </Link>
-              <div className={classes.title}>{item.name}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <Button
-        type="button"
-        className={`${classes.sliderBtn} ${classes.item}`}
-        onClick={() => slideRight()}>
-        <ArrowRightIcon width="6rem" height="6rem" />
-      </Button>
+    <div style={{ padding: '1rem', width: '90%', margin: '0 auto' }}>
+      <SimpleCarousel history={historyArr} settings={settings} />
     </div>
   );
 }

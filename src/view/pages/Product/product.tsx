@@ -60,16 +60,12 @@ function Product({ state, setState }: MainProps) {
           date: new Date(),
           productData: product
         };
-        // Check if the product already exists in the history
         const existingIndex = newHistory.findIndex((entry) => entry.id === product.id);
         if (existingIndex !== -1) {
-          // Update the existing entry's date
           newHistory[existingIndex].date = new Date();
         } else {
-          // Add the new entry to history
           newHistory.push(newEntry);
         }
-        // Sort history by date
         newHistory.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
         return {
           ...prevState,
@@ -209,6 +205,7 @@ function Product({ state, setState }: MainProps) {
         />
       ) : null}
       <HistoryComponent history={state.history} />
+
       <Footer />
     </div>
   );
