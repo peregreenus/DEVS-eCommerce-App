@@ -34,6 +34,14 @@ const settings = {
   slidesToScroll: 1,
   responsive: [
     {
+      breakpoint: 900,
+      settings: {
+        slidesToShow: Math.min(4, calcSlidesToShow()),
+        slidesToScroll: 4,
+        initialSlide: 2
+      }
+    },
+    {
       breakpoint: 600,
       settings: {
         slidesToShow: Math.min(2, calcSlidesToShow()),
