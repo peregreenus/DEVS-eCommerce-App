@@ -12,7 +12,6 @@
     "lint": "eslint . --ext .tsx --fix",
     "prepare": "husky"
   },
-  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
