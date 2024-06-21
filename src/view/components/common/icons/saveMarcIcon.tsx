@@ -15,6 +15,7 @@ export default function SaveMarkIcon({ width, height, fill = 'green' }: IconProp
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
+        data-testid="save-mark-icon"
       />
     </svg>
   );
