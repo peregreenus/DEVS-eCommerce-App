@@ -141,7 +141,7 @@ function Cart({ state, setState }: MainProps) {
                 <ul>
                   {cart.lineItems.map((item: LineItem) => (
                     <li key={item.id}>
-                      <div className={`${classes.cell} ${classes.cell}`}>
+                      <div className={`${classes.imgBlock} ${classes.cell} ${classes.cell}`}>
                         <Link to={`/catalog/product/${item.productId}`}>
                           <img
                             className={classes.img}
@@ -158,7 +158,7 @@ function Cart({ state, setState }: MainProps) {
                           : formatPrice(item.variant.prices[0].value.centAmount)}
                       </div>
                       <div
-                        className={`${classes.priceWrapper} ${classes.cell} ${classes.priceWrapperTotal}`}>
+                        className={`${classes.priceTotalWrapper} ${classes.priceWrapper} ${classes.cell}`}>
                         Total:&#32;
                         {formatPrice(item.totalPrice.centAmount)}
                       </div>

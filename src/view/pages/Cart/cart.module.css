@@ -230,15 +230,17 @@
     margin: 0 1rem;
     align-items: center;
     border: none;
-
   }
 
-  .img, .btnQuantity, .priceWrapperTotal {
+  .imgBlock {
     display: none;
   }
   
-  [class*='footer'] {
+  .priceTotalWrapper {
     display: none;
   }
 
+  [class*='footer'] {
+    display: none;
+  }
 }
