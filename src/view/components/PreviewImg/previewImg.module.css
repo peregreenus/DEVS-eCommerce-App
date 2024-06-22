@@ -1,0 +1,6 @@
+.preview {
+  grid-area: preview;
+  width: 100%;
+  overflow: hidden;
+}
+

@@ -17,7 +17,7 @@ import PriceContainer from '../../components/PriceContainer/PriceContainer';
 import * as classes from './product.module.css';
 import AddToCart from '../../../data/api/Cart/AddToCart';
 import RemoveFromCart from '../../../data/api/Cart/RemoveFromCart';
-import RibbonImages from './ribbonImages';
+import RibbonImages from '../../components/RibbonImages/ribbonImages';
 import productInCart from '../../../data/utils/productInCart';
 import HistoryComponent from '../../components/common/History/history';
 import Footer from '../../components/common/footer/footer';
