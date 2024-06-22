@@ -1,7 +1,7 @@
 import path from 'path';
 import { Configuration } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import EslingPlugin from 'eslint-webpack-plugin';
+import EslintPlugin from 'eslint-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import FaviconsWebpackPlugin from 'favicons-webpack-plugin';
 import 'webpack-dev-server';
@@ -29,14 +29,13 @@ const config: Configuration = {
               },
               importLoaders: 1
             }
-          },
-          'sass-loader'
+          }
         ]
       },
       {
         test: /\.(sc|sa|c)ss$/i,
         exclude: /\.module\.(sc|sa|c)ss$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -75,7 +74,7 @@ const config: Configuration = {
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css'
     }),
-    new EslingPlugin({ extensions: ['ts', '.tsx'] }),
+    new EslintPlugin({ extensions: ['ts', '.tsx'] }),
     new FaviconsWebpackPlugin('./src/assets/img/logo_.ico')
   ]
 };
