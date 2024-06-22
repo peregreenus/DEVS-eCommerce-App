@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "jest/globals": true
   },
   "extends": [
     "plugin:react/recommended",
@@ -28,7 +29,7 @@
     }
   },
   "ignorePatterns": ["webpack.config.ts"],
-  "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
+  "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier", "jest"],
   "rules": {
     "@typescript-eslint/no-shadow": "error",
     "@typescript-eslint/no-explicit-any": "error",
