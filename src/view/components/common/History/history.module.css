@@ -3,6 +3,6 @@
   margin-bottom: 2rem;
 }
 
-.slide [class*="slick-list"] {
+.slide [class*='slick-list'] {
   justify-content: space-between;
 }

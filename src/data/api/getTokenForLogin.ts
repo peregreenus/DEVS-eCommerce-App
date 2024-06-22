@@ -54,8 +54,6 @@ async function getTokenForLogin(
     setState((prevState) => ({ ...prevState, userLoggedIn: true, showMsg: false }));
 
     if (anonCart && anonCart.lineItems.length > 0) {
-      // eslint-disable-next-line no-console
-      console.log('anonCart', anonCart);
       mergeAnonCartsToUser(anonCart);
     }
     setState((prevState) => ({ ...prevState, changesInCart: prevState.changesInCart + 1 }));
