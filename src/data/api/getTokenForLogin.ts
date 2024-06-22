@@ -1,13 +1,19 @@
 import CTP from '../types/ctp';
 import { ErrorProps } from '../types/errorProps';
+import { ICart } from '../types/interfaces/ICart';
 import { MainProps } from '../types/main-props';
+import getCart from './Cart/GetCart';
 import createCart from './Cart/createCart';
+import mergeAnonCartsToUser from './Cart/mergeAnonCartsToUser';
 
 async function getTokenForLogin(
   email: FormDataEntryValue,
   password: FormDataEntryValue,
-  { setState }: MainProps
+  { state, setState }: MainProps
 ): Promise<ErrorProps | string> {
+  // get anonCart
+  const anonCart: ICart | null = !state.userLoggedIn ? await getCart() : null;
+
   const url = `${CTP.AUTH_URL}oauth/${CTP.PROJECT_KEY}/customers/token`;
   const data = new URLSearchParams();
 
@@ -46,6 +52,11 @@ async function getTokenForLogin(
     }
 
     setState((prevState) => ({ ...prevState, userLoggedIn: true, showMsg: false }));
+
+    if (anonCart && anonCart.lineItems.length > 0) {
+      mergeAnonCartsToUser(anonCart);
+    }
+    setState((prevState) => ({ ...prevState, changesInCart: prevState.changesInCart + 1 }));
 
     return bearerToken;
   } catch (err) {

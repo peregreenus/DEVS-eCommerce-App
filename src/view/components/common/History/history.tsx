@@ -32,6 +32,7 @@ const settings = {
   speed: 500,
   slidesToShow: calcSlidesToShow(),
   slidesToScroll: 1,
+  className: `${classes.slide}`,
   responsive: [
     {
       breakpoint: 900,
