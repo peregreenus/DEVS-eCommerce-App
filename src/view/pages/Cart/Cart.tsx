@@ -157,7 +157,8 @@ function Cart({ state, setState }: MainProps) {
                           ? formatPrice(item.variant.prices[0].discounted.value.centAmount)
                           : formatPrice(item.variant.prices[0].value.centAmount)}
                       </div>
-                      <div className={`${classes.priceWrapper} ${classes.cell}`}>
+                      <div
+                        className={`${classes.priceWrapper} ${classes.cell} ${classes.priceWrapperTotal}`}>
                         Total:&#32;
                         {formatPrice(item.totalPrice.centAmount)}
                       </div>

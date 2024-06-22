@@ -214,3 +214,31 @@
     }
   }
 }
+
+.buttonWrapper {
+  flex-wrap: wrap;
+}
+
+@media (max-width: 500px) {
+  .cart {
+    position: relative;
+    top: unset;
+    left: unset;
+    transform: unset;
+    display: flex;
+    flex-direction: column;
+    margin: 0 1rem;
+    align-items: center;
+    border: none;
+
+  }
+
+  .img, .btnQuantity, .priceWrapperTotal {
+    display: none;
+  }
+  
+  [class*='footer'] {
+    display: none;
+  }
+
+}
