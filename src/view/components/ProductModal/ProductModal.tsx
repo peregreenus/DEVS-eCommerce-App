@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useState } from 'react';
 import Button from '../common/Button/Button';
 import Modal from '../common/modal/modal';
@@ -30,7 +29,6 @@ function ProductModal(param: ProductModalParam) {
 
   const onTouchMove = (e: React.TouchEvent) => {
     setTouchEndX(e.targetTouches[0].clientX);
-    console.log('ggggggggggg');
   };
 
   const onTouchEnd = () => {
