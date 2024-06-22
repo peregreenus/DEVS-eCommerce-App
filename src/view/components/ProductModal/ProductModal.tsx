@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable no-console */
+import React, { useState } from 'react';
 import Button from '../common/Button/Button';
 import Modal from '../common/modal/modal';
 import ArrowLeftIcon from '../common/icons/ArrowLeftIcon';
@@ -20,10 +21,35 @@ function ProductModal(param: ProductModalParam) {
     slideRight,
     modalShow
   } = param;
+  const [touchStartX, setTouchStartX] = useState<number>(0);
+  const [touchEndX, setTouchEndX] = useState<number>(0);
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEndX(e.targetTouches[0].clientX);
+    console.log('ggggggggggg');
+  };
+
+  const onTouchEnd = () => {
+    if (touchStartX - touchEndX > 50) {
+      slideRight();
+    }
+
+    if (touchEndX - touchStartX > 50) {
+      slideLeft();
+    }
+  };
   return (
     <Modal visible={modal} setVisible={setModal}>
       {isImage ? (
-        <div className={classes.modalWrapper}>
+        <div
+          className={classes.modalWrapper}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}>
           {leftVisible ? (
             <Button
               type="button"
