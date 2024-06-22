@@ -63,6 +63,12 @@ function ProductModal(param: ProductModalParam) {
             alt="product"
             product={product}
           />
+          <button
+            className={classes.btnClose}
+            type="button"
+            onClick={() => setModal(false)}
+            aria-label="Close modal"
+          />
           {rightVisible ? (
             <Button
               type="button"
