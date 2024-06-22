@@ -15,6 +15,7 @@ export default function CloseXIcon({ width, height, fill = 'red' }: IconProps) {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
+        data-testid="close-icon"
       />
     </svg>
   );
