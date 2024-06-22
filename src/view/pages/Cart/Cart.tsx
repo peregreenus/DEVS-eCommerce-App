@@ -25,6 +25,7 @@ import Button from '../../components/common/Button/Button';
 import InputLabelButton from '../../components/common/input/input';
 import applyPromo from '../../../data/api/Cart/applyPromo';
 import Loader from '../../components/Loader/Loader';
+import Footer from '../../components/common/footer/footer';
 
 function Cart({ state, setState }: MainProps) {
   const [cart, setCart] = useState<ICart | null>(null);
@@ -243,6 +244,9 @@ function Cart({ state, setState }: MainProps) {
           </div>
         </section>
       )}
+      <div style={{ position: 'absolute', bottom: '0', width: '100%' }}>
+        <Footer />
+      </div>
     </>
   );
 }
