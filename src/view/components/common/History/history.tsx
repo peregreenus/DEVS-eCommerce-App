@@ -35,10 +35,26 @@ const settings = {
   className: `${classes.slide}`,
   responsive: [
     {
+      breakpoint: 1100,
+      settings: {
+        slidesToShow: Math.min(6, calcSlidesToShow()),
+        slidesToScroll: 2,
+        initialSlide: 2
+      }
+    },
+    {
+      breakpoint: 1000,
+      settings: {
+        slidesToShow: Math.min(5, calcSlidesToShow()),
+        slidesToScroll: 2,
+        initialSlide: 2
+      }
+    },
+    {
       breakpoint: 900,
       settings: {
         slidesToShow: Math.min(4, calcSlidesToShow()),
-        slidesToScroll: 4,
+        slidesToScroll: 2,
         initialSlide: 2
       }
     },

@@ -3,6 +3,7 @@
   margin-bottom: 2rem;
 }
 
-.slide [class*='slick-list'] {
-  justify-content: space-between;
+.slide [class*='slick-track'] {
+  justify-content: center;
+  gap: 5rem;
 }
