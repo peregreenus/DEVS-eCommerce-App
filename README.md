@@ -22,11 +22,12 @@ This project is built with:
 - **TypeScript**: A strongly typed superset of JavaScript that adds static types.
 - **Webpack**: A static module bundler for modern JavaScript applications.
 - **HTML**: The standard markup language for documents designed to be displayed in a web browser.
-- **SCSS**: A preprocessor scripting language that is interpreted or compiled into Cascading Style Sheets (CSS).
+- **CSS**: Cascading Style Sheets is a style sheet language used for describing the look and formatting of a document written in HTML or XML.
 - **ESLint**: A tool for identifying and reporting on patterns found in ECMAScript/JavaScript code.
 - **Prettier**: An opinionated code formatter that enforces a consistent style by parsing your code and re-printing it.
 - **Husky**: A tool that makes Git hooks easy, used for enforcing checks before code is committed.
 - **Jest**: A delightful JavaScript Testing Framework with a focus on simplicity.
+- **@testing-library/react**: A very light-weight solution for testing React components.
 
 ## Instructions
 
@@ -78,5 +79,9 @@ Runs **Prettier** to enforce a consistent style by parsing your code and re-prin
 #### `npm run prepare`
 
 Runs **Husky** to set up Git hooks and enforce checks before code is committed.
+
+#### `npm run coverage`
+
+Generate a code coverage report for your JavaScript code.
 
 _Remember to replace `npm` with `yarn` if you are using Yarn as your package manager._
