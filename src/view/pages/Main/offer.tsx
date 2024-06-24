@@ -25,8 +25,8 @@ function Offer() {
           selection of premium islands and immerse yourself in luxury and privacy.
         </p>
         <p className={classes.subtitle}>
-          <span>Corporation:</span> Change the world by purchasing a corporation. You can destroy it
-          or take over the world with it.
+          <span>Corporations:</span> Change the world by purchasing a corporation. You can destroy
+          it or take over the world with it.
         </p>
         <p className={classes.subtitle}>
           <span>Mass-Media:</span> Influence people’s minds through your own media. Money will flow

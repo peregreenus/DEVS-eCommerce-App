@@ -35,7 +35,10 @@ function Greeting() {
   return (
     <section className={classes.greeting}>
       <div className={classes.textContent}>
-        <h1>Welcome to &quot;Galactic Exclusive&quot;</h1>
+        <h1>
+          Welcome to <br />
+          &quot;Galactic Exclusive&quot;
+        </h1>
         <p className={classes.subtitle}>
           Your ultimate destination for premium stuff! We offer the most exclusive properties in the
           galaxy for the most discerning clients. From luxurious islands to corporations and
