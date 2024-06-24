@@ -66,6 +66,9 @@
   width: 100%;
   justify-content: space-between;
 }
+.oneAddress {
+  justify-content: flex-end;
+}
 .addressRadio {
   display: flex;
   gap: 0.2rem;
