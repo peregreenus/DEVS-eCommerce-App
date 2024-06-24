@@ -12,9 +12,14 @@
   border: 1px solid var(--border-color);
   border-radius: 1rem;
   padding: 1rem 2rem;
-  background-color: var(--gray-bg-color);
+  /* background-color: var(--gray-bg-color); */
   position: relative;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+  box-shadow:
+    -7px -7px 20px 0px var(--light-shadow),
+    -4px -4px 5px 0px var(--light-shadow),
+    7px 7px 20px 0px var(--dark-shadow),
+    4px 4px 5px 0px #aa9f90;
 }
 .headerBlock {
   position: absolute;
@@ -49,14 +54,20 @@
   }
 }
 .input {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   padding: 0.5rem 1.6rem;
   height: 3.5rem;
   border-radius: 1rem;
-  background-color: var(--default-bg-color);
+  /* background-color: var(--default-bg-color);
   color: var(--primary-text-color);
-  border-color: var(--border-color);
+  border-color: var(--border-color); */
   cursor: text;
+  border: 0;
+  background-color: transparent;
+  box-shadow:
+    inset 6px 6px 6px var(--dark-shadow),
+    inset -6px -6px 6px var(--light-shadow);
+  outline: transparent;
 }
 
 .error {
@@ -72,22 +83,37 @@
 
 .button {
   align-self: center;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   margin-top: 1rem;
   padding: 1rem 4rem;
   width: 20rem;
   height: 4rem;
   border-radius: 1rem;
-  background-color: var(--primary-text-color);
-  color: var(--light-text-color);
-  border-color: var(--border-color);
+  /* background-color: var(--primary-text-color); */
+  color: var(--body-text-color);
+  /* border-color: var(--border-color); */
   cursor: pointer;
   align-self: center;
+  box-shadow:
+    -7px -7px 20px 0px var(--light-shadow),
+    -4px -4px 5px 0px var(--light-shadow),
+    7px 7px 20px 0px var(--dark-shadow),
+    4px 4px 5px 0px #aa9f90;
+  outline: 0;
+  border-color: transparent;
+  background-color: var(--primary-text-color);
 }
 .button:disabled {
   cursor: not-allowed;
-  background-color: var(--gray-bg-color);
-  color: rgba(220, 220, 220, 0.433);
+  /* background-color: var(--gray-bg-color);
+  color: rgba(220, 220, 220, 0.433); */
+  box-shadow:
+    4px 4px 6px 0 var(--light-shadow),
+    -4px -4px 6px 0 var(--dark-shadow),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+    inset 4px 4px 6px 0 var(--dark-shadow);
+  outline: transparent;
+  border: 0;
 }
 
 .addressForm {
@@ -111,8 +137,8 @@
     font-size: 1.6rem;
   }
   input[type='checkbox'] {
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
     border-color: var(--border-color);
     border-radius: 2rem;
     accent-color: var(--accent-color);
@@ -148,10 +174,10 @@
     p {
       font-size: 1.3rem;
     }
-    input[type='checkbox'] {
+    /* input[type='checkbox'] {
       width: 3rem;
       height: 3rem;
-    }
+    } */
   }
 }
 
