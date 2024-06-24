@@ -75,7 +75,7 @@ const config: Configuration = {
       filename: '[name].[contenthash].css'
     }),
     new EslintPlugin({ extensions: ['ts', '.tsx'] }),
-    new FaviconsWebpackPlugin('./src/assets/img/logo_.ico')
+    new FaviconsWebpackPlugin('./src/assets/img/favicon.ico')
   ]
 };
 
