@@ -12,6 +12,8 @@
   align-items: center;
   user-select: none;
   gap: 1rem;
+  color: var(--primary-text-color);
+  padding-top: 3rem;
 }
 .wrapper {
   display: flex;
@@ -60,7 +62,7 @@
 
 .sliderBtn:hover {
   cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.8);
+  /* background-color: rgba(255, 255, 255, 0.8); */
 }
 
 .sliderBtnDisabled:hover {
