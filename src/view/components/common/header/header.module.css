@@ -5,10 +5,32 @@
   display: flex;
   justify-content: space-between;
   font-size: 1.6rem;
+  z-index: 2000;
+  a {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: var(--primary-text-color);
+    font-weight: bold;
+  }
   .logo {
-    width: 15rem;
+    width: 5rem;
     object-fit: cover;
-    z-index: 2000;
+    position: relative;
+    /* z-index: 2000; */
     transition: 0.4s all ease-in;
+  }
+  p {
+    font-size: 1rem;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+  }
+}
+
+@media (max-width: 500px) {
+  .header {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
