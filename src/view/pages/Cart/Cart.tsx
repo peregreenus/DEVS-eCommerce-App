@@ -223,12 +223,14 @@ function Cart({ state, setState }: MainProps) {
                 <Modal visible={modalVisible} setVisible={setModalVisible}>
                   <div className={classes.confirm}>
                     <p style={{ margin: '2rem 0' }}>Are you sure you want to clear the cart?</p>
-                    <Button className="btn btnYes" onClick={handleConfirmClearCart}>
-                      Yes
-                    </Button>
-                    <Button className="btn btnNo" onClick={() => setModalVisible(false)}>
-                      No
-                    </Button>
+                    <p>
+                      <Button className="btn btnYes" onClick={handleConfirmClearCart}>
+                        Yes
+                      </Button>
+                      <Button className="btn btnNo" onClick={() => setModalVisible(false)}>
+                        No
+                      </Button>
+                    </p>
                   </div>
                 </Modal>
               </>
@@ -245,9 +247,7 @@ function Cart({ state, setState }: MainProps) {
           </div>
         </section>
       )}
-      <div style={{ position: 'absolute', bottom: '0', width: '100%' }}>
-        <Footer />
-      </div>
+      <Footer />
     </>
   );
 }
