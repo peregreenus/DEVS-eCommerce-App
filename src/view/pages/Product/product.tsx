@@ -135,7 +135,7 @@ function Product({ state, setState }: MainProps) {
   };
 
   return (
-    <div>
+    <>
       <Header state={state} setState={setState} />
       <section className={classes.product}>
         <h2>{product.name.en}</h2>
@@ -226,7 +226,7 @@ function Product({ state, setState }: MainProps) {
       ) : null}
       <HistoryComponent history={state.history} />
       <Footer />
-    </div>
+    </>
   );
 }
 

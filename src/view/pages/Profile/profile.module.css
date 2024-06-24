@@ -4,7 +4,7 @@
   flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
-  min-height: 85vh;
+  min-height: 70vh;
   padding: 3rem 0;
   gap: 2rem;
   color: var(--primary-text-color);
@@ -26,10 +26,8 @@
 .content {
   font-size: 1.6rem;
   width: 65%;
-  /* border: 1px var(--border-color) solid; */
-  border-radius: 1rem;
+  border-radius: 0.1rem;
   padding: 1.5rem;
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
   box-shadow:
     4px 4px 6px 0 var(--light-shadow),
     -4px -4px 6px 0 var(--dark-shadow),
@@ -42,24 +40,26 @@
   width: 17rem;
   min-width: fit-content;
   height: 4rem;
-  /* border: var(--border-color) 1px solid; */
-  /* background-color: var(--default-bg-color); */
-  border-radius: 1rem;
+  background-color: var(--gray-bg-color);
+  border-radius: 0.1rem;
   cursor: pointer;
   border: 0;
   background-color: transparent;
   color: var(--body-text-color);
 }
 
-/* .tabsItem:hover,
+.tabsItem:hover,
 .tabsItem:active {
-  background-color: var(--gray-bg-color);
-  border-color: var(--primary-text-color);
-} */
+  box-shadow:
+    4px 4px 6px 0 var(--light-shadow),
+    -4px -4px 6px 0 var(--dark-shadow),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+    inset 4px 4px 6px 0 var(--dark-shadow);
+  border-left: var(--accent-color) 1px solid;
+}
 
 .tabActive {
-  /* background-color: var(--gray-bg-color); */
-  /* border-color: var(--accent-color); */
+  border-left: var(--accent-color) 1px solid;
   box-shadow:
     4px 4px 6px 0 var(--light-shadow),
     -4px -4px 6px 0 var(--dark-shadow),

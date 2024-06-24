@@ -19,7 +19,7 @@
     'photo skills skills'
     'photo bio bio'/ 1fr 10fr;
   border: transparent;
-  border-radius: 1rem;
+  border-radius: 0.1rem;
   padding: 1.5rem;
   /* background-color: var(--gray-bg-color); */
   box-shadow:
@@ -72,14 +72,14 @@
   padding-top: 1.5rem;
   height: 3rem;
   align-self: center;
-  /* transition: var(--transition); */
+  transition: var(--transition);
   /* translate: 0 -50%; */
 }
-/* .gitHubLInk:hover,
+.gitHubLInk:hover,
 .gitHubLInk:focus {
-  transform: rotate(360deg);
-  transition: var(--transition);
-} */
+  transform: scale(1.1);
+  /* transition: var(--transition); */
+}
 
 @media (max-width: 599px) {
   .team {

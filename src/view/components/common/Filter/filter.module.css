@@ -44,15 +44,15 @@
   background-color: var(--default-bg-color);
   cursor: pointer;
   border: 1px solid var(--primary-text-color);
-  border-radius: 0.2rem;
   color: var(--body-text-color);
-  border-radius: 1rem;
+  border-radius: 0.1rem;
   transition: var(--transition);
 }
 
 .btn:hover,
 .btn:focus {
-  background-color: var(--primary-text-color);
+  background-color: var(--link-hover-color);
+  color: var(--light-text-color);
 }
 
 @media (max-width: 1100px) {

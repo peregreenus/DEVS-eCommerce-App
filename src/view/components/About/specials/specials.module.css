@@ -9,13 +9,8 @@
   }
 }
 .RSLinks {
-  /* border-radius: 50%; */
-  width: 20rem;
+  max-width: 20rem;
 }
-/* .RSLinks:hover,
-.RSLinks:focus {
-  background-color: rgb(255, 193, 67);
-} */
 
 @media (max-width: 694) {
   .contributions {

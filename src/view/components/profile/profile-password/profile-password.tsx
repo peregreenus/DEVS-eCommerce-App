@@ -23,7 +23,6 @@ export default function ChangePasswordTabContent({ state, setState }: MainProps)
   const navigate = useNavigate();
 
   const textb = 'submit';
-
   useEffect(() => {
     if (Object.values(errors).every((str) => str === '')) {
       setFormValid(true);

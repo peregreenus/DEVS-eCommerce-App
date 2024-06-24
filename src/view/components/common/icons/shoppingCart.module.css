@@ -6,6 +6,7 @@
     right: -1rem;
     border-radius: 50%;
     background-color: lightgreen;
+    color: var(--primary-text-color);
     min-width: 1.2rem;
     min-height: 1.2rem;
     font-size: 1rem;
