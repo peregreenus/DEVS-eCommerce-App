@@ -26,7 +26,7 @@
     transition: 0.4s all ease-in;
   }
 
-  .btn:hover {
+  /* .btn:hover {
     background-color: rgb(136, 214, 33, 1);
-  }
+  } */
 }
