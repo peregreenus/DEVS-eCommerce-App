@@ -4,8 +4,9 @@
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
-  margin-top: 2rem;
-  background-color: var(--gray-bg-color);
+  /* margin-top: 2rem; */
+  background-color: var(--primary-text-color);
+  color: var(--default-bg-color);
 }
 .footerItem {
   display: flex;
