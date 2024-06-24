@@ -6,21 +6,44 @@
   border-radius: 1rem;
   padding: 2rem 1rem;
   cursor: pointer;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  transition:
+  /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); */
+  box-shadow:
+    -7px -7px 20px 0px var(--light-shadow),
+    -4px -4px 5px 0px var(--light-shadow),
+    7px 7px 20px 0px var(--dark-shadow),
+    4px 4px 5px 0px #aa9f90;
+  /* transition:
     transform 0.3s ease-in-out,
-    box-shadow 0.5s ease;
-  color: rgba(0, 0, 0, 0.8);
+    box-shadow 0.5s ease; */
+  color: var(--body-text-color);
+  transition: var(--transition);
+  position: relative;
+
+  h3 {
+    position: absolute;
+    text-align: center;
+    transition: var(--transition);
+    font-size: 1.5rem;
+  }
 }
 
 .imageWrapper {
   overflow: hidden;
   margin-bottom: 1.5rem;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  /* border-bottom: 2px solid var(--body-text-color); */
   display: flex;
   justify-content: center;
   align-items: center;
   height: 25rem;
+  box-shadow:
+    -7px -7px 20px 0px var(--light-shadow),
+    -4px -4px 5px 0px var(--light-shadow),
+    7px 7px 20px 0px var(--dark-shadow),
+    4px 4px 5px 0px #aa9f90;
+  border-radius: 1rem;
+  translate: 0 45%;
+  background-color: var(--default-bg-color);
+  transition: var(--transition);
 }
 
 .cardImage {
@@ -53,7 +76,7 @@
 }
 
 .discountPrice {
-  color: #900;
+  color: var(--link-hover-color);
 }
 
 .cancelPrice {
@@ -66,20 +89,67 @@
   background: url('../../../assets/icon/shopping-cart.svg') no-repeat center;
   background-color: transparent;
   background-size: 25px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  /* border: 1px solid var(--body-text-color); */
+  border: 0;
   border-radius: 1rem;
   padding: 1.3rem;
   margin-top: 1rem;
   cursor: pointer;
+  transition: var(--transition);
+  box-shadow:
+    -7px -7px 20px 0px var(--light-shadow),
+    -4px -4px 5px 0px var(--light-shadow),
+    7px 7px 20px 0px var(--dark-shadow),
+    4px 4px 5px 0px #aa9f90;
 }
 
 .cardBtn:disabled {
   cursor: default;
   opacity: 0.5;
+  box-shadow:
+    4px 4px 6px 0 var(--light-shadow),
+    -4px -4px 6px 0 var(--dark-shadow),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+    inset 4px 4px 6px 0 var(--dark-shadow);
+}
+
+@media (max-width: 768px) {
+  .card {
+    h3 {
+      opacity: 0;
+      display: none;
+    }
+  }
+
+  .imageWrapper {
+    translate: 0 0;
+  }
 }
 
 @media (hover: hover) {
   .card:hover {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    box-shadow:
+      4px 4px 6px 0 var(--light-shadow),
+      -4px -4px 6px 0 var(--dark-shadow),
+      inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+      inset 4px 4px 6px 0 var(--dark-shadow);
+
+    &:hover .imageWrapper {
+      translate: 0 0;
+      transition: var(--transition);
+    }
+
+    &:hover h3 {
+      opacity: 0;
+      transition: var(--transition);
+    }
+  }
+
+  .cardBtn:hover {
+    box-shadow:
+      4px 4px 6px 0 var(--light-shadow),
+      -4px -4px 6px 0 var(--dark-shadow),
+      inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+      inset 4px 4px 6px 0 var(--dark-shadow);
   }
 }

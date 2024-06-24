@@ -44,7 +44,7 @@ function PriceRangeSlider({
               ...props.style,
               background: getTrackBackground({
                 values,
-                colors: ['#ccc', 'var(--accent-color)', '#ccc'],
+                colors: ['#ccc', 'var(--primary-text-color)', '#ccc'],
                 min,
                 max
               })
