@@ -3,7 +3,7 @@
   width: 100%;
   margin-bottom: 5rem;
   padding-top: 3rem;
-  min-height: 70vh;
+  /* min-height: 70vh; */
   display: flex;
   flex-direction: column;
   text-align: center;
