@@ -268,8 +268,4 @@
   .priceTotalWrapper {
     display: none;
   }
-
-  [class*='footer'] {
-    display: none;
-  }
 }
