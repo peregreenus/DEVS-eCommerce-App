@@ -150,7 +150,7 @@ function AddressesTabContent({
           </EditAddressModal>
         )}
         {shippingAddresses.map((value) => (
-          <div id={value.id}>
+          <div id={value.id} key={value.id}>
             <div
               key={value.id}
               className={`${defShipping === value.id ? styles.defaultAddress : ''} ${styles.address} 
