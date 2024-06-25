@@ -83,7 +83,7 @@ function HistoryComponent({ history }: HistoryComponentProps) {
       style={{
         padding: '1rem',
         width: '90%',
-        margin: '0 auto',
+        margin: '0 auto 2rem',
         background: 'var(--gray-bg-color)'
       }}>
       <h2 className={classes.title}>You were watching</h2>
