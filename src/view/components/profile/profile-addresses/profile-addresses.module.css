@@ -152,3 +152,17 @@
     }
   }
 }
+
+@media (max-width: 376px) {
+  .defaultAddress p,
+  .defaultAddress .addressContentString,
+  .address p,
+  .address .addressContentString {
+    font-size: 1.5rem;
+  }
+
+  .defaultAddress,
+  .address {
+    padding: 1rem;
+  }
+}

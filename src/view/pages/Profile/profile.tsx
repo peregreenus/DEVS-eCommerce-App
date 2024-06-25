@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MainProps } from '../../../data/types/main-props';
 import Header from '../../components/common/header/header';
-import Footer from '../../components/common/footer/footer';
+// import Footer from '../../components/common/footer/footer';
 import * as styles from './profile.module.css';
 import ProfileTabContent from '../../components/profile/profile-content/profile-content';
 import getCustomerProfile from '../../../data/api/profile/getProfile';
@@ -85,13 +85,13 @@ export default function Profile({ state, setState }: MainProps) {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   ) : (
     <>
       <Header state={state} setState={setState} />
       <Loader />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
