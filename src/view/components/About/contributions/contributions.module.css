@@ -7,11 +7,17 @@
   align-items: baseline;
 
   p {
-    border: 1px var(--border-color) solid;
-    border-radius: 1rem;
+    border: transparent;
+    border-radius: 0.1rem;
     padding: 1.5rem;
-    background-color: var(--gray-bg-color);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    /* background-color: var(--gray-bg-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+    color: var(--body-text-color);
+    box-shadow:
+      4px 4px 6px 0 var(--light-shadow),
+      -4px -4px 6px 0 var(--dark-shadow),
+      inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+      inset 4px 4px 6px 0 var(--dark-shadow);
   }
 }
 
@@ -28,5 +34,9 @@
 @media (max-width: 480px) {
   .contributions {
     width: 95%;
+
+    p {
+      font-size: 1.4rem;
+    }
   }
 }

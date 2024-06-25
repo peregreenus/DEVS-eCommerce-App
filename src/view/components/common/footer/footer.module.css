@@ -4,8 +4,10 @@
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
-  margin-top: 2rem;
-  background-color: var(--gray-bg-color);
+  margin-top: auto;
+  /* align-self: flex-end; */
+  background-color: var(--dark-bg-color);
+  color: var(--default-bg-color);
 }
 .footerItem {
   display: flex;
@@ -56,4 +58,15 @@
 
 .minimal {
   display: none;
+}
+
+@media (max-width: 500px) {
+  .footer {
+    font-size: 1.5rem;
+  }
+
+  .footerItem {
+    text-align: center;
+    width: 260px;
+  }
 }

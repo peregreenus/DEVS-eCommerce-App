@@ -37,7 +37,7 @@ const settings = {
     {
       breakpoint: 1100,
       settings: {
-        slidesToShow: Math.min(6, calcSlidesToShow()),
+        slidesToShow: 6,
         slidesToScroll: 2,
         initialSlide: 2
       }
@@ -45,7 +45,7 @@ const settings = {
     {
       breakpoint: 1000,
       settings: {
-        slidesToShow: Math.min(5, calcSlidesToShow()),
+        slidesToShow: 5,
         slidesToScroll: 2,
         initialSlide: 2
       }
@@ -53,7 +53,7 @@ const settings = {
     {
       breakpoint: 900,
       settings: {
-        slidesToShow: Math.min(4, calcSlidesToShow()),
+        slidesToShow: 4,
         slidesToScroll: 2,
         initialSlide: 2
       }
@@ -61,7 +61,7 @@ const settings = {
     {
       breakpoint: 600,
       settings: {
-        slidesToShow: Math.min(2, calcSlidesToShow()),
+        slidesToShow: 2,
         slidesToScroll: 2,
         initialSlide: 2
       }
@@ -69,7 +69,7 @@ const settings = {
     {
       breakpoint: 480,
       settings: {
-        slidesToShow: Math.min(1, calcSlidesToShow()),
+        slidesToShow: 1,
         slidesToScroll: 1
       }
     }
@@ -79,7 +79,13 @@ const settings = {
 function HistoryComponent({ history }: HistoryComponentProps) {
   const sortedHistory = sortHistoryByDate(history);
   return (
-    <div style={{ padding: '1rem', width: '90%', margin: '0 auto' }}>
+    <div
+      style={{
+        padding: '1rem',
+        width: '90%',
+        margin: '0 auto 2rem',
+        background: 'var(--gray-bg-color)'
+      }}>
       <h2 className={classes.title}>You were watching</h2>
       <SimpleCarousel history={sortedHistory} settings={settings} />
     </div>

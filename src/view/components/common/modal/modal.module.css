@@ -1,5 +1,5 @@
 .modal {
-  position: fixed;
+  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
@@ -11,9 +11,12 @@
 
 .modalContent {
   padding: 2rem;
-  background: white;
+  background: #fff;
   border-radius: 1.5rem;
   /* min-width: 150rem; */
+  /* min-width: 300px;
+  max-width: 400px; */
+  margin: 0 0.5rem;
 }
 
 .modal.active {

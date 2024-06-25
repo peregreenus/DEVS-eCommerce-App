@@ -13,8 +13,8 @@
 }
 
 .thumb {
-  height: 24px;
-  width: 24px;
+  height: 20px;
+  width: 20px;
   border-radius: 50%;
   background-color: #fff;
   display: flex;
@@ -23,11 +23,11 @@
   box-shadow: 0px 2px 6px #aaa;
 }
 
-.thumbInner {
+/* .thumbInner {
   height: 16px;
   width: 5px;
   background-color: var(--accent-color);
-}
+} */
 
 .output {
   margin-top: 12px;

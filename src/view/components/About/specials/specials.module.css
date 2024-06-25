@@ -9,12 +9,7 @@
   }
 }
 .RSLinks {
-  border-radius: 50%;
-  width: 20rem;
-}
-.RSLinks:hover,
-.RSLinks:focus {
-  background-color: rgb(255, 193, 67);
+  max-width: 20rem;
 }
 
 @media (max-width: 694) {

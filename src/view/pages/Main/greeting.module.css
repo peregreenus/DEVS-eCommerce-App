@@ -1,29 +1,32 @@
 .greeting {
-  background-image: url('../../../assets/img/Default_draw_a_picture_about_Welcome_to_Galactic_Exclusive_yo_1.jpg');
+  /* background-image: url('../../../assets/img/Default_draw_a_picture_about_Welcome_to_Galactic_Exclusive_yo_1.jpg');
   background-repeat: no-repeat;
-  background-size: cover;
-  color: var(--light-text-color);
+  background-size: cover; */
+  width: 80%;
+  color: var(--primary-text-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  min-height: 80rem;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-
+  letter-spacing: 0.15rem;
+  padding: 6rem 0;
   .promo {
     margin-top: 3rem;
     display: flex;
-    gap: 2rem;
+    align-items: center;
+    gap: 1rem;
+    font-weight: bold;
     .value {
       border: none;
-      background-color: rgba(255, 255, 255, 0);
+      background-color: transparent;
       padding: 0.5rem;
       color: var(--accent-color);
       font-size: 2rem;
-      text-shadow: inherit;
     }
-    .value:hover {
-      cursor: pointer;
+
+    @media (hover: hover) {
+      .value:hover {
+        cursor: pointer;
+      }
     }
   }
 }
@@ -31,62 +34,103 @@
 .wrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 1rem;
 }
 
 .catalogButton {
   font-size: 2rem;
-  color: var(--accent-color);
+  font-weight: bold;
+  color: var(--light-text-color);
   background: transparent;
-  border: 1px solid var(--accent-color);
   cursor: pointer;
   border: none;
-  border-radius: 1rem;
+  border-radius: 0.1rem;
   min-width: 15rem;
   padding: 1rem 3rem;
-  background-color: rgba(255, 255, 255, 0.5);
-  transition: 0.4s all ease-in;
+  background-color: var(--dark-bg-color);
+  transition: var(--transition);
   margin-top: 5rem;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    -5px -5px 10px 5px var(--light-shadow),
+    5px 5px 9px var(--dark-shadow),
+    inset -5px -5px 7px var(--dark-shadow);
 }
 
-.catalogButton:hover {
-  background-color: rgb(255, 255, 255);
+@media (hover: hover) {
+  .catalogButton:hover {
+    box-shadow:
+      4px 4px 6px 0 var(--light-shadow),
+      -4px -4px 6px 0 var(--dark-shadow),
+      inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+      inset 4px 4px 6px 0 var(--dark-shadow);
+    transition: var(--transition);
+  }
 }
 
 .textContent {
-  max-width: 70%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  text-shadow:
+  /* text-shadow:
     -1px -1px 0 #000,
     1px -1px 0 #000,
     -1px 1px 0 #000,
-    1px 1px 0 #000;
+    1px 1px 0 #000; */
   h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 5rem;
+    font-size: 6rem !important;
+    font-weight: 800;
   }
 }
 .subtitle {
-  text-indent: 3rem;
+  /* text-indent: 3rem; */
   margin-top: 1rem;
   font-size: 2.5rem;
+  max-width: 160rem;
+  color: var(--body-text-color);
 }
 
 @media (max-width: 880px) {
+  .greeting {
+    width: 100%;
+    padding-bottom: 0;
+  }
   .textContent {
-    max-width: 90%;
+    width: 100%;
     align-items: center;
     text-align: center;
+    align-self: center;
     h1 {
-      font-size: 4rem;
+      font-size: 4rem !important;
     }
   }
   .subtitle {
     font-size: 2rem;
-    max-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .textContent {
+    h1 {
+      font-size: 3rem !important;
+    }
+    .subtitle {
+      font-size: 1.5rem;
+    }
+  }
+  .catalogButton {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .greeting {
+    .promo {
+      flex-direction: column;
+      gap: 0;
+    }
   }
 }
