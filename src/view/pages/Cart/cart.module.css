@@ -1,29 +1,38 @@
 .cart {
   /* position: absolute; */
-  width: 95%;
-  max-width: 900px;
-  height: 85vh;
+  width: 100%;
+  min-height: 70vh;
   /* top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); */
   border: 1px solid transparent;
-  border-radius: 1rem;
+  border-radius: 0.1rem;
   padding: 3rem;
   color: var(--primary-text-color);
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  h2 {
+  /* h2 {
     text-align: center;
-  }
+  } */
 
   .cartWrapper {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 90%;
+    /* justify-content: space-between; */
+    gap: 3rem;
+    padding: 0 3rem;
+    max-width: fit-content;
     align-items: center;
-    overflow-x: hidden;
-    overflow-y: auto;
+    /* overflow-x: hidden;
+    overflow-y: auto; */
+    box-shadow:
+      4px 4px 6px 0 var(--light-shadow),
+      -4px -4px 6px 0 var(--dark-shadow),
+      inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+      inset 4px 4px 6px 0 var(--dark-shadow);
+    padding-bottom: 3rem;
 
     ul {
       padding: 0;
@@ -130,15 +139,17 @@
       .imgEmpty {
         /* height: 55rem;
         max-height: 50vh; */
-        width: 130%;
+        width: 100%;
         margin-top: 5rem;
       }
       .btn {
+        width: 20rem;
+        height: 4rem;
         padding: 5px 15px;
         color: var(--light-text-color);
         cursor: pointer;
         border: none;
-        border-radius: 1rem;
+        border-radius: 0.1rem;
         padding: 1rem;
         background-color: var(--primary-text-color);
         transition: 0.4s all ease-in;
@@ -163,7 +174,7 @@
           color: var(--light-text-color);
           cursor: pointer;
           border: none;
-          border-radius: 1rem;
+          border-radius: 0.1rem;
           padding: 1rem;
           background-color: var(--body-text-color);
           transition: 0.4s all ease-in;
@@ -192,6 +203,8 @@
     }
 
     .btn {
+      width: 20rem;
+      height: 4rem;
       padding: 5px 15px;
       /* color: teal; */
       font-size: 1.3rem;
@@ -199,7 +212,7 @@
       border: 1px solid teal;
       cursor: pointer;
       border: none;
-      border-radius: 1rem;
+      border-radius: 0.1rem;
       /* width: 15rem; */
       padding: 1rem;
       /* background-color: rgba(255, 255, 255, 0.5); */
@@ -231,7 +244,6 @@
     } */
   }
 }
-
 .buttonWrapper {
   flex-wrap: wrap;
 }
@@ -254,10 +266,6 @@
   }
 
   .priceTotalWrapper {
-    display: none;
-  }
-
-  [class*='footer'] {
     display: none;
   }
 }

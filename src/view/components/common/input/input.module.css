@@ -16,11 +16,13 @@
   }
 
   .btn {
+    width: 20rem;
+    height: 4rem;
     padding: 5px 15px;
     color: var(--light-text-color);
     cursor: pointer;
     border: none;
-    border-radius: 1rem;
+    border-radius: 0.1rem;
     padding: 1rem;
     background-color: var(--body-text-color);
     transition: 0.4s all ease-in;

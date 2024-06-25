@@ -79,7 +79,13 @@ const settings = {
 function HistoryComponent({ history }: HistoryComponentProps) {
   const sortedHistory = sortHistoryByDate(history);
   return (
-    <div style={{ padding: '1rem', width: '90%', margin: '0 auto' }}>
+    <div
+      style={{
+        padding: '1rem',
+        width: '90%',
+        margin: '0 auto',
+        background: 'var(--gray-bg-color)'
+      }}>
       <h2 className={classes.title}>You were watching</h2>
       <SimpleCarousel history={sortedHistory} settings={settings} />
     </div>

@@ -1,20 +1,17 @@
 .card {
+  /* max-width: 40rem; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   text-align: left;
-  border-radius: 1rem;
+  border-radius: 0.1rem;
   padding: 2rem 1rem;
   cursor: pointer;
-  /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); */
   box-shadow:
     -7px -7px 20px 0px var(--light-shadow),
     -4px -4px 5px 0px var(--light-shadow),
     7px 7px 20px 0px var(--dark-shadow),
     4px 4px 5px 0px #aa9f90;
-  /* transition:
-    transform 0.3s ease-in-out,
-    box-shadow 0.5s ease; */
   color: var(--body-text-color);
   transition: var(--transition);
   position: relative;
@@ -30,7 +27,6 @@
 .imageWrapper {
   overflow: hidden;
   margin-bottom: 1.5rem;
-  /* border-bottom: 2px solid var(--body-text-color); */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,15 +36,15 @@
     -4px -4px 5px 0px var(--light-shadow),
     7px 7px 20px 0px var(--dark-shadow),
     4px 4px 5px 0px #aa9f90;
-  border-radius: 1rem;
+  border-radius: 0.1rem;
   translate: 0 45%;
   background-color: var(--default-bg-color);
   transition: var(--transition);
 }
 
 .cardImage {
-  max-width: 90%;
-  max-height: 90%;
+  width: 95%;
+  max-height: 100%;
 }
 
 .cardTitle {
@@ -87,11 +83,11 @@
 
 .cardBtn {
   background: url('../../../assets/icon/shopping-cart.svg') no-repeat center;
-  background-color: transparent;
+  background-color: var(--dark-bg-color);
   background-size: 25px;
   /* border: 1px solid var(--body-text-color); */
   border: 0;
-  border-radius: 1rem;
+  border-radius: 0.1rem;
   padding: 1.3rem;
   margin-top: 1rem;
   cursor: pointer;

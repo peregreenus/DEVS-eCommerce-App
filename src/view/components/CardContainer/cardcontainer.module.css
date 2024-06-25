@@ -1,6 +1,6 @@
 .cardContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   justify-content: space-evenly;
   gap: 2rem;
   padding: 2rem 1rem;
