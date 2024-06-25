@@ -95,14 +95,15 @@
   cursor: pointer;
   align-self: center;
   box-shadow:
-    4px 4px 6px 0 var(--light-shadow),
-    -4px -4px 6px 0 var(--dark-shadow),
-    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
-    inset 4px 4px 6px 0 var(--dark-shadow);
+    -7px -7px 20px 0px var(--light-shadow),
+    -4px -4px 5px 0px var(--light-shadow),
+    7px 7px 20px 0px var(--dark-shadow),
+    4px 4px 5px 0px #aa9f90;
   outline: 0;
   border-color: transparent;
   background-color: var(--primary-text-color);
 }
+
 .button:disabled {
   cursor: not-allowed;
   background-color: var(--gray-bg-color);
