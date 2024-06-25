@@ -24,6 +24,7 @@ function ProductCard({ product, goToProduct, setState }: ProductCardProps) {
 
   return (
     <div id={product.id} className={classes.card} onClick={() => goToProduct(product.id)}>
+      <h3>{product.name.en}</h3>
       <div className={classes.imageWrapper}>
         <img
           className={classes.cardImage}

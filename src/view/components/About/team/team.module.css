@@ -18,11 +18,17 @@
     'photo role role'
     'photo skills skills'
     'photo bio bio'/ 1fr 10fr;
-  border: 1px var(--border-color) solid;
-  border-radius: 1rem;
+  border: transparent;
+  border-radius: 0.1rem;
   padding: 1.5rem;
-  background-color: var(--gray-bg-color);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  /* background-color: var(--gray-bg-color); */
+  box-shadow:
+    4px 4px 6px 0 var(--light-shadow),
+    -4px -4px 6px 0 var(--dark-shadow),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+    inset 4px 4px 6px 0 var(--dark-shadow);
+  color: var(--body-text-color);
+
   h5 {
     font-weight: 200;
   }
@@ -38,8 +44,9 @@
 .skillsMember {
   grid-area: skills;
   font-size: 1.5rem;
+  color: var(--link-hover-color);
   span {
-    font-size: 1.4;
+    font-size: 1.4rem;
     font-weight: 200;
   }
 }
@@ -55,7 +62,6 @@
 }
 .bioMember {
   grid-area: bio;
-
   font-style: italic;
   font-weight: 200;
   font-size: 1.8rem;
@@ -66,10 +72,13 @@
   padding-top: 1.5rem;
   height: 3rem;
   align-self: center;
+  transition: var(--transition);
+  /* translate: 0 -50%; */
 }
 .gitHubLInk:hover,
 .gitHubLInk:focus {
   transform: scale(1.1);
+  /* transition: var(--transition); */
 }
 
 @media (max-width: 599px) {
@@ -104,5 +113,8 @@
     justify-self: center;
     width: 25rem;
     height: 25rem;
+  }
+  .bioMember {
+    font-size: 1.4rem;
   }
 }

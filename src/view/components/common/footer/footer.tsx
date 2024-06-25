@@ -6,7 +6,7 @@ function Footer() {
   return (
     <footer className={classes.footer}>
       <div className={classes.footerItem}>
-        © 2024 &quot;Galactic Exclusive&quot;. All rights reserved.
+        © 2024 DEVS &quot;Galactic Exclusive&quot;. All rights reserved.
       </div>
       <div className={`${classes.footerItem} ${classes.minimal}`}>
         <p>Contact Information:</p>

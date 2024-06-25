@@ -112,7 +112,7 @@ export default function ProfileTabContent({ ...profileData }: ProfileUpdateProps
           <EditingProfileContent
             type="date"
             name="dateOfBirth"
-            value={`${profileData.dateOfBirth}`}
+            value={`${newProfileInfo.dateOfBirth}`}
             onChange={handleChangeProfileInfo}
             error={errors.dateOfBirth}
             onSubmit={(e: FormEvent<HTMLFormElement>) => handleSave(e, 'dateOfBirth')}
@@ -125,7 +125,7 @@ export default function ProfileTabContent({ ...profileData }: ProfileUpdateProps
         {!editing.email ? (
           <ProfileContentElement
             name="email"
-            data={`${profileData.email}`}
+            data={`${newProfileInfo.email}`}
             onClick={() => setEditingContent('email')}
           />
         ) : (

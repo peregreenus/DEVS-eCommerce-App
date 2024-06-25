@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as styles from './specials.module.css';
-import LogoRS from '../../../../assets/icon/rsschool.svg';
+import LogoRS from '../../../../assets/icon/rss-logo.svg';
 
 export default function Specials() {
   return (

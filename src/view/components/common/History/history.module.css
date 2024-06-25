@@ -1,3 +1,9 @@
 .title {
   text-align: center;
+  margin-bottom: 2rem;
+}
+
+.slide [class*='slick-track'] {
+  justify-content: center;
+  gap: 5rem;
 }

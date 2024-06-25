@@ -25,6 +25,7 @@ import Button from '../../components/common/Button/Button';
 import InputLabelButton from '../../components/common/input/input';
 import applyPromo from '../../../data/api/Cart/applyPromo';
 import Loader from '../../components/Loader/Loader';
+import Footer from '../../components/common/footer/footer';
 
 function Cart({ state, setState }: MainProps) {
   const [cart, setCart] = useState<ICart | null>(null);
@@ -140,7 +141,7 @@ function Cart({ state, setState }: MainProps) {
                 <ul>
                   {cart.lineItems.map((item: LineItem) => (
                     <li key={item.id}>
-                      <div className={`${classes.cell} ${classes.cell}`}>
+                      <div className={`${classes.imgBlock} ${classes.cell} ${classes.cell}`}>
                         <Link to={`/catalog/product/${item.productId}`}>
                           <img
                             className={classes.img}
@@ -156,7 +157,8 @@ function Cart({ state, setState }: MainProps) {
                           ? formatPrice(item.variant.prices[0].discounted.value.centAmount)
                           : formatPrice(item.variant.prices[0].value.centAmount)}
                       </div>
-                      <div className={`${classes.priceWrapper} ${classes.cell}`}>
+                      <div
+                        className={`${classes.priceTotalWrapper} ${classes.priceWrapper} ${classes.cell}`}>
                         Total:&#32;
                         {formatPrice(item.totalPrice.centAmount)}
                       </div>
@@ -221,12 +223,14 @@ function Cart({ state, setState }: MainProps) {
                 <Modal visible={modalVisible} setVisible={setModalVisible}>
                   <div className={classes.confirm}>
                     <p style={{ margin: '2rem 0' }}>Are you sure you want to clear the cart?</p>
-                    <Button className="btn btnYes" onClick={handleConfirmClearCart}>
-                      Yes
-                    </Button>
-                    <Button className="btn btnNo" onClick={() => setModalVisible(false)}>
-                      No
-                    </Button>
+                    <p>
+                      <Button className="btn btnYes" onClick={handleConfirmClearCart}>
+                        Yes
+                      </Button>
+                      <Button className="btn btnNo" onClick={() => setModalVisible(false)}>
+                        No
+                      </Button>
+                    </p>
                   </div>
                 </Modal>
               </>
@@ -243,6 +247,7 @@ function Cart({ state, setState }: MainProps) {
           </div>
         </section>
       )}
+      <Footer />
     </>
   );
 }

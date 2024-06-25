@@ -11,20 +11,35 @@
 .paginationBtn {
   padding: 0.5rem 1rem;
   background-color: transparent;
-  border: 1px solid transparent;
+  border: 0;
+  border-radius: 1rem;
   cursor: pointer;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    -7px -7px 20px 0px var(--light-shadow),
+    -4px -4px 5px 0px var(--light-shadow),
+    7px 7px 20px 0px var(--dark-shadow),
+    4px 4px 5px 0px #aa9f90;
   transition: all ease 0.5s;
+  color: var(--body-text-color);
+  font-weight: bold;
 }
 
 .paginationBtn:disabled {
   cursor: default;
-  box-shadow: 0 0 10px inset rgba(0, 0, 0, 0.2);
+  box-shadow:
+    4px 4px 6px 0 var(--light-shadow),
+    -4px -4px 6px 0 var(--dark-shadow),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+    inset 4px 4px 6px 0 var(--dark-shadow);
 }
 
 @media (hover: hover) {
   .paginationBtn:not(:disabled):hover {
-    background-color: #beb9b9;
+    box-shadow:
+      4px 4px 6px 0 var(--light-shadow),
+      -4px -4px 6px 0 var(--dark-shadow),
+      inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+      inset 4px 4px 6px 0 var(--dark-shadow);
   }
 }
 

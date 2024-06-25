@@ -7,7 +7,7 @@ import { MainProps } from '../../../data/types/main-props';
 
 function Notfound({ state, setState }: MainProps) {
   return (
-    <div>
+    <>
       <Header state={state} setState={setState} />
       <section className={classes.notFound}>
         <div className={classes.title}>404</div>
@@ -17,7 +17,7 @@ function Notfound({ state, setState }: MainProps) {
         </Link>
       </section>
       <Footer />
-    </div>
+    </>
   );
 }
 

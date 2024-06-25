@@ -29,6 +29,10 @@ function AddressesTabContent({
 }: ProfileUpdateProps) {
   let defShipping: string = '';
   let defBilling: string = '';
+  const isVisibleRadio = {
+    shipping: false,
+    billing: false
+  };
   const { isVisible, toggleVisible } = useModal();
   const [isNew, setNew] = useState<boolean>(false);
   const shippingAddresses: CustomerAddresses[] = [];
@@ -57,6 +61,12 @@ function AddressesTabContent({
         }
       });
     });
+    if (billingAddresses.length > 1) {
+      isVisibleRadio.billing = true;
+    }
+    if (shippingAddresses.length > 1) {
+      isVisibleRadio.shipping = true;
+    }
   }
   function modalShow(key: string, country: string) {
     if (country) {
@@ -150,22 +160,25 @@ function AddressesTabContent({
           </EditAddressModal>
         )}
         {shippingAddresses.map((value) => (
-          <div id={value.id}>
+          <div id={value.id} key={value.id}>
             <div
               key={value.id}
-              className={`${defShipping === value.id ? styles.defaultAddress : ''} ${styles.address} 
+              className={`${defShipping === value.id && isVisibleRadio.shipping ? styles.defaultAddress : ''} ${styles.address} 
               ${!isVisible[`Shipping-${value.id}`] ? styles.showTextAddressContent : styles.hideTextAddressContent}`}>
-              <div className={styles.addressControl}>
-                <p className={styles.addressRadio}>
-                  <input
-                    type="radio"
-                    name="shippingRadio"
-                    id={value.id}
-                    checked={defaultShippingAddressId?.includes(`${value.id}`)}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => setDefault(e, 'shipping')}
-                  />
-                  set default
-                </p>
+              <div
+                className={`${styles.addressControl} ${isVisibleRadio.shipping ? '' : styles.oneAddress}`}>
+                {isVisibleRadio.shipping && (
+                  <p className={styles.addressRadio}>
+                    <input
+                      type="radio"
+                      name="shippingRadio"
+                      id={value.id}
+                      checked={defaultShippingAddressId?.includes(`${value.id}`)}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => setDefault(e, 'shipping')}
+                    />
+                    set default
+                  </p>
+                )}
                 <div className={styles.controlBlock}>
                   <button
                     type="button"
@@ -264,19 +277,22 @@ function AddressesTabContent({
         {billingAddresses.map((value) => (
           <div key={value.id}>
             <div
-              className={`${defBilling === value.id ? styles.defaultAddress : ''} ${styles.address}
+              className={`${defBilling === value.id && isVisibleRadio.billing ? styles.defaultAddress : ''} ${styles.address}
                          ${!isVisible[`Billing-${value.id}`] ? styles.showTextAddressContent : styles.hideTextAddressContent}`}>
-              <div className={styles.addressControl}>
-                <p className={styles.addressRadio}>
-                  <input
-                    type="radio"
-                    name="billingRadio"
-                    id={value.id}
-                    checked={defaultBillingAddressId?.includes(`${value.id}`)}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => setDefault(e, 'billing')}
-                  />
-                  set default
-                </p>
+              <div
+                className={`${styles.addressControl} ${isVisibleRadio.billing ? '' : styles.oneAddress}`}>
+                {isVisibleRadio.billing && (
+                  <p className={styles.addressRadio}>
+                    <input
+                      type="radio"
+                      name="billingRadio"
+                      id={value.id}
+                      checked={defaultBillingAddressId?.includes(`${value.id}`)}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => setDefault(e, 'billing')}
+                    />
+                    set default
+                  </p>
+                )}
                 <div className={styles.controlBlock}>
                   <button
                     type="button"

@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 import React from 'react';
-import PreviewImg from '../pages/Product/previewImg';
+import PreviewImg from '../components/PreviewImg/previewImg';
 
 describe('PreviewImg', () => {
   const mockSetModal = jest.fn();

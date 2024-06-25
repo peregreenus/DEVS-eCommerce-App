@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   max-width: 30rem;
+  min-height: 40rem;
   overflow: hidden;
 }
 
@@ -19,17 +20,20 @@
   width: 0;
   position: absolute;
   right: 2rem;
-  top: 3rem;
+  top: 3.3rem;
   opacity: 0.5;
 }
 
 .inputBlock {
-  border: 1px solid var(--border-color);
-  border-radius: 1rem;
+  border-radius: 0.1rem;
   padding: 1rem 2rem;
-  background-color: var(--gray-bg-color);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   margin: 1rem;
+  box-shadow:
+    -7px -7px 20px 0px var(--light-shadow),
+    -4px -4px 5px 0px var(--light-shadow),
+    7px 7px 20px 0px var(--dark-shadow),
+    4px 4px 5px 0px #aa9f90;
+  border: 0;
 }
 
 .loginForm input[type='checkbox']:checked {
@@ -37,8 +41,11 @@
 }
 
 .loginForm input[type='checkbox']::after {
-  content: '👁️';
+  content: '';
   position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: url('../../../assets/icon/eye-password-hide.svg');
 }
 
 .loginForm button {
@@ -46,18 +53,30 @@
   padding: 0.4rem 0.6rem;
   text-transform: uppercase;
   cursor: pointer;
-  border-radius: 1rem;
-  background-color: var(--primary-text-color);
+  border-radius: 0.1rem;
+  background-color: var(--dark-bg-color);
   color: var(--light-text-color);
   width: 20rem;
   height: 4rem;
   align-self: center;
+  border: 0;
+  box-shadow:
+    -7px -7px 20px 0px var(--light-shadow),
+    -4px -4px 5px 0px var(--light-shadow),
+    7px 7px 20px 0px var(--dark-shadow),
+    4px 4px 5px 0px #aa9f90;
 }
 
 .loginForm button:disabled {
   cursor: not-allowed;
   background-color: var(--gray-bg-color);
-  color: rgba(220, 220, 220, 0.433);
+  color: rgba(1, 1, 1, 0.206);
+  box-shadow:
+    4px 4px 6px 0 var(--light-shadow),
+    -4px -4px 6px 0 var(--dark-shadow),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+    inset 4px 4px 6px 0 var(--dark-shadow);
+  outline: transparent;
 }
 
 .failMessage {

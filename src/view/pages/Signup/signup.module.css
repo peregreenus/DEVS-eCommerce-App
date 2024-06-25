@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   gap: 1rem;
-  min-height: 85vh;
+  /* min-height: 85vh; */
   padding-top: 3rem;
   flex-direction: column;
   align-items: center;
@@ -12,10 +12,10 @@
     color: var(--accent-color);
     transition: 0.4s all ease-in;
   }
-  a:hover {
+  /* a:hover {
     text-decoration: underline;
     transition: 0.4s all ease-in;
-  }
+  } */
 }
 .showForm {
   transition: 0.4s all ease-in;
@@ -44,6 +44,7 @@
   opacity: 1;
   transition: 0.4s all ease-in;
   visibility: visible;
+  border: 1px solid var(--body-text-color);
 }
 
 .hideButton {

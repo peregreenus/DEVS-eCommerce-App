@@ -17,10 +17,10 @@ import PriceContainer from '../../components/PriceContainer/PriceContainer';
 import * as classes from './product.module.css';
 import AddToCart from '../../../data/api/Cart/AddToCart';
 import RemoveFromCart from '../../../data/api/Cart/RemoveFromCart';
-import RibbonImages from './ribbonImages';
 import productInCart from '../../../data/utils/productInCart';
 import HistoryComponent from '../../components/common/History/history';
 import Footer from '../../components/common/footer/footer';
+import RibbonImages from '../../components/RibbonImages/ribbonImages';
 
 function Product({ state, setState }: MainProps) {
   const [product, setProduct] = useState<IProduct | null>(null);
@@ -32,6 +32,8 @@ function Product({ state, setState }: MainProps) {
   const [numImage, setNumImage] = useState<number>(0);
   const [modal, setModal] = useState(false);
   const [inCart, setInCart] = useState(false);
+  const [touchStartX, setTouchStartX] = useState<number>(0);
+  const [touchEndX, setTouchEndX] = useState<number>(0);
 
   useEffect(() => {
     async function fetchProduct() {
@@ -115,15 +117,37 @@ function Product({ state, setState }: MainProps) {
     }
   };
 
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEndX(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (touchStartX - touchEndX > 50) {
+      slideRight();
+    }
+
+    if (touchEndX - touchStartX > 50) {
+      slideLeft();
+    }
+  };
+
   return (
-    <div>
+    <>
       <Header state={state} setState={setState} />
       <section className={classes.product}>
         <h2>{product.name.en}</h2>
         <div className={classes.wrapper}>
           <div className={classes.card}>
             {isImage ? (
-              <div className={classes.slider}>
+              <div
+                className={classes.slider}
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onTouchEnd={onTouchEnd}>
                 {leftVisible ? (
                   <Button type="button" className={classes.sliderBtn} onClick={() => slideLeft()}>
                     <ArrowLeftIcon width="6rem" height="6rem" />
@@ -136,7 +160,6 @@ function Product({ state, setState }: MainProps) {
                     <ArrowLeftIcon width="6rem" height="6rem" fill="gray" />
                   </Button>
                 )}
-
                 <div className={classes.sliderWrapper}>
                   {product.masterVariant.images.map((img, index) => (
                     <PreviewImageComponent
@@ -203,9 +226,8 @@ function Product({ state, setState }: MainProps) {
         />
       ) : null}
       <HistoryComponent history={state.history} />
-
       <Footer />
-    </div>
+    </>
   );
 }
 

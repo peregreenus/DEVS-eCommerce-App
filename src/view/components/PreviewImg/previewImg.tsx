@@ -1,5 +1,5 @@
 import React from 'react';
-import * as classes from './product.module.css';
+import * as classes from './previewImg.module.css';
 
 interface ImageProps {
   imgUrl: string;
