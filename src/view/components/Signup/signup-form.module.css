@@ -1,0 +1,206 @@
+.form {
+  display: flex;
+  padding: 2rem 0;
+  flex-direction: column;
+  justify-self: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.nameBlock,
+.addressForm,
+.passwordBlock {
+  border: 1px solid var(--border-color);
+  border-radius: 0.1rem;
+  padding: 1rem 2rem;
+  /* background-color: var(--gray-bg-color); */
+  position: relative;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+  box-shadow:
+    -7px -7px 20px 0px var(--light-shadow),
+    -4px -4px 5px 0px var(--light-shadow),
+    7px 7px 20px 0px var(--dark-shadow),
+    4px 4px 5px 0px #aa9f90;
+}
+.headerBlock {
+  position: absolute;
+  font-size: 1.3rem;
+  top: -1rem;
+  padding: 0 1rem;
+  background-color: var(--default-bg-color);
+  color: var(--body-text-color);
+  border-radius: 2rem;
+}
+
+.block {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  .label {
+    width: 100%;
+  }
+}
+
+.label {
+  padding: 1rem 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  width: 100%;
+  gap: 0.2rem;
+  color: var(--primary-text-color);
+  display: flex;
+  flex-direction: column;
+  p {
+    margin-left: 1rem;
+  }
+}
+.input {
+  font-size: 1.6rem;
+  padding: 0.5rem 1.6rem;
+  height: 3.5rem;
+  border-radius: 0.1rem;
+  background-color: var(--default-bg-color);
+  color: var(--primary-text-color);
+  cursor: text;
+  border: 0;
+  background-color: transparent;
+  box-shadow:
+    4px 4px 6px 0 var(--light-shadow),
+    -4px -4px 6px 0 var(--dark-shadow),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+    inset 4px 4px 6px 0 var(--dark-shadow);
+  outline: transparent;
+}
+
+.error {
+  color: var(--accent-color);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 200;
+  font-size: 1.2rem;
+}
+
+.errorBorder {
+  border: var(--accent-color) 1px solid;
+}
+
+.button {
+  align-self: center;
+  font-size: 1.6rem;
+  margin-top: 1rem;
+  padding: 1rem 4rem;
+  width: 20rem;
+  height: 4rem;
+  border-radius: 0.1rem;
+  background-color: var(--dark-bg-color);
+  color: var(--light-text-color);
+  cursor: pointer;
+  align-self: center;
+  box-shadow:
+    -7px -7px 20px 0px var(--light-shadow),
+    -4px -4px 5px 0px var(--light-shadow),
+    7px 7px 20px 0px var(--dark-shadow),
+    4px 4px 5px 0px #aa9f90;
+  outline: 0;
+  border-color: transparent;
+  background-color: var(--primary-text-color);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  background-color: var(--gray-bg-color);
+  color: rgba(1, 1, 1, 0.206);
+  box-shadow:
+    4px 4px 6px 0 var(--light-shadow),
+    -4px -4px 6px 0 var(--dark-shadow),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+    inset 4px 4px 6px 0 var(--dark-shadow);
+  outline: transparent;
+}
+
+.addressForm {
+  transition: 0.4s all ease-in;
+  visibility: visible;
+  opacity: 1;
+}
+
+.checkBoxForm,
+.controlAddressForm {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkBoxForm {
+  display: flex;
+  gap: 0.5rem;
+  p {
+    font-size: 1.6rem;
+  }
+  input[type='checkbox'] {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-color: var(--border-color);
+    border-radius: 2rem;
+    accent-color: var(--accent-color);
+  }
+}
+.controlAddressForm {
+  justify-content: space-between;
+}
+
+.addressFormName {
+  font-size: 1.2rem;
+}
+
+.disableAddress {
+  max-height: 0;
+  transition: max-height 0.4s ease-in;
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media (max-width: 640px) {
+  .form {
+    margin: 0 2rem;
+  }
+  .block {
+    .label {
+      width: 95%;
+    }
+  }
+}
+@media (max-width: 539px) {
+  .checkBoxForm {
+    p {
+      font-size: 1.3rem;
+    }
+    /* input[type='checkbox'] {
+      width: 3rem;
+      height: 3rem;
+    } */
+  }
+}
+
+@media (max-width: 326px) {
+  .form {
+    margin: 0;
+  }
+  .headerBlock {
+    padding: 0;
+    font-size: 1rem;
+  }
+  .input {
+    font-size: 1.6rem;
+    padding: 0 0.5rem;
+    height: 2.5rem;
+    option {
+      font-size: 1.6rem;
+      padding: 0;
+    }
+  }
+  .nameBlock,
+  .addressForm,
+  .passwordBlock {
+    padding: 0.5rem 0;
+  }
+}

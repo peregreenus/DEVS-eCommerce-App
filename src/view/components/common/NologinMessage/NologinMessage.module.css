@@ -1,0 +1,46 @@
+.nologin {
+  position: absolute;
+  padding: 0.5rem;
+  display: flex;
+  width: 100%;
+  max-width: 1920px;
+  height: 3rem;
+  background-color: rgba(238, 187, 46, 0.753);
+  align-items: center;
+  transition: 0.4s all ease-in;
+  z-index: 1000;
+}
+.wrapper {
+  font-size: 1.2rem;
+  a {
+    padding-left: 2rem;
+    text-decoration: none;
+    color: var(--default-bg-color);
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+  }
+}
+.button {
+  position: absolute;
+  background-image: url('../../../../assets/icon/cross.svg');
+  background-size: cover;
+  width: 1.4rem;
+  height: 1.4rem;
+  border: none;
+  right: 1rem;
+  z-index: 700;
+  cursor: pointer;
+}
+
+.hide {
+  height: 0;
+  padding: 0;
+}
+
+@media (max-width: 350px) {
+  .wrapper {
+    span {
+      display: none;
+    }
+  }
+}

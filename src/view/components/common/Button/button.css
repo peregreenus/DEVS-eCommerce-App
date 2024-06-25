@@ -1,0 +1,42 @@
+.btn {
+  padding: 5px 15px;
+  color: teal;
+  font-size: 14px;
+  background: transparent;
+  border: 1px solid teal;
+  cursor: pointer;
+  border: none;
+  border-radius: 1rem;
+  width: 15rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: 0.4s all ease-in;
+}
+
+.btn-center {
+  margin-top: 5rem;
+}
+
+.btn:hover {
+  background-color: rgb(255, 255, 255);
+}
+
+.btnYes {
+  margin-top: 1rem;
+  background-color: rgb(241, 98, 98);
+  margin-right: 2rem;
+}
+
+.btnNo {
+  margin-top: 1rem;
+  background-color: rgb(110, 241, 98);
+}
+.btnYes:hover {
+  background-color: rgb(150, 11, 11);
+  color: white;
+}
+
+.btnNo:hover {
+  background-color: rgb(13, 92, 6);
+  color: white;
+}

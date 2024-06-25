@@ -1,0 +1,111 @@
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  max-width: 30rem;
+  min-height: 40rem;
+  overflow: hidden;
+}
+
+.loginForm label {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--primary-text-color);
+}
+
+.loginForm label:has(input[type='checkbox']) {
+  position: relative;
+}
+
+.loginForm input[type='checkbox'] {
+  width: 0;
+  position: absolute;
+  right: 2rem;
+  top: 3.3rem;
+  opacity: 0.5;
+}
+
+.inputBlock {
+  border-radius: 0.1rem;
+  padding: 1rem 2rem;
+  margin: 1rem;
+  box-shadow:
+    -7px -7px 20px 0px var(--light-shadow),
+    -4px -4px 5px 0px var(--light-shadow),
+    7px 7px 20px 0px var(--dark-shadow),
+    4px 4px 5px 0px #aa9f90;
+  border: 0;
+}
+
+.loginForm input[type='checkbox']:checked {
+  opacity: 1;
+}
+
+.loginForm input[type='checkbox']::after {
+  content: '';
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: url('../../../assets/icon/eye-password-hide.svg');
+}
+
+.loginForm button {
+  margin-top: 2rem;
+  padding: 0.4rem 0.6rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 0.1rem;
+  background-color: var(--dark-bg-color);
+  color: var(--light-text-color);
+  width: 20rem;
+  height: 4rem;
+  align-self: center;
+  border: 0;
+  box-shadow:
+    -7px -7px 20px 0px var(--light-shadow),
+    -4px -4px 5px 0px var(--light-shadow),
+    7px 7px 20px 0px var(--dark-shadow),
+    4px 4px 5px 0px #aa9f90;
+}
+
+.loginForm button:disabled {
+  cursor: not-allowed;
+  background-color: var(--gray-bg-color);
+  color: rgba(1, 1, 1, 0.206);
+  box-shadow:
+    4px 4px 6px 0 var(--light-shadow),
+    -4px -4px 6px 0 var(--dark-shadow),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+    inset 4px 4px 6px 0 var(--dark-shadow);
+  outline: transparent;
+}
+
+.failMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  gap: 1rem;
+}
+
+.failMessageTitle {
+  color: #900;
+  font-size: 2rem;
+}
+
+@media (max-width: 326px) {
+  .inputBlock {
+    padding: 0.5rem 0;
+  }
+  .loginForm {
+    text-align: center;
+  }
+}
+
+@media (max-width: 241px) {
+  .inputBlock {
+    margin: 0;
+  }
+}

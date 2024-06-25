@@ -1,0 +1,136 @@
+.greeting {
+  /* background-image: url('../../../assets/img/Default_draw_a_picture_about_Welcome_to_Galactic_Exclusive_yo_1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover; */
+  width: 80%;
+  color: var(--primary-text-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  letter-spacing: 0.15rem;
+  padding: 6rem 0;
+  .promo {
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: bold;
+    .value {
+      border: none;
+      background-color: transparent;
+      padding: 0.5rem;
+      color: var(--accent-color);
+      font-size: 2rem;
+    }
+
+    @media (hover: hover) {
+      .value:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.catalogButton {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--light-text-color);
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.1rem;
+  min-width: 15rem;
+  padding: 1rem 3rem;
+  background-color: var(--dark-bg-color);
+  transition: var(--transition);
+  margin-top: 5rem;
+  box-shadow:
+    -5px -5px 10px 5px var(--light-shadow),
+    5px 5px 9px var(--dark-shadow),
+    inset -5px -5px 7px var(--dark-shadow);
+}
+
+@media (hover: hover) {
+  .catalogButton:hover {
+    box-shadow:
+      4px 4px 6px 0 var(--light-shadow),
+      -4px -4px 6px 0 var(--dark-shadow),
+      inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+      inset 4px 4px 6px 0 var(--dark-shadow);
+    transition: var(--transition);
+  }
+}
+
+.textContent {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  /* text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000; */
+  h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 6rem !important;
+    font-weight: 800;
+  }
+}
+.subtitle {
+  /* text-indent: 3rem; */
+  margin-top: 1rem;
+  font-size: 2.5rem;
+  max-width: 160rem;
+  color: var(--body-text-color);
+}
+
+@media (max-width: 880px) {
+  .greeting {
+    width: 100%;
+    padding-bottom: 0;
+  }
+  .textContent {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    align-self: center;
+    h1 {
+      font-size: 4rem !important;
+    }
+  }
+  .subtitle {
+    font-size: 2rem;
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .textContent {
+    h1 {
+      font-size: 3rem !important;
+    }
+    .subtitle {
+      font-size: 1.5rem;
+    }
+  }
+  .catalogButton {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .greeting {
+    .promo {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
+}

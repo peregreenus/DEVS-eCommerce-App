@@ -1,0 +1,18 @@
+.wrapper {
+  align-self: flex-end;
+  font-size: 1.3rem;
+  margin: 0.5rem;
+  padding: 1rem;
+}
+
+.select {
+  font-size: inherit;
+  outline: transparent;
+  border-radius: 0.5rem;
+  border-color: transparent;
+  width: 90px;
+  padding: 0.2rem;
+  cursor: pointer;
+  background-color: var(--default-bg-color);
+  color: var(--body-text-color);
+}

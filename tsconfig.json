@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "jsx": "react",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "moduleDetection": "force",
+    "strictNullChecks": true,
+    "isolatedModules": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "lib": ["dom", "dom.iterable", "es2022"],
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
+    "types": ["jest", "@testing-library/jest-dom"]
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["./node_modules", "./dist", "webpack.config.ts"]
+}

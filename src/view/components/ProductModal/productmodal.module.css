@@ -1,0 +1,57 @@
+.modalWrapper {
+  position: relative;
+  display: flex;
+  width: 90vw;
+  height: 90vh;
+  justify-content: space-around;
+  align-items: center;
+
+  .modalBtn {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 6rem;
+    height: 6rem;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.4s ease-in-out;
+    z-index: 10;
+  }
+
+  .modalBtn:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+
+  .modalBtnLeft {
+    left: 1rem;
+  }
+
+  .modalBtnRight {
+    right: 1rem;
+  }
+  .btnClose {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    background-image: url('../../../assets/icon/cross.svg');
+    background-size: contain;
+    border: none;
+    width: 5rem;
+    height: 5rem;
+  }
+  .btnClose:hover {
+    cursor: pointer;
+  }
+}
+
+/* .modalImg {
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: auto;
+  } */

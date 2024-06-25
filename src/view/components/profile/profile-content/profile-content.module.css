@@ -1,0 +1,74 @@
+.profileTabContent {
+  margin: 1.5rem;
+}
+
+.profileContent {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 5rem;
+}
+
+.fieldName {
+  width: 11rem;
+  color: var(--body-text-color);
+}
+
+.profileContentString {
+  display: flex;
+  gap: 0.5rem;
+  p {
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
+.controlProfileButton {
+  width: 2.5rem;
+  height: 3rem;
+  background-color: var(--default-bg-color);
+  border: none;
+  cursor: pointer;
+}
+.controlProfileButton:disabled {
+  cursor: not-allowed;
+  background-color: var(--gray-bg-color);
+  color: rgba(220, 220, 220, 0.433);
+}
+.editInfoContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.formEditInfo {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.inputInfoField {
+  width: 100%;
+  border: 0;
+  font-size: 1.8rem;
+  padding: 0.5rem 1.6rem;
+  height: 4rem;
+  border-radius: 0.1rem;
+  background-color: var(--default-bg-color);
+  color: var(--primary-text-color);
+  box-shadow:
+    4px 4px 6px 0 var(--light-shadow),
+    -4px -4px 6px 0 var(--dark-shadow),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+    inset 4px 4px 6px 0 var(--dark-shadow);
+}
+
+.error {
+  color: var(--accent-color);
+  font-weight: 200;
+  font-size: 1.2rem;
+  max-width: 40rem;
+}
+
+@media (max-width: 400px) {
+  .profileContent {
+    flex-direction: column;
+  }
+}

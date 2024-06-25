@@ -1,0 +1,36 @@
+.wrapper {
+  position: relative;
+  .count {
+    position: absolute;
+    bottom: 0.5rem;
+    right: -1rem;
+    border-radius: 50%;
+    background-color: lightgreen;
+    color: var(--primary-text-color);
+    min-width: 1.2rem;
+    min-height: 1.2rem;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  svg {
+    display: flex;
+  }
+
+  svg g path,
+  svg circle {
+    transition: 0.7s all ease;
+  }
+
+  @media (hover: hover) {
+    svg:hover {
+      g path,
+      circle {
+        fill: var(--link-hover-color);
+        transition: 0.7s all ease;
+      }
+    }
+  }
+}

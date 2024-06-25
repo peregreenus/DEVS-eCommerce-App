@@ -1,0 +1,30 @@
+.loginPage {
+  display: flex;
+  min-height: 70vh;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 3rem;
+}
+
+.loginPage h2 {
+  margin-bottom: 2rem;
+  color: var(--primary-text-color);
+}
+
+.linkContainer {
+  display: flex;
+  align-items: center;
+}
+
+.linkContainer p {
+  font-size: 1.2rem;
+  color: var(--primary-text-color);
+}
+
+.link {
+  margin: 0 1rem;
+  font-size: 1.6rem;
+  color: var(--accent-color);
+  align-self: center;
+  text-decoration: none;
+}

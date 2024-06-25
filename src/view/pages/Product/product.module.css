@@ -1,0 +1,140 @@
+/* .pageWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+} */
+.product {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* min-height: 70vh; */
+  align-items: center;
+  user-select: none;
+  gap: 1rem;
+  color: var(--primary-text-color);
+  padding-top: 3rem;
+}
+.wrapper {
+  display: flex;
+  width: 95%;
+  gap: 2rem;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  padding: 2rem;
+}
+.wrapperDescription {
+  width: 95%;
+  padding: 0 2rem;
+}
+
+.card {
+  width: 60%;
+  display: grid;
+  justify-content: center;
+  grid-template:
+    'slider' 1fr
+    'preview' 7fr;
+  gap: 2rem;
+  padding: 1.5rem;
+}
+
+.priceContainer {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.slider {
+  grid-area: slider;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.sliderBtn {
+  border: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease-in-out;
+}
+
+.sliderBtn:hover {
+  cursor: pointer;
+  /* background-color: rgba(255, 255, 255, 0.8); */
+}
+
+.sliderBtnDisabled:hover {
+  cursor: default;
+}
+
+.sliderWrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  justify-content: center;
+  gap: 1rem;
+}
+.sliderImgContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.3rem;
+  border-top: 2px solid transparent;
+}
+
+.sliderImg {
+  width: 98%;
+  max-height: 10rem;
+}
+.sliderImg:hover,
+.sliderImg:focus {
+  cursor: pointer;
+}
+
+.active {
+  border-top: 2px solid var(--accent-color);
+}
+
+.preview {
+  grid-area: preview;
+  width: 100%;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+  .wrapperDescription {
+    padding: 0 0.5rem;
+  }
+
+  .card {
+    width: 100%;
+    padding: 0.5rem;
+    grid-template:
+      'slider' 1fr
+      'preview' 4fr;
+  }
+  .priceContainer {
+    width: 100%;
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 460px) {
+  .card {
+    grid-template:
+      'preview' 4fr
+      'slider' 1fr;
+  }
+  .sliderImgContainer {
+    display: none;
+  }
+}
